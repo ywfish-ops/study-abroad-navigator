@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>学术灵魂定位测试 · 全球留学决策导航</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+  <!-- Chart.js（结果页雷达图） -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <style>
+    :root {
+      --bg-primary:    #F8F7F4;
+      --bg-card:       #FFFFFF;
+      --accent-main:   #2B5CE6;
+      --accent-warm:   #E87B35;
+      --text-primary:  #1A1A2E;
+      --text-secondary:#6B7280;
+      --border:        #E5E7EB;
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      min-height: 100dvh;
+    }
+
+    /* ── 容器 ─────────────────────────────── */
+    .quiz-container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 16px 32px;
+    }
+
+    /* ── 视图切换 ─────────────────────────── */
+    .view { display: none; }
+    .view.active { display: block; }
+
+    /* ── 进度条 ───────────────────────────── */
+    #progress-bar-fill {
+      height: 4px;
+      background: var(--accent-main);
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+
+    /* ── 题目卡片动画 ──────────────────────── */
+    .slide-in-right  { animation: slideInRight  0.2s ease forwards; }
+    .slide-out-left  { animation: slideOutLeft  0.2s ease forwards; }
+    .slide-in-left   { animation: slideInLeft   0.2s ease forwards; }
+    .slide-out-right { animation: slideOutRight 0.2s ease forwards; }
+
+    @keyframes slideInRight  { from { opacity:0; transform:translateX(40px); }  to { opacity:1; transform:translateX(0); } }
+    @keyframes slideOutLeft  { from { opacity:1; transform:translateX(0); }     to { opacity:0; transform:translateX(-40px); } }
+    @keyframes slideInLeft   { from { opacity:0; transform:translateX(-40px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes slideOutRight { from { opacity:1; transform:translateX(0); }     to { opacity:0; transform:translateX(40px); } }
+
+    /* ── 选项卡片 ─────────────────────────── */
+    .option-card {
+      display: flex;
+      align-items: center;
+      min-height: 56px;
+      padding: 14px 16px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .option-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--accent-main);
+      transform: scaleY(0);
+      transition: transform 0.15s;
+      border-radius: 0 2px 2px 0;
+    }
+    .option-card.selected {
+      border-color: var(--accent-main);
+      background: #EEF3FD;
+    }
+    .option-card.selected::before { transform: scaleY(1); }
+
+    /* ── This-or-That 二选一 ──────────────── */
+    .tot-card {
+      flex: 1;
+      min-height: 100px;
+      padding: 20px 16px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.5;
+      transition: border-color 0.15s, background 0.15s, transform 0.1s;
+      user-select: none;
+    }
+    .tot-card:active { transform: scale(0.97); }
+    .tot-card.selected {
+      border-color: var(--accent-main);
+      background: #EEF3FD;
+    }
+
+    /* ── 滑块 ─────────────────────────────── */
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--accent-main);
+      cursor: pointer;
+      box-shadow: 0 1px 4px rgba(43,92,230,0.3);
+    }
+    input[type=range]::-moz-range-thumb {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--accent-main);
+      cursor: pointer;
+      border: none;
+    }
+
+    /* ── 量表单选点 ───────────────────────── */
+    .scale-dot {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      background: var(--bg-card);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: border-color 0.15s, background 0.15s;
+      user-select: none;
+    }
+    .scale-dot.selected {
+      background: var(--accent-main);
+      border-color: var(--accent-main);
+      color: #fff;
+    }
+
+    /* ── 图选网格 ─────────────────────────── */
+    .image-card {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.15s;
+      aspect-ratio: 1;
+      background: #E5E7EB;
+    }
+    .image-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .image-card .img-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      padding: 12px;
+      font-size: 13px;
+      text-align: center;
+      color: var(--text-secondary);
+      background: #F3F4F6;
+    }
+    .image-card .img-overlay {
+      position: absolute; inset: 0;
+      background: rgba(43,92,230,0.4);
+      display: none; align-items: center; justify-content: center;
+    }
+    .image-card.selected { border-color: var(--accent-main); }
+    .image-card.selected .img-overlay { display: flex; }
+    .image-card .img-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: rgba(26,26,46,0.65);
+      color: #fff;
+      font-size: 12px;
+      padding: 6px 8px;
+      line-height: 1.3;
+    }
+
+    /* ── 多选 ─────────────────────────────── */
+    .multi-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 52px;
+      padding: 12px 16px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      user-select: none;
+    }
+    .multi-card.selected {
+      border-color: var(--accent-main);
+      background: #EEF3FD;
+    }
+    .multi-check {
+      width: 22px; height: 22px; flex-shrink: 0;
+      border-radius: 6px;
+      border: 1.5px solid var(--border);
+      background: var(--bg-card);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .multi-card.selected .multi-check {
+      background: var(--accent-main);
+      border-color: var(--accent-main);
+    }
+
+    /* ── 主按钮 ───────────────────────────── */
+    .btn-primary {
+      width: 100%;
+      height: 52px;
+      background: var(--accent-main);
+      color: #fff;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      user-select: none;
+    }
+    .btn-primary:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .btn-primary:not(:disabled):active { transform: scale(0.98); }
+
+    /* ── 加载页 ───────────────────────────── */
+    .loading-step { transition: opacity 0.4s; }
+    .loading-step.pending { opacity: 0.3; }
+    .loading-step.done { opacity: 1; }
+    .loading-step.active { opacity: 1; }
+
+    /* ── 结果页雷达图 ──────────────────────── */
+    #radar-chart { max-width: 300px; margin: 0 auto; }
+
+    /* ── 模态框 ───────────────────────────── */
+    #modal-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 50;
+      align-items: flex-end;
+    }
+    #modal-overlay.active { display: flex; }
+    #modal-box {
+      background: var(--bg-card);
+      border-radius: 16px 16px 0 0;
+      padding: 24px 20px 40px;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ── 装饰几何线条（欢迎页右上角） ──────── */
+    .deco-lines {
+      position: absolute; top: 0; right: 0;
+      width: 120px; height: 120px;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    /* ── 响应式 ───────────────────────────── */
+    @media (min-width: 768px) {
+      .quiz-container { padding: 32px 32px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     视图 0：欢迎页
+════════════════════════════════════════════ -->
+<div id="view-welcome" class="view active">
+  <div class="quiz-container" style="min-height:100dvh; display:flex; flex-direction:column; justify-content:center; position:relative;">
+
+    <!-- 装饰线条 -->
+    <svg class="deco-lines" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="90" cy="30" r="50" stroke="#1A1A2E" stroke-width="1"/>
+      <circle cx="90" cy="30" r="35" stroke="#1A1A2E" stroke-width="1"/>
+      <line x1="40" y1="0" x2="120" y2="80" stroke="#1A1A2E" stroke-width="1"/>
+    </svg>
+
+    <div style="padding-top: 60px;">
+      <!-- 图标 -->
+      <div style="font-size:40px; margin-bottom:24px;">🧭</div>
+
+      <!-- 标题 -->
+      <h1 style="font-family:'Noto Serif SC',serif; font-size:32px; font-weight:700; line-height:1.3; margin-bottom:8px;">
+        找到你的<br>学术定位
+      </h1>
+      <p style="color:var(--text-secondary); font-size:14px; margin-bottom:32px;">
+        20题 · 约5分钟 · 免费
+      </p>
+
+      <!-- 副标题 -->
+      <p style="font-size:15px; line-height:1.8; color:var(--text-primary); margin-bottom:40px; max-width:280px;">
+        这不是评分，是定位。<br>
+        我们帮你找到与你气质匹配的留学路径。
+      </p>
+
+      <!-- CTA -->
+      <button class="btn-primary" onclick="startQuiz()" style="margin-bottom:20px;">
+        开始定位测试
+      </button>
+
+      <!-- 社会证明 -->
+      <p style="text-align:center; color:var(--text-secondary); font-size:13px;">
+        已有 <span id="social-proof-count">3,241</span> 人完成测试
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     视图 1：答题页
+════════════════════════════════════════════ -->
+<div id="view-quiz" class="view">
+
+  <!-- 固定头部：返回 + 进度 -->
+  <div style="position:sticky; top:0; background:var(--bg-primary); z-index:10; padding:12px 16px 0;">
+    <div class="quiz-container" style="padding:0; max-width:480px; margin:0 auto;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <button onclick="goBack()" style="background:none; border:none; cursor:pointer; padding:8px; margin-left:-8px; color:var(--text-secondary); font-size:14px; min-height:44px; min-width:44px;">
+          ← 返回
+        </button>
+        <span id="progress-label" style="color:var(--text-secondary); font-size:13px;">1/20</span>
+      </div>
+      <div style="height:4px; background:var(--border); border-radius:2px; overflow:hidden;">
+        <div id="progress-bar-fill" style="width:5%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 题目主体 -->
+  <div class="quiz-container" style="padding-top:24px;">
+    <div id="question-area">
+      <!-- 由 renderQuestion() 动态填充 -->
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     视图 2：计算过渡页
+════════════════════════════════════════════ -->
+<div id="view-loading" class="view">
+  <div class="quiz-container" style="min-height:100dvh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:32px;">
+
+    <p style="font-size:17px; font-weight:500; color:var(--text-primary);">
+      正在分析你的学术画像...
+    </p>
+
+    <!-- 进度条 -->
+    <div style="width:100%; max-width:280px;">
+      <div style="height:6px; background:var(--border); border-radius:3px; overflow:hidden; margin-bottom:8px;">
+        <div id="loading-bar-fill" style="height:100%; background:var(--accent-main); border-radius:3px; width:0%; transition:width 0.3s ease;"></div>
+      </div>
+      <span id="loading-pct" style="color:var(--text-secondary); font-size:13px;">0%</span>
+    </div>
+
+    <!-- 步骤列表 -->
+    <div style="width:100%; max-width:320px; text-align:left; display:flex; flex-direction:column; gap:12px;">
+      <div class="loading-step pending" id="ls-1" style="display:flex; align-items:center; gap:10px; font-size:14px;">
+        <span id="ls-1-icon">⟳</span>
+        <span>分析学习驱动力...</span>
+      </div>
+      <div class="loading-step pending" id="ls-2" style="display:flex; align-items:center; gap:10px; font-size:14px;">
+        <span id="ls-2-icon">⟳</span>
+        <span>识别环境与风险偏好...</span>
+      </div>
+      <div class="loading-step pending" id="ls-3" style="display:flex; align-items:center; gap:10px; font-size:14px;">
+        <span id="ls-3-icon">⟳</span>
+        <span>解析职业锚点...</span>
+      </div>
+      <div class="loading-step pending" id="ls-4" style="display:flex; align-items:center; gap:10px; font-size:14px;">
+        <span id="ls-4-icon">⟳</span>
+        <span>匹配学术画像类型...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     视图 3：结果页（占位，任务5完成）
+════════════════════════════════════════════ -->
+<div id="view-result" class="view">
+  <div class="quiz-container" style="padding-top:32px;">
+
+    <p style="color:var(--text-secondary); font-size:13px; margin-bottom:8px;">你的学术画像</p>
+
+    <!-- 画像卡片 -->
+    <div id="result-card" style="background:var(--bg-card); border-radius:16px; padding:28px 20px; margin-bottom:24px; text-align:center;">
+      <div id="result-emoji" style="font-size:48px; margin-bottom:12px;"></div>
+      <h2 id="result-label-zh" style="font-family:'Noto Serif SC',serif; font-size:26px; font-weight:700; margin-bottom:4px;"></h2>
+      <p id="result-label-en" style="color:var(--text-secondary); font-size:14px; letter-spacing:0.5px; margin-bottom:16px;"></p>
+      <p id="result-desc" style="font-size:14px; line-height:1.8; color:var(--text-primary); text-align:left;"></p>
+    </div>
+
+    <!-- 混合型提示 -->
+    <div id="result-hybrid-note" style="display:none; background:#FFF8F3; border:1px solid #F5D9C0; border-radius:10px; padding:14px 16px; margin-bottom:20px; font-size:13px; line-height:1.6; color:#8B5E3C;">
+    </div>
+
+    <!-- 品牌猎手警示 -->
+    <div id="result-brand-alert" style="display:none; background:#FFF8EE; border:1px solid #F5DEB3; border-radius:10px; padding:14px 16px; margin-bottom:20px; font-size:13px; line-height:1.6;">
+      ⚠️ 我们注意到你的决策受"学校品牌"影响较大。品牌价值在不同就业市场的实际兑现率差异很大——在进入推荐环节前，建议你认真考量品牌以外的维度。
+    </div>
+
+    <!-- 雷达图 -->
+    <div style="background:var(--bg-card); border-radius:16px; padding:20px; margin-bottom:24px;">
+      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">你的五维画像</p>
+      <canvas id="radar-chart"></canvas>
+    </div>
+
+    <!-- 3件最应关注的事 -->
+    <div style="background:var(--bg-card); border-radius:16px; padding:20px; margin-bottom:24px;">
+      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">📋 你最应关注的3件事</p>
+      <div id="result-tips" style="display:flex; flex-direction:column; gap:12px;"></div>
+    </div>
+
+    <!-- 家长视角摘要（familyDriven 时显示） -->
+    <div id="result-parent-summary" style="display:none; background:#F0F4FF; border-radius:16px; padding:20px; margin-bottom:24px;">
+      <p style="font-size:13px; font-weight:600; color:var(--accent-main); margin-bottom:8px;">👨‍👩‍👧 家长视角摘要</p>
+      <p style="font-size:14px; line-height:1.8;" id="result-parent-text"></p>
+    </div>
+
+    <!-- CTA -->
+    <button class="btn-primary" onclick="alert('模块 1B 推荐器即将上线，敬请期待！')" style="margin-bottom:16px;">
+      查看适合我的学校推荐 →
+    </button>
+
+    <!-- 分享/保存 -->
+    <div style="display:flex; gap:12px; margin-bottom:40px;">
+      <button onclick="shareResult()" style="flex:1; height:48px; border:1.5px solid var(--accent-main); color:var(--accent-main); background:none; border-radius:8px; font-size:14px; cursor:pointer;">
+        分享我的画像
+      </button>
+      <button onclick="restartQuiz()" style="flex:1; height:48px; border:1.5px solid var(--border); color:var(--text-secondary); background:none; border-radius:8px; font-size:14px; cursor:pointer;">
+        重新测试
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     隐藏分享卡片（html2canvas 截图用）
+     实际渲染尺寸 540×960，scale×2 = 1080×1920
+════════════════════════════════════════════ -->
+<div id="share-card-hidden" style="
+  display:none;
+  position:fixed;
+  left:-9999px;
+  top:0;
+  width:540px;
+  height:960px;
+  background:#F8F7F4;
+  font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
+  overflow:hidden;
+  box-sizing:border-box;
+">
+  <!-- 顶部品牌栏 -->
+  <div style="padding:36px 40px 0; display:flex; align-items:center; gap:10px;">
+    <span style="font-size:20px;">🧭</span>
+    <span style="font-size:13px; color:#6B7280; letter-spacing:0.3px;">全球留学决策导航系统</span>
+  </div>
+
+  <!-- 引导文案 -->
+  <div style="padding:40px 40px 0;">
+    <p style="font-size:15px; color:#6B7280; margin:0 0 6px;">我的学术画像是</p>
+  </div>
+
+  <!-- 画像主卡 -->
+  <div style="margin:0 40px; background:#fff; border-radius:20px; padding:32px 28px; box-shadow:0 2px 16px rgba(0,0,0,0.06);">
+
+    <!-- 画像名称 -->
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+      <span id="sc-emoji" style="font-size:40px; line-height:1;"></span>
+      <div>
+        <p id="sc-label-zh" style="font-size:26px; font-weight:700; color:#1A1A2E; margin:0 0 2px; font-family:'Noto Serif SC',serif;"></p>
+        <p id="sc-label-en" style="font-size:12px; color:#6B7280; margin:0; letter-spacing:0.8px;"></p>
+      </div>
+    </div>
+
+    <!-- 分隔线 -->
+    <div style="height:1px; background:#E5E7EB; margin-bottom:20px;"></div>
+
+    <!-- 五维雷达图 -->
+    <canvas id="sc-radar" width="300" height="220" style="display:block; margin:0 auto 20px;"></canvas>
+
+    <!-- 五维进度条 -->
+    <div id="sc-bars" style="display:flex; flex-direction:column; gap:10px;"></div>
+  </div>
+
+  <!-- 底部召唤文案 -->
+  <div style="padding:32px 40px 0; display:flex; align-items:center; justify-content:space-between;">
+    <div>
+      <p style="font-size:14px; color:#1A1A2E; margin:0 0 4px; font-weight:500;">你也来测测你的学术定位 →</p>
+      <p style="font-size:12px; color:#6B7280; margin:0;">globalstudynav.com/quiz</p>
+    </div>
+    <!-- QR 码占位（MVP 静态图） -->
+    <div id="sc-qr" style="width:72px; height:72px; flex-shrink:0;"></div>
+  </div>
+
+  <!-- 底部渐变装饰 -->
+  <div style="position:absolute; bottom:0; left:0; right:0; height:120px;
+    background:linear-gradient(to top, rgba(43,92,230,0.04), transparent);
+    pointer-events:none;">
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     断点续答 Modal
+════════════════════════════════════════════ -->
+<div id="modal-overlay" onclick="closeModal()">
+  <div id="modal-box" onclick="event.stopPropagation()">
+    <h3 style="font-size:18px; font-weight:600; margin-bottom:8px;">继续上次的测试？</h3>
+    <p style="color:var(--text-secondary); font-size:14px; margin-bottom:24px;" id="modal-progress-text"></p>
+    <button class="btn-primary" onclick="resumeQuiz()" style="margin-bottom:12px;">继续作答</button>
+    <button onclick="freshStart()" style="width:100%; height:44px; background:none; border:none; color:var(--text-secondary); font-size:14px; cursor:pointer;">
+      重新开始
+    </button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     Quiz Engine
+════════════════════════════════════════════ -->
+<script src="modules/quiz.js"></script>
+
+<script>
+'use strict';
+
+// ── 全局状态 ────────────────────────────────────────────────────────────────
+const state = {
+  questions: [],          // 20道主题题目
+  clarQuestions: [],      // 方向澄清对话（3题）
+  inClarification: false, // 当前是否在做澄清题
+  answers: {},            // { questionId: answer }
+  currentIndex: 0,        // questions 数组中的当前索引
+  currentSubRound: 0,     // this_or_that 当前子轮次（0起）
+  totAnswers: {},          // { qId: { round1:'A', round2:'B', ... } }
+  multiSelections: {},    // { qId: Set<optionId> }
+  sliderTouched: {},      // { qId: boolean }，滑块是否已拖动过
+  phase: 'welcome',       // welcome | quiz | clarification | loading | result
+  startedAt: null,
+  result: null,
+};
+
+// ── 初始化 ──────────────────────────────────────────────────────────────────
+
+/** 加载题库，检测是否有断点续答进度 */
+async function init() {
+  // 社会证明数字
+  let count = parseInt(localStorage.getItem('gs_social_count') || '0');
+  if (!count) {
+    count = 3000 + Math.floor(Math.random() * 500);
+    localStorage.setItem('gs_social_count', count);
+  }
+  document.getElementById('social-proof-count').textContent = count.toLocaleString('zh-CN');
+
+  // 加载题库
+  try {
+    const res = await fetch('data/quiz-questions.json');
+    const data = await res.json();
+    state.questions = data.questions;
+    state.clarQuestions = data.clarificationQuestions?.questions || [];
+  } catch (e) {
+    console.error('题库加载失败', e);
+  }
+
+  // 检测断点续答
+  const progress = QuizEngine.loadProgress();
+  if (progress && Object.keys(progress.answers).length > 0) {
+    const done = progress.currentQuestion;
+    document.getElementById('modal-progress-text').textContent =
+      `上次已完成 ${done} / ${state.questions.length} 题`;
+    document.getElementById('modal-overlay').classList.add('active');
+    // 预填答案但不跳转，等用户选择
+    state._savedProgress = progress;
+  }
+}
+
+// ── 视图切换 ─────────────────────────────────────────────────────────────────
+
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── 断点续答 Modal ───────────────────────────────────────────────────────────
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('active');
+}
+
+function resumeQuiz() {
+  closeModal();
+  const p = state._savedProgress;
+  state.answers = p.answers || {};
+  // 恢复 totAnswers
+  for (const q of state.questions) {
+    if (q.type === 'this_or_that' && state.answers[q.id]) {
+      state.totAnswers[q.id] = { ...state.answers[q.id] };
+    }
+  }
+  state.currentIndex = Math.min(p.currentQuestion, state.questions.length - 1);
+  state.startedAt = p.startedAt;
+  state.phase = 'quiz';
+  showView('view-quiz');
+  renderQuestion(false);
+}
+
+function freshStart() {
+  closeModal();
+  QuizEngine.clearProgress();
+  startQuiz();
+}
+
+// ── 开始测试 ─────────────────────────────────────────────────────────────────
+
+function startQuiz() {
+  state.answers = {};
+  state.totAnswers = {};
+  state.multiSelections = {};
+  state.sliderTouched = {};
+  state.currentIndex = 0;
+  state.currentSubRound = 0;
+  state.phase = 'quiz';
+  state.startedAt = new Date().toISOString();
+
+  // 社会证明 +1
+  const count = parseInt(localStorage.getItem('gs_social_count') || '3241') + 1;
+  localStorage.setItem('gs_social_count', count);
+
+  showView('view-quiz');
+  renderQuestion(false);
+}
+
+// ── 题目渲染 ─────────────────────────────────────────────────────────────────
+
+/**
+ * 渲染当前题目到 #question-area。
+ * @param {boolean} fromBack - 是否来自返回操作（决定动画方向）
+ */
+function renderQuestion(fromBack = false) {
+  const questions = state.inClarification ? state.clarQuestions : state.questions;
+  const total = state.inClarification ? state.clarQuestions.length : state.questions.length;
+  const q = questions[state.currentIndex];
+  if (!q) return;
+
+  // 进度
+  const mainDone = state.inClarification ? state.questions.length : state.currentIndex;
+  const mainTotal = state.questions.length;
+  const displayNum = state.inClarification
+    ? `澄清 ${state.currentIndex + 1}/${total}`
+    : `${state.currentIndex + 1}/${mainTotal}`;
+  const pct = state.inClarification
+    ? 100
+    : Math.round((state.currentIndex / mainTotal) * 100);
+
+  document.getElementById('progress-label').textContent = displayNum;
+  document.getElementById('progress-bar-fill').style.width = `${Math.max(pct, 5)}%`;
+
+  // 维度标签
+  const dimMap = { DRIVE:'学习驱动力', ENV:'环境偏好', RISK:'风险容忍度', CAREER:'职业锚点', IDENTITY:'身份认同' };
+
+  // 构建 HTML
+  const area = document.getElementById('question-area');
+  const animClass = fromBack ? 'slide-in-left' : 'slide-in-right';
+
+  area.innerHTML = `
+    <div class="${animClass}" style="display:flex; flex-direction:column; gap:20px;">
+      ${q.dimension ? `<p style="font-size:12px; color:var(--text-secondary); letter-spacing:0.5px; text-transform:uppercase;">${dimMap[q.dimension] || q.dimension}</p>` : ''}
+      <p style="font-size:17px; line-height:1.6; font-weight:500;">${q.text}</p>
+      <div id="answer-area"></div>
+      <div id="next-btn-wrap" style="margin-top:8px;"></div>
+    </div>
+  `;
+
+  renderAnswerArea(q);
+}
+
+/**
+ * 根据题型渲染答题组件到 #answer-area。
+ */
+function renderAnswerArea(q) {
+  const area = document.getElementById('answer-area');
+  const existing = state.answers[q.id];
+
+  switch (q.type) {
+    case 'single':
+      renderSingle(area, q, existing);
+      break;
+    case 'image_single':
+      renderImageSingle(area, q, existing);
+      break;
+    case 'scale':
+      renderScale(area, q, existing);
+      break;
+    case 'slider':
+      renderSlider(area, q, existing);
+      break;
+    case 'this_or_that':
+      renderThisOrThat(area, q);
+      break;
+    case 'multi_select':
+      renderMultiSelect(area, q, existing);
+      break;
+  }
+}
+
+// ── 各题型渲染 ───────────────────────────────────────────────────────────────
+
+function renderSingle(area, q, existing) {
+  area.innerHTML = q.options.map(opt => `
+    <div class="option-card ${existing === opt.id ? 'selected' : ''}"
+         onclick="selectSingle('${q.id}', '${opt.id}')"
+         style="margin-bottom:10px;">
+      <span style="font-size:15px; line-height:1.5;">${opt.text}</span>
+    </div>
+  `).join('');
+
+  renderNextBtn(!!existing, () => advanceQuestion());
+}
+
+function renderImageSingle(area, q, existing) {
+  area.innerHTML = `
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+      ${q.options.map(opt => `
+        <div class="image-card ${existing === opt.id ? 'selected' : ''}"
+             onclick="selectSingle('${q.id}', '${opt.id}')">
+          <img src="${opt.imageSrc}" alt="${opt.imageAlt}"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none;">${opt.imageAlt}</div>
+          <div class="img-overlay"><span style="color:#fff; font-size:22px;">✓</span></div>
+          <div class="img-label">${opt.text}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  renderNextBtn(!!existing, () => advanceQuestion());
+}
+
+function renderScale(area, q, existing) {
+  const dots = [];
+  for (let i = q.min; i <= q.max; i++) {
+    dots.push(`
+      <div class="scale-dot ${existing == i ? 'selected' : ''}"
+           onclick="selectScale('${q.id}', ${i})">${i}</div>
+    `);
+  }
+
+  area.innerHTML = `
+    <div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+        <span style="font-size:12px; color:var(--text-secondary); max-width:40%;">${q.leftLabel}</span>
+        <span style="font-size:12px; color:var(--text-secondary); max-width:40%; text-align:right;">${q.rightLabel}</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; gap:4px;">
+        ${dots.join('')}
+      </div>
+    </div>
+  `;
+
+  renderNextBtn(existing !== undefined && existing !== null, () => advanceQuestion());
+}
+
+function renderSlider(area, q, existing) {
+  const val = existing !== undefined ? existing : Math.ceil((q.min + q.max) / 2);
+  const pct = ((val - q.min) / (q.max - q.min)) * 100;
+  const touched = state.sliderTouched[q.id] || existing !== undefined;
+
+  area.innerHTML = `
+    <div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:20px; gap:12px;">
+        <span style="font-size:12px; color:var(--text-secondary); max-width:45%; line-height:1.4;">${q.leftLabel}</span>
+        <span style="font-size:12px; color:var(--text-secondary); max-width:45%; text-align:right; line-height:1.4;">${q.rightLabel}</span>
+      </div>
+      <input type="range"
+             id="slider-${q.id}"
+             min="${q.min}" max="${q.max}" value="${val}"
+             oninput="onSliderInput('${q.id}', this.value)"
+             style="margin-bottom:8px;">
+      <div style="text-align:center; font-size:13px; color:var(--text-secondary);">
+        当前：<span id="slider-val-${q.id}" style="color:var(--accent-main); font-weight:600;">${val}</span>
+      </div>
+    </div>
+  `;
+
+  renderNextBtn(touched, () => advanceQuestion());
+}
+
+function onSliderInput(qId, val) {
+  document.getElementById(`slider-val-${qId}`).textContent = val;
+  state.sliderTouched[qId] = true;
+  state.answers[qId] = Number(val);
+  saveProgressNow();
+  // 激活下一题按钮
+  const btn = document.querySelector('#next-btn-wrap .btn-primary');
+  if (btn) btn.disabled = false;
+}
+
+function renderThisOrThat(area, q) {
+  const rounds = getEffectiveRounds(q);
+  const roundIndex = state.currentSubRound;
+  if (roundIndex >= rounds.length) {
+    advanceQuestion();
+    return;
+  }
+
+  const round = rounds[roundIndex];
+  const totAns = state.totAnswers[q.id] || {};
+  const roundKey = `round${round.round || (roundIndex + 1)}`;
+  const selected = totAns[roundKey];
+
+  const isMultiRound = rounds.length > 1;
+  const hintText = isMultiRound
+    ? `${rounds.length} 个选项两两对比，共 ${rounds.length} 轮 · 第 ${roundIndex + 1} 轮`
+    : `第 ${roundIndex + 1} / ${rounds.length} 轮`;
+
+  area.innerHTML = `
+    <div>
+      <p style="font-size:12px; color:var(--text-secondary); margin-bottom:4px; text-align:center;">
+        ${hintText}
+      </p>
+      ${isMultiRound ? `
+      <p style="font-size:11px; color:var(--border); text-align:center; margin-bottom:14px;">
+        选项会重复出现，每次只比较两个
+      </p>` : `<div style="margin-bottom:12px;"></div>`}
+      <div style="display:flex; gap:12px;">
+        <div class="tot-card ${selected === 'A' ? 'selected' : ''}"
+             onclick="selectTot('${q.id}', '${roundKey}', 'A')">
+          ${round.optionA.text}
+        </div>
+        <div class="tot-card ${selected === 'B' ? 'selected' : ''}"
+             onclick="selectTot('${q.id}', '${roundKey}', 'B')">
+          ${round.optionB.text}
+        </div>
+      </div>
+    </div>
+  `;
+
+  // this_or_that 选中后自动前进，不显示"下一题"按钮
+}
+
+/**
+ * 处理 C1 的分支逻辑，返回本轮实际需要展示的 rounds 数组。
+ */
+function getEffectiveRounds(q) {
+  const rounds = [];
+  for (const r of q.rounds) {
+    if (r.branchCondition) {
+      const prev = (state.totAnswers[q.id] || {})['round1'];
+      const branchKey = prev === 'A' ? 'round1_A' : 'round1_B';
+      const branch = r.branchCondition[branchKey];
+      if (branch && branch[0]) {
+        rounds.push({ ...branch[0], round: r.round || rounds.length + 1 });
+      }
+    } else {
+      rounds.push(r);
+    }
+  }
+  return rounds;
+}
+
+function renderMultiSelect(area, q, existing) {
+  if (!state.multiSelections[q.id]) {
+    state.multiSelections[q.id] = new Set(Array.isArray(existing) ? existing : []);
+  }
+  const sel = state.multiSelections[q.id];
+
+  area.innerHTML = `
+    <p style="font-size:12px; color:var(--text-secondary); margin-bottom:12px;">
+      最多选 ${q.maxSelections} 项（已选 <span id="multi-count-${q.id}">${sel.size}</span> 项）
+    </p>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      ${q.options.map(opt => `
+        <div class="multi-card ${sel.has(opt.id) ? 'selected' : ''}"
+             id="multi-opt-${q.id}-${opt.id}"
+             onclick="toggleMulti('${q.id}', '${opt.id}', ${q.maxSelections})">
+          <div class="multi-check">
+            ${sel.has(opt.id) ? '<svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>' : ''}
+          </div>
+          <span style="font-size:14px; line-height:1.4;">${opt.text}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  renderNextBtn(sel.size > 0, () => {
+    state.answers[q.id] = Array.from(sel);
+    saveProgressNow();
+    advanceQuestion();
+  });
+}
+
+// ── 选择处理 ─────────────────────────────────────────────────────────────────
+
+function selectSingle(qId, optId) {
+  state.answers[qId] = optId;
+  saveProgressNow();
+
+  // 更新 UI 选中态
+  document.querySelectorAll('.option-card, .image-card').forEach(el => el.classList.remove('selected'));
+  const clicked = event.currentTarget;
+  if (clicked) clicked.classList.add('selected');
+
+  // 300ms 后激活下一题
+  setTimeout(() => {
+    const btn = document.querySelector('#next-btn-wrap .btn-primary');
+    if (btn) btn.disabled = false;
+  }, 300);
+}
+
+function selectScale(qId, val) {
+  state.answers[qId] = val;
+  saveProgressNow();
+
+  document.querySelectorAll('.scale-dot').forEach((d, i) => {
+    d.classList.toggle('selected', i + 1 === val);
+  });
+
+  setTimeout(() => {
+    const btn = document.querySelector('#next-btn-wrap .btn-primary');
+    if (btn) btn.disabled = false;
+  }, 300);
+}
+
+function selectTot(qId, roundKey, choice) {
+  if (!state.totAnswers[qId]) state.totAnswers[qId] = {};
+  state.totAnswers[qId][roundKey] = choice;
+
+  const q = getCurrentQuestion();
+  const rounds = getEffectiveRounds(q);
+  const roundIdx = state.currentSubRound;
+
+  // 视觉反馈后，250ms 自动进入下一轮或下一题
+  document.querySelectorAll('.tot-card').forEach((c, i) => {
+    c.classList.toggle('selected', (i === 0 && choice === 'A') || (i === 1 && choice === 'B'));
+  });
+
+  setTimeout(() => {
+    if (roundIdx + 1 < rounds.length) {
+      state.currentSubRound++;
+      // 如果是 C1 round 2（有分支），需要重新计算 rounds
+      renderAnswerArea(q);
+    } else {
+      // 所有轮次完成，合并答案
+      state.answers[qId] = { ...state.totAnswers[qId] };
+      saveProgressNow();
+      state.currentSubRound = 0;
+      advanceQuestion();
+    }
+  }, 250);
+}
+
+function toggleMulti(qId, optId, max) {
+  const sel = state.multiSelections[qId];
+  if (sel.has(optId)) {
+    sel.delete(optId);
+  } else {
+    if (sel.size >= max) return; // 超限不添加
+    sel.add(optId);
+  }
+
+  // 刷新单个选项态（不重新渲染整个区域）
+  const card = document.getElementById(`multi-opt-${qId}-${optId}`);
+  if (card) {
+    card.classList.toggle('selected', sel.has(optId));
+    const check = card.querySelector('.multi-check');
+    check.innerHTML = sel.has(optId)
+      ? '<svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+      : '';
+  }
+
+  const countEl = document.getElementById(`multi-count-${qId}`);
+  if (countEl) countEl.textContent = sel.size;
+
+  const btn = document.querySelector('#next-btn-wrap .btn-primary');
+  if (btn) btn.disabled = sel.size === 0;
+}
+
+// ── 下一题按钮 ───────────────────────────────────────────────────────────────
+
+function renderNextBtn(enabled, onClickFn) {
+  const wrap = document.getElementById('next-btn-wrap');
+  if (!wrap) return;
+  wrap.innerHTML = `<button class="btn-primary" ${enabled ? '' : 'disabled'} id="next-btn">下一题</button>`;
+  document.getElementById('next-btn').addEventListener('click', onClickFn);
+}
+
+// ── 导航 ─────────────────────────────────────────────────────────────────────
+
+function getCurrentQuestion() {
+  const qs = state.inClarification ? state.clarQuestions : state.questions;
+  return qs[state.currentIndex];
+}
+
+/** 前进到下一题或进入澄清对话或进入结果 */
+function advanceQuestion() {
+  const questions = state.inClarification ? state.clarQuestions : state.questions;
+
+  if (state.currentIndex < questions.length - 1) {
+    animateOut(() => {
+      state.currentIndex++;
+      state.currentSubRound = 0;
+      saveProgressNow();
+      renderQuestion(false);
+    });
+  } else if (!state.inClarification) {
+    // 主题目全部完成
+    enterLoadingPhase();
+  } else {
+    // 澄清题完成
+    enterLoadingPhase();
+  }
+}
+
+/** 返回上一题 */
+function goBack() {
+  const q = getCurrentQuestion();
+
+  // this_or_that 子轮次：先退回上一轮，而不是跳上一题
+  if (q && q.type === 'this_or_that' && state.currentSubRound > 0) {
+    state.currentSubRound--;
+    renderAnswerArea(q);
+    return;
+  }
+
+  if (state.inClarification && state.currentIndex === 0) {
+    // 澄清题第一题 → 回到主题目最后一题
+    state.inClarification = false;
+    state.currentIndex = state.questions.length - 1;
+    animateOut(() => renderQuestion(true), true);
+  } else if (state.currentIndex > 0) {
+    animateOut(() => {
+      state.currentIndex--;
+      // 返回 this_or_that 题时，定位到最后一个已答的子轮次
+      const prevQ = getCurrentQuestion();
+      if (prevQ && prevQ.type === 'this_or_that') {
+        const rounds = getEffectiveRounds(prevQ);
+        const answered = state.totAnswers[prevQ.id] || {};
+        const lastAnswered = rounds.filter((_, i) =>
+          answered[`round${(rounds[i].round || i + 1)}`]
+        ).length;
+        state.currentSubRound = Math.max(0, lastAnswered - 1);
+      } else {
+        state.currentSubRound = 0;
+      }
+      renderQuestion(true);
+    }, true);
+  } else {
+    // 第一题 → 返回欢迎页
+    showView('view-welcome');
+    state.phase = 'welcome';
+  }
+}
+
+function animateOut(cb, reverse = false) {
+  const area = document.getElementById('question-area');
+  const cls = reverse ? 'slide-out-right' : 'slide-out-left';
+  if (area) {
+    area.classList.add(cls);
+    setTimeout(() => {
+      area.classList.remove(cls);
+      cb();
+    }, 180);
+  } else {
+    cb();
+  }
+}
+
+// ── 进入加载/澄清阶段 ────────────────────────────────────────────────────────
+
+/**
+ * 主题目完成后：先做预评分判断是否需要澄清对话，再进入加载页。
+ */
+function enterLoadingPhase() {
+  // 快速预评分：判断是否触发澄清
+  if (!state.inClarification && state.clarQuestions.length > 0) {
+    const preResult = QuizEngine.computeQuizResult(state.answers, state.questions);
+    const needsClar = preResult.flags.needsDirectionDialog;
+    if (needsClar) {
+      state.inClarification = true;
+      state.currentIndex = 0;
+      state.currentSubRound = 0;
+      showView('view-quiz');
+      renderQuestion(false);
+      return;
+    }
+  }
+
+  // 进入加载页
+  showView('view-loading');
+  runLoadingAnimation();
+}
+
+// ── 加载页动画 ───────────────────────────────────────────────────────────────
+
+function runLoadingAnimation() {
+  const steps = [
+    { id: 'ls-1', delay: 0 },
+    { id: 'ls-2', delay: 600 },
+    { id: 'ls-3', delay: 1200 },
+    { id: 'ls-4', delay: 1800 },
+  ];
+
+  let pct = 0;
+  const fillBar = () => {
+    pct += 5 + Math.floor(Math.random() * 10);
+    if (pct > 95) pct = 95;
+    document.getElementById('loading-bar-fill').style.width = pct + '%';
+    document.getElementById('loading-pct').textContent = pct + '%';
+  };
+  const ticker = setInterval(fillBar, 200);
+
+  steps.forEach(({ id, delay }) => {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      el.classList.remove('pending');
+      el.classList.add('active');
+    }, delay);
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      el.classList.remove('active');
+      el.classList.add('done');
+      document.getElementById(`${id}-icon`).textContent = '✓';
+    }, delay + 400);
+  });
+
+  // 2.5s 后跳转结果页
+  setTimeout(() => {
+    clearInterval(ticker);
+    document.getElementById('loading-bar-fill').style.width = '100%';
+    document.getElementById('loading-pct').textContent = '100%';
+    setTimeout(showResult, 400);
+  }, 2500);
+}
+
+// ── 结果页 ───────────────────────────────────────────────────────────────────
+
+function showResult() {
+  const clarAnswers = {};
+  if (state.inClarification) {
+    // 澄清题答案已在 state.answers 里（同 key 空间）
+  }
+
+  state.result = QuizEngine.computeQuizResult(state.answers, [
+    ...state.questions,
+    ...(state.inClarification ? state.clarQuestions : []),
+  ]);
+
+  const profile = QuizEngine.saveProfile(state.result);
+  QuizEngine.clearProgress();
+
+  const r = state.result;
+  const arch = r.archetypeResult;
+
+  // 画像卡
+  document.getElementById('result-emoji').textContent = arch.primaryEmoji;
+  document.getElementById('result-label-zh').textContent = arch.primaryLabel;
+  document.getElementById('result-label-en').textContent = arch.primary.replace(/_/g, ' ');
+  document.getElementById('result-desc').textContent = getArchetypeDesc(arch.primary);
+
+  // 混合型提示
+  if (arch.isHybrid) {
+    const note = document.getElementById('result-hybrid-note');
+    note.style.display = 'block';
+    note.textContent = `💡 你同时具备「${arch.primaryLabel}」和「${arch.secondaryLabel}」的特征，是一种复合型画像。`;
+  }
+
+  // 品牌猎手警示
+  if (r.flags.brandHunterAlert) {
+    document.getElementById('result-brand-alert').style.display = 'block';
+  }
+
+  // 家长视角
+  if (r.flags.familyDriven) {
+    document.getElementById('result-parent-summary').style.display = 'block';
+    document.getElementById('result-parent-text').textContent = getParentSummary(arch.primary);
+  }
+
+  // 推荐关注的3件事
+  const tips = getArchetypeTips(arch.primary);
+  document.getElementById('result-tips').innerHTML = tips.map((t, i) => `
+    <div style="display:flex; gap:12px; align-items:flex-start;">
+      <span style="color:var(--accent-main); font-weight:700; font-size:15px; flex-shrink:0;">${i + 1}.</span>
+      <p style="font-size:14px; line-height:1.7; color:var(--text-primary);">${t}</p>
+    </div>
+  `).join('');
+
+  // 雷达图
+  renderRadarChart(r.radarScores);
+
+  showView('view-result');
+}
+
+function renderRadarChart(radarScores) {
+  const ctx = document.getElementById('radar-chart').getContext('2d');
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['学习驱动', '环境适应', '风险承受', '职业清晰', '身份认同'],
+      datasets: [{
+        data: [
+          radarScores.DRIVE,
+          radarScores.ENV,
+          radarScores.RISK,
+          radarScores.CAREER,
+          radarScores.IDENTITY,
+        ],
+        backgroundColor: 'rgba(43, 92, 230, 0.12)',
+        borderColor: '#2B5CE6',
+        borderWidth: 2,
+        pointBackgroundColor: '#2B5CE6',
+        pointRadius: 4,
+      }],
+    },
+    options: {
+      scales: {
+        r: {
+          min: 0, max: 100,
+          ticks: { stepSize: 25, display: false },
+          grid: { color: '#E5E7EB' },
+          pointLabels: {
+            font: { size: 12, family: "'PingFang SC', sans-serif" },
+            color: '#1A1A2E',
+          },
+        },
+      },
+      plugins: { legend: { display: false } },
+    },
+  });
+}
+
+// ── 画像文案 ─────────────────────────────────────────────────────────────────
+
+const ARCHETYPE_DESC = {
+  SCHOLAR_PIONEER: '你对知识本身的渴望是最强的驱动力。你不只是要拿一个学位，你在寻找一个能被自己的好奇心深度滋养的学术环境。你愿意为了进入顶尖研究生项目承担较高的申请风险。',
+  CAREER_ARCHITECT: '你知道自己想要什么。留学是你职业路径上经过深思熟虑的一步棋。你在乎项目的行业认可度、校友网络的质量，以及毕业后的就业结果。',
+  GLOBAL_NOMAD: '对你来说，去哪里读书本身就是答案的一部分。你不只是在申请一所学校，你在启动一种生活方式。高度的环境适应能力是你的核心资产。',
+  HOME_ANCHOR: '你对留学的定位是清醒而务实的——拿一个有含金量的海外学历，然后回来。这是最需要精准决策的路径：错误的学校选择会导致学历在回国市场的性价比极低。',
+  EXPLORER_BETA: '你还没有完全确定方向，这不是弱点——这是一种真诚。问题在于，申请系统本身是为"已经想清楚"的人设计的，你需要更策略性地选择给你留有探索空间的项目。',
+  BRAND_HUNTER: '学校名字对你（或你的家人）来说承载了大量意义。名校光环驱动的申请策略有一个系统性风险：当录取结果不符合预期时，你可能没有备用框架来评估"次优"选项的真实价值。',
+  RISK_HEDGER: '你对不确定性的容忍度偏低，这在申请过程中会表现为更倾向于保底、对冲，以及需要更多数据支撑才能做决定。好消息是：我们平台的决策支持工具正是为你设计的。',
+  HYBRID_IDENTITY: '你在多个维度上都处于真实的张力之中：回国vs留外、学术vs行业、稳健vs冲刺。这不是摇摆不定，这是复杂情境的真实反映。',
+};
+
+const ARCHETYPE_TIPS = {
+  SCHOLAR_PIONEER: [
+    '找到研究方向匹配的导师，比学校排名更重要。先确定你想做什么方向的研究，再锁定目标导师，再决定申请哪所学校。',
+    '不要只看 Ranking。顶尖研究型大学在你的细分方向上不一定是最好的——找到在你领域发表最多顶会/顶刊的项目。',
+    '套磁是你的核心武器。一封有针对性的邮件，可以让你在竞争激烈的 PhD 申请中脱颖而出。不要群发。',
+  ],
+  CAREER_ARCHITECT: [
+    '地理位置权重大于排名。金融去纽约/香港，科技去湾区/新加坡，咨询去波士顿/伦敦——就业生态决定你的起跳点。',
+    '校友网络的质量决定你的第一份工作。在选校时，重点调研目标公司的校友占比，而不只是就业率数字。',
+    '提前规划实习窗口。很多顶级项目的暑期实习申请在入学第一个月就开始，提前准备行业案例、简历和面经。',
+  ],
+  GLOBAL_NOMAD: [
+    '多国分散布局是合理的。美+英、港+英、新+美的组合让你的选择更灵活，不必把宝押在一个国家。',
+    '优先考虑国际学生比例高、校友网络全球分布的项目。你的同学网络将是你未来最有价值的资产之一。',
+    '不必执着于回国就业优势。你的画像更适合把"全球流动性"作为长期竞争壁垒来建设。',
+  ],
+  HOME_ANCHOR: [
+    '香港、新加坡优先。学制1年、回国认可度高、地理位置近——三个维度都契合你的目标。',
+    '避免美国2年制项目。时间成本高加上回国时间窗口不佳，可能让你错失最佳的国内就业时机。',
+    '重点考察目标城市的校友会活跃度，以及国内目标公司对该学校的实际认知度，而不只是国际排名。',
+  ],
+  EXPLORER_BETA: [
+    '优先选择课程设置灵活、允许跨系选课的项目。你需要的是"探索空间"，而不是一条固定轨道。',
+    '避免专业化极强、出口单一的项目。比如"量化金融硕士"出口只有 Quant，对你的灵活性需求来说太窄。',
+    '先想清楚"不要什么"，再想"要什么"。有时候排除法比正向筛选更有效——你不想做什么类型的工作？',
+  ],
+  BRAND_HUNTER: [
+    '用"品牌兑现率"代替"品牌知名度"来评估学校。哈佛品牌在中国咨询市场的兑现率，和在国内互联网市场的兑现率，差异很大。',
+    '建立你的"次选框架"。在申请前就想好：如果最理想的学校没拿到，你的 Plan B 对你意味着什么？',
+    '家人的期望值需要提前管理。和家人讨论"什么样的 offer 是成功的"，比拿到 offer 之后再协商要容易得多。',
+  ],
+  RISK_HEDGER: [
+    '用数据代替直觉。你需要的不是更多建议，而是更多数据——录取区间、历年 GPA 中位数、就业去向统计。',
+    '申请清单以"保底+目标"为主结构，冲刺比例不超过20%。先确保有好的保底，再谈是否值得冲刺。',
+    '财务规划先行。把留学成本、预期回报、风险情境都算清楚之后，不确定性会显著降低——你会感觉更有掌控感。',
+  ],
+  HYBRID_IDENTITY: [
+    '在申请之前，先完成一次"优先级排序"。把回国vs留外、学术vs行业、稳健vs冲刺这三对张力各自排个序，会帮你聚焦。',
+    '找到你的"锚点"——哪一个维度是不可妥协的？找到这个锚点之后，其他维度的选择会自然变得清晰。',
+    '接受"现在不确定"是合理的。你的画像说明你面对的是真实的复杂性，不是犹豫不决。给自己设定一个决策时间节点，在那之前允许自己保持开放。',
+  ],
+};
+
+const PARENT_SUMMARY = {
+  SCHOLAR_PIONEER: '您的孩子有强烈的学术热情和探索精神。建议支持他/她申请研究型项目，不要只看学校排名，导师匹配度同样重要。接受冲刺策略带来的不确定性，是对这种学术性格最合适的支持方式。',
+  CAREER_ARCHITECT: '您的孩子目标明确、职业规划清晰。建议重点关注项目的就业数据和校友网络，而非单纯的学校排名。支持他/她选择就业生态好的城市和项目，是最务实的投资逻辑。',
+  HOME_ANCHOR: '您的孩子和您的想法高度一致——留学是手段，回国是目标。香港和新加坡的1年制硕士是性价比最高的选择：学制短、费用低、回国认可度高。',
+  default: '您的孩子正在做一个重要的人生决策。我们建议您作为支持者而非决策者参与这个过程——了解他/她的画像类型，帮助他/她找到最匹配的路径，而不是用您的期望替代他/她的判断。',
+};
+
+function getArchetypeDesc(key) {
+  return ARCHETYPE_DESC[key] || '';
+}
+
+function getArchetypeTips(key) {
+  return ARCHETYPE_TIPS[key] || ['根据你的画像，我们将为你提供个性化推荐。'];
+}
+
+function getParentSummary(key) {
+  return PARENT_SUMMARY[key] || PARENT_SUMMARY.default;
+}
+
+// ── 工具函数 ─────────────────────────────────────────────────────────────────
+
+function saveProgressNow() {
+  QuizEngine.saveProgress(state.currentIndex, state.answers);
+}
+
+/** 生成分享卡片：移动端显示图片供长按保存，桌面端直接下载 */
+async function shareResult() {
+  if (!state.result) return;
+
+  const btn = document.querySelector('button[onclick="shareResult()"]');
+  if (btn) { btn.textContent = '生成中...'; btn.disabled = true; }
+
+  try {
+    const dataUrl = await generateShareCard(state.result);
+    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      // 优先尝试系统分享（iOS/Android 可直接"存储图像"到相册）
+      if (navigator.share && navigator.canShare) {
+        try {
+          const blob = await (await fetch(dataUrl)).blob();
+          const file = new File([blob], '我的学术画像.png', { type: 'image/png' });
+          if (navigator.canShare({ files: [file] })) {
+            await navigator.share({ files: [file], title: '我的学术画像' });
+            return; // 系统分享成功，结束
+          }
+        } catch (shareErr) {
+          // 用户取消或不支持，继续走弹窗预览
+          if (shareErr.name === 'AbortError') return;
+        }
+      }
+      // 兜底：弹出图片预览，引导长按保存
+      showImagePreview(dataUrl);
+    } else {
+      // 桌面端：直接下载
+      triggerDownload(dataUrl, `我的学术画像_${state.result.archetypeResult.primary}.png`);
+    }
+  } catch (e) {
+    console.error('分享卡片生成失败', e);
+    alert('图片生成失败，请截图保存结果页。');
+  } finally {
+    if (btn) { btn.textContent = '分享我的画像'; btn.disabled = false; }
+  }
+}
+
+/** 在全屏遮罩内展示生成的图片，引导用户长按保存到相册 */
+function showImagePreview(dataUrl) {
+  // 若已存在，先移除
+  const old = document.getElementById('image-preview-overlay');
+  if (old) old.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'image-preview-overlay';
+  overlay.style.cssText = `
+    position:fixed; inset:0; background:rgba(0,0,0,0.88);
+    z-index:100; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:16px;
+    padding:24px;
+  `;
+
+  overlay.innerHTML = `
+    <p style="color:#fff; font-size:15px; font-weight:500; margin:0; text-align:center;">
+      长按图片保存到相册
+    </p>
+    <img src="${dataUrl}"
+         style="max-width:100%; max-height:75dvh; border-radius:12px; display:block;"
+         alt="我的学术画像">
+    <button onclick="document.getElementById('image-preview-overlay').remove()"
+            style="color:#fff; background:rgba(255,255,255,0.15); border:none;
+                   border-radius:8px; padding:12px 32px; font-size:15px; cursor:pointer;">
+      关闭
+    </button>
+  `;
+
+  document.body.appendChild(overlay);
+}
+
+/**
+ * 将结果数据渲染到隐藏卡片，用 html2canvas 截图后返回 dataURL。
+ * @param {Object} result - computeQuizResult 的输出
+ * @returns {Promise<string>} PNG dataURL
+ */
+async function generateShareCard(result) {
+  const arch = result.archetypeResult;
+  const radar = result.radarScores;
+
+  // ── 填充文字内容 ──────────────────────────────
+  document.getElementById('sc-emoji').textContent      = arch.primaryEmoji;
+  document.getElementById('sc-label-zh').textContent   = arch.primaryLabel;
+  document.getElementById('sc-label-en').textContent   = arch.primary.replace(/_/g, ' ');
+
+  // ── 五维进度条 ────────────────────────────────
+  const dimLabels = { DRIVE:'学习驱动', ENV:'环境适应', RISK:'风险承受', CAREER:'职业清晰', IDENTITY:'身份认同' };
+  const barsEl = document.getElementById('sc-bars');
+  barsEl.innerHTML = Object.entries(dimLabels).map(([key, label]) => {
+    const val = radar[key] || 0;
+    return `
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:12px; color:#6B7280; width:52px; flex-shrink:0;">${label}</span>
+        <div style="flex:1; height:6px; background:#E5E7EB; border-radius:3px; overflow:hidden;">
+          <div style="width:${val}%; height:100%; background:#2B5CE6; border-radius:3px;"></div>
+        </div>
+        <span style="font-size:12px; color:#1A1A2E; width:24px; text-align:right; flex-shrink:0;">${val}</span>
+      </div>
+    `;
+  }).join('');
+
+  // ── QR 码占位（SVG 模拟） ─────────────────────
+  document.getElementById('sc-qr').innerHTML = buildQrPlaceholder();
+
+  // ── 显示卡片（html2canvas 需要可见元素） ──────
+  const cardEl = document.getElementById('share-card-hidden');
+  cardEl.style.display = 'block';
+
+  // ── 渲染卡片内雷达图 ──────────────────────────
+  await renderShareRadar(radar);
+
+  // 等 Chart.js 动画完成
+  await new Promise(r => setTimeout(r, 600));
+
+  // ── html2canvas 截图 ──────────────────────────
+  const canvas = await html2canvas(cardEl, {
+    scale: 2,
+    width: 540,
+    height: 960,
+    backgroundColor: '#F8F7F4',
+    useCORS: true,
+    logging: false,
+    allowTaint: false,
+  });
+
+  cardEl.style.display = 'none';
+  return canvas.toDataURL('image/png');
+}
+
+/**
+ * 在分享卡片内的 #sc-radar canvas 上渲染雷达图。
+ * 每次调用前销毁旧实例，避免 Chart.js 的 canvas reuse 警告。
+ */
+async function renderShareRadar(radarScores) {
+  const canvas = document.getElementById('sc-radar');
+  // 销毁可能存在的旧实例
+  const existing = Chart.getChart(canvas);
+  if (existing) existing.destroy();
+
+  return new Promise(resolve => {
+    new Chart(canvas.getContext('2d'), {
+      type: 'radar',
+      data: {
+        labels: ['学习驱动', '环境适应', '风险承受', '职业清晰', '身份认同'],
+        datasets: [{
+          data: [radarScores.DRIVE, radarScores.ENV, radarScores.RISK,
+                 radarScores.CAREER, radarScores.IDENTITY],
+          backgroundColor: 'rgba(43,92,230,0.12)',
+          borderColor: '#2B5CE6',
+          borderWidth: 2,
+          pointBackgroundColor: '#2B5CE6',
+          pointRadius: 3,
+        }],
+      },
+      options: {
+        animation: { onComplete: resolve, duration: 400 },
+        scales: {
+          r: {
+            min: 0, max: 100,
+            ticks: { display: false },
+            grid: { color: '#E5E7EB' },
+            pointLabels: { font: { size: 11 }, color: '#1A1A2E' },
+          },
+        },
+        plugins: { legend: { display: false } },
+      },
+    });
+  });
+}
+
+/**
+ * 生成 QR 码视觉占位（MVP：用 SVG 模拟像素格子，非真实扫描码）。
+ * Phase 2 替换为真实二维码库生成。
+ */
+function buildQrPlaceholder() {
+  // 7×7 简单像素图案（固定装饰，不可扫描）
+  const pattern = [
+    [1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,1],
+    [1,0,1,0,1,0,1],
+    [1,0,0,0,0,0,1],
+    [1,0,1,1,1,0,1],
+    [1,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1],
+  ];
+  const cell = 72 / 7;
+  const rects = [];
+  pattern.forEach((row, r) => {
+    row.forEach((val, c) => {
+      if (val) {
+        rects.push(`<rect x="${(c * cell).toFixed(1)}" y="${(r * cell).toFixed(1)}" width="${cell.toFixed(1)}" height="${cell.toFixed(1)}" fill="#1A1A2E"/>`);
+      }
+    });
+  });
+  return `<svg width="72" height="72" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg"
+    style="border:1px solid #E5E7EB; border-radius:6px; background:#fff; padding:4px; box-sizing:border-box;">
+    ${rects.join('')}
+  </svg>`;
+}
+
+/** 触发浏览器下载 PNG 文件 */
+function triggerDownload(dataUrl, filename) {
+  const a = document.createElement('a');
+  a.href = dataUrl;
+  a.download = filename;
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function restartQuiz() {
+  QuizEngine.clearProgress();
+  state.inClarification = false;
+  showView('view-welcome');
+}
+
+// ── 启动 ─────────────────────────────────────────────────────────────────────
+init();
+</script>
+
+</body>
+</html>

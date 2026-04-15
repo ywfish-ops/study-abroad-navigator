@@ -1,0 +1,145 @@
+# CLAUDE.md
+
+本文件在每次 Claude Code 会话开始时自动加载。用于告知 Claude Code 本项目的工程约定、技术栈和开发规范。
+
+## 项目简介
+
+全球留学决策导航系统——面向中国高中生及家长的留学决策工具。单页 H5 应用，MVP 阶段无后端数据库。详细产品背景见 `/docs/PRODUCT.md`（如需）。
+
+## 技术栈
+
+- **前端**：单文件 HTML + Vanilla JS（ES6+）+ Tailwind CSS（CDN）
+- **图表**：Chart.js（CDN）
+- **PDF 生成**：jsPDF + html2canvas（CDN）
+- **数据存储**：localStorage + JSON 导入/导出
+- **汇率 API**：ExchangeRate-API
+- **后端（Phase 2+）**：Cloudflare Workers
+- **部署**：Cloudflare Pages
+- **包管理**：暂无（全部用 CDN）
+
+## 目录结构
+
+```
+/
+├── index.html                  # 主入口
+├── CLAUDE.md                   # 本文件
+├── README.md                   # 项目说明
+├── /modules/                   # 各功能模块
+│   ├── quiz.js                 # 模块 1A：学术定位测试
+│   ├── recommender.js          # 模块 1B：联申定位器
+│   └── finance.js              # 模块 1C：财务沙盘
+├── /data/
+│   ├── schools.json            # 院校数据
+│   ├── quiz-questions.json     # 测试题库
+│   └── living-costs.json       # 生活费分级
+├── /styles/
+│   └── main.css                # 自定义样式（Tailwind 之外的）
+└── /docs/
+    ├── PRODUCT.md              # 产品规格（可选）
+    └── module-specs/           # 每个模块的开发文档
+```
+
+## 代码规范
+
+### 通用
+- 所有代码使用 UTF-8 编码
+- 缩进 2 空格
+- 文件末尾保留空行
+- 单引号字符串（除非字符串内含单引号）
+
+### JavaScript
+- 使用 ES6+ 语法（const/let、箭头函数、解构、模板字符串）
+- 函数和变量用 camelCase，常量用 UPPER_SNAKE_CASE
+- 避免全局变量，用 IIFE 或模块模式封装
+- 关键函数写 JSDoc 注释，包括参数类型和返回值
+- 异步操作用 async/await，不用 .then()
+
+### HTML/CSS
+- 语义化标签（`<nav>`、`<main>`、`<section>` 等）
+- Tailwind 优先，特殊样式写到 main.css
+- 移动端优先：默认样式为 mobile，再用 `md:`/`lg:` 前缀做桌面端
+- 所有交互元素保证触控区域 ≥ 44×44px
+
+### 注释
+- 用中文注释（面向开发者 Leo 阅读）
+- 每个函数上方说明"做什么"而非"怎么做"
+- 复杂算法要写"为什么这样做"
+
+## 数据处理约定
+
+- 所有金额计算保留 2 位小数：`Math.round(x * 100) / 100`
+- 排名显示整数
+- 日期格式：`YYYY-MM-DD`
+- localStorage 键名加版本号：`quiz_result_v1`、`finance_sandbox_v1`
+- JSON 导入时做 schema 校验，缺失字段用默认值
+- **JSON 字符串内禁用裸双引号**：从规格文档复制含 `"引用词"` 的文本时，必须将内部的 `"` 替换为 `「」`（如 `"完整"` → `「完整」`），否则会破坏 JSON 格式。写入前用 `python3 -c "import json; json.load(open('file.json'))"` 验证
+
+## UI 设计约定
+
+- **颜色方案**：专业、克制，参考金融/咨询行业（深蓝 + 灰 + 少量暖色点缀）
+- **字体**：系统默认无衬线字体栈，中文优先 PingFang/微软雅黑
+- **移动端优先**：目标用户 80%+ 在手机上使用
+- **付费墙**：用 CSS blur 遮罩 + "解锁查看"按钮
+- **加载状态**：所有异步操作要有 loading 提示
+- **错误处理**：用户友好的中文提示，不暴露技术错误
+
+## 开发流程
+
+### 启动开发
+```bash
+# 本地预览（需装 serve 或用 VS Code Live Server）
+npx serve .
+# 或
+python3 -m http.server 8000
+```
+
+### 部署
+```bash
+# 推送到 main 分支后，Cloudflare Pages 自动部署
+git add .
+git commit -m "feat: <描述>"
+git push origin main
+```
+
+### Git 提交规范
+- `feat:` 新功能
+- `fix:` 修 bug
+- `style:` 样式调整
+- `refactor:` 重构
+- `docs:` 文档
+- `data:` 数据更新
+
+## 当前阶段
+
+**Phase 1 开发中（目标 2026.06 上线）**
+
+开发顺序：
+1. 项目骨架 + 部署流程（进行中）
+2. 院校数据整理（schools.json）
+3. 模块 1A：学术定位测试
+4. 模块 1C：财务沙盘
+5. 模块 1B：联申定位器
+6. 付费墙 + 分享功能
+7. 移动端适配打磨
+
+## 与 Claude Code 协作约定
+
+1. **全程使用中文对话**：所有回复、解释、提问、报错说明都用中文。代码中的变量名、函数名、英文术语保持英文，但注释和沟通用中文
+2. **读文档再写代码**：开发某个模块前，先读 `/docs/module-specs/` 下对应的开发文档
+3. **小步提交**：每完成一个可运行的功能点就提交，不要一次改动大量文件
+4. **测试再说完成**：每次改动后，至少在本地浏览器打开 index.html 确认无报错
+5. **不要擅自加依赖**：新增 CDN 或库前先和 Leo 确认
+6. **不要改 schools.json 的字段结构**：数据结构变更需要 Leo 同步更新 `/docs/module-specs/` 里的 schema
+
+## 本项目的 AI 协作背景（简要）
+
+Leo 同时使用四个工具：
+- **Claude.ai**：产品设计和模块开发文档（给 Claude Code 的输入）
+- **Claude Code（你）**：代码实现和部署
+- **Gemini Pro**：批量整理院校数据为 JSON
+- **OpenClaw + MiniMax**：后台定时任务（监控汇率、政策页面）
+
+所以：
+- 产品决策和文档请 Leo 回 Claude.ai 做，你专注工程实现
+- 需要大量数据时，Leo 会从 Gemini 拿 JSON 给你，你不需要自己收集
+- 你产出的代码会被部署后由 OpenClaw 做运行时监控

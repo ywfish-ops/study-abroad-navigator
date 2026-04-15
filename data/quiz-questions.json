@@ -1,0 +1,433 @@
+{
+  "schemaVersion": "1.0",
+  "totalQuestions": 20,
+  "dimensions": ["DRIVE", "ENV", "RISK", "CAREER", "IDENTITY"],
+  "questions": [
+
+    {
+      "id": "D1",
+      "dimension": "DRIVE",
+      "type": "single",
+      "order": 1,
+      "text": "当你开始一门新课程，最让你兴奋的是什么？",
+      "options": [
+        { "id": "A", "text": "这门课和我未来的职业方向直接相关", "scores": { "D_EXT": 2 } },
+        { "id": "B", "text": "我对这个话题本身很好奇，想搞懂它", "scores": { "D_INT": 2 } },
+        { "id": "C", "text": "教授或同学的评价让我觉得值得学", "scores": { "D_SOC": 2 } },
+        { "id": "D", "text": "这门课的成绩对我的申请或 GPA 很重要", "scores": { "D_CRED": 2 } }
+      ]
+    },
+
+    {
+      "id": "D2",
+      "dimension": "DRIVE",
+      "type": "slider",
+      "order": 2,
+      "text": "在做一个学期项目时，你更倾向于——",
+      "min": 1,
+      "max": 7,
+      "leftLabel": "把时间花在弄懂核心原理上，哪怕最终作品不够「完整」",
+      "rightLabel": "把时间花在把作品做到最好看，哪怕原理还有些模糊",
+      "scoring": [
+        { "range": [1, 3], "scores": { "D_DEPTH": 2 } },
+        { "range": [4, 4], "scores": {} },
+        { "range": [5, 7], "scores": { "D_POLISH": 2 } }
+      ]
+    },
+
+    {
+      "id": "D3",
+      "dimension": "DRIVE",
+      "type": "this_or_that",
+      "order": 3,
+      "text": "以下「学习成果」，哪个对你更重要？",
+      "rounds": [
+        {
+          "round": 1,
+          "optionA": { "text": "能把概念解释给完全不懂的人听", "scores": { "D_INT": 2 } },
+          "optionB": { "text": "做出了可以展示的作品/论文/项目", "scores": { "D_DEPTH": 2 } }
+        },
+        {
+          "round": 2,
+          "optionA": { "text": "在这个领域认识了重要的人", "scores": { "D_SOC": 2 } },
+          "optionB": { "text": "成绩单上有一个好看的分数", "scores": { "D_CRED": 2 } }
+        },
+        {
+          "round": 3,
+          "optionA": { "text": "真正理解了核心原理", "scores": { "D_INT": 2 } },
+          "optionB": { "text": "建立了有价值的人脉", "scores": { "D_SOC": 2 } }
+        }
+      ]
+    },
+
+    {
+      "id": "D4",
+      "dimension": "DRIVE",
+      "type": "single",
+      "order": 4,
+      "text": "你在学校里「最讨厌」的老师类型是？",
+      "options": [
+        { "id": "A", "text": "讲课没逻辑，知识点跳来跳去", "scores": { "D_STRUCT": 2 } },
+        { "id": "B", "text": "只讲理论，完全没有实际案例", "scores": { "D_APPLY": 2 } },
+        { "id": "C", "text": "上课读PPT，没有互动和讨论", "scores": { "D_INTERACT": 2 } }
+      ]
+    },
+
+    {
+      "id": "E1",
+      "dimension": "ENV",
+      "type": "image_single",
+      "order": 5,
+      "text": "以下哪个校园场景最让你感到「对，这就是我想要的」？",
+      "options": [
+        {
+          "id": "A",
+          "imageAlt": "城市中心的摩天楼旁，一栋现代玻璃幕墙教学楼",
+          "imageSrc": "assets/campus-urban.jpg",
+          "text": "城市中心，现代玻璃幕墙教学楼",
+          "scores": { "E_URBAN": 2 }
+        },
+        {
+          "id": "B",
+          "imageAlt": "被树林和湖泊包围的绿色传统校园",
+          "imageSrc": "assets/campus-green.jpg",
+          "text": "树林湖泊环绕的绿色传统校园",
+          "scores": { "E_CAMPUS": 2 }
+        },
+        {
+          "id": "C",
+          "imageAlt": "开放式共享工作空间，满是白板和学生讨论",
+          "imageSrc": "assets/campus-collab.jpg",
+          "text": "开放式共享空间，白板与讨论",
+          "scores": { "E_COLLAB": 2 }
+        },
+        {
+          "id": "D",
+          "imageAlt": "独立安静的图书馆自习区，每个人专注于自己的工作",
+          "imageSrc": "assets/campus-library.jpg",
+          "text": "独立安静的图书馆自习区",
+          "scores": { "E_SOLO": 2 }
+        }
+      ]
+    },
+
+    {
+      "id": "E2",
+      "dimension": "ENV",
+      "type": "single",
+      "order": 6,
+      "text": "关于班级/项目规模，你的直觉是？",
+      "options": [
+        { "id": "A", "text": "小班更好，教授能叫出我的名字", "scores": { "E_SMALL": 2 } },
+        { "id": "B", "text": "大班没关系，我会主动找教授 Office Hour", "scores": { "E_LARGE": 2 } },
+        { "id": "C", "text": "关键看同学质量，规模不重要", "scores": { "E_PEER": 2 } },
+        { "id": "D", "text": "我需要一段时间才能判断", "scores": { "E_UNSURE": 1 } }
+      ]
+    },
+
+    {
+      "id": "E3",
+      "dimension": "ENV",
+      "type": "single",
+      "order": 7,
+      "text": "开学第一周，你的室友邀请你去参加系里的社交活动。你的第一反应是？",
+      "options": [
+        { "id": "A", "text": "好！这是认识同学的好机会", "scores": { "E_SOC_HIGH": 2 } },
+        { "id": "B", "text": "可以去一会儿，但我也需要自己的时间缓冲", "scores": { "E_SOC_MED": 2 } },
+        { "id": "C", "text": "我更倾向于在小圈子里慢慢建立关系", "scores": { "E_SOC_LOW": 2 } }
+      ]
+    },
+
+    {
+      "id": "E4",
+      "dimension": "ENV",
+      "type": "scale",
+      "order": 8,
+      "text": "在一个竞争激烈的班级里，我会变得更有动力。",
+      "min": 1,
+      "max": 5,
+      "leftLabel": "完全不同意",
+      "rightLabel": "完全同意",
+      "scoring": [
+        { "range": [1, 2], "scores": { "E_COMP_AVOID": 2 } },
+        { "range": [3, 3], "scores": {} },
+        { "range": [4, 5], "scores": { "E_COMP_OK": 2 } }
+      ]
+    },
+
+    {
+      "id": "R1",
+      "dimension": "RISK",
+      "type": "single",
+      "order": 9,
+      "text": "现在是12月，你有两个选择来分配剩余的申请名额：",
+      "options": [
+        { "id": "A", "text": "全部用来冲刺 Top 20，接受可能全聚德的风险", "scores": { "R_HIGH": 2 } },
+        { "id": "B", "text": "一半冲刺一半保底，确保至少有学上", "scores": { "R_MED": 2 } },
+        { "id": "C", "text": "以录取概率高的学校为主，再加1-2个冲刺", "scores": { "R_LOW": 2 } },
+        { "id": "D", "text": "完全取决于爸妈的意见", "scores": { "R_DEFER": 2 } }
+      ]
+    },
+
+    {
+      "id": "R2",
+      "dimension": "RISK",
+      "type": "slider",
+      "order": 10,
+      "text": "如果你拿到的最好录取，比你原本设定的目标低一个档次，你会？",
+      "min": 1,
+      "max": 7,
+      "leftLabel": "接受并感到满足，重要的是拿到了好 offer",
+      "rightLabel": "感到强烈遗憾，会考虑 Gap Year 再申",
+      "scoring": [
+        { "range": [1, 3], "scores": { "R_FLEXIBLE": 2 } },
+        { "range": [4, 4], "scores": {} },
+        { "range": [5, 7], "scores": { "R_REGRET": 2 } }
+      ]
+    },
+
+    {
+      "id": "R3",
+      "dimension": "RISK",
+      "type": "single",
+      "order": 11,
+      "text": "关于「转专业申请」（用非本科专业背景申请研究生），你的态度是？",
+      "options": [
+        { "id": "A", "text": "我愿意尝试，背景差异可以变成差异化优势", "scores": { "R_CREATIVE": 2 } },
+        { "id": "B", "text": "我会选择有跨专业录取先例的项目，降低不确定性", "scores": { "R_INFORMED": 2 } },
+        { "id": "C", "text": "我更倾向于申请本专业，稳一点", "scores": { "R_CONSERVATIVE": 2 } }
+      ]
+    },
+
+    {
+      "id": "R4",
+      "dimension": "RISK",
+      "type": "scale",
+      "order": 12,
+      "text": "我能接受在一个完全陌生的城市/国家独立生活，没有任何认识的人。",
+      "min": 1,
+      "max": 5,
+      "leftLabel": "完全不能接受",
+      "rightLabel": "完全可以接受",
+      "scoring": [
+        { "range": [1, 2], "scores": { "R_ADAPT_LOW": 2 } },
+        { "range": [3, 3], "scores": {} },
+        { "range": [4, 5], "scores": { "R_ADAPT_HIGH": 2 } }
+      ],
+      "flags": [
+        { "condition": { "value": 1 }, "flag": "adaptLow", "action": "trigger_geo_preference_note" }
+      ]
+    },
+
+    {
+      "id": "C1",
+      "dimension": "CAREER",
+      "type": "this_or_that",
+      "order": 13,
+      "text": "选择你更倾向的方向：",
+      "rounds": [
+        {
+          "round": 1,
+          "optionA": { "text": "学术研究", "scores": { "C_ACADEMIC": 2 } },
+          "optionB": { "text": "行业实践", "scores": { "C_INDUSTRY": 2 } }
+        },
+        {
+          "round": 2,
+          "branchCondition": {
+            "round1_A": [
+              {
+                "optionA": { "text": "继续博士深造", "scores": { "C_PHD": 2 } },
+                "optionB": { "text": "毕业后进高校/研究机构", "scores": { "C_RESEARCH_INST": 2 } }
+              }
+            ],
+            "round1_B": [
+              {
+                "optionA": { "text": "进入大公司/跨国企业", "scores": { "C_CORP": 2 } },
+                "optionB": { "text": "创业或加入初创", "scores": { "C_STARTUP": 2 } }
+              }
+            ]
+          }
+        },
+        {
+          "round": 3,
+          "optionA": { "text": "回国发展", "scores": { "C_RETURN": 2 } },
+          "optionB": { "text": "留在海外发展", "scores": { "C_GLOBAL": 2 } }
+        }
+      ]
+    },
+
+    {
+      "id": "C2",
+      "dimension": "CAREER",
+      "type": "multi_select",
+      "order": 14,
+      "text": "你最看重研究生阶段带给你的是什么？（选最重要的3项）",
+      "maxSelections": 3,
+      "options": [
+        { "id": "A", "text": "专业深度和研究能力", "scores": { "C_ACADEMIC": 2 } },
+        { "id": "B", "text": "顶校的品牌和学历背书", "scores": { "C_BRAND": 2 } },
+        { "id": "C", "text": "海外生活和文化体验", "scores": { "C_LIFESTYLE": 2 } },
+        { "id": "D", "text": "人脉网络（同学、校友、教授）", "scores": { "C_NETWORK": 2 } },
+        { "id": "E", "text": "提升就业竞争力和薪资", "scores": { "C_INDUSTRY": 2 } },
+        { "id": "F", "text": "为移民或长期居留铺路", "scores": { "C_GLOBAL": 2 } },
+        { "id": "G", "text": "探索自己真正的兴趣", "scores": { "C_EXPLORE": 2 } }
+      ]
+    },
+
+    {
+      "id": "C3",
+      "dimension": "CAREER",
+      "type": "this_or_that",
+      "order": 15,
+      "text": "哪种「成功的研究生经历」对你更重要？",
+      "rounds": [
+        {
+          "round": 1,
+          "optionA": { "text": "毕业时手握多个高薪工作 offer", "scores": { "C_INDUSTRY": 2 } },
+          "optionB": { "text": "毕业时发表了有影响力的研究论文", "scores": { "C_ACADEMIC": 2 } }
+        },
+        {
+          "round": 2,
+          "optionA": { "text": "毕业时手握多个高薪工作 offer", "scores": { "C_INDUSTRY": 2 } },
+          "optionB": { "text": "毕业时在新城市建立了真实的生活方式和社交圈", "scores": { "C_LIFESTYLE": 2 } }
+        },
+        {
+          "round": 3,
+          "optionA": { "text": "毕业时发表了有影响力的研究论文", "scores": { "C_ACADEMIC": 2 } },
+          "optionB": { "text": "毕业时在新城市建立了真实的生活方式和社交圈", "scores": { "C_LIFESTYLE": 2 } }
+        }
+      ]
+    },
+
+    {
+      "id": "C4",
+      "dimension": "CAREER",
+      "type": "single",
+      "order": 16,
+      "text": "三年后，你最希望在哪里工作？",
+      "options": [
+        { "id": "A", "text": "中国一线城市（北上广深杭）", "scores": { "C_RETURN": 2 } },
+        { "id": "B", "text": "香港或新加坡", "scores": { "C_RETURN": 1, "C_GLOBAL": 1 } },
+        { "id": "C", "text": "美国或英国", "scores": { "C_GLOBAL": 2 } },
+        { "id": "D", "text": "还不确定，保持灵活", "scores": { "C_EXPLORE": 2 } }
+      ]
+    },
+
+    {
+      "id": "I1",
+      "dimension": "IDENTITY",
+      "type": "scale",
+      "order": 17,
+      "text": "出国留学对我来说，「离开中国」本身也是目标的一部分。",
+      "min": 1,
+      "max": 7,
+      "leftLabel": "完全不是",
+      "rightLabel": "完全是",
+      "scoring": [
+        { "range": [1, 3], "scores": { "I_BRIDGE": 2 } },
+        { "range": [4, 4], "scores": {} },
+        { "range": [5, 7], "scores": { "I_GLOBAL": 2 } }
+      ]
+    },
+
+    {
+      "id": "I2",
+      "dimension": "IDENTITY",
+      "type": "image_single",
+      "order": 18,
+      "text": "你心目中「理想的留学状态」最接近哪一张？",
+      "options": [
+        {
+          "id": "A",
+          "imageAlt": "在异国他乡完全融入当地生活，说流利的英语",
+          "imageSrc": "assets/identity-global.jpg",
+          "text": "完全融入当地生活，说流利的英语",
+          "scores": { "I_GLOBAL_FULL": 2 }
+        },
+        {
+          "id": "B",
+          "imageAlt": "在两种文化之间切换自如，保持双重身份",
+          "imageSrc": "assets/identity-bridge.jpg",
+          "text": "在两种文化之间切换自如，双重身份",
+          "scores": { "I_BRIDGE": 2 }
+        },
+        {
+          "id": "C",
+          "imageAlt": "在海外保持中国文化圈，留学只是手段",
+          "imageSrc": "assets/identity-home.jpg",
+          "text": "在海外保持中国文化圈，留学是手段",
+          "scores": { "I_HOME_BASED": 2 }
+        }
+      ]
+    },
+
+    {
+      "id": "I3",
+      "dimension": "IDENTITY",
+      "type": "single",
+      "order": 19,
+      "text": "你的父母/家庭对这次留学决策的影响力是？",
+      "options": [
+        { "id": "A", "text": "完全由我自己决定", "scores": { "I_AUTONOMOUS": 2 } },
+        { "id": "B", "text": "我主导，但需要家人认可", "scores": { "I_AUTONOMOUS": 1, "I_FAMILY": 1 } },
+        { "id": "C", "text": "共同决策，家人意见很重要", "scores": { "I_FAMILY": 2 } },
+        { "id": "D", "text": "主要由家人决定，我配合", "scores": { "I_FAMILY": 3 } }
+      ],
+      "flags": [
+        { "condition": { "optionId": "D" }, "flag": "familyDriven", "action": "show_parent_summary" }
+      ]
+    },
+
+    {
+      "id": "I4",
+      "dimension": "IDENTITY",
+      "type": "single",
+      "order": 20,
+      "text": "你在社交媒体上发现一篇文章，标题是《放弃海外高薪回国的年轻人后悔了吗？》，你的第一反应是？",
+      "options": [
+        { "id": "A", "text": "马上点进去，这个问题困扰我很久了", "scores": { "I_UNCERTAIN": 2 } },
+        { "id": "B", "text": "有点好奇，但这不是我现在要想的事", "scores": { "I_PRESENT": 2 } },
+        { "id": "C", "text": "不太感兴趣，我对自己的方向比较清楚", "scores": { "I_CLEAR": 2 } }
+      ]
+    }
+  ],
+
+  "clarificationQuestions": {
+    "description": "方向澄清对话，在画像为 EXPLORER_BETA 或 HYBRID_IDENTITY 时触发",
+    "triggerArchetypes": ["EXPLORER_BETA", "HYBRID_IDENTITY"],
+    "questions": [
+      {
+        "id": "CL1",
+        "type": "this_or_that",
+        "text": "如果只能选一个，你更在乎哪个？",
+        "rounds": [
+          {
+            "round": 1,
+            "optionA": { "text": "未来几年在哪里生活", "scores": { "CL_GEO": 2 } },
+            "optionB": { "text": "未来做什么类型的工作", "scores": { "CL_CAREER": 2 } }
+          }
+        ]
+      },
+      {
+        "id": "CL2",
+        "type": "single",
+        "text": "对于「我还没想清楚方向」这件事，你的感受是？",
+        "options": [
+          { "id": "A", "text": "焦虑，感觉落后了", "scores": { "CL_PRESSURE": 2 } },
+          { "id": "B", "text": "还好，我相信读了会更清晰", "scores": { "CL_OPEN": 2 } },
+          { "id": "C", "text": "其实我有些想法，只是不确定能不能实现", "scores": { "CL_LATENT": 2 } }
+        ]
+      },
+      {
+        "id": "CL3",
+        "type": "single",
+        "text": "如果要给自己的留学目标写一句话，最接近哪个？",
+        "options": [
+          { "id": "A", "text": "找到一个能让我真正投入的研究或职业方向", "scores": { "CL_EXPLORE_DEEP": 2 } },
+          { "id": "B", "text": "拿到一个有含金量的学历，为下一步提供选项", "scores": { "CL_OPTIONALITY": 2 } },
+          { "id": "C", "text": "在一个新环境里重新认识自己", "scores": { "CL_IDENTITY_SEARCH": 2 } }
+        ]
+      }
+    ]
+  }
+}
