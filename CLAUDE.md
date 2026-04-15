@@ -24,20 +24,48 @@
 ├── index.html                  # 主入口
 ├── CLAUDE.md                   # 本文件
 ├── README.md                   # 项目说明
-├── /modules/                   # 各功能模块
-│   ├── quiz.js                 # 模块 1A：学术定位测试
-│   ├── recommender.js          # 模块 1B：联申定位器
-│   └── finance.js              # 模块 1C：财务沙盘
-├── /data/
-│   ├── schools.json            # 院校数据
-│   ├── quiz-questions.json     # 测试题库
-│   └── living-costs.json       # 生活费分级
-├── /styles/
-│   └── main.css                # 自定义样式（Tailwind 之外的）
+│
+├── app.js                      # 主逻辑、路由、模块调度
+├── quiz.js                     # 模块 1A：学术定位测试
+├── finance.js                  # 模块 1C：财务沙盘
+├── recommender.js              # 模块 1B：联申定位器
+├── utils.js                    # 共享工具函数（汇率、localStorage 等）
+│
+├── schools.json                # 院校数据
+├── quiz-questions.json         # 测试题库
+├── living-costs.json           # 生活费分级
+│
+├── styles.css                  # 自定义样式（Tailwind 之外的）
+│
 └── /docs/
-    ├── PRODUCT.md              # 产品规格（可选）
-    └── module-specs/           # 每个模块的开发文档
+    └── /module-specs/          # 每个模块的开发文档
+        ├── 1A-quiz.md
+        ├── 1B-recommender.md
+        └── 1C-finance.md
 ```
+
+**目录扁平化原则**：
+- 所有代码和数据文件放项目根目录，不建子目录
+- 每个模块对应一个 `.js` 文件，用模块名命名
+- 只有 `/docs/` 是唯一子目录（文档数量多需要分类）
+- 等根目录文件超过 15 个，或引入构建工具时再重构
+
+## 模块封装方式
+
+每个模块用对象字面量封装，暴露到 `window` 供其他模块调用：
+
+```javascript
+// quiz.js
+const QuizModule = {
+  init() { /* ... */ },
+  loadQuestions() { /* ... */ },
+  renderQuestion(index) { /* ... */ },
+  calculateResult(answers) { /* ... */ }
+};
+window.QuizModule = QuizModule;
+```
+
+index.html 中 script 加载顺序：`utils.js` → 各模块 → `app.js`（app.js 最后，负责调度其他模块）。
 
 ## 代码规范
 
@@ -72,7 +100,6 @@
 - 日期格式：`YYYY-MM-DD`
 - localStorage 键名加版本号：`quiz_result_v1`、`finance_sandbox_v1`
 - JSON 导入时做 schema 校验，缺失字段用默认值
-- **JSON 字符串内禁用裸双引号**：从规格文档复制含 `"引用词"` 的文本时，必须将内部的 `"` 替换为 `「」`（如 `"完整"` → `「完整」`），否则会破坏 JSON 格式。写入前用 `python3 -c "import json; json.load(open('file.json'))"` 验证
 
 ## UI 设计约定
 
@@ -141,5 +168,32 @@ Leo 同时使用四个工具：
 
 所以：
 - 产品决策和文档请 Leo 回 Claude.ai 做，你专注工程实现
-- 需要大量数据时，Leo 会从 Gemini 拿 JSON 给你，你不需要自己收集
 - 你产出的代码会被部署后由 OpenClaw 做运行时监控
+
+## schools.json 数据管道
+
+schools.json 每所学校由四个数据批次组成，来源不同，**合并是你（Claude Code）的职责**：
+
+```
+College Scorecard API ──→ batch_a（录取率、学费、排名）
+Gemini Pro 提取官网 ──→ batch_b（专业、语言要求、截止日期、奖学金）
+Claude.ai 手动整理 ───→ batch_c（就业城市、行业、校友、校园风格）
+基于 batch_a/b 计算 ──→ finance_sandbox（4年总成本、生活费、保险）
+```
+
+### 当 Leo 给你 Gemini 输出的数据时
+
+Leo 会把 Gemini 返回的 JSON 直接粘贴给你（已经人工核查过），你需要：
+
+1. **按 school_id 匹配**：找到 schools.json 中对应的学校
+2. **只更新 batch_b 字段**：不动 batch_a、batch_c、finance_sandbox、meta
+3. **如果 school_id 不存在**：为该学校新建完整条目，batch_b 填入数据，其他批次字段留空结构（填 null）
+4. **合并后更新 meta.batch_b_verified 为 false**：等 Leo 人工确认后再改为 true
+5. **合并后更新 meta.data_updated 为当天日期**
+
+### 绝对不要做的事
+
+- ❌ 不要自己编造或猜测院校数据（学费、排名、录取率等）
+- ❌ 不要从互联网搜索数据来填充——数据源由 Gemini 和 College Scorecard 负责
+- ❌ 不要改变 schools.json 的顶层结构（_schema、schools 数组）
+- ❌ 不要删除已有学校的数据，即使 Gemini 新数据中没有那所学校

@@ -552,7 +552,7 @@
 <!-- ════════════════════════════════════════════
      Quiz Engine
 ════════════════════════════════════════════ -->
-<script src="modules/quiz.js"></script>
+<script src="quiz.js"></script>
 
 <script>
 'use strict';
@@ -587,7 +587,7 @@ async function init() {
 
   // 加载题库
   try {
-    const res = await fetch('data/quiz-questions.json');
+    const res = await fetch('quiz-questions.json');
     const data = await res.json();
     state.questions = data.questions;
     state.clarQuestions = data.clarificationQuestions?.questions || [];

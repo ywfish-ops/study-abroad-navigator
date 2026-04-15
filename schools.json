@@ -1,0 +1,652 @@
+{
+  "_schema": {
+    "version": "1.0",
+    "scope": "QS World Top 100 + US News National Universities Top 100，本科项目",
+    "target_user": "中国高中生申请海外本科",
+    "batch_strategy": {
+      "A": "自动化采集（College Scorecard / QS API）",
+      "B": "Gemini 提取官网",
+      "C": "手工验证"
+    },
+    "currency_note": "所有金额统一换算为 USD，保留原始货币字段供汇率模拟使用"
+  },
+
+  "schools": [
+    {
+      "school_id": "mit",
+
+      "batch_a": {
+        "school_name_en": "Massachusetts Institute of Technology",
+        "school_name_zh": "麻省理工学院",
+        "country": "US",
+        "city": "Cambridge",
+        "state": "MA",
+        "qs_rank": 1,
+        "usnews_rank": 2,
+        "acceptance_rate": 0.04,
+        "tuition_usd_annual": 57986,
+        "tuition_local_annual": 57986,
+        "currency_local": "USD"
+      },
+
+      "batch_b": {
+        "programs": [
+          "Computer Science",
+          "Electrical Engineering & Computer Science",
+          "Mathematics",
+          "Physics",
+          "Economics",
+          "Mechanical Engineering",
+          "Biology",
+          "Architecture"
+        ],
+        "ielts_min": null,
+        "toefl_min": null,
+        "english_note": "No minimum score required; admits based on holistic review",
+        "avg_accepted_toefl": 113,
+        "avg_accepted_ielts": null,
+        "application_deadline": {
+          "early_action": "2025-11-01",
+          "regular": "2026-01-01"
+        },
+        "sat_mid50": { "math": [790, 800], "reading": [740, 780] },
+        "act_mid50": [34, 36],
+        "financial_aid_international": true,
+        "scholarship_availability": true,
+        "scholarship_note": "Need-blind for all applicants including international; meets 100% of demonstrated need",
+        "scholarship_typical_usd_annual": 55000
+      },
+
+      "batch_c": {
+        "employment_city_tags": ["San Francisco", "Boston", "New York", "Seattle", "London"],
+        "industry_strengths": ["Deep Tech", "AI/ML", "Finance", "Consulting", "Research", "Entrepreneurship"],
+        "qs_subject_ranks": {
+          "Computer Science": 1,
+          "Engineering": 1,
+          "Mathematics": 3,
+          "Physics": 4
+        },
+        "notable_alumni_companies": ["Google", "Microsoft", "SpaceX", "Palantir", "McKinsey"],
+        "campus_vibe": ["Research-intensive", "Small class", "Collaborative"],
+        "chinese_student_ratio_approx": 0.10
+      },
+
+      "finance_sandbox": {
+        "tuition_usd_annual": 57986,
+        "duration_years": 4,
+        "living_cost_usd_monthly": {
+          "low": 2000,
+          "mid": 2800,
+          "high": 4000
+        },
+        "scholarship_typical_usd_annual": 55000,
+        "scholarship_coverage_rate": 0.85,
+        "scholarship_condition": "need-based",
+        "health_insurance_usd_annual": 3500,
+        "fees_usd_annual": 360
+      },
+
+      "meta": {
+        "archetype_fit": ["SCHOLAR_PIONEER", "CAREER_ARCHITECT", "GLOBAL_NOMAD"],
+        "difficulty_tier": "S",
+        "tags": ["顶尖研究型", "美国", "STEM强校", "需要极高绩"],
+        "batch_a_verified": true,
+        "batch_b_verified": true,
+        "batch_c_verified": false,
+        "data_updated": "2026-04-15",
+        "official_url": "https://www.mit.edu"
+      }
+    },
+
+    {
+      "school_id": "unimelb",
+
+      "batch_a": {
+        "school_name_en": "University of Melbourne",
+        "school_name_zh": "墨尔本大学",
+        "country": "Australia",
+        "city": "Melbourne",
+        "state": "VIC",
+        "qs_rank": 13,
+        "usnews_rank": null,
+        "acceptance_rate": 0.70,
+        "tuition_usd_annual": 31000,
+        "tuition_local_annual": 47000,
+        "currency_local": "AUD"
+      },
+
+      "batch_b": {
+        "programs": [
+          "Commerce",
+          "Science",
+          "Arts",
+          "Engineering",
+          "Biomedicine",
+          "Architecture",
+          "Fine Arts"
+        ],
+        "ielts_min": 6.5,
+        "toefl_min": 79,
+        "english_note": "Overall IELTS 6.5 with no band below 6.0",
+        "avg_accepted_toefl": null,
+        "avg_accepted_ielts": 7.0,
+        "application_deadline": {
+          "early_action": null,
+          "regular": "2025-10-31"
+        },
+        "sat_mid50": null,
+        "act_mid50": null,
+        "financial_aid_international": false,
+        "scholarship_availability": true,
+        "scholarship_note": "Melbourne International Undergraduate Scholarship; merit-based; ~AUD 10,000/yr",
+        "scholarship_typical_usd_annual": 6500
+      },
+
+      "batch_c": {
+        "employment_city_tags": ["Melbourne", "Sydney", "Singapore", "Shanghai"],
+        "industry_strengths": ["Finance", "Healthcare", "Research", "Government", "Education"],
+        "qs_subject_ranks": {
+          "Education": 5,
+          "Agriculture": 8,
+          "Pharmacy": 12,
+          "Economics": 28
+        },
+        "notable_alumni_companies": ["Macquarie", "Deloitte", "KPMG", "WHO"],
+        "campus_vibe": ["Leafy campus", "Research-active", "Diverse"],
+        "chinese_student_ratio_approx": 0.18
+      },
+
+      "finance_sandbox": {
+        "tuition_usd_annual": 31000,
+        "duration_years": 3,
+        "living_cost_usd_monthly": {
+          "low": 1400,
+          "mid": 2000,
+          "high": 2800
+        },
+        "scholarship_typical_usd_annual": 6500,
+        "scholarship_coverage_rate": 0.15,
+        "scholarship_condition": "merit-based",
+        "health_insurance_usd_annual": 700,
+        "fees_usd_annual": 800
+      },
+
+      "meta": {
+        "archetype_fit": ["HOME_ANCHOR", "GLOBAL_NOMAD", "CAREER_ARCHITECT"],
+        "difficulty_tier": "B",
+        "tags": ["澳洲", "综合性强", "3年制", "回国认可度高"],
+        "batch_a_verified": true,
+        "batch_b_verified": true,
+        "batch_c_verified": false,
+        "data_updated": "2026-04-15",
+        "official_url": "https://www.unimelb.edu.au"
+      }
+    },
+
+    {
+      "school_id": "stanford",
+
+      "batch_a": {
+        "school_name_en": null,
+        "school_name_zh": null,
+        "country": null,
+        "city": null,
+        "state": null,
+        "qs_rank": null,
+        "usnews_rank": null,
+        "acceptance_rate": null,
+        "tuition_usd_annual": null,
+        "tuition_local_annual": null,
+        "currency_local": null
+      },
+
+      "batch_b": {
+        "programs": [
+          "Computer Science",
+          "Economics",
+          "Engineering",
+          "Human Biology",
+          "Symbolic Systems",
+          "Political Science",
+          "Psychology",
+          "Physics",
+          "Mathematics",
+          "Management Science and Engineering"
+        ],
+        "ielts_min": null,
+        "toefl_min": 100,
+        "english_note": "Stanford has no official minimum but 100+ TOEFL is strongly recommended. Test optional for SAT/ACT in 2026-27; proficiency results expected if native language is not English.",
+        "avg_accepted_toefl": null,
+        "avg_accepted_ielts": null,
+        "application_deadline": {
+          "early_action": "2026-11-01",
+          "regular": "2027-01-05"
+        },
+        "sat_mid50": { "math": [770, 800], "reading": [740, 780] },
+        "act_mid50": [34, 35],
+        "financial_aid_international": true,
+        "scholarship_availability": true,
+        "scholarship_note": "Need-based aid only for international students; Stanford meets 100% of demonstrated need for all admitted students. No merit scholarships available.",
+        "scholarship_typical_usd_annual": 65000,
+        "_extraction_notes": {
+          "source_urls": [
+            "https://admission.stanford.edu/apply/first-year/",
+            "https://financialaid.stanford.edu/undergrad/apply/requirements/rd_international.html"
+          ],
+          "uncertainties": [
+            "avg_accepted_toefl/ielts 官网未公开具体均分",
+            "ielts_min 学校明确表示无最低分要求"
+          ],
+          "extraction_date": "2026-04-15"
+        }
+      },
+
+      "batch_c": {
+        "employment_city_tags": null,
+        "industry_strengths": null,
+        "qs_subject_ranks": null,
+        "notable_alumni_companies": null,
+        "campus_vibe": null,
+        "chinese_student_ratio_approx": null
+      },
+
+      "finance_sandbox": {
+        "tuition_usd_annual": null,
+        "duration_years": null,
+        "living_cost_usd_monthly": { "low": null, "mid": null, "high": null },
+        "scholarship_typical_usd_annual": 65000,
+        "scholarship_coverage_rate": null,
+        "scholarship_condition": "need-based",
+        "health_insurance_usd_annual": null,
+        "fees_usd_annual": null
+      },
+
+      "meta": {
+        "archetype_fit": null,
+        "difficulty_tier": null,
+        "tags": null,
+        "batch_a_verified": false,
+        "batch_b_verified": false,
+        "batch_c_verified": false,
+        "data_updated": "2026-04-15",
+        "official_url": "https://admission.stanford.edu"
+      }
+    },
+
+    {
+      "school_id": "ucl",
+
+      "batch_a": {
+        "school_name_en": null,
+        "school_name_zh": null,
+        "country": null,
+        "city": null,
+        "state": null,
+        "qs_rank": null,
+        "usnews_rank": null,
+        "acceptance_rate": null,
+        "tuition_usd_annual": null,
+        "tuition_local_annual": null,
+        "currency_local": null
+      },
+
+      "batch_b": {
+        "programs": [
+          "Architecture",
+          "Education",
+          "Laws",
+          "Economics",
+          "Psychology",
+          "Medicine",
+          "Computer Science",
+          "Geography",
+          "History",
+          "Management Science"
+        ],
+        "ielts_min": 6.5,
+        "toefl_min": 92,
+        "english_note": "UCL uses 5 levels. Level 1 (Min): IELTS 6.5 (6.0), TOEFL 92. Level 4 (Advanced): IELTS 7.5 (7.0), TOEFL 109. Also accepts Duolingo.",
+        "avg_accepted_toefl": null,
+        "avg_accepted_ielts": null,
+        "application_deadline": {
+          "early_action": null,
+          "regular": "2027-01-14"
+        },
+        "sat_mid50": null,
+        "act_mid50": null,
+        "financial_aid_international": true,
+        "scholarship_availability": true,
+        "scholarship_note": "UCL Global Undergraduate Scholarship: up to full tuition + living; UCL Access Opportunity Scholarship: full tuition + 13,762 GBP living allowance.",
+        "scholarship_typical_usd_annual": 55000,
+        "_extraction_notes": {
+          "source_urls": [
+            "https://www.ucl.ac.uk/study/prospective-students/undergraduate/how-apply/english-language-requirements",
+            "https://www.ucl.ac.uk/study/prospective-students/undergraduate/frequently-asked-questions"
+          ],
+          "uncertainties": [
+            "scholarship_typical_usd_annual 为学费加生活费的估算值"
+          ],
+          "extraction_date": "2026-04-15"
+        }
+      },
+
+      "batch_c": {
+        "employment_city_tags": null,
+        "industry_strengths": null,
+        "qs_subject_ranks": null,
+        "notable_alumni_companies": null,
+        "campus_vibe": null,
+        "chinese_student_ratio_approx": null
+      },
+
+      "finance_sandbox": {
+        "tuition_usd_annual": null,
+        "duration_years": null,
+        "living_cost_usd_monthly": { "low": null, "mid": null, "high": null },
+        "scholarship_typical_usd_annual": 55000,
+        "scholarship_coverage_rate": null,
+        "scholarship_condition": "need-based + merit",
+        "health_insurance_usd_annual": null,
+        "fees_usd_annual": null
+      },
+
+      "meta": {
+        "archetype_fit": null,
+        "difficulty_tier": null,
+        "tags": null,
+        "batch_a_verified": false,
+        "batch_b_verified": false,
+        "batch_c_verified": false,
+        "data_updated": "2026-04-15",
+        "official_url": "https://www.ucl.ac.uk"
+      }
+    },
+
+    {
+      "school_id": "oxford",
+
+      "batch_a": {
+        "school_name_en": null,
+        "school_name_zh": null,
+        "country": null,
+        "city": null,
+        "state": null,
+        "qs_rank": null,
+        "usnews_rank": null,
+        "acceptance_rate": null,
+        "tuition_usd_annual": null,
+        "tuition_local_annual": null,
+        "currency_local": null
+      },
+
+      "batch_b": {
+        "programs": [
+          "Philosophy, Politics and Economics (PPE)",
+          "Medicine",
+          "History",
+          "Engineering Science",
+          "Mathematics",
+          "Law",
+          "Chemistry",
+          "Classics",
+          "Fine Art",
+          "Physics"
+        ],
+        "ielts_min": 7.0,
+        "toefl_min": 100,
+        "english_note": "Standard level: 7.0 (6.5) / 100. Higher level: 7.5 (7.0) / 110. Most Humanities/Social Sciences require Higher level.",
+        "avg_accepted_toefl": null,
+        "avg_accepted_ielts": null,
+        "application_deadline": {
+          "early_action": null,
+          "regular": "2026-10-15"
+        },
+        "sat_mid50": null,
+        "act_mid50": null,
+        "financial_aid_international": true,
+        "scholarship_availability": true,
+        "scholarship_note": "Reach Oxford Scholarship: full tuition + living + one return airfare; Simon and June Li Undergraduate Scholarship.",
+        "scholarship_typical_usd_annual": 65000,
+        "_extraction_notes": {
+          "source_urls": [
+            "https://www.ox.ac.uk/admissions/undergraduate/applying-to-oxford/admissions-timeline",
+            "https://www.ox.ac.uk/admissions/undergraduate/applying-to-oxford/for-international-students/ELR"
+          ],
+          "uncertainties": [
+            "Oxford 奖学金多为覆盖全额，USD 金额随汇率和课程学费变动"
+          ],
+          "extraction_date": "2026-04-15"
+        }
+      },
+
+      "batch_c": {
+        "employment_city_tags": null,
+        "industry_strengths": null,
+        "qs_subject_ranks": null,
+        "notable_alumni_companies": null,
+        "campus_vibe": null,
+        "chinese_student_ratio_approx": null
+      },
+
+      "finance_sandbox": {
+        "tuition_usd_annual": null,
+        "duration_years": null,
+        "living_cost_usd_monthly": { "low": null, "mid": null, "high": null },
+        "scholarship_typical_usd_annual": 65000,
+        "scholarship_coverage_rate": null,
+        "scholarship_condition": "need-based",
+        "health_insurance_usd_annual": null,
+        "fees_usd_annual": null
+      },
+
+      "meta": {
+        "archetype_fit": null,
+        "difficulty_tier": null,
+        "tags": null,
+        "batch_a_verified": false,
+        "batch_b_verified": false,
+        "batch_c_verified": false,
+        "data_updated": "2026-04-15",
+        "official_url": "https://www.ox.ac.uk"
+      }
+    },
+
+    {
+      "school_id": "nus",
+
+      "batch_a": {
+        "school_name_en": null,
+        "school_name_zh": null,
+        "country": null,
+        "city": null,
+        "state": null,
+        "qs_rank": null,
+        "usnews_rank": null,
+        "acceptance_rate": null,
+        "tuition_usd_annual": null,
+        "tuition_local_annual": null,
+        "currency_local": null
+      },
+
+      "batch_b": {
+        "programs": [
+          "Computer Science",
+          "Business Administration",
+          "Medicine",
+          "Architecture",
+          "Law",
+          "Mechanical Engineering",
+          "Economics",
+          "Data Science and Analytics",
+          "Psychology",
+          "Pharmacy"
+        ],
+        "ielts_min": 6.5,
+        "toefl_min": 92,
+        "english_note": "IELTS overall 6.5 (Reading/Writing 6.5) or TOEFL 92-93. Law and Medicine often require higher scores.",
+        "avg_accepted_toefl": null,
+        "avg_accepted_ielts": null,
+        "application_deadline": {
+          "early_action": null,
+          "regular": "2027-02-23"
+        },
+        "sat_mid50": null,
+        "act_mid50": null,
+        "financial_aid_international": true,
+        "scholarship_availability": true,
+        "scholarship_note": "ASEAN Undergraduate Scholarship: 100% tuition + S$5,800 living + S$3,000 housing allowance. Science & Technology Scholarship for Asian students.",
+        "scholarship_typical_usd_annual": 30000,
+        "_extraction_notes": {
+          "source_urls": [
+            "https://www.nus.edu.sg/oam/admissions/international-qualifications-for-foreigners/admission-requirements",
+            "https://nus.edu.sg/oam/scholarships/scholarships-for-freshmen-singapore-permanent-residents/asean-undergraduate-scholarship"
+          ],
+          "uncertainties": [
+            "2027 Fall 截止日期基于 2026 申请季周期推算",
+            "scholarship_typical_usd_annual 按政府资助后的学费覆盖估算"
+          ],
+          "extraction_date": "2026-04-15"
+        }
+      },
+
+      "batch_c": {
+        "employment_city_tags": null,
+        "industry_strengths": null,
+        "qs_subject_ranks": null,
+        "notable_alumni_companies": null,
+        "campus_vibe": null,
+        "chinese_student_ratio_approx": null
+      },
+
+      "finance_sandbox": {
+        "tuition_usd_annual": null,
+        "duration_years": null,
+        "living_cost_usd_monthly": { "low": null, "mid": null, "high": null },
+        "scholarship_typical_usd_annual": 30000,
+        "scholarship_coverage_rate": null,
+        "scholarship_condition": "merit-based",
+        "health_insurance_usd_annual": null,
+        "fees_usd_annual": null
+      },
+
+      "meta": {
+        "archetype_fit": null,
+        "difficulty_tier": null,
+        "tags": null,
+        "batch_a_verified": false,
+        "batch_b_verified": false,
+        "batch_c_verified": false,
+        "data_updated": "2026-04-15",
+        "official_url": "https://www.nus.edu.sg"
+      }
+    },
+
+    {
+      "school_id": "hku",
+
+      "batch_a": {
+        "school_name_en": null,
+        "school_name_zh": null,
+        "country": null,
+        "city": null,
+        "state": null,
+        "qs_rank": null,
+        "usnews_rank": null,
+        "acceptance_rate": null,
+        "tuition_usd_annual": null,
+        "tuition_local_annual": null,
+        "currency_local": null
+      },
+
+      "batch_b": {
+        "programs": [
+          "Bachelor of Medicine and Bachelor of Surgery",
+          "Bachelor of Laws",
+          "Bachelor of Finance (Asset Management)",
+          "Architecture",
+          "Economics and Finance",
+          "Psychology",
+          "Social Sciences",
+          "Engineering",
+          "Bachelor of Dental Surgery",
+          "Biomedical Sciences"
+        ],
+        "ielts_min": 6.5,
+        "toefl_min": 80,
+        "english_note": "IELTS 6.5 (no subtest < 5.5) or TOEFL 80. Faculty of Arts requires IELTS 7.0. Tests valid for 2 years prior to Sept 1.",
+        "avg_accepted_toefl": null,
+        "avg_accepted_ielts": null,
+        "application_deadline": {
+          "early_action": "2026-11-26",
+          "regular": "2027-08-21"
+        },
+        "sat_mid50": null,
+        "act_mid50": null,
+        "financial_aid_international": true,
+        "scholarship_availability": true,
+        "scholarship_note": "Entrance Scholarship for President's Scholars: up to HK$1,000,000 (approx $128k) covering full tuition and study abroad support.",
+        "scholarship_typical_usd_annual": 32000,
+        "_extraction_notes": {
+          "source_urls": [
+            "https://admissions.hku.hk/apply/international-qualifications",
+            "https://www.admissions.hku.hk/fees-and-scholarships/scholarships/hku-undergraduate-entrance-scholarship-presidents-scholars"
+          ],
+          "uncertainties": [
+            "deadline_regular 为滚动录取截止日，早期申请建议在 11 月完成"
+          ],
+          "extraction_date": "2026-04-15"
+        }
+      },
+
+      "batch_c": {
+        "employment_city_tags": null,
+        "industry_strengths": null,
+        "qs_subject_ranks": null,
+        "notable_alumni_companies": null,
+        "campus_vibe": null,
+        "chinese_student_ratio_approx": null
+      },
+
+      "finance_sandbox": {
+        "tuition_usd_annual": null,
+        "duration_years": null,
+        "living_cost_usd_monthly": { "low": null, "mid": null, "high": null },
+        "scholarship_typical_usd_annual": 32000,
+        "scholarship_coverage_rate": null,
+        "scholarship_condition": "merit-based",
+        "health_insurance_usd_annual": null,
+        "fees_usd_annual": null
+      },
+
+      "meta": {
+        "archetype_fit": null,
+        "difficulty_tier": null,
+        "tags": null,
+        "batch_a_verified": false,
+        "batch_b_verified": false,
+        "batch_c_verified": false,
+        "data_updated": "2026-04-15",
+        "official_url": "https://www.hku.hk"
+      }
+    }
+  ],
+
+  "_gemini_prompt_template": {
+    "instruction": "以下是院校数据 schema，请按照此结构填写指定学校的 batch_b 字段。数据来源：学校官网招生页面。不确定的字段填 null，不要猜测。",
+    "fields_to_fill": [
+      "programs（主要本科专业，最多10个，英文）",
+      "ielts_min（最低总分，数字，无要求填 null）",
+      "toefl_min（最低总分，数字，无要求填 null）",
+      "english_note（补充说明，如单科要求）",
+      "avg_accepted_ielts（录取者平均分，官网有则填，否则 null）",
+      "application_deadline.early_action（早申截止，YYYY-MM-DD，无则 null）",
+      "application_deadline.regular（常规截止，YYYY-MM-DD）",
+      "sat_mid50（中间50%分数段，如 {math:[700,780], reading:[680,750]}，无则 null）",
+      "financial_aid_international（是否向国际生提供助学金，true/false）",
+      "scholarship_availability（是否有奖学金，true/false）",
+      "scholarship_note（奖学金名称及简介，100字以内）",
+      "scholarship_typical_usd_annual（典型年奖学金金额 USD，估算，无则 null）"
+    ],
+    "output_format": "严格 JSON，字段名与 schema 一致，不添加额外字段"
+  }
+}
