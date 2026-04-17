@@ -1,2 +1,23 @@
+# macOS
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V8
+.Trashes
+
+# Claude Code
 .claude/
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 本地调试
+*.log
+node_modules/
+
+# 环境变量（如有）
+.env
+.env.local

@@ -1,0 +1,502 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "last_updated": "2026-04-17",
+    "data_cycle": "2025-2026 学年",
+    "description": "按城市群分组的生活费参考数据，供财务沙盘模块使用",
+    "currency_note": "monthly_local 为当地货币月均，monthly_usd 为等值美元（参考汇率见 exchange_rate_to_usd）。汇率以 2025 年均值为基准，实时汇率由应用层获取后动态换算。",
+    "tiers": {
+      "low": "节俭型：校内住宿或多人合租，自炊为主，尽量少消费",
+      "mid": "舒适型：校外单间或双人间，餐厅与自炊混合，偶尔娱乐",
+      "high": "宽裕型：独立公寓，外食为主，正常娱乐社交"
+    },
+    "categories": {
+      "rent": "住宿（含水电网络）",
+      "food": "餐饮（外食+自炊）",
+      "transport": "交通（公共交通+偶尔打车）",
+      "personal": "个人消费（通讯、娱乐、衣物、日用品）"
+    }
+  },
+
+  "city_groups": [
+
+    {
+      "group_id": "us_bay_area",
+      "group_name_zh": "美国·湾区",
+      "group_name_en": "US - San Francisco Bay Area",
+      "country": "US",
+      "currency": "USD",
+      "exchange_rate_to_usd": 1.0,
+      "cost_level": "very_high",
+      "cities": ["Stanford, CA", "Santa Clara, CA"],
+      "related_schools": ["stanford", "scu"],
+      "monthly_usd": {
+        "low":  { "rent": 1500, "food": 430, "transport": 80,  "personal": 250, "total": 2260 },
+        "mid":  { "rent": 2400, "food": 680, "transport": 120, "personal": 400, "total": 3600 },
+        "high": { "rent": 3800, "food": 1050,"transport": 200, "personal": 700, "total": 5750 }
+      },
+      "annual_usd": { "low": 27120, "mid": 43200, "high": 69000 },
+      "notes_zh": "湾区房租极高，斯坦福校内住宿相对经济但竞争激烈；STEM 专业 OPT 期可延长至 3 年"
+    },
+
+    {
+      "group_id": "us_socal",
+      "group_name_zh": "美国·南加州",
+      "group_name_en": "US - Southern California",
+      "country": "US",
+      "currency": "USD",
+      "exchange_rate_to_usd": 1.0,
+      "cost_level": "high",
+      "cities": ["Los Angeles, CA", "Irvine, CA", "Santa Barbara, CA", "San Diego, CA"],
+      "related_schools": ["ucla", "usc", "uci", "ucsb", "ucsd"],
+      "monthly_usd": {
+        "low":  { "rent": 1150, "food": 380, "transport": 100, "personal": 230, "total": 1860 },
+        "mid":  { "rent": 1900, "food": 620, "transport": 150, "personal": 380, "total": 3050 },
+        "high": { "rent": 3100, "food": 980, "transport": 250, "personal": 650, "total": 4980 }
+      },
+      "annual_usd": { "low": 22320, "mid": 36600, "high": 59760 },
+      "notes_zh": "气候好但租金偏高；圣芭芭拉校园周边相对便宜；洛杉矶交通需考虑有车成本"
+    },
+
+    {
+      "group_id": "us_norcal_other",
+      "group_name_zh": "美国·北加州其他",
+      "group_name_en": "US - Northern California (non-Bay Area)",
+      "country": "US",
+      "currency": "USD",
+      "exchange_rate_to_usd": 1.0,
+      "cost_level": "medium_high",
+      "cities": ["Davis, CA", "Santa Cruz, CA"],
+      "related_schools": ["ucd", "ucsc"],
+      "monthly_usd": {
+        "low":  { "rent": 900,  "food": 350, "transport": 70,  "personal": 200, "total": 1520 },
+        "mid":  { "rent": 1500, "food": 570, "transport": 100, "personal": 350, "total": 2520 },
+        "high": { "rent": 2400, "food": 880, "transport": 150, "personal": 580, "total": 4010 }
+      },
+      "annual_usd": { "low": 18240, "mid": 30240, "high": 48120 },
+      "notes_zh": "Davis 以自行车代步为主，生活费低于湾区；Santa Cruz 临近海边，旅游旺季租金上涨"
+    },
+
+    {
+      "group_id": "us_boston",
+      "group_name_zh": "美国·波士顿",
+      "group_name_en": "US - Boston Area",
+      "country": "US",
+      "currency": "USD",
+      "exchange_rate_to_usd": 1.0,
+      "cost_level": "high",
+      "cities": ["Boston, MA", "Cambridge, MA", "Medford, MA"],
+      "related_schools": ["mit", "bu", "neu", "tufts"],
+      "monthly_usd": {
+        "low":  { "rent": 1200, "food": 400, "transport": 90,  "personal": 210, "total": 1900 },
+        "mid":  { "rent": 1900, "food": 620, "transport": 130, "personal": 370, "total": 3020 },
+        "high": { "rent": 3100, "food": 970, "transport": 200, "personal": 650, "total": 4920 }
+      },
+      "annual_usd": { "low": 22800, "mid": 36240, "high": 59040 },
+      "notes_zh": "剑桥市学生氛围浓厚；MBTA 月票约 90 美元；建议大一住校，大二以后再考虑校外"
+    },
+
+    {
+      "group_id": "us_nyc",
+      "group_name_zh": "美国·纽约",
+      "group_name_en": "US - New York City",
+      "country": "US",
+      "currency": "USD",
+      "exchange_rate_to_usd": 1.0,
+      "cost_level": "very_high",
+      "cities": ["New York, NY", "Poughkeepsie, NY"],
+      "related_schools": ["nyu", "columbia", "vassar"],
+      "monthly_usd": {
+        "low":  { "rent": 1600, "food": 480, "transport": 130, "personal": 300, "total": 2510 },
+        "mid":  { "rent": 2700, "food": 780, "transport": 160, "personal": 500, "total": 4140 },
+        "high": { "rent": 4200, "food": 1200,"transport": 220, "personal": 800, "total": 6420 }
+      },
+      "annual_usd": { "low": 30120, "mid": 49680, "high": 77040 },
+      "notes_zh": "纽约地铁方便，无车成本低；但住宿是全美最贵之一；Vassar（Poughkeepsie）生活费低得多"
+    },
+
+    {
+      "group_id": "us_mid_atlantic",
+      "group_name_zh": "美国·中大西洋",
+      "group_name_en": "US - Mid-Atlantic",
+      "country": "US",
+      "currency": "USD",
+      "exchange_rate_to_usd": 1.0,
+      "cost_level": "medium_high",
+      "cities": ["Philadelphia, PA", "New Brunswick, NJ", "College Park, MD", "Charlottesville, VA", "Pittsburgh, PA", "Cleveland, OH", "Lancaster, PA"],
+      "related_schools": ["upenn", "drexel", "rutgers", "umd", "uva", "pitt", "cwru", "fm"],
+      "monthly_usd": {
+        "low":  { "rent": 950,  "food": 360, "transport": 95,  "personal": 210, "total": 1615 },
+        "mid":  { "rent": 1550, "food": 580, "transport": 140, "personal": 360, "total": 2630 },
+        "high": { "rent": 2500, "food": 900, "transport": 200, "personal": 600, "total": 4200 }
+      },
+      "annual_usd": { "low": 19380, "mid": 31560, "high": 50400 },
+      "notes_zh": "费城和 DC 周边成本适中；弗吉尼亚大学所在的 Charlottesville 偏低；匹兹堡近年房价上涨"
+    },
+
+    {
+      "group_id": "us_midwest",
+      "group_name_zh": "美国·中西部",
+      "group_name_en": "US - Midwest",
+      "country": "US",
+      "currency": "USD",
+      "exchange_rate_to_usd": 1.0,
+      "cost_level": "medium",
+      "cities": ["Ann Arbor, MI", "Madison, WI", "Columbus, OH", "West Lafayette, IN", "East Lansing, MI", "Minneapolis, MN", "Bloomington, IN", "Urbana-Champaign, IL", "Ithaca, NY"],
+      "related_schools": ["umich", "uw-madison", "osu", "purdue", "msu", "umn", "indiana", "uiuc", "cornell"],
+      "monthly_usd": {
+        "low":  { "rent": 750,  "food": 320, "transport": 80,  "personal": 180, "total": 1330 },
+        "mid":  { "rent": 1200, "food": 500, "transport": 110, "personal": 310, "total": 2120 },
+        "high": { "rent": 1950, "food": 780, "transport": 180, "personal": 540, "total": 3450 }
+      },
+      "annual_usd": { "low": 15960, "mid": 25440, "high": 41400 },
+      "notes_zh": "中西部生活成本是全美最低之一；冬季寒冷，暖气费用需考虑（$100-200/月）；适合节省留学资金"
+    },
+
+    {
+      "group_id": "us_pacific_nw",
+      "group_name_zh": "美国·太平洋西北",
+      "group_name_en": "US - Pacific Northwest",
+      "country": "US",
+      "currency": "USD",
+      "exchange_rate_to_usd": 1.0,
+      "cost_level": "high",
+      "cities": ["Seattle, WA"],
+      "related_schools": ["uw-seattle"],
+      "monthly_usd": {
+        "low":  { "rent": 1250, "food": 400, "transport": 100, "personal": 230, "total": 1980 },
+        "mid":  { "rent": 2000, "food": 640, "transport": 150, "personal": 390, "total": 3180 },
+        "high": { "rent": 3200, "food": 980, "transport": 200, "personal": 650, "total": 5030 }
+      },
+      "annual_usd": { "low": 23760, "mid": 38160, "high": 60360 },
+      "notes_zh": "西雅图科技行业发达，实习机会多；无州所得税；公共交通较完善"
+    },
+
+    {
+      "group_id": "us_south",
+      "group_name_zh": "美国·南部",
+      "group_name_en": "US - US South",
+      "country": "US",
+      "currency": "USD",
+      "exchange_rate_to_usd": 1.0,
+      "cost_level": "medium",
+      "cities": ["Atlanta, GA", "Nashville, TN", "Chapel Hill, NC"],
+      "related_schools": ["gatech", "emory", "vanderbilt", "unc"],
+      "monthly_usd": {
+        "low":  { "rent": 900,  "food": 350, "transport": 100, "personal": 210, "total": 1560 },
+        "mid":  { "rent": 1450, "food": 560, "transport": 150, "personal": 350, "total": 2510 },
+        "high": { "rent": 2300, "food": 870, "transport": 220, "personal": 580, "total": 3970 }
+      },
+      "annual_usd": { "low": 18720, "mid": 30120, "high": 47640 },
+      "notes_zh": "南部气候好，成本低于东西海岸；亚特兰大 CDC/科技业发展迅速；需考虑有车出行"
+    },
+
+    {
+      "group_id": "us_southwest",
+      "group_name_zh": "美国·西南/阳光带",
+      "group_name_en": "US - Sunbelt / Southwest",
+      "country": "US",
+      "currency": "USD",
+      "exchange_rate_to_usd": 1.0,
+      "cost_level": "low_medium",
+      "cities": ["Tempe, AZ", "Austin, TX", "Orlando, FL", "Boulder, CO"],
+      "related_schools": ["asu", "uta", "ucf", "cu-boulder"],
+      "monthly_usd": {
+        "low":  { "rent": 800,  "food": 320, "transport": 100, "personal": 200, "total": 1420 },
+        "mid":  { "rent": 1300, "food": 520, "transport": 150, "personal": 330, "total": 2300 },
+        "high": { "rent": 2100, "food": 820, "transport": 220, "personal": 570, "total": 3710 }
+      },
+      "annual_usd": { "low": 17040, "mid": 27600, "high": 44520 },
+      "notes_zh": "德克萨斯和亚利桑那无州所得税；奥斯汀近年科技移民推高房价；博尔德滑雪季花销增加"
+    },
+
+    {
+      "group_id": "uk_london",
+      "group_name_zh": "英国·伦敦",
+      "group_name_en": "UK - London",
+      "country": "GB",
+      "currency": "GBP",
+      "exchange_rate_to_usd": 1.27,
+      "cost_level": "very_high",
+      "cities": ["London"],
+      "related_schools": ["ucl", "lse", "kcl", "imperial"],
+      "monthly_local": {
+        "low":  { "rent": 950,  "food": 250, "transport": 100, "personal": 200, "total": 1500 },
+        "mid":  { "rent": 1550, "food": 400, "transport": 150, "personal": 320, "total": 2420 },
+        "high": { "rent": 2500, "food": 620, "transport": 200, "personal": 550, "total": 3870 }
+      },
+      "monthly_usd": {
+        "low":  { "rent": 1207, "food": 318, "transport": 127, "personal": 254, "total": 1905 },
+        "mid":  { "rent": 1969, "food": 508, "transport": 191, "personal": 406, "total": 3073 },
+        "high": { "rent": 3175, "food": 787, "transport": 254, "personal": 699, "total": 4914 }
+      },
+      "annual_usd": { "low": 22860, "mid": 36876, "high": 58968 },
+      "notes_zh": "伦敦是全球生活费最贵城市之一；UCL/帝国理工多为 3 年学制；Oyster 卡月票约 £165；校内宿舍紧张需提前申请"
+    },
+
+    {
+      "group_id": "uk_oxford",
+      "group_name_zh": "英国·牛津",
+      "group_name_en": "UK - Oxford",
+      "country": "GB",
+      "currency": "GBP",
+      "exchange_rate_to_usd": 1.27,
+      "cost_level": "high",
+      "cities": ["Oxford"],
+      "related_schools": ["oxford"],
+      "monthly_local": {
+        "low":  { "rent": 700,  "food": 220, "transport": 50,  "personal": 180, "total": 1150 },
+        "mid":  { "rent": 1100, "food": 360, "transport": 80,  "personal": 300, "total": 1840 },
+        "high": { "rent": 1800, "food": 560, "transport": 120, "personal": 500, "total": 2980 }
+      },
+      "monthly_usd": {
+        "low":  { "rent": 889,  "food": 279, "transport": 64,  "personal": 229, "total": 1461 },
+        "mid":  { "rent": 1397, "food": 457, "transport": 102, "personal": 381, "total": 2337 },
+        "high": { "rent": 2286, "food": 711, "transport": 152, "personal": 635, "total": 3784 }
+      },
+      "annual_usd": { "low": 17532, "mid": 28044, "high": 45408 },
+      "notes_zh": "牛津大多数学生住学院宿舍（College accommodation），通常必须住满 1-2 年；城市紧凑，自行车为主要交通工具；3 年学制"
+    },
+
+    {
+      "group_id": "uk_cambridge",
+      "group_name_zh": "英国·剑桥",
+      "group_name_en": "UK - Cambridge",
+      "country": "GB",
+      "currency": "GBP",
+      "exchange_rate_to_usd": 1.27,
+      "cost_level": "high",
+      "cities": ["Cambridge"],
+      "related_schools": ["cambridge"],
+      "monthly_local": {
+        "low":  { "rent": 700,  "food": 220, "transport": 50,  "personal": 180, "total": 1150 },
+        "mid":  { "rent": 1100, "food": 360, "transport": 80,  "personal": 300, "total": 1840 },
+        "high": { "rent": 1800, "food": 560, "transport": 120, "personal": 500, "total": 2980 }
+      },
+      "monthly_usd": {
+        "low":  { "rent": 889,  "food": 279, "transport": 64,  "personal": 229, "total": 1461 },
+        "mid":  { "rent": 1397, "food": 457, "transport": 102, "personal": 381, "total": 2337 },
+        "high": { "rent": 2286, "food": 711, "transport": 152, "personal": 635, "total": 3784 }
+      },
+      "annual_usd": { "low": 17532, "mid": 28044, "high": 45408 },
+      "notes_zh": "剑桥学院制度与牛津相似，住宿由学院统一安排；城市规模小，生活费略低于伦敦"
+    },
+
+    {
+      "group_id": "uk_other",
+      "group_name_zh": "英国·其他城市",
+      "group_name_en": "UK - Other Cities",
+      "country": "GB",
+      "currency": "GBP",
+      "exchange_rate_to_usd": 1.27,
+      "cost_level": "medium",
+      "cities": ["Edinburgh", "Durham", "Manchester", "Bristol", "Coventry", "Glasgow", "Southampton", "Nottingham", "Leeds", "Sheffield", "Birmingham"],
+      "related_schools": ["edinburgh", "durham", "manchester", "bristol", "warwick", "glasgow", "southampton", "nottingham", "leeds", "sheffield", "birmingham"],
+      "monthly_local": {
+        "low":  { "rent": 550,  "food": 200, "transport": 60,  "personal": 160, "total": 970  },
+        "mid":  { "rent": 900,  "food": 330, "transport": 90,  "personal": 270, "total": 1590 },
+        "high": { "rent": 1450, "food": 520, "transport": 130, "personal": 460, "total": 2560 }
+      },
+      "monthly_usd": {
+        "low":  { "rent": 699,  "food": 254, "transport": 76,  "personal": 203, "total": 1232 },
+        "mid":  { "rent": 1143, "food": 419, "transport": 114, "personal": 343, "total": 2019 },
+        "high": { "rent": 1842, "food": 660, "transport": 165, "personal": 584, "total": 3251 }
+      },
+      "annual_usd": { "low": 14784, "mid": 24228, "high": 39012 },
+      "notes_zh": "英国非伦敦城市生活费低 30-40%；曼彻斯特华人社区大；爱丁堡 8 月艺术节期间租金上涨；Russell Group 高校集中"
+    },
+
+    {
+      "group_id": "au_melbourne",
+      "group_name_zh": "澳大利亚·墨尔本",
+      "group_name_en": "Australia - Melbourne",
+      "country": "AU",
+      "currency": "AUD",
+      "exchange_rate_to_usd": 0.65,
+      "cost_level": "medium_high",
+      "cities": ["Melbourne, VIC"],
+      "related_schools": ["unimelb", "umelbourne", "monash"],
+      "monthly_local": {
+        "low":  { "rent": 1500, "food": 500, "transport": 120, "personal": 300, "total": 2420 },
+        "mid":  { "rent": 2200, "food": 800, "transport": 180, "personal": 500, "total": 3680 },
+        "high": { "rent": 3500, "food": 1200,"transport": 250, "personal": 800, "total": 5750 }
+      },
+      "monthly_usd": {
+        "low":  { "rent": 975,  "food": 325, "transport": 78,  "personal": 195, "total": 1573 },
+        "mid":  { "rent": 1430, "food": 520, "transport": 117, "personal": 325, "total": 2392 },
+        "high": { "rent": 2275, "food": 780, "transport": 163, "personal": 520, "total": 3738 }
+      },
+      "annual_usd": { "low": 18876, "mid": 28704, "high": 44856 },
+      "notes_zh": "墨尔本连续多年获评全球最宜居城市；Myki 公交卡方便；中餐馆多，省食费容易；本科一般 3 年"
+    },
+
+    {
+      "group_id": "au_sydney",
+      "group_name_zh": "澳大利亚·悉尼",
+      "group_name_en": "Australia - Sydney",
+      "country": "AU",
+      "currency": "AUD",
+      "exchange_rate_to_usd": 0.65,
+      "cost_level": "high",
+      "cities": ["Sydney, NSW"],
+      "related_schools": ["usyd", "unsw"],
+      "monthly_local": {
+        "low":  { "rent": 1700, "food": 520, "transport": 140, "personal": 320, "total": 2680 },
+        "mid":  { "rent": 2500, "food": 820, "transport": 200, "personal": 530, "total": 4050 },
+        "high": { "rent": 3900, "food": 1250,"transport": 280, "personal": 850, "total": 6280 }
+      },
+      "monthly_usd": {
+        "low":  { "rent": 1105, "food": 338, "transport": 91,  "personal": 208, "total": 1742 },
+        "mid":  { "rent": 1625, "food": 533, "transport": 130, "personal": 345, "total": 2633 },
+        "high": { "rent": 2535, "food": 813, "transport": 182, "personal": 553, "total": 4082 }
+      },
+      "annual_usd": { "low": 20904, "mid": 31596, "high": 48984 },
+      "notes_zh": "悉尼是澳大利亚最贵城市；从市区到 UNSW 有轻轨直达；签证毕业后可获 2-4 年 PSW"
+    },
+
+    {
+      "group_id": "au_other",
+      "group_name_zh": "澳大利亚·其他城市",
+      "group_name_en": "Australia - Other Cities",
+      "country": "AU",
+      "currency": "AUD",
+      "exchange_rate_to_usd": 0.65,
+      "cost_level": "medium",
+      "cities": ["Brisbane, QLD", "Canberra, ACT", "Adelaide, SA"],
+      "related_schools": ["uq", "anu", "uadelaide"],
+      "monthly_local": {
+        "low":  { "rent": 1300, "food": 450, "transport": 110, "personal": 280, "total": 2140 },
+        "mid":  { "rent": 1900, "food": 720, "transport": 160, "personal": 450, "total": 3230 },
+        "high": { "rent": 3000, "food": 1100,"transport": 220, "personal": 720, "total": 5040 }
+      },
+      "monthly_usd": {
+        "low":  { "rent": 845,  "food": 293, "transport": 72,  "personal": 182, "total": 1391 },
+        "mid":  { "rent": 1235, "food": 468, "transport": 104, "personal": 293, "total": 2100 },
+        "high": { "rent": 1950, "food": 715, "transport": 143, "personal": 468, "total": 3276 }
+      },
+      "annual_usd": { "low": 16692, "mid": 25200, "high": 39312 },
+      "notes_zh": "布里斯班气候最好；堪培拉（ANU）城市小、租金低；阿德莱德美食之都，中国学生社区活跃"
+    },
+
+    {
+      "group_id": "ca_toronto",
+      "group_name_zh": "加拿大·多伦多",
+      "group_name_en": "Canada - Toronto",
+      "country": "CA",
+      "currency": "CAD",
+      "exchange_rate_to_usd": 0.74,
+      "cost_level": "high",
+      "cities": ["Toronto, ON"],
+      "related_schools": ["uoft"],
+      "monthly_local": {
+        "low":  { "rent": 1600, "food": 500, "transport": 130, "personal": 280, "total": 2510 },
+        "mid":  { "rent": 2400, "food": 780, "transport": 180, "personal": 450, "total": 3810 },
+        "high": { "rent": 3800, "food": 1200,"transport": 250, "personal": 700, "total": 5950 }
+      },
+      "monthly_usd": {
+        "low":  { "rent": 1184, "food": 370, "transport": 96,  "personal": 207, "total": 1857 },
+        "mid":  { "rent": 1776, "food": 577, "transport": 133, "personal": 333, "total": 2819 },
+        "high": { "rent": 2812, "food": 888, "transport": 185, "personal": 518, "total": 4403 }
+      },
+      "annual_usd": { "low": 22284, "mid": 33828, "high": 52836 },
+      "notes_zh": "多伦多是加拿大最大城市，机会多；TTC 公交月票约 CAD 143；毕业后可申请 3 年 PGWP 工签"
+    },
+
+    {
+      "group_id": "ca_vancouver",
+      "group_name_zh": "加拿大·温哥华",
+      "group_name_en": "Canada - Vancouver",
+      "country": "CA",
+      "currency": "CAD",
+      "exchange_rate_to_usd": 0.74,
+      "cost_level": "high",
+      "cities": ["Vancouver, BC"],
+      "related_schools": ["ubc"],
+      "monthly_local": {
+        "low":  { "rent": 1700, "food": 520, "transport": 130, "personal": 300, "total": 2650 },
+        "mid":  { "rent": 2600, "food": 800, "transport": 190, "personal": 480, "total": 4070 },
+        "high": { "rent": 4000, "food": 1250,"transport": 250, "personal": 750, "total": 6250 }
+      },
+      "monthly_usd": {
+        "low":  { "rent": 1258, "food": 385, "transport": 96,  "personal": 222, "total": 1961 },
+        "mid":  { "rent": 1924, "food": 592, "transport": 141, "personal": 355, "total": 3012 },
+        "high": { "rent": 2960, "food": 925, "transport": 185, "personal": 555, "total": 4625 }
+      },
+      "annual_usd": { "low": 23532, "mid": 36144, "high": 55500 },
+      "notes_zh": "温哥华华人社区最成熟；UBC 校园面积大，部分学生骑车或开车；气候温和少雪"
+    },
+
+    {
+      "group_id": "ca_other",
+      "group_name_zh": "加拿大·其他城市",
+      "group_name_en": "Canada - Other Cities",
+      "country": "CA",
+      "currency": "CAD",
+      "exchange_rate_to_usd": 0.74,
+      "cost_level": "medium",
+      "cities": ["Waterloo, ON", "Kingston, ON", "Hamilton, ON", "London, ON", "Edmonton, AB", "Montreal, QC"],
+      "related_schools": ["uwaterloo", "queens", "mcmaster", "western", "ualberta", "mcgill"],
+      "monthly_local": {
+        "low":  { "rent": 1050, "food": 430, "transport": 100, "personal": 240, "total": 1820 },
+        "mid":  { "rent": 1650, "food": 680, "transport": 150, "personal": 380, "total": 2860 },
+        "high": { "rent": 2600, "food": 1050,"transport": 210, "personal": 620, "total": 4480 }
+      },
+      "monthly_usd": {
+        "low":  { "rent": 777,  "food": 318, "transport": 74,  "personal": 178, "total": 1347 },
+        "mid":  { "rent": 1221, "food": 503, "transport": 111, "personal": 281, "total": 2116 },
+        "high": { "rent": 1924, "food": 777, "transport": 155, "personal": 459, "total": 3315 }
+      },
+      "annual_usd": { "low": 16164, "mid": 25392, "high": 39780 },
+      "notes_zh": "蒙特利尔法语区，生活费加拿大最低；滑铁卢 Co-op 项目让学生边读边工作；京斯顿、汉密顿生活费低"
+    },
+
+    {
+      "group_id": "sg_singapore",
+      "group_name_zh": "新加坡",
+      "group_name_en": "Singapore",
+      "country": "SG",
+      "currency": "SGD",
+      "exchange_rate_to_usd": 0.75,
+      "cost_level": "medium_high",
+      "cities": ["Singapore"],
+      "related_schools": ["nus", "ntu", "smu-sg", "sutd", "sim"],
+      "monthly_local": {
+        "low":  { "rent": 900,  "food": 400, "transport": 120, "personal": 250, "total": 1670 },
+        "mid":  { "rent": 1600, "food": 650, "transport": 160, "personal": 400, "total": 2810 },
+        "high": { "rent": 2800, "food": 1000,"transport": 200, "personal": 650, "total": 4650 }
+      },
+      "monthly_usd": {
+        "low":  { "rent": 675,  "food": 300, "transport": 90,  "personal": 188, "total": 1253 },
+        "mid":  { "rent": 1200, "food": 488, "transport": 120, "personal": 300, "total": 2108 },
+        "high": { "rent": 2100, "food": 750, "transport": 150, "personal": 488, "total": 3488 }
+      },
+      "annual_usd": { "low": 15036, "mid": 25296, "high": 41856 },
+      "notes_zh": "新加坡政府医疗补贴好；地铁（MRT）极为方便；Hawker Center 食物便宜；NUS 学费获政府补贴后仅约 SGD 1.7-2.8 万/年，但需签服务协议"
+    },
+
+    {
+      "group_id": "hk_hong_kong",
+      "group_name_zh": "香港",
+      "group_name_en": "Hong Kong",
+      "country": "HK",
+      "currency": "HKD",
+      "exchange_rate_to_usd": 0.128,
+      "cost_level": "high",
+      "cities": ["Hong Kong"],
+      "related_schools": ["hku", "hkust", "cuhk", "hkbu", "polyu"],
+      "monthly_local": {
+        "low":  { "rent": 5500, "food": 2500,"transport": 500, "personal": 1500,"total": 10000 },
+        "mid":  { "rent": 9000, "food": 3800,"transport": 700, "personal": 2500,"total": 16000 },
+        "high": { "rent": 15000,"food": 5500,"transport": 1000,"personal": 4000,"total": 25500 }
+      },
+      "monthly_usd": {
+        "low":  { "rent": 704,  "food": 320, "transport": 64,  "personal": 192, "total": 1280 },
+        "mid":  { "rent": 1152, "food": 486, "transport": 90,  "personal": 320, "total": 2048 },
+        "high": { "rent": 1920, "food": 704, "transport": 128, "personal": 512, "total": 3264 }
+      },
+      "annual_usd": { "low": 15360, "mid": 24576, "high": 39168 },
+      "notes_zh": "香港地铁（MTR）是全球最高效公交之一；住宿是最大支出，校内宿舍竞争激烈；高校多为 4 年制；内地生可用高考成绩申请港八大"
+    }
+
+  ]
+}

@@ -434,22 +434,16 @@ function computeQuizResult(answers, questions) {
 
 // ─── localStorage 读写 ───────────────────────────────────────────────────────
 
-const STORAGE_KEYS = {
-  PROFILE:   'globalStudy_profile_v1',
-  PROGRESS:  'globalStudy_quiz_progress_v1',
-  SESSION:   'globalStudy_session_v1',
-};
+// 键名统一由 Utils.KEYS 管理（utils.js 须先于本文件加载）
+const STORAGE_KEYS = Utils.KEYS;
 
 /** 保存答题进度（断点续答，有效期24小时） */
 function saveProgress(currentQuestion, answers) {
-  const now = new Date();
-  const expires = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-  localStorage.setItem(STORAGE_KEYS.PROGRESS, JSON.stringify({
-    currentQuestion,
-    answers,
-    startedAt: now.toISOString(),
-    expiresAt: expires.toISOString(),
-  }));
+  Utils.storage.setWithExpiry(
+    STORAGE_KEYS.QUIZ_PROGRESS,
+    { currentQuestion, answers, startedAt: new Date().toISOString() },
+    24 * 60 * 60 * 1000,
+  );
 }
 
 /**
@@ -458,33 +452,17 @@ function saveProgress(currentQuestion, answers) {
  * @returns {{ currentQuestion: number, answers: Object } | null}
  */
 function loadProgress() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEYS.PROGRESS);
-    if (!raw) return null;
-    const data = JSON.parse(raw);
-    if (new Date(data.expiresAt) < new Date()) {
-      localStorage.removeItem(STORAGE_KEYS.PROGRESS);
-      return null;
-    }
-    return data;
-  } catch {
-    return null;
-  }
+  return Utils.storage.getWithExpiry(STORAGE_KEYS.QUIZ_PROGRESS);
 }
 
 /** 清除答题进度（完成测试或用户选择重新开始时调用） */
 function clearProgress() {
-  localStorage.removeItem(STORAGE_KEYS.PROGRESS);
+  Utils.storage.remove(STORAGE_KEYS.QUIZ_PROGRESS);
 }
 
 /** 将完整档案写入 localStorage */
 function saveProfile(quiz1AResult) {
-  let profile;
-  try {
-    profile = JSON.parse(localStorage.getItem(STORAGE_KEYS.PROFILE)) || {};
-  } catch {
-    profile = {};
-  }
+  const profile = Utils.storage.get(STORAGE_KEYS.PROFILE) || {};
 
   const now = new Date().toISOString();
   profile.schemaVersion = '1.0';
@@ -494,21 +472,17 @@ function saveProfile(quiz1AResult) {
   profile.quiz1B = profile.quiz1B || null;
   profile.quiz1C = profile.quiz1C || null;
   profile.metadata = profile.metadata || {
-    deviceType: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
-    entrySource: new URLSearchParams(location.search).get('src') || 'direct',
+    deviceType: Utils.env.isMobile ? 'mobile' : 'desktop',
+    entrySource: Utils.env.getParam('src') || 'direct',
   };
 
-  localStorage.setItem(STORAGE_KEYS.PROFILE, JSON.stringify(profile));
+  Utils.storage.set(STORAGE_KEYS.PROFILE, profile);
   return profile;
 }
 
 /** 读取已保存的完整档案，不存在时返回 null */
 function loadProfile() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEYS.PROFILE)) || null;
-  } catch {
-    return null;
-  }
+  return Utils.storage.get(STORAGE_KEYS.PROFILE);
 }
 
 // ─── 对外导出 ────────────────────────────────────────────────────────────────
@@ -528,5 +502,5 @@ window.QuizEngine = {
   loadProfile,
   ARCHETYPES,
   DIMENSION_GROUPS,
-  STORAGE_KEYS,
+  KEYS: Utils.KEYS,
 };
