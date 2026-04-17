@@ -131,7 +131,8 @@
       "data_source": "College Scorecard + UCLA Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "UC系统；国际生无merit aid；洛杉矶生活费高。"
+      "special_notes": "UC系统；国际生无merit aid；洛杉矶生活费高。",
+      "usnews_rank_2026": 17
     },
     {
       "id": "ucsd",
@@ -185,7 +186,8 @@
       "data_source": "College Scorecard + UCSD Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "UC系统；国际生无merit aid；生物/工程/认知科学强。"
+      "special_notes": "UC系统；国际生无merit aid；生物/工程/认知科学强。",
+      "usnews_rank_2026": 29
     },
     {
       "id": "ucsb",
@@ -238,7 +240,8 @@
       "data_source": "College Scorecard + UCSB Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "Test-free；UC系统；海滨校园；国际生无merit aid。"
+      "special_notes": "Test-free；UC系统；海滨校园；国际生无merit aid。",
+      "usnews_rank_2026": 40
     },
     {
       "id": "uci",
@@ -291,7 +294,8 @@
       "data_source": "College Scorecard + UCI Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "UC系统；国际生无merit aid；CS/商科强。"
+      "special_notes": "UC系统；国际生无merit aid；CS/商科强。",
+      "usnews_rank_2026": 33
     },
     {
       "id": "ucd",
@@ -344,7 +348,8 @@
       "data_source": "College Scorecard + UCD Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "UC系统；农业/生命科学/兽医全美顶尖；国际生无merit aid。"
+      "special_notes": "UC系统；农业/生命科学/兽医全美顶尖；国际生无merit aid。",
+      "usnews_rank_2026": 32
     },
     {
       "id": "ucsc",
@@ -398,7 +403,8 @@
       "data_source": "College Scorecard + UCSC Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "Test-free；UC系统；游戏设计/环境科学强；Dean's Award可抵非居民学费。"
+      "special_notes": "Test-free；UC系统；游戏设计/环境科学强；Dean's Award可抵非居民学费。",
+      "usnews_rank_2026": 88
     },
     {
       "id": "umich",
@@ -453,7 +459,8 @@
       "data_source": "College Scorecard + UMich Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "RD截止2月1日；Ross商学院/工程学院顶尖。"
+      "special_notes": "RD截止2月1日；Ross商学院/工程学院顶尖。",
+      "usnews_rank_2026": 21
     },
     {
       "id": "uw-madison",
@@ -507,7 +514,8 @@
       "data_source": "College Scorecard + UW-Madison Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "EA截止11月1日；学费涨幅较大，建议确认最新数字。"
+      "special_notes": "EA截止11月1日；学费涨幅较大，建议确认最新数字。",
+      "usnews_rank_2026": 36
     },
     {
       "id": "uiuc",
@@ -561,7 +569,8 @@
       "data_source": "College Scorecard + UIUC Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "EA截止11月1日；CS/工程全美顶尖；Illinois Award奖学金。"
+      "special_notes": "EA截止11月1日；CS/工程全美顶尖；Illinois Award奖学金。",
+      "usnews_rank_2026": 36
     },
     {
       "id": "gatech",
@@ -615,7 +624,8 @@
       "data_source": "College Scorecard + GT Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "RD截止1月21日；纯工科定位；Atlanta科技就业生态强。"
+      "special_notes": "RD截止1月21日；纯工科定位；Atlanta科技就业生态强。",
+      "usnews_rank_2026": 32
     },
     {
       "id": "purdue",
@@ -669,7 +679,8 @@
       "data_source": "College Scorecard + Purdue Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "EA截止11月1日；航空/工程全美顶尖。"
+      "special_notes": "EA截止11月1日；航空/工程全美顶尖。",
+      "usnews_rank_2026": 46
     },
     {
       "id": "osu",
@@ -723,7 +734,8 @@
       "data_source": "College Scorecard + OSU Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "EA截止11月1日；大型旗舰校；商科/工程强。"
+      "special_notes": "EA截止11月1日；大型旗舰校；商科/工程强。",
+      "usnews_rank_2026": 41
     },
     {
       "id": "uw-seattle",
@@ -776,7 +788,8 @@
       "data_source": "College Scorecard + UW Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "Test-optional；Seattle科技就业生态强（Amazon/Microsoft）。"
+      "special_notes": "Test-optional；Seattle科技就业生态强（Amazon/Microsoft）。",
+      "usnews_rank_2026": 42
     },
     {
       "id": "bu",
@@ -831,7 +844,8 @@
       "data_source": "College Scorecard + BU Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "Intl merit aid available；波士顿医疗/科技就业生态强。"
+      "special_notes": "Intl merit aid available；波士顿医疗/科技就业生态强。",
+      "usnews_rank_2026": 42
     },
     {
       "id": "neu",
@@ -885,7 +899,8 @@
       "data_source": "College Scorecard + NEU Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "RD截止1月1日；co-op强制参与，实习经验丰富。"
+      "special_notes": "RD截止1月1日；co-op强制参与，实习经验丰富。",
+      "usnews_rank_2026": 46
     },
     {
       "id": "nyu",
@@ -939,7 +954,8 @@
       "data_source": "College Scorecard + NYU Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "纽约生活费高；多校区全球学习项目（Abu Dhabi/Shanghai）。"
+      "special_notes": "纽约生活费高；多校区全球学习项目（Abu Dhabi/Shanghai）。",
+      "usnews_rank_2026": 32
     },
     {
       "id": "asu",
@@ -993,7 +1009,8 @@
       "data_source": "College Scorecard + ASU Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "Rolling admission；高merit aid，性价比高；Carey商学院强。"
+      "special_notes": "Rolling admission；高merit aid，性价比高；Carey商学院强。",
+      "usnews_rank_2026": 117
     },
     {
       "id": "uta",
@@ -1047,7 +1064,8 @@
       "data_source": "College Scorecard + UT Austin Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "SAT申请必要；EA截止10月15日；McCombs商学院顶尖。"
+      "special_notes": "SAT申请必要；EA截止10月15日；McCombs商学院顶尖。",
+      "usnews_rank_2026": 30
     },
     {
       "id": "ucf",
@@ -1101,7 +1119,8 @@
       "data_source": "College Scorecard + UCF Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "Rolling admission；酒店管理/工程/CS强；奥兰多生活费低。"
+      "special_notes": "Rolling admission；酒店管理/工程/CS强；奥兰多生活费低。",
+      "usnews_rank_2026": 117
     },
     {
       "id": "fm",
@@ -1155,7 +1174,8 @@
       "data_source": "F&M College Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "Need-blind admission；小型文理学院；pre-med强。"
+      "special_notes": "Need-blind admission；小型文理学院；pre-med强。",
+      "usnews_rank_2026": 35
     },
     {
       "id": "pitt",
@@ -1209,7 +1229,8 @@
       "data_source": "College Scorecard + Pitt Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "Rolling admission；医学/公共卫生研究强。"
+      "special_notes": "Rolling admission；医学/公共卫生研究强。",
+      "usnews_rank_2026": 69
     },
     {
       "id": "rutgers",
@@ -1262,7 +1283,8 @@
       "data_source": "College Scorecard + Rutgers Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "EA截止11月1日；纽约周边，就业生态强。"
+      "special_notes": "EA截止11月1日；纽约周边，就业生态强。",
+      "usnews_rank_2026": 42
     },
     {
       "id": "cu-boulder",
@@ -1315,7 +1337,8 @@
       "data_source": "College Scorecard + CU Boulder Admissions",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "EA截止11月15日；航空/环境/商科强；户外生活质量高。"
+      "special_notes": "EA截止11月15日；航空/环境/商科强；户外生活质量高。",
+      "usnews_rank_2026": 97
     },
     {
       "id": "ucl",
@@ -2926,7 +2949,8 @@
       "data_source": "Cornell Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "Need-aware for intl；不同学院学费略有差异。"
+      "special_notes": "Need-aware for intl；不同学院学费略有差异。",
+      "usnews_rank_2026": 12
     },
     {
       "id": "columbia",
@@ -2981,7 +3005,8 @@
       "data_source": "Columbia Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "Need-aware for intl；申请时须同时申请助学金；CSS Profile required。"
+      "special_notes": "Need-aware for intl；申请时须同时申请助学金；CSS Profile required。",
+      "usnews_rank_2026": 15
     },
     {
       "id": "upenn",
@@ -3036,7 +3061,8 @@
       "data_source": "UPenn Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "Need-aware for intl；Wharton商学院学费略高。"
+      "special_notes": "Need-aware for intl；Wharton商学院学费略高。",
+      "usnews_rank_2026": 7
     },
     {
       "id": "usc",
@@ -3091,7 +3117,8 @@
       "data_source": "USC Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "RD截止12月1日（比大多数私立早）；洛杉矶影视资源丰富。"
+      "special_notes": "RD截止12月1日（比大多数私立早）；洛杉矶影视资源丰富。",
+      "usnews_rank_2026": 28
     },
     {
       "id": "emory",
@@ -3146,7 +3173,8 @@
       "data_source": "Emory Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "Intl merit aid available；尽早申请竞争力更强。"
+      "special_notes": "Intl merit aid available；尽早申请竞争力更强。",
+      "usnews_rank_2026": 24
     },
     {
       "id": "vanderbilt",
@@ -3201,7 +3229,8 @@
       "data_source": "Vanderbilt Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "Need-blind国际生；全美少数need-blind国际生院校之一。"
+      "special_notes": "Need-blind国际生；全美少数need-blind国际生院校之一。",
+      "usnews_rank_2026": 17
     },
     {
       "id": "tufts",
@@ -3255,7 +3284,8 @@
       "data_source": "Tufts Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "所有国际生申请时自动评估奖学金资格。"
+      "special_notes": "所有国际生申请时自动评估奖学金资格。",
+      "usnews_rank_2026": 36
     },
     {
       "id": "cwru",
@@ -3310,7 +3340,8 @@
       "data_source": "CWRU Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "生物医学/工程/护理强；Cleveland医疗研究生态丰富。"
+      "special_notes": "生物医学/工程/护理强；Cleveland医疗研究生态丰富。",
+      "usnews_rank_2026": 46
     },
     {
       "id": "unc",
@@ -3364,7 +3395,8 @@
       "data_source": "UNC Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "EA截止10月15日；Kenan-Flagler商学院/公共卫生顶尖。"
+      "special_notes": "EA截止10月15日；Kenan-Flagler商学院/公共卫生顶尖。",
+      "usnews_rank_2026": 22
     },
     {
       "id": "uva",
@@ -3418,7 +3450,8 @@
       "data_source": "UVA Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "EA截止11月1日；McIntire商学院/公共政策顶尖。"
+      "special_notes": "EA截止11月1日；McIntire商学院/公共政策顶尖。",
+      "usnews_rank_2026": 24
     },
     {
       "id": "umd",
@@ -3473,7 +3506,8 @@
       "data_source": "UMD Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "EA截止11月1日；CS/工程强；DC周边就业优势。"
+      "special_notes": "EA截止11月1日；CS/工程强；DC周边就业优势。",
+      "usnews_rank_2026": 42
     },
     {
       "id": "msu",
@@ -3528,7 +3562,8 @@
       "data_source": "MSU Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "Rolling admission；供应链/农业/传播强。"
+      "special_notes": "Rolling admission；供应链/农业/传播强。",
+      "usnews_rank_2026": 64
     },
     {
       "id": "umn",
@@ -3583,7 +3618,8 @@
       "data_source": "UMN Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "Rolling admission；Carlson商学院强。"
+      "special_notes": "Rolling admission；Carlson商学院强。",
+      "usnews_rank_2026": 59
     },
     {
       "id": "indiana",
@@ -3637,7 +3673,8 @@
       "data_source": "IU Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "EA截止11月1日；Kelley商学院全美顶尖；音乐学院著名。"
+      "special_notes": "EA截止11月1日；Kelley商学院全美顶尖；音乐学院著名。",
+      "usnews_rank_2026": 73
     },
     {
       "id": "vassar",
@@ -3691,7 +3728,8 @@
       "data_source": "Vassar Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "Need-blind for all；小型文理学院；艺术/人文强。"
+      "special_notes": "Need-blind for all；小型文理学院；艺术/人文强。",
+      "usnews_rank_2026": 13
     },
     {
       "id": "drexel",
@@ -3745,7 +3783,8 @@
       "data_source": "Drexel Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "截止11月15日（较早）；co-op强制；Philadelphia科技/医疗就业好。"
+      "special_notes": "截止11月15日（较早）；co-op强制；Philadelphia科技/医疗就业好。",
+      "usnews_rank_2026": 98
     },
     {
       "id": "scu",
@@ -3800,7 +3839,8 @@
       "data_source": "SCU Admissions Office",
       "verified": true,
       "data_confidence": "medium",
-      "special_notes": "EA截止11月1日；硅谷地理优势；就业网络强。"
+      "special_notes": "EA截止11月1日；硅谷地理优势；就业网络强。",
+      "usnews_rank_2026": 59
     },
     {
       "id": "kcl",
@@ -4626,7 +4666,8 @@
       "difficulty_tier": "S",
       "official_url": "https://www.mit.edu",
       "batch_b_verified": true,
-      "batch_c_verified": false
+      "batch_c_verified": false,
+      "usnews_rank_2026": 2
     },
     {
       "id": "unimelb",
