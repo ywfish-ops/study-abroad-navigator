@@ -9,7 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- 字体 -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
 
   <!-- Chart.js（结果页雷达图） -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -488,6 +488,294 @@
       75%  { opacity:1; }
       100% { opacity:0; }
     }
+
+    /* ══════════════════════════════════════════
+       联申定位器 样式
+    ══════════════════════════════════════════ */
+
+    /* 梯队标签颜色（语义色，硬编码） */
+    .tier-safe   { background:#EAF3DE; color:#27500A; border:0.5px solid #97C459; }
+    .tier-target { background:#FAEEDA; color:#633806; border:0.5px solid #EF9F27; }
+    .tier-reach  { background:#FCEBEB; color:#501313; border:0.5px solid #F09595; }
+
+    @media (prefers-color-scheme: dark) {
+      .tier-safe   { background:#173404; color:#C0DD97; border-color:#3B6D11; }
+      .tier-target { background:#412402; color:#FAC775; border-color:#854F0B; }
+      .tier-reach  { background:#501313; color:#F7C1C1; border-color:#A32D2D; }
+    }
+
+    .rec-wrap { font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', sans-serif; }
+
+    /* 布局区块 */
+    .rec-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 16px;
+      margin-bottom: 12px;
+    }
+    .rec-step-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; color: var(--text-secondary);
+      letter-spacing: 0.08em; margin-bottom: 4px;
+    }
+    .rec-section-title {
+      font-size: 16px; font-weight: 500;
+      color: var(--text-primary); margin-bottom: 16px;
+    }
+
+    /* 字段组 */
+    .rec-field-group { margin-bottom: 16px; }
+    .rec-field-group:last-child { margin-bottom: 0; }
+    .rec-label {
+      font-size: 13px; color: var(--text-secondary);
+      margin-bottom: 8px; display: block;
+    }
+    .rec-label-hint { font-size: 11px; }
+
+    /* 输入框 */
+    .rec-input {
+      width: 100%; height: 36px;
+      background: var(--bg-primary); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0 12px;
+      font-size: 14px; color: var(--text-primary);
+      font-family: 'IBM Plex Mono', monospace;
+      outline: none;
+    }
+    .rec-input:focus { border-color: var(--accent-main); }
+
+    /* Select */
+    .rec-select {
+      width: 100%; height: 36px;
+      background: var(--bg-primary); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0 12px;
+      font-size: 14px; color: var(--text-primary);
+      outline: none; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 12px center;
+      padding-right: 32px;
+    }
+
+    /* Chip 组 */
+    .rec-chip-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .rec-chip-group--wrap { flex-wrap: wrap; }
+    .rec-chip-group--col { flex-direction: column; gap: 6px; }
+
+    .rec-chip {
+      min-height: 36px; padding: 0 14px;
+      border: 1px solid var(--border); border-radius: 20px;
+      background: var(--bg-primary); color: var(--text-primary);
+      font-size: 13px; cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    .rec-chip.active {
+      background: var(--accent-main); color: #fff;
+      border-color: var(--accent-main);
+    }
+    .rec-chip--row {
+      display: flex; align-items: center;
+      padding: 10px 14px; border-radius: 10px;
+      text-align: left; gap: 10px;
+    }
+    .rec-chip-main { font-size: 14px; font-weight: 500; }
+    .rec-chip-sub  { font-size: 12px; color: var(--text-secondary); }
+    .rec-chip--row.active .rec-chip-sub { color: rgba(255,255,255,0.75); }
+
+    /* Checkbox */
+    .rec-checkbox-label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; color: var(--text-primary); cursor: pointer;
+      min-height: 44px;
+    }
+
+    /* 提交按钮 */
+    .rec-submit-btn {
+      width: 100%; height: 52px;
+      background: var(--accent-main); color: #fff;
+      border: none; border-radius: 12px;
+      font-size: 16px; font-weight: 500; cursor: pointer;
+      margin-top: 4px; margin-bottom: 20px;
+      transition: opacity 0.15s;
+    }
+    .rec-submit-btn:active { opacity: 0.85; }
+
+    /* 错误提示 */
+    .rec-field-error { font-size: 12px; color: #E53E3E; margin-top: 4px; }
+
+    /* 变更 banner */
+    .rec-banner {
+      display: flex; align-items: center; gap: 8px;
+      background: #FFF8E1; border: 1px solid #FFC107;
+      border-radius: 8px; padding: 10px 14px;
+      font-size: 13px; color: #633806;
+      margin-bottom: 12px;
+    }
+    .rec-banner-btn {
+      background: none; border: none; color: var(--accent-main);
+      font-size: 13px; font-weight: 500; cursor: pointer; padding: 0;
+    }
+
+    /* 结果区 */
+    .rec-summary {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px;
+      margin-bottom: 12px;
+    }
+    .rec-summary-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+    .rec-summary-dist  { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
+    .rec-summary-actions { display: flex; gap: 8px; }
+
+    .rec-tier-group { margin-bottom: 16px; }
+    .rec-tier-header {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 8px;
+    }
+    .rec-tier-count { font-size: 13px; color: var(--text-secondary); }
+
+    /* 梯队标签通用 */
+    .rec-tier-chip {
+      display: inline-block; padding: 2px 8px;
+      border-radius: 20px; font-size: 13px; font-weight: 500;
+    }
+    .rec-tier-chip--sm { font-size: 12px; padding: 1px 7px; flex-shrink: 0; }
+
+    /* 院校卡片 */
+    .rec-card-list { display: flex; flex-direction: column; gap: 10px; }
+    .rec-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem 1.25rem;
+      cursor: pointer; transition: border-color 0.15s;
+    }
+    .rec-card:active, .rec-card.expanded { border-color: var(--accent-main); }
+
+    .rec-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+    .rec-card-name   { font-size: 15px; font-weight: 500; flex: 1; }
+    .rec-card-meta   { font-size: 12px; color: var(--text-secondary); margin-bottom: 10px; }
+
+    /* 进度条 */
+    .rec-score-row { display: flex; align-items: center; gap: 10px; }
+    .rec-score-bar-wrap {
+      flex: 1; height: 3px; background: var(--border);
+      border-radius: 2px; overflow: hidden;
+    }
+    .rec-score-bar {
+      height: 100%; background: var(--accent-main);
+      border-radius: 2px; transition: width 600ms ease;
+      width: 0%;
+    }
+    .rec-score-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px; color: var(--text-secondary); min-width: 24px;
+    }
+
+    /* 展开详情 */
+    .rec-card-toggle {
+      font-size: 12px; color: var(--text-secondary);
+      margin-top: 8px; text-align: right;
+    }
+    .rec-toggle-icon { font-size: 14px; }
+
+    /* 展开内容 */
+    .rec-expanded-inner { padding-top: 14px; }
+
+    /* 4格指标 */
+    .rec-metrics {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 8px; margin-bottom: 14px;
+    }
+    .rec-metric-card {
+      background: var(--bg-primary); border-radius: 8px;
+      padding: 10px 8px; text-align: center;
+    }
+    .rec-metric-val {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 15px; font-weight: 500; margin-bottom: 2px;
+    }
+    .rec-metric-label { font-size: 10px; color: var(--text-secondary); }
+
+    /* 雷达图 */
+    .rec-radar-wrap {
+      display: flex; justify-content: center;
+      margin-bottom: 14px; height: 180px;
+    }
+
+    /* 详情行 */
+    .rec-detail-rows { margin-bottom: 12px; }
+    .rec-detail-row {
+      display: flex; justify-content: space-between;
+      font-size: 13px; padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .rec-detail-row:last-child { border-bottom: none; }
+    .rec-detail-row span:first-child { color: var(--text-secondary); }
+    .rec-detail-majors { text-align: right; max-width: 60%; }
+
+    /* Special notes */
+    .rec-special-notes {
+      font-size: 12px; color: var(--text-secondary);
+      background: var(--bg-primary); border-radius: 8px;
+      padding: 10px 12px; margin-bottom: 10px;
+    }
+
+    /* Tags */
+    .rec-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    .rec-tag  {
+      font-size: 11px; font-family: 'IBM Plex Mono', monospace;
+      background: var(--bg-primary); color: var(--text-secondary);
+      border-radius: 4px; padding: 2px 6px;
+    }
+
+    /* 操作按钮 */
+    .rec-card-actions { display: flex; gap: 8px; }
+    .rec-action-btn {
+      flex: 1; height: 40px; border-radius: 8px;
+      font-size: 13px; cursor: pointer;
+      border: 1px solid var(--border); background: var(--bg-primary);
+      color: var(--text-primary);
+    }
+    .rec-action-btn--primary {
+      background: var(--accent-main); color: #fff; border-color: var(--accent-main);
+    }
+
+    /* 空态 */
+    .rec-empty {
+      text-align: center; padding: 40px 20px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .rec-empty-icon  { font-size: 36px; margin-bottom: 12px; }
+    .rec-empty-title { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
+    .rec-empty-hint  { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; }
+
+    /* Reset / 重置按钮 */
+    .rec-reset-btn {
+      height: 36px; padding: 0 16px; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--bg-card);
+      font-size: 13px; color: var(--text-primary); cursor: pointer;
+    }
+
+    /* 免责声明 */
+    .rec-disclaimer {
+      font-size: 11px; color: var(--text-secondary);
+      text-align: center; padding: 16px 0 8px;
+      line-height: 1.6;
+    }
+
+    /* Loading / Error */
+    .rec-loading, .rec-error {
+      padding: 40px 20px; text-align: center;
+      font-size: 14px; color: var(--text-secondary);
+    }
+
+    /* Toast */
+    .rec-toast {
+      position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,0.75); color: #fff;
+      padding: 8px 16px; border-radius: 20px;
+      font-size: 13px; white-space: nowrap; z-index: 999;
+      animation: fadeInOut 2.5s ease forwards;
+    }
   </style>
 </head>
 <body>
@@ -503,6 +791,10 @@
   <button id="tab-btn-finance" class="tab-btn"        onclick="switchTab('finance')">
     <span class="tab-btn-icon">💰</span>
     <span class="tab-btn-label">财务沙盘</span>
+  </button>
+  <button id="tab-btn-recommender" class="tab-btn"   onclick="switchTab('recommender')">
+    <span class="tab-btn-icon">🎯</span>
+    <span class="tab-btn-label">联申定位</span>
   </button>
 </nav>
 
@@ -851,6 +1143,15 @@
 </div><!-- /tab-finance -->
 
 <!-- ════════════════════════════════════════════
+     联申定位器 Tab
+════════════════════════════════════════════ -->
+<div id="tab-recommender" class="tab-pane">
+  <div id="rec-root" style="max-width:480px;margin:0 auto;padding:0 16px 120px;">
+    <!-- 由 RecommenderModule.init() 渲染 -->
+  </div>
+</div><!-- /tab-recommender -->
+
+<!-- ════════════════════════════════════════════
      断点续答 Modal
 ════════════════════════════════════════════ -->
 <div id="modal-overlay" onclick="closeModal()">
@@ -878,6 +1179,11 @@
      Finance Module
 ════════════════════════════════════════════ -->
 <script src="finance.js"></script>
+
+<!-- ════════════════════════════════════════════
+     Recommender Module
+════════════════════════════════════════════ -->
+<script src="recommender.js"></script>
 
 <script>
 'use strict';
@@ -1935,6 +2241,9 @@ function switchTab(tabId) {
 
   if (tabId === 'finance') {
     FinanceModule.init();
+  }
+  if (tabId === 'recommender') {
+    RecommenderModule.init();
   }
 }
 
