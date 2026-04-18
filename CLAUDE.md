@@ -101,6 +101,23 @@ index.html 中 script 加载顺序：`utils.js` → 各模块 → `app.js`（app
 - localStorage 键名加版本号：`quiz_result_v1`、`finance_sandbox_v1`
 - JSON 导入时做 schema 校验，缺失字段用默认值
 
+### 数据存储两阶段规划
+
+**Phase 1（MVP，当前阶段）：localStorage + JSON 导出/导入**
+- 所有用户数据存储在浏览器 localStorage，无服务器
+- 提供"导出备份"按钮，将全部数据打包为 JSON 文件下载到本地
+- 提供"导入恢复"按钮，读取 JSON 文件还原数据（导入前做 schema 校验）
+- 界面显示固定提示语："数据存储在本设备，换设备或清除浏览器数据后将丢失，建议定期导出备份"
+- 提示语样式：浅黄色 banner，放在设置页或数据相关操作旁，不打扰主流程
+
+**Phase 2（用户量验证后接入）：Supabase 云端同步**
+- 触发条件：月活 > 500 或有用户明确反馈"换手机数据丢了"
+- 注册方式：手机号 + 验证码（无密码，降低注册门槛）
+- 数据同步：登录后自动将 localStorage 数据上传云端，多设备实时同步
+- 迁移策略：Phase 1 → Phase 2 无缝升级，本地数据自动合并到云端，不丢失
+- 技术选型：Supabase（PostgreSQL + Auth + Realtime），搭配 Cloudflare Workers 做 API 中间层
+- Phase 2 开发前需 Leo 确认 Supabase 项目已建，不要提前写相关代码
+
 ## UI 设计约定
 
 - **颜色方案**：专业、克制，参考金融/咨询行业（深蓝 + 灰 + 少量暖色点缀）
