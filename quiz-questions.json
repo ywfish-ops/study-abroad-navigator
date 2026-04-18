@@ -261,16 +261,16 @@
       "dimension": "CAREER",
       "type": "multi_select",
       "order": 14,
-      "text": "你最看重研究生阶段带给你的是什么？（选最重要的3项）",
+      "text": "你最看重本科阶段带给你的是什么？（选最重要的3项）",
       "maxSelections": 3,
       "options": [
-        { "id": "A", "text": "专业深度和研究能力", "scores": { "C_ACADEMIC": 2 } },
+        { "id": "A", "text": "扎实的专业知识和学习能力", "scores": { "C_ACADEMIC": 2 } },
         { "id": "B", "text": "顶校的品牌和学历背书", "scores": { "C_BRAND": 2 } },
         { "id": "C", "text": "海外生活和文化体验", "scores": { "C_LIFESTYLE": 2 } },
         { "id": "D", "text": "人脉网络（同学、校友、教授）", "scores": { "C_NETWORK": 2 } },
         { "id": "E", "text": "提升就业竞争力和薪资", "scores": { "C_INDUSTRY": 2 } },
         { "id": "F", "text": "为移民或长期居留铺路", "scores": { "C_GLOBAL": 2 } },
-        { "id": "G", "text": "探索自己真正的兴趣", "scores": { "C_EXPLORE": 2 } }
+        { "id": "G", "text": "探索自己真正的兴趣和方向", "scores": { "C_EXPLORE": 2 } }
       ]
     },
 
@@ -279,12 +279,12 @@
       "dimension": "CAREER",
       "type": "this_or_that",
       "order": 15,
-      "text": "哪种「成功的研究生经历」对你更重要？",
+      "text": "哪种「成功的本科经历」对你更重要？",
       "rounds": [
         {
           "round": 1,
           "optionA": { "text": "毕业时手握多个高薪工作 offer", "scores": { "C_INDUSTRY": 2 } },
-          "optionB": { "text": "毕业时发表了有影响力的研究论文", "scores": { "C_ACADEMIC": 2 } }
+          "optionB": { "text": "毕业时完成了有价值的研究或项目", "scores": { "C_ACADEMIC": 2 } }
         },
         {
           "round": 2,
@@ -318,7 +318,7 @@
       "dimension": "IDENTITY",
       "type": "scale",
       "order": 17,
-      "text": "出国留学对我来说，「离开中国」本身也是目标的一部分。",
+      "text": "出国留学对我来说，「在海外长期发展」也是目标的一部分。",
       "min": 1,
       "max": 7,
       "leftLabel": "完全不是",
