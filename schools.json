@@ -2,7 +2,7 @@
   "_meta": {
     "version": "1.0.0",
     "last_updated": "2026-04-17",
-    "total_schools": 85,
+    "total_schools": 116,
     "data_cycle": "2025-2026 Academic Year",
     "notes": "Base data for 全球留学决策导航系统. Financial figures in USD (US/CA/AU) or GBP (UK) or HKD (HK) or SGD (SG). Tuition = annual undergraduate international student tuition. Rankings: QS 2025, USNews Global 2025.",
     "schema_version": "v1",
@@ -46,7 +46,9 @@
       "data_confidence": "Data confidence level: high (URL verified + human spot-check), medium (official URL source, unverified), low (third-party source or unverified)",
       "data_source_urls": "Source URLs used to populate this record"
     },
-    "merge_notes": "由 Claude Code 合并 schools_database.json（82所）+ 旧版 schools.json 项目字段（batch_c/finance_sandbox/meta 等）"
+    "merge_notes": "由 Claude Code 合并 schools_database.json（82所）+ 旧版 schools.json 项目字段（batch_c/finance_sandbox/meta 等）",
+    "data_updated": "2026-04-18",
+    "note": "合并自 schools_database.json v2（115所）+ 保留 unimelb，补全 usnews_rank_2026"
   },
   "_schema_legacy": {
     "version": "1.0",
@@ -102,7 +104,7 @@
         29,
         35
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 4.18,
       "popular_majors": [
@@ -158,7 +160,7 @@
         28,
         34
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 4.07,
       "popular_majors": [
@@ -213,7 +215,7 @@
         28,
         34
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 4.03,
       "popular_majors": [
@@ -267,7 +269,7 @@
         26,
         33
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.97,
       "popular_majors": [
@@ -321,7 +323,7 @@
         25,
         33
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.97,
       "popular_majors": [
@@ -375,7 +377,7 @@
         24,
         31
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.71,
       "popular_majors": [
@@ -430,7 +432,7 @@
         33,
         35
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.9,
       "popular_majors": [
@@ -486,7 +488,7 @@
         28,
         33
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.84,
       "popular_majors": [
@@ -541,7 +543,7 @@
         30,
         35
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.83,
       "popular_majors": [
@@ -596,7 +598,7 @@
         32,
         35
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 4.07,
       "popular_majors": [
@@ -706,7 +708,7 @@
         28,
         33
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.75,
       "popular_majors": [
@@ -761,7 +763,7 @@
         27,
         33
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 92,
       "gpa_avg": 3.83,
       "popular_majors": [
@@ -815,7 +817,7 @@
         32,
         35
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.93,
       "popular_majors": [
@@ -871,7 +873,7 @@
         34,
         36
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 4.04,
       "popular_majors": [
@@ -926,7 +928,7 @@
         33,
         35
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.76,
       "popular_majors": [
@@ -981,7 +983,7 @@
         21,
         29
       ],
-      "ielts_min": 6.0,
+      "ielts_min": 6,
       "toefl_min": 79,
       "gpa_avg": 3.59,
       "popular_majors": [
@@ -1146,7 +1148,7 @@
         30,
         33
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.8,
       "popular_majors": [
@@ -1201,7 +1203,7 @@
         29,
         33
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.82,
       "popular_majors": [
@@ -1388,40 +1390,7 @@
       "a_level_typical": "AAA",
       "special_notes": "学费按专业£26,250-£47,250；医学最贵；400+专业；无学院制；Cohort Guarantee学费在学期间固定。",
       "data_confidence": "medium",
-      "english_note": "UCL uses 5 levels. Level 1 (Min): IELTS 6.5 (6.0), TOEFL 92. Level 4 (Advanced): IELTS 7.5 (7.0), TOEFL 109. Also accepts Duolingo.",
-      "application_deadline": {
-        "early_action": null,
-        "regular": "2027-01-14"
-      },
-      "financial_aid_international": true,
-      "scholarship_typical_usd_annual": 0,
-      "_extraction_notes": {
-        "source_urls": [
-          "https://www.ucl.ac.uk/study/prospective-students/undergraduate/how-apply/english-language-requirements",
-          "https://www.ucl.ac.uk/study/prospective-students/undergraduate/frequently-asked-questions"
-        ],
-        "uncertainties": [
-          "scholarship_typical_usd_annual 为学费加生活费的估算值"
-        ],
-        "extraction_date": "2026-04-15"
-      },
-      "finance_sandbox": {
-        "tuition_usd_annual": null,
-        "duration_years": null,
-        "living_cost_usd_monthly": {
-          "low": null,
-          "mid": null,
-          "high": null
-        },
-        "scholarship_typical_usd_annual": 0,
-        "scholarship_coverage_rate": null,
-        "scholarship_condition": "need-based + merit",
-        "health_insurance_usd_annual": null,
-        "fees_usd_annual": null
-      },
-      "official_url": "https://www.ucl.ac.uk",
-      "batch_b_verified": false,
-      "batch_c_verified": false
+      "usnews_rank_2026": null
     },
     {
       "id": "edinburgh",
@@ -1470,7 +1439,8 @@
       "verified": true,
       "a_level_typical": "AAA",
       "special_notes": "苏格兰四年制学位；医学/兽医独立申请（A*AA）；部分文科专业低至ABB。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "durham",
@@ -1519,7 +1489,8 @@
       "verified": true,
       "a_level_typical": "A*AA",
       "special_notes": "学院制申请（类Oxbridge）；文科/神学/理科强；无医学院；部分课程需面试。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "manchester",
@@ -1568,7 +1539,8 @@
       "verified": true,
       "a_level_typical": "AAA",
       "special_notes": "英国最大单一校区大学；医学需UCAT入学考试；Alliance Manchester Business School录取竞争激烈。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "lse",
@@ -1588,7 +1560,7 @@
       "application_system": "UCAS",
       "sat_range": null,
       "act_range": null,
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": null,
       "popular_majors": [
@@ -1617,7 +1589,8 @@
       "verified": true,
       "a_level_typical": "A*AA",
       "special_notes": "仅社会科学类专业，无理工医学；录取率全英最低；需GCSE英语/数学B/6成绩。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "bristol",
@@ -1665,7 +1638,8 @@
       "verified": true,
       "a_level_typical": "AAA",
       "special_notes": "工程/理科实力强；牙医/医学A*AA；许多专业要求特定A-Level科目组合。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "warwick",
@@ -1714,7 +1688,8 @@
       "verified": true,
       "a_level_typical": "AAA",
       "special_notes": "数学/经济/WBS商学院全英顶尖；无医学院；部分课程需面试或提交书面作品。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "glasgow",
@@ -1763,7 +1738,8 @@
       "verified": true,
       "a_level_typical": "AAA",
       "special_notes": "苏格兰最古老大学；文科/医学/理科均强；医学/兽医有额外申请要求。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "southampton",
@@ -1812,7 +1788,8 @@
       "verified": true,
       "a_level_typical": "AAA",
       "special_notes": "电子工程/海洋科学全球顶尖；物理声誉极高；无医学院；海事专业世界领先。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "hku",
@@ -1863,40 +1840,7 @@
       "dse_accepted": true,
       "special_notes": "内地生通过自主招生选拔，STEM学院年学费为24.9万港币（含STEM费）；26-27学年非STEM学费22.4万，STEM学费24.9万。",
       "data_confidence": "medium",
-      "english_note": "IELTS 6.5 (no subtest < 5.5) or TOEFL 80. Faculty of Arts requires IELTS 7.0. Tests valid for 2 years prior to Sept 1.",
-      "application_deadline": {
-        "early_action": "2026-11-26",
-        "regular": "2027-08-21"
-      },
-      "financial_aid_international": true,
-      "scholarship_typical_usd_annual": 0,
-      "_extraction_notes": {
-        "source_urls": [
-          "https://admissions.hku.hk/apply/international-qualifications",
-          "https://www.admissions.hku.hk/fees-and-scholarships/scholarships/hku-undergraduate-entrance-scholarship-presidents-scholars"
-        ],
-        "uncertainties": [
-          "deadline_regular 为滚动录取截止日，早期申请建议在 11 月完成"
-        ],
-        "extraction_date": "2026-04-15"
-      },
-      "finance_sandbox": {
-        "tuition_usd_annual": null,
-        "duration_years": null,
-        "living_cost_usd_monthly": {
-          "low": null,
-          "mid": null,
-          "high": null
-        },
-        "scholarship_typical_usd_annual": 0,
-        "scholarship_coverage_rate": null,
-        "scholarship_condition": "merit-based",
-        "health_insurance_usd_annual": null,
-        "fees_usd_annual": null
-      },
-      "official_url": "https://www.hku.hk",
-      "batch_b_verified": false,
-      "batch_c_verified": false
+      "usnews_rank_2026": null
     },
     {
       "id": "hkust",
@@ -1916,7 +1860,7 @@
       "application_system": "Direct",
       "sat_range": null,
       "act_range": null,
-      "ielts_min": 6.0,
+      "ielts_min": 6,
       "toefl_min": 80,
       "gpa_avg": null,
       "popular_majors": [
@@ -1946,7 +1890,8 @@
       "gaokao_accepted": true,
       "dse_accepted": true,
       "special_notes": "26/27学年学费定为21.5万港币。部分专业录取竞争极激烈。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "cuhk",
@@ -1996,7 +1941,8 @@
       "gaokao_accepted": true,
       "dse_accepted": true,
       "special_notes": "内地生采取统招提前批模式。26-27学年学费将调整至21.4万港币。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "hkbu",
@@ -2016,7 +1962,7 @@
       "application_system": "Direct",
       "sat_range": null,
       "act_range": null,
-      "ielts_min": 6.0,
+      "ielts_min": 6,
       "toefl_min": 79,
       "gpa_avg": null,
       "popular_majors": [
@@ -2046,7 +1992,8 @@
       "gaokao_accepted": true,
       "dse_accepted": true,
       "special_notes": "26-27学年学费升至19万港币。内地生需高考达一本线及以上，英语成绩有硬性要求。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "polyu",
@@ -2066,7 +2013,7 @@
       "application_system": "Direct",
       "sat_range": null,
       "act_range": null,
-      "ielts_min": 6.0,
+      "ielts_min": 6,
       "toefl_min": 80,
       "gpa_avg": null,
       "popular_majors": [
@@ -2096,7 +2043,8 @@
       "gaokao_accepted": true,
       "dse_accepted": true,
       "special_notes": "内地生通道主要看高考成绩和面试。设计等热门学科竞争极为激烈。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "nus",
@@ -2150,41 +2098,7 @@
       "tuition_subsidised_notes": "MOE补贴后学费约1.7-2.8万新币，需毕业后在新加坡注册公司工作3年。",
       "special_notes": "国际学历（非IB/A-Level）截止日期为2月23日。录取极看重综合素质及面试表现。",
       "data_confidence": "medium",
-      "english_note": "IELTS overall 6.5 (Reading/Writing 6.5) or TOEFL 92-93. Law and Medicine often require higher scores.",
-      "application_deadline": {
-        "early_action": null,
-        "regular": "2027-02-23"
-      },
-      "financial_aid_international": true,
-      "scholarship_typical_usd_annual": 0,
-      "_extraction_notes": {
-        "source_urls": [
-          "https://www.nus.edu.sg/oam/admissions/international-qualifications-for-foreigners/admission-requirements",
-          "https://nus.edu.sg/oam/scholarships/scholarships-for-freshmen-singapore-permanent-residents/asean-undergraduate-scholarship"
-        ],
-        "uncertainties": [
-          "2027 Fall 截止日期基于 2026 申请季周期推算",
-          "scholarship_typical_usd_annual 按政府资助后的学费覆盖估算"
-        ],
-        "extraction_date": "2026-04-15"
-      },
-      "finance_sandbox": {
-        "tuition_usd_annual": null,
-        "duration_years": null,
-        "living_cost_usd_monthly": {
-          "low": null,
-          "mid": null,
-          "high": null
-        },
-        "scholarship_typical_usd_annual": 0,
-        "scholarship_coverage_rate": null,
-        "scholarship_condition": "merit-based",
-        "health_insurance_usd_annual": null,
-        "fees_usd_annual": null
-      },
-      "official_url": "https://www.nus.edu.sg",
-      "batch_b_verified": false,
-      "batch_c_verified": false
+      "usnews_rank_2026": null
     },
     {
       "id": "ntu",
@@ -2204,7 +2118,7 @@
       "application_system": "Direct",
       "sat_range": null,
       "act_range": null,
-      "ielts_min": 6.0,
+      "ielts_min": 6,
       "toefl_min": 90,
       "gpa_avg": null,
       "popular_majors": [
@@ -2237,7 +2151,8 @@
       "tuition_subsidised": true,
       "tuition_subsidised_notes": "实行固定学费制。补贴后国际生学费约2-2.17万新币，附带3年服务条款。",
       "special_notes": "申请时需勾选MOE补贴意向。固定学费制：入学时费率在整个本科期间保持不变。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "smu-sg",
@@ -2257,7 +2172,7 @@
       "application_system": "Direct",
       "sat_range": null,
       "act_range": null,
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 93,
       "gpa_avg": null,
       "popular_majors": [
@@ -2290,7 +2205,8 @@
       "tuition_subsidised": true,
       "tuition_subsidised_notes": "补贴后国际生学费约2.62万新币，需为新加坡注册实体服务3年。",
       "special_notes": "商科对英语要求严苛。面试是选拔过程中的决定性环节。无大型校内宿舍，市中心生活成本较高。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "sutd",
@@ -2342,7 +2258,8 @@
       "tuition_subsidised": true,
       "tuition_subsidised_notes": "补贴后学费约3.14万新币，需通过Tuition Grant签约工作3年。",
       "special_notes": "跨学科设计课程，非常看重数学及物理背景。校内住宿强制要求。MIT合作教育模式，学位由SUTD独立颁发。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "sim",
@@ -2362,7 +2279,7 @@
       "application_system": "Direct",
       "sat_range": null,
       "act_range": null,
-      "ielts_min": 6.0,
+      "ielts_min": 6,
       "toefl_min": 79,
       "gpa_avg": null,
       "popular_majors": [
@@ -2394,7 +2311,8 @@
       "tuition_subsidised": false,
       "tuition_subsidised_notes": "私立机构，不适用MOE政府学费补贴。",
       "special_notes": "私人教育机构。合作伙伴含伦敦大学、伯明翰大学等。学费因合作院校不同有差异。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "uoft",
@@ -2444,7 +2362,8 @@
       "verified": true,
       "data_confidence": "medium",
       "pr_pathway_notes": "Express Entry联邦技术移民；PGWP毕业工签3年。",
-      "special_notes": "Arts/Science $45,000；Engineering $70,060；Rotman Commerce $72,260；PEY Co-op带薪实习可选。"
+      "special_notes": "Arts/Science $45,000；Engineering $70,060；Rotman Commerce $72,260；PEY Co-op带薪实习可选。",
+      "usnews_rank_2026": null
     },
     {
       "id": "ubc",
@@ -2495,7 +2414,8 @@
       "verified": true,
       "data_confidence": "medium",
       "pr_pathway_notes": "Express Entry联邦技术移民；PGWP毕业工签3年。",
-      "special_notes": "Arts $52,260；Engineering $66,200；Sauder Commerce $66,680；截止日12月1日（rolling）。"
+      "special_notes": "Arts $52,260；Engineering $66,200；Sauder Commerce $66,680；截止日12月1日（rolling）。",
+      "usnews_rank_2026": null
     },
     {
       "id": "mcgill",
@@ -2545,7 +2465,8 @@
       "verified": true,
       "data_confidence": "high",
       "pr_pathway_notes": "Express Entry联邦技术移民；PGWP毕业工签3年。",
-      "special_notes": "Arts/Science $33,018；Engineering $63,889；Commerce $69,339；Guaranteed tuition锁定；魁北克省附加费已含。"
+      "special_notes": "Arts/Science $33,018；Engineering $63,889；Commerce $69,339；Guaranteed tuition锁定；魁北克省附加费已含。",
+      "usnews_rank_2026": null
     },
     {
       "id": "uwaterloo",
@@ -2595,7 +2516,8 @@
       "verified": true,
       "data_confidence": "medium",
       "pr_pathway_notes": "Express Entry联邦技术移民；PGWP毕业工签3年。",
-      "special_notes": "Math/Arts $38,000；Engineering $75,000（含co-op）；CS $73,000；co-op强制参与。"
+      "special_notes": "Math/Arts $38,000；Engineering $75,000（含co-op）；CS $73,000；co-op强制参与。",
+      "usnews_rank_2026": null
     },
     {
       "id": "queens",
@@ -2644,7 +2566,8 @@
       "verified": true,
       "data_confidence": "medium",
       "pr_pathway_notes": "Express Entry联邦技术移民；PGWP毕业工签3年。",
-      "special_notes": "Arts $38,000；Smith Commerce $61,581；Engineering按学分计费。"
+      "special_notes": "Arts $38,000；Smith Commerce $61,581；Engineering按学分计费。",
+      "usnews_rank_2026": null
     },
     {
       "id": "umelbourne",
@@ -2693,7 +2616,8 @@
       "verified": true,
       "data_confidence": "medium",
       "pr_pathway_notes": "Skilled Independent visa (189) 或 Employer Sponsored (482/186)。",
-      "special_notes": "Arts/Commerce $57,856；Engineering $60,416；Melbourne Model宽度课程制。"
+      "special_notes": "Arts/Commerce $57,856；Engineering $60,416；Melbourne Model宽度课程制。",
+      "usnews_rank_2026": null
     },
     {
       "id": "usyd",
@@ -2743,7 +2667,8 @@
       "verified": true,
       "data_confidence": "medium",
       "pr_pathway_notes": "Skilled Independent visa (189) 或 Employer Sponsored (482/186)。",
-      "special_notes": "Arts $46,000；Commerce $52,000；Engineering $58,800；Sydney Scholars Award 20%减免。"
+      "special_notes": "Arts $46,000；Commerce $52,000；Engineering $58,800；Sydney Scholars Award 20%减免。",
+      "usnews_rank_2026": null
     },
     {
       "id": "unsw",
@@ -2763,7 +2688,7 @@
       "application_system": "UAC or Direct",
       "sat_range": null,
       "act_range": null,
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 94,
       "gpa_avg": null,
       "popular_majors": [
@@ -2794,7 +2719,8 @@
       "verified": true,
       "data_confidence": "medium",
       "pr_pathway_notes": "Skilled Independent visa (189) 或 Employer Sponsored (482/186)。",
-      "special_notes": "Arts/Business $46,000；Engineering $48,480；co-op另有费用。"
+      "special_notes": "Arts/Business $46,000；Engineering $48,480；co-op另有费用。",
+      "usnews_rank_2026": null
     },
     {
       "id": "uq",
@@ -2844,7 +2770,8 @@
       "verified": true,
       "data_confidence": "medium",
       "pr_pathway_notes": "Skilled Independent visa (189) 或 Employer Sponsored (482/186)。",
-      "special_notes": "Arts/Commerce $44,000；Engineering $48,000；Brisbane生活费低于悉尼墨尔本约20%。"
+      "special_notes": "Arts/Commerce $44,000；Engineering $48,000；Brisbane生活费低于悉尼墨尔本约20%。",
+      "usnews_rank_2026": null
     },
     {
       "id": "anu",
@@ -2894,7 +2821,8 @@
       "verified": true,
       "data_confidence": "medium",
       "pr_pathway_notes": "Skilled Independent visa (189) 或 Employer Sponsored (482/186)。",
-      "special_notes": "Commerce/CS $53,370；堪培拉生活费低于悉尼/墨尔本；政策研究方向全澳最强。"
+      "special_notes": "Commerce/CS $53,370；堪培拉生活费低于悉尼/墨尔本；政策研究方向全澳最强。",
+      "usnews_rank_2026": null
     },
     {
       "id": "cornell",
@@ -2920,7 +2848,7 @@
         34,
         36
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 4.07,
       "popular_majors": [
@@ -2976,7 +2904,7 @@
         35,
         36
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 4.14,
       "popular_majors": [
@@ -3032,7 +2960,7 @@
         35,
         36
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.9,
       "popular_majors": [
@@ -3088,7 +3016,7 @@
         33,
         35
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.79,
       "popular_majors": [
@@ -3144,7 +3072,7 @@
         33,
         35
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.9,
       "popular_majors": [
@@ -3200,7 +3128,7 @@
         34,
         36
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.94,
       "popular_majors": [
@@ -3256,7 +3184,7 @@
         33,
         35
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.93,
       "popular_majors": [
@@ -3311,7 +3239,7 @@
         33,
         35
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.92,
       "popular_majors": [
@@ -3367,7 +3295,7 @@
         31,
         35
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 4.47,
       "popular_majors": [
@@ -3422,7 +3350,7 @@
         32,
         35
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 4.31,
       "popular_majors": [
@@ -3477,7 +3405,7 @@
         31,
         35
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 4.15,
       "popular_majors": [
@@ -3700,7 +3628,7 @@
         32,
         35
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.94,
       "popular_majors": [
@@ -3810,7 +3738,7 @@
         30,
         34
       ],
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": 3.72,
       "popular_majors": [
@@ -3890,7 +3818,8 @@
       "verified": true,
       "a_level_typical": "AAA",
       "special_notes": "位于伦敦市中心泰晤士河畔；医学/牙医A*AA；护理/急救医学门槛较低。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "nottingham",
@@ -3940,7 +3869,8 @@
       "verified": true,
       "a_level_typical": "AAA",
       "special_notes": "医学/药学/工程强；在中国宁波设有校区；无艺术设计专业。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "leeds",
@@ -3960,7 +3890,7 @@
       "application_system": "UCAS",
       "sat_range": null,
       "act_range": null,
-      "ielts_min": 6.0,
+      "ielts_min": 6,
       "toefl_min": 92,
       "gpa_avg": null,
       "popular_majors": [
@@ -3990,7 +3920,8 @@
       "verified": true,
       "a_level_typical": "AAA",
       "special_notes": "英国最大院校之一；文科/媒体/商科强；医学需AAA + UKMSAT入学考试。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "sheffield",
@@ -4010,7 +3941,7 @@
       "application_system": "UCAS",
       "sat_range": null,
       "act_range": null,
-      "ielts_min": 6.0,
+      "ielts_min": 6,
       "toefl_min": 80,
       "gpa_avg": null,
       "popular_majors": [
@@ -4040,7 +3971,8 @@
       "verified": true,
       "a_level_typical": "AAA",
       "special_notes": "工程/医学/商科强；生活费全英最低之一；Sheffield是英国最宜居城市之一。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "birmingham",
@@ -4060,7 +3992,7 @@
       "application_system": "UCAS",
       "sat_range": null,
       "act_range": null,
-      "ielts_min": 6.0,
+      "ielts_min": 6,
       "toefl_min": 90,
       "gpa_avg": null,
       "popular_majors": [
@@ -4090,7 +4022,8 @@
       "verified": true,
       "a_level_typical": "AAA",
       "special_notes": "大型校区大学；医学/牙医需特定A-Level；体育科学和工程实力强。",
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "mcmaster",
@@ -4140,7 +4073,8 @@
       "verified": true,
       "data_confidence": "medium",
       "pr_pathway_notes": "Express Entry联邦技术移民；PGWP毕业工签3年。",
-      "special_notes": "Arts/Science $32,000；Engineering $55,000；Health Sciences $57,540；rolling滚动录取。"
+      "special_notes": "Arts/Science $32,000；Engineering $55,000；Health Sciences $57,540；rolling滚动录取。",
+      "usnews_rank_2026": null
     },
     {
       "id": "western",
@@ -4189,7 +4123,8 @@
       "verified": true,
       "data_confidence": "medium",
       "pr_pathway_notes": "Express Entry联邦技术移民；PGWP毕业工签3年。",
-      "special_notes": "Arts $39,000；Engineering $64,400；Ivey HBA为Year 3入读（2+2模式）。"
+      "special_notes": "Arts $39,000；Engineering $64,400；Ivey HBA为Year 3入读（2+2模式）。",
+      "usnews_rank_2026": null
     },
     {
       "id": "ualberta",
@@ -4239,7 +4174,8 @@
       "verified": true,
       "data_confidence": "medium",
       "pr_pathway_notes": "Alberta PNP省提名+Express Entry双通道；PGWP毕业工签3年。",
-      "special_notes": "Arts/Science $31,500；Engineering $39,792；Business $46,547；Alberta PNP省提名移民路径有优势。"
+      "special_notes": "Arts/Science $31,500；Engineering $39,792；Business $46,547；Alberta PNP省提名移民路径有优势。",
+      "usnews_rank_2026": null
     },
     {
       "id": "monash",
@@ -4290,7 +4226,8 @@
       "verified": true,
       "data_confidence": "medium",
       "pr_pathway_notes": "Skilled Independent visa (189) 或 Employer Sponsored (482/186)。",
-      "special_notes": "Arts/Commerce $35,000；Engineering $33,634；按faculty费率差异大。"
+      "special_notes": "Arts/Commerce $35,000；Engineering $33,634；按faculty费率差异大。",
+      "usnews_rank_2026": null
     },
     {
       "id": "uadelaide",
@@ -4340,7 +4277,8 @@
       "verified": true,
       "data_confidence": "medium",
       "pr_pathway_notes": "Skilled Independent visa (189) 或 Employer Sponsored (482/186)。",
-      "special_notes": "Arts/Commerce $39,000；Engineering $43,000；南澳区域优势对移民申请加分。"
+      "special_notes": "Arts/Commerce $39,000；Engineering $43,000；南澳区域优势对移民申请加分。",
+      "usnews_rank_2026": null
     },
     {
       "id": "oxford",
@@ -4392,40 +4330,7 @@
       "data_source": "Oxford Admissions + UCAS",
       "verified": true,
       "data_confidence": "medium",
-      "english_note": "Standard level: 7.0 (6.5) / 100. Higher level: 7.5 (7.0) / 110. Most Humanities/Social Sciences require Higher level.",
-      "application_deadline": {
-        "early_action": null,
-        "regular": "2026-10-15"
-      },
-      "financial_aid_international": true,
-      "scholarship_typical_usd_annual": 0,
-      "_extraction_notes": {
-        "source_urls": [
-          "https://www.ox.ac.uk/admissions/undergraduate/applying-to-oxford/admissions-timeline",
-          "https://www.ox.ac.uk/admissions/undergraduate/applying-to-oxford/for-international-students/ELR"
-        ],
-        "uncertainties": [
-          "Oxford 奖学金多为覆盖全额，USD 金额随汇率和课程学费变动"
-        ],
-        "extraction_date": "2026-04-15"
-      },
-      "finance_sandbox": {
-        "tuition_usd_annual": null,
-        "duration_years": null,
-        "living_cost_usd_monthly": {
-          "low": null,
-          "mid": null,
-          "high": null
-        },
-        "scholarship_typical_usd_annual": 0,
-        "scholarship_coverage_rate": null,
-        "scholarship_condition": "need-based",
-        "health_insurance_usd_annual": null,
-        "fees_usd_annual": null
-      },
-      "official_url": "https://www.ox.ac.uk",
-      "batch_b_verified": false,
-      "batch_c_verified": false
+      "usnews_rank_2026": null
     },
     {
       "id": "cambridge",
@@ -4476,7 +4381,8 @@
       ],
       "data_source": "Cambridge Admissions + UCAS",
       "verified": true,
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
       "id": "imperial",
@@ -4496,7 +4402,7 @@
       "application_system": "UCAS",
       "sat_range": null,
       "act_range": null,
-      "ielts_min": 7.0,
+      "ielts_min": 7,
       "toefl_min": 100,
       "gpa_avg": null,
       "a_level_typical": "A*AA",
@@ -4530,150 +4436,1861 @@
       ],
       "data_source": "Imperial Admissions + UCAS",
       "verified": true,
-      "data_confidence": "medium"
+      "data_confidence": "medium",
+      "usnews_rank_2026": null
     },
     {
-      "id": "mit",
-      "name_en": "Massachusetts Institute of Technology",
-      "name_zh": "麻省理工学院",
+      "id": "boston-college",
+      "name_en": "Boston College",
+      "name_zh": "波士顿学院",
       "country": "US",
-      "region": "East Coast",
-      "city": "Cambridge, MA",
+      "region": "Northeast",
+      "city": "Chestnut Hill, MA",
       "type": "private",
-      "qs_rank_2025": 1,
-      "usnews_global_rank_2025": 2,
-      "acceptance_rate": 0.04,
-      "tuition_intl_annual": 57986,
+      "qs_rank_2025": 432,
+      "usnews_rank_2025": 37,
+      "tuition_intl_annual": 70702,
+      "avg_living_cost_annual": 19612,
+      "application_deadline_fall": "01-02",
+      "application_system": "Common App",
+      "acceptance_rate": 0.16,
+      "sat_range": [
+        1460,
+        1520
+      ],
+      "act_range": [
+        33,
+        35
+      ],
+      "ielts_min": 7,
+      "toefl_min": 100,
+      "gpa_avg": null,
+      "popular_majors": [
+        "Finance",
+        "Biology",
+        "Marketing",
+        "Economics",
+        "Political Science"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Need-based aid only; 67% students receive financial aid",
+      "campus_setting": "suburban",
+      "chinese_student_community": "medium",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Jesuit values; 7.3% intl students; 96% graduate employment rate",
+      "tags": [
+        "jesuit-institution",
+        "business-focus",
+        "new-england"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://www.bc.edu/bc-web/admission/affordability.html",
+        "https://www.usnews.com/best-colleges/boston-college-2128",
+        "https://blog.collegevine.com/what-does-it-take-to-get-into-boston-college"
+      ],
       "tuition_currency": "USD",
-      "avg_living_cost_annual": 33600,
-      "application_deadline_fall": "01-01",
-      "application_system": "MIT Application",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "brandeis",
+      "name_en": "Brandeis University",
+      "name_zh": "布兰代斯大学",
+      "country": "US",
+      "region": "Northeast",
+      "city": "Waltham, MA",
+      "type": "private",
+      "qs_rank_2025": null,
+      "usnews_rank_2025": 69,
+      "tuition_intl_annual": 67082,
+      "avg_living_cost_annual": 20000,
+      "application_deadline_fall": "01-15",
+      "application_system": "Common App",
+      "acceptance_rate": 0.35,
+      "sat_range": [
+        1350,
+        1500
+      ],
+      "act_range": [
+        30,
+        34
+      ],
+      "ielts_min": 7,
+      "toefl_min": 100,
+      "gpa_avg": null,
+      "popular_majors": [
+        "Business",
+        "Biology",
+        "Social Sciences",
+        "Health Policy",
+        "Psychology"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "100% demonstrated need met; $71M+ grants/scholarships annually",
+      "campus_setting": "suburban",
+      "chinese_student_community": "small",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Near Boston; 8:1 student-faculty ratio",
+      "tags": [
+        "private-research",
+        "small-class-size",
+        "jewish-heritage"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://www.brandeis.edu/admissions",
+        "https://www.brandeis.edu/registrar/bulletin/2024-2025/financial-information/tuition-fees-expenses.html",
+        "https://www.brandeis.edu/about/facts/rankings.html"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "brown",
+      "name_en": "Brown University",
+      "name_zh": "布朗大学",
+      "country": "US",
+      "region": "Northeast",
+      "city": "Providence, RI",
+      "type": "private",
+      "qs_rank_2025": 79,
+      "usnews_rank_2025": 13,
+      "tuition_intl_annual": 71700,
+      "avg_living_cost_annual": 18514,
+      "application_deadline_fall": "01-05",
+      "application_system": "Common App",
+      "acceptance_rate": 0.054,
+      "sat_range": [
+        1510,
+        1560
+      ],
+      "act_range": [
+        34,
+        35
+      ],
+      "ielts_min": 7,
+      "toefl_min": 100,
+      "gpa_avg": null,
+      "popular_majors": [
+        "Computer Science",
+        "Economics",
+        "Biology",
+        "International Relations",
+        "Engineering"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Need-based only; meets 100% demonstrated need",
+      "campus_setting": "urban",
+      "chinese_student_community": "large",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Open Curriculum; Ivy League; no required courses",
+      "tags": [
+        "ivy-league",
+        "open-curriculum",
+        "liberal-arts"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admission.brown.edu",
+        "https://admission.brown.edu/tuition-aid/tuition-fees"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "caltech",
+      "name_en": "California Institute of Technology",
+      "name_zh": "加州理工学院",
+      "country": "US",
+      "region": "West Coast",
+      "city": "Pasadena, CA",
+      "type": "private",
+      "qs_rank_2025": 10,
+      "usnews_rank_2025": 9,
+      "tuition_intl_annual": 68574,
+      "avg_living_cost_annual": 24651,
+      "application_deadline_fall": "01-05",
+      "application_system": "学校自设系统",
+      "acceptance_rate": 0.03,
       "sat_range": [
         1530,
+        1580
+      ],
+      "act_range": [
+        35,
+        36
+      ],
+      "ielts_min": 7,
+      "toefl_min": 100,
+      "gpa_avg": null,
+      "popular_majors": [
+        "Computer Science",
+        "Mechanical Engineering",
+        "Physics",
+        "Chemistry",
+        "Mathematics"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Need-based aid only; no merit scholarships",
+      "campus_setting": "suburban",
+      "chinese_student_community": "medium",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Need-blind domestic, need-aware international",
+      "tags": [
+        "stem",
+        "research-intensive",
+        "small-class"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admissions.caltech.edu",
+        "https://www.finaid.caltech.edu/costs"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "cmu",
+      "name_en": "Carnegie Mellon University",
+      "name_zh": "卡内基梅隆大学",
+      "country": "US",
+      "region": "Northeast",
+      "city": "Pittsburgh, PA",
+      "type": "private",
+      "qs_rank_2025": 58,
+      "usnews_rank_2025": 20,
+      "tuition_intl_annual": 66246,
+      "avg_living_cost_annual": 19666,
+      "application_deadline_fall": "01-15",
+      "application_system": "Common App",
+      "acceptance_rate": 0.117,
+      "sat_range": [
+        1510,
+        1560
+      ],
+      "act_range": [
+        34,
+        35
+      ],
+      "ielts_min": 7,
+      "toefl_min": 100,
+      "gpa_avg": 3.9,
+      "popular_majors": [
+        "Computer Science",
+        "Engineering",
+        "Business Administration",
+        "Mathematics",
+        "Physics"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Need-based aid available; no separate intl scholarship program",
+      "campus_setting": "urban",
+      "chinese_student_community": "medium",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Test-optional; 98% retention rate; 6:1 student-faculty ratio",
+      "tags": [
+        "stem-powerhouse",
+        "test-optional",
+        "high-roi"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://www.cmu.edu/about/rankings-and-awards",
+        "https://www.usnews.com/best-colleges/carnegie-mellon-university-3242",
+        "https://www.cmu.edu/ira/CDS/pdf/cds_2024-25/common-data-set-2024-2025-21feb2025.pdf"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "dartmouth",
+      "name_en": "Dartmouth College",
+      "name_zh": "达特茅斯学院",
+      "country": "US",
+      "region": "Northeast",
+      "city": "Hanover, NH",
+      "type": "private",
+      "qs_rank_2025": 237,
+      "usnews_rank_2025": 18,
+      "tuition_intl_annual": 69207,
+      "avg_living_cost_annual": 24863,
+      "application_deadline_fall": "01-01",
+      "application_system": "Common App",
+      "acceptance_rate": 0.054,
+      "sat_range": [
+        1500,
+        1570
+      ],
+      "act_range": [
+        33,
+        35
+      ],
+      "ielts_min": 7,
+      "toefl_min": 100,
+      "gpa_avg": 3.9,
+      "popular_majors": [
+        "Engineering",
+        "Economics",
+        "Computer Science",
+        "Government",
+        "Biological Sciences"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Need-blind for intl；meets 100% demonstrated need。",
+      "campus_setting": "rural",
+      "chinese_student_community": "medium",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Need-blind国际生；常春藤最小规模；D-Plan弹性学期制。",
+      "tags": [
+        "ivy-league",
+        "liberal-arts",
+        "rural"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admissions.dartmouth.edu",
+        "https://www.dartmouth.edu/oir/pdfs/cds_2024-2025.pdf",
+        "https://financialaid.dartmouth.edu/cost-attendance/cost-attendance-2025-2026"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "duke",
+      "name_en": "Duke University",
+      "name_zh": "杜克大学",
+      "country": "US",
+      "region": "Southeast",
+      "city": "Durham, NC",
+      "type": "private",
+      "qs_rank_2025": 61,
+      "usnews_rank_2025": 9,
+      "tuition_intl_annual": 70265,
+      "avg_living_cost_annual": 28284,
+      "application_deadline_fall": "01-05",
+      "application_system": "Common App",
+      "acceptance_rate": 0.062,
+      "sat_range": [
+        1510,
+        1570
+      ],
+      "act_range": [
+        34,
+        36
+      ],
+      "ielts_min": 7,
+      "toefl_min": 100,
+      "gpa_avg": null,
+      "popular_majors": [
+        "Computer Science",
+        "Economics",
+        "Biology",
+        "Political Science",
+        "Psychology"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Need-based aid; no merit scholarships",
+      "campus_setting": "suburban",
+      "chinese_student_community": "large",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Strong sports program; renowned medical school",
+      "tags": [
+        "ivy-league",
+        "research-intensive",
+        "athletics"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admissions.duke.edu",
+        "https://admissions.duke.edu/financial-support/"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "fordham",
+      "name_en": "Fordham University",
+      "name_zh": "福特汉姆大学",
+      "country": "US",
+      "region": "Northeast",
+      "city": "New York, NY",
+      "type": "private",
+      "qs_rank_2025": null,
+      "usnews_rank_2025": 97,
+      "tuition_intl_annual": 67452,
+      "avg_living_cost_annual": 25200,
+      "application_deadline_fall": "01-03",
+      "application_system": "Common App",
+      "acceptance_rate": 0.59,
+      "sat_range": [
+        1350,
+        1480
+      ],
+      "act_range": [
+        30,
+        34
+      ],
+      "ielts_min": 6.5,
+      "toefl_min": 79,
+      "gpa_avg": 3.61,
+      "popular_majors": [
+        "Finance and Business Economics",
+        "Communication and Media Studies",
+        "Psychology",
+        "Political Science",
+        "Business Administration"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Limited need-based aid; merit scholarships up to $25,000 for qualifying intl students",
+      "campus_setting": "urban",
+      "chinese_student_community": "small",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Jesuit university in NYC with Rose Hill and Lincoln Center campuses. Urban setting.",
+      "tags": [
+        "jesuit-education",
+        "nyc-location",
+        "business-school-emphasis"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://www.fordham.edu/admission",
+        "https://www.fordham.edu/undergraduate-admission/why-fordham/admission-facts/",
+        "https://www.fordham.edu/undergraduate-admission/international-students/",
+        "https://www.usnews.com/best-colleges/fordham-university-2722"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "georgetown",
+      "name_en": "Georgetown University",
+      "name_zh": "乔治城大学",
+      "country": "US",
+      "region": "Northeast",
+      "city": "Washington, DC",
+      "type": "private",
+      "qs_rank_2025": 12,
+      "usnews_rank_2025": 24,
+      "tuition_intl_annual": 68017,
+      "avg_living_cost_annual": 22000,
+      "application_deadline_fall": "01-10",
+      "application_system": "学校自设系统 (Georgetown Application)",
+      "acceptance_rate": 0.129,
+      "sat_range": [
+        1390,
+        1550
+      ],
+      "act_range": [
+        31,
+        35
+      ],
+      "ielts_min": 7,
+      "toefl_min": 100,
+      "gpa_avg": null,
+      "popular_majors": [
+        "International Relations",
+        "Economics",
+        "Political Science",
+        "Finance",
+        "Pre-Med"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Limited aid for internationals; EA not restrictive; no CSS required unless merit aid",
+      "campus_setting": "urban",
+      "chinese_student_community": "medium",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Located in DC; strong government/international affairs focus; no Common App",
+      "tags": [
+        "political-science",
+        "international-affairs",
+        "urban"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://uadmissions.georgetown.edu",
+        "https://bulletin.georgetown.edu/admissions/",
+        "https://www.sofi.com/georgetown-university-tuition-fees/"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "gwu",
+      "name_en": "The George Washington University",
+      "name_zh": "乔治·华盛顿大学",
+      "country": "US",
+      "region": "Northeast",
+      "city": "Washington, D.C.",
+      "type": "private",
+      "qs_rank_2025": 358,
+      "usnews_rank_2025": 59,
+      "tuition_intl_annual": 69780,
+      "avg_living_cost_annual": 20000,
+      "application_deadline_fall": "01-05",
+      "application_system": "Common App",
+      "acceptance_rate": 0.47,
+      "sat_range": [
+        1320,
+        1460
+      ],
+      "act_range": [
+        29,
+        33
+      ],
+      "ielts_min": 6.5,
+      "toefl_min": 80,
+      "gpa_avg": null,
+      "popular_majors": [
+        "International Affairs",
+        "Business",
+        "Political Science",
+        "Engineering",
+        "Communications"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Located in DC heart; strong internship opportunities",
+      "campus_setting": "urban",
+      "chinese_student_community": "medium",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "In heart of DC; test-optional for most applicants",
+      "tags": [
+        "private-research",
+        "dc-location",
+        "test-optional"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admissions.gwu.edu",
+        "https://undergraduate.admissions.gwu.edu/test-optional",
+        "https://studentaccounts.gwu.edu/undergraduate-tuition"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "harvard",
+      "name_en": "Harvard University",
+      "name_zh": "哈佛大学",
+      "country": "US",
+      "region": "Northeast",
+      "city": "Cambridge, MA",
+      "type": "private",
+      "qs_rank_2025": 4,
+      "usnews_rank_2025": 3,
+      "tuition_intl_annual": 59320,
+      "avg_living_cost_annual": 25630,
+      "application_deadline_fall": "01-01",
+      "application_system": "Common App",
+      "acceptance_rate": 0.0365,
+      "sat_range": [
+        1510,
         1580
       ],
       "act_range": [
         34,
         36
       ],
-      "ielts_min": null,
-      "toefl_min": null,
+      "ielts_min": 7.5,
+      "toefl_min": 100,
+      "gpa_avg": 4.21,
+      "popular_majors": [
+        "Economics",
+        "Computer Science",
+        "Political Science",
+        "Psychology",
+        "History"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Need-blind for intl；家庭收入<$10万免学费；<$20万大幅资助。",
+      "campus_setting": "urban",
+      "chinese_student_community": "large",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Need-blind国际生；全美最慷慨财援之一；CSS Profile required。",
+      "tags": [
+        "ivy-league",
+        "elite",
+        "need-blind"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://college.harvard.edu",
+        "https://www.gradgpt.com/common-data-set/harvard-university"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "howard",
+      "name_en": "Howard University",
+      "name_zh": "霍华德大学",
+      "country": "US",
+      "region": "Southeast",
+      "city": "Washington, DC",
+      "type": "private",
+      "qs_rank_2025": null,
+      "usnews_rank_2025": 86,
+      "tuition_intl_annual": 38936,
+      "avg_living_cost_annual": 38717,
+      "application_deadline_fall": "02-01",
+      "application_system": "Common App",
+      "acceptance_rate": 0.35,
+      "sat_range": [
+        1130,
+        1250
+      ],
+      "act_range": [
+        21,
+        27
+      ],
+      "ielts_min": 7,
+      "toefl_min": 90,
+      "gpa_avg": 3.66,
+      "popular_majors": [
+        "Business",
+        "Communications",
+        "Engineering",
+        "Psychology",
+        "Political Science"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Merit-based Howard University Freshman Scholarships available; ISFAA required",
+      "campus_setting": "urban",
+      "chinese_student_community": "small",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Top HBCU; strong liberal arts and pre-med programs; located in Washington DC",
+      "tags": [
+        "hbcu",
+        "liberal-arts",
+        "pre-med"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admissions.howard.edu",
+        "https://admission.howard.edu/undergraduate/admission-profile",
+        "https://admission.howard.edu/undergraduate/intl-first-year",
+        "https://financialservices.howard.edu/tuition-fees/tuition-faqs/cost-attendance/2024-2025-estimated-cost-attendance"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "jhu",
+      "name_en": "Johns Hopkins University",
+      "name_zh": "约翰斯·霍普金斯大学",
+      "country": "US",
+      "region": "Southeast",
+      "city": "Baltimore, MD",
+      "type": "private",
+      "qs_rank_2025": 32,
+      "usnews_rank_2025": 9,
+      "tuition_intl_annual": 65230,
+      "avg_living_cost_annual": 22390,
+      "application_deadline_fall": "01-02",
+      "application_system": "Common App",
+      "acceptance_rate": 0.075,
+      "sat_range": [
+        1500,
+        1560
+      ],
+      "act_range": [
+        34,
+        35
+      ],
+      "ielts_min": 7,
+      "toefl_min": 100,
       "gpa_avg": null,
       "popular_majors": [
+        "Engineering",
+        "Medicine",
+        "Public Health",
+        "International Studies",
+        "Biology"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Need-based and merit scholarships available",
+      "campus_setting": "urban",
+      "chinese_student_community": "large",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Top med school; strong research in health/engineering",
+      "tags": [
+        "medicine",
+        "research-intensive",
+        "health-sciences"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://apply.jhu.edu",
+        "https://apply.jhu.edu/tuition-aid/"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "mit",
+      "name_en": "Massachusetts Institute of Technology",
+      "name_zh": "麻省理工学院",
+      "country": "US",
+      "region": "Northeast",
+      "city": "Cambridge, MA",
+      "type": "private",
+      "qs_rank_2025": 1,
+      "usnews_rank_2025": 2,
+      "tuition_intl_annual": 61990,
+      "avg_living_cost_annual": 23960,
+      "application_deadline_fall": "01-01",
+      "application_system": "学校自设系统 (MIT Application Portal)",
+      "acceptance_rate": 0.04,
+      "sat_range": [
+        1520,
+        1580
+      ],
+      "act_range": [
+        34,
+        36
+      ],
+      "ielts_min": 7,
+      "toefl_min": 90,
+      "gpa_avg": 4.17,
+      "popular_majors": [
         "Computer Science",
-        "Electrical Engineering & Computer Science",
-        "Mathematics",
-        "Physics",
-        "Economics",
         "Mechanical Engineering",
+        "Physics",
+        "Mathematics",
+        "Electrical Engineering"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Need-blind for intl；家庭收入<$20万免学费（2025-26起）。",
+      "campus_setting": "urban",
+      "chinese_student_community": "large",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Need-blind国际生；纯工科+理科；Maker culture；无传统专业限制。",
+      "tags": [
+        "stem-elite",
+        "research-university",
+        "need-blind"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://mitadmissions.org",
+        "https://www.gradgpt.com/common-data-set/massachusetts-institute-of-technology-mit"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": 2
+    },
+    {
+      "id": "ncsu",
+      "name_en": "North Carolina State University",
+      "name_zh": "北卡罗来纳州立大学",
+      "country": "US",
+      "region": "Southeast",
+      "city": "Raleigh, NC",
+      "type": "public",
+      "qs_rank_2025": 272,
+      "usnews_rank_2025": 58,
+      "tuition_intl_annual": 33993,
+      "avg_living_cost_annual": 19116,
+      "application_deadline_fall": "06-01",
+      "application_system": "Common App",
+      "acceptance_rate": 0.4,
+      "sat_range": [
+        1310,
+        1440
+      ],
+      "act_range": [
+        25,
+        32
+      ],
+      "ielts_min": 6.5,
+      "toefl_min": 80,
+      "gpa_avg": 3.84,
+      "popular_majors": [
+        "Engineering",
+        "Business",
         "Biology",
+        "Computer Science",
+        "Liberal Arts & Social Sciences"
+      ],
+      "coop_available": true,
+      "scholarship_intl": true,
+      "scholarship_notes": "Cooperative Education Program available; merit scholarships for international students",
+      "campus_setting": "urban",
+      "chinese_student_community": "large",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Co-op program with alternating semesters of study and work; top 10 best value public college",
+      "tags": [
+        "engineering",
+        "co-op",
+        "stem"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admissions.ncsu.edu",
+        "https://admissions.ncsu.edu/apply/international/first-year/",
+        "https://studentservices.ncsu.edu/finances/estimated-cost-of-attendance/undergraduate-student-estimated-cost-of-attendance/",
+        "https://careers.dasa.ncsu.edu/overview/"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "northwestern",
+      "name_en": "Northwestern University",
+      "name_zh": "西北大学",
+      "country": "US",
+      "region": "Midwest",
+      "city": "Evanston, IL",
+      "type": "private",
+      "qs_rank_2025": 50,
+      "usnews_rank_2025": 9,
+      "tuition_intl_annual": 67158,
+      "avg_living_cost_annual": 22290,
+      "application_deadline_fall": "01-01",
+      "application_system": "Common App",
+      "acceptance_rate": 0.077,
+      "sat_range": [
+        1500,
+        1560
+      ],
+      "act_range": [
+        33,
+        35
+      ],
+      "ielts_min": 7,
+      "toefl_min": 100,
+      "gpa_avg": null,
+      "popular_majors": [
+        "Communication",
+        "Journalism",
+        "Economics",
+        "Engineering",
+        "Computer Science"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Need-based aid only; no merit scholarships",
+      "campus_setting": "suburban",
+      "chinese_student_community": "large",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Strong media/journalism; large research university",
+      "tags": [
+        "journalism",
+        "research-intensive",
+        "midwest"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admissions.northwestern.edu/tuition-aid/",
+        "https://news.northwestern.edu/stories/2024/04/tuition-fees-and-financial-aid-for-2024-2025"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "notre-dame",
+      "name_en": "University of Notre Dame",
+      "name_zh": "圣母大学",
+      "country": "US",
+      "region": "Midwest",
+      "city": "Notre Dame, IN",
+      "type": "private",
+      "qs_rank_2025": 304,
+      "usnews_rank_2025": 23,
+      "tuition_intl_annual": 65298,
+      "avg_living_cost_annual": 22000,
+      "application_deadline_fall": "01-02",
+      "application_system": "Common App",
+      "acceptance_rate": 0.113,
+      "sat_range": [
+        1470,
+        1540
+      ],
+      "act_range": [
+        32,
+        35
+      ],
+      "ielts_min": 7,
+      "toefl_min": 100,
+      "gpa_avg": null,
+      "popular_majors": [
+        "Finance",
+        "Engineering",
+        "Political Science",
+        "Economics",
         "Architecture"
       ],
-      "coop_available": null,
+      "coop_available": false,
       "scholarship_intl": true,
-      "scholarship_notes": "Need-blind for all applicants including international; meets 100% of demonstrated need",
+      "scholarship_notes": "Need-blind; meets 100% demonstrated need; half tuition for incomes up to $200K",
       "campus_setting": "suburban",
       "chinese_student_community": "medium",
       "visa_type": "F-1",
       "post_study_work": 36,
+      "special_notes": "Catholic university; strong alumni network; study abroad programs worldwide",
       "tags": [
-        "顶尖研究型",
-        "美国",
-        "STEM强校",
-        "需要极高绩"
+        "catholic-university",
+        "liberal-arts",
+        "business"
       ],
-      "data_source": "schools.json (legacy merge)",
-      "verified": true,
       "data_confidence": "medium",
-      "special_notes": null,
-      "english_note": "No minimum score required; admits based on holistic review",
-      "avg_accepted_toefl": 113,
-      "application_deadline": {
-        "early_action": "2025-11-01",
-        "regular": "2026-01-01"
-      },
-      "sat_mid50": {
-        "math": [
-          790,
-          800
-        ],
-        "reading": [
-          740,
-          780
-        ]
-      },
-      "act_mid50": [
+      "verified": true,
+      "source_urls": [
+        "https://admission.nd.edu",
+        "https://financialaid.nd.edu/costs-and-affordability/",
+        "https://studentaccounts.nd.edu/rates/undergraduate-programs/"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "penn-state",
+      "name_en": "The Pennsylvania State University (Penn State)",
+      "name_zh": "宾夕法尼亚州立大学",
+      "country": "US",
+      "region": "Northeast",
+      "city": "University Park, PA",
+      "type": "public",
+      "qs_rank_2025": 89,
+      "usnews_rank_2025": 63,
+      "tuition_intl_annual": 43490,
+      "avg_living_cost_annual": 20000,
+      "application_deadline_fall": "11-01",
+      "application_system": "Common App",
+      "acceptance_rate": 0.6,
+      "sat_range": [
+        1250,
+        1410
+      ],
+      "act_range": [
+        27,
+        32
+      ],
+      "ielts_min": 6.5,
+      "toefl_min": 80,
+      "gpa_avg": null,
+      "popular_majors": [
+        "Engineering",
+        "Business",
+        "Computer Science",
+        "Biological Sciences",
+        "Psychology"
+      ],
+      "coop_available": true,
+      "scholarship_intl": true,
+      "scholarship_notes": "Merit and need-based aid available; $1.44B annual research expenditure",
+      "campus_setting": "suburban",
+      "chinese_student_community": "large",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Big Ten university; co-op program available",
+      "tags": [
+        "public-research",
+        "big-ten",
+        "co-op-program"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admissions.psu.edu",
+        "https://www.psu.edu/news/academics/story/penn-state-remains-strong-2025-qs-world-university-rankings",
+        "https://www.compassprep.com/college-profiles/"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "pepperdine",
+      "name_en": "Pepperdine University",
+      "name_zh": "佩珀代因大学",
+      "country": "US",
+      "region": "West Coast",
+      "city": "Malibu, CA",
+      "type": "private",
+      "qs_rank_2025": null,
+      "usnews_rank_2025": 49,
+      "tuition_intl_annual": 71860,
+      "avg_living_cost_annual": 26590,
+      "application_deadline_fall": "01-15",
+      "application_system": "Common App",
+      "acceptance_rate": 0.42,
+      "sat_range": [
+        1330,
+        1420
+      ],
+      "act_range": [
+        30,
+        32
+      ],
+      "ielts_min": 6.5,
+      "toefl_min": 101,
+      "gpa_avg": 3.64,
+      "popular_majors": [
+        "Business Administration",
+        "Communication",
+        "Psychology",
+        "Political Science",
+        "International Studies"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Merit scholarships available; 90% of admitted students receive scholarship offers",
+      "campus_setting": "suburban",
+      "chinese_student_community": "medium",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Christian liberal arts university in Malibu, CA. Christian values-based education.",
+      "tags": [
+        "christian-university",
+        "business-emphasis",
+        "west-coast-location"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://www.pepperdine.edu/admission",
+        "https://seaver.pepperdine.edu/admission/fast-facts/",
+        "https://www.pepperdine.edu/oie/institutional-research/common-data-set.htm",
+        "https://seaver.pepperdine.edu/admission/financial-aid/undergraduate/costs/budget-costs.htm"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "princeton",
+      "name_en": "Princeton University",
+      "name_zh": "普林斯顿大学",
+      "country": "US",
+      "region": "Northeast",
+      "city": "Princeton, NJ",
+      "type": "private",
+      "qs_rank_2025": 12,
+      "usnews_rank_2025": 1,
+      "tuition_intl_annual": 62400,
+      "avg_living_cost_annual": 24200,
+      "application_deadline_fall": "01-01",
+      "application_system": "Common App",
+      "acceptance_rate": 0.046,
+      "sat_range": [
+        1500,
+        1560
+      ],
+      "act_range": [
         34,
-        36
+        35
       ],
-      "financial_aid_international": true,
-      "scholarship_typical_usd_annual": 0,
-      "batch_c": {
-        "employment_city_tags": [
-          "San Francisco",
-          "Boston",
-          "New York",
-          "Seattle",
-          "London"
-        ],
-        "industry_strengths": [
-          "Deep Tech",
-          "AI/ML",
-          "Finance",
-          "Consulting",
-          "Research",
-          "Entrepreneurship"
-        ],
-        "qs_subject_ranks": {
-          "Computer Science": 1,
-          "Engineering": 1,
-          "Mathematics": 3,
-          "Physics": 4
-        },
-        "notable_alumni_companies": [
-          "Google",
-          "Microsoft",
-          "SpaceX",
-          "Palantir",
-          "McKinsey"
-        ],
-        "campus_vibe": [
-          "Research-intensive",
-          "Small class",
-          "Collaborative"
-        ],
-        "chinese_student_ratio_approx": 0.1
-      },
-      "finance_sandbox": {
-        "tuition_usd_annual": 57986,
-        "duration_years": 4,
-        "living_cost_usd_monthly": {
-          "low": 2000,
-          "mid": 2800,
-          "high": 4000
-        },
-        "scholarship_typical_usd_annual": 0,
-        "scholarship_coverage_rate": 0.85,
-        "scholarship_condition": "need-based",
-        "health_insurance_usd_annual": 3500,
-        "fees_usd_annual": 360
-      },
-      "archetype_fit": [
-        "SCHOLAR_PIONEER",
-        "CAREER_ARCHITECT",
-        "GLOBAL_NOMAD"
+      "ielts_min": 7,
+      "toefl_min": 100,
+      "gpa_avg": 3.95,
+      "popular_majors": [
+        "Computer Science",
+        "Economics",
+        "Engineering",
+        "Political Science",
+        "Public Policy"
       ],
-      "difficulty_tier": "S",
-      "official_url": "https://www.mit.edu",
-      "batch_b_verified": true,
-      "batch_c_verified": false,
-      "usnews_rank_2026": 2
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Need-blind for intl；家庭收入<$25万免学费；无贷款政策。",
+      "campus_setting": "suburban",
+      "chinese_student_community": "medium",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Need-blind国际生；本科教育全美最受重视；独立论文必修。",
+      "tags": [
+        "ivy-league",
+        "elite",
+        "need-blind"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admission.princeton.edu",
+        "https://www.gradgpt.com/common-data-set/princeton-university"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "rice",
+      "name_en": "Rice University",
+      "name_zh": "莱斯大学",
+      "country": "US",
+      "region": "South",
+      "city": "Houston, TX",
+      "type": "private",
+      "qs_rank_2025": 18,
+      "usnews_rank_2025": 18,
+      "tuition_intl_annual": 62874,
+      "avg_living_cost_annual": 20530,
+      "application_deadline_fall": "01-04",
+      "application_system": "Common App",
+      "acceptance_rate": 0.08,
+      "sat_range": [
+        1510,
+        1570
+      ],
+      "act_range": [
+        34,
+        35
+      ],
+      "ielts_min": 7,
+      "toefl_min": 100,
+      "gpa_avg": null,
+      "popular_majors": [
+        "Engineering",
+        "Biochemistry",
+        "Computer Science",
+        "Economics",
+        "Architectural Sciences"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Need-aware for internationals; limited need-based aid available",
+      "campus_setting": "urban",
+      "chinese_student_community": "large",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Residential college system; outstanding engineering and science programs",
+      "tags": [
+        "research-university",
+        "urban",
+        "engineering"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admission.rice.edu",
+        "https://ga.rice.edu/undergraduate-students/student-services-organizations/tuition-fees-expenses/",
+        "https://news.rice.edu/news/2024/rice-announces-tuition-rates-2024-25-2025-26-academic-years-reiterates-commitment-meet"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "rochester",
+      "name_en": "University of Rochester",
+      "name_zh": "罗切斯特大学",
+      "country": "US",
+      "region": "Northeast",
+      "city": "Rochester, NY",
+      "type": "private",
+      "qs_rank_2025": 236,
+      "usnews_rank_2025": 46,
+      "tuition_intl_annual": 69030,
+      "avg_living_cost_annual": 21488,
+      "application_deadline_fall": "01-05",
+      "application_system": "Common App",
+      "acceptance_rate": 0.36,
+      "sat_range": [
+        1420,
+        1500
+      ],
+      "act_range": [
+        32,
+        34
+      ],
+      "ielts_min": 6.5,
+      "toefl_min": 90,
+      "gpa_avg": 3.7,
+      "popular_majors": [
+        "Biological and Biomedical Sciences",
+        "Engineering",
+        "Social Sciences",
+        "Psychology",
+        "Business"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "About half of admitted students receive merit scholarships of USD 14,000 per year",
+      "campus_setting": "urban",
+      "chinese_student_community": "medium",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Strong research focus; medical school affiliation; test-optional policy",
+      "tags": [
+        "research",
+        "medical",
+        "engineering"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://enrollment.rochester.edu",
+        "https://admissions.rochester.edu",
+        "https://www.rochester.edu/adminfinance/bursar/billing-and-payment/tuition-fees-2021-2022/",
+        "https://www.rochester.edu/provost/wp-content/uploads/2025/06/CDS_2024-2025_completed-for-web.pdf"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "stanford",
+      "name_en": "Stanford University",
+      "name_zh": "斯坦福大学",
+      "country": "US",
+      "region": "West Coast",
+      "city": "Palo Alto, CA",
+      "type": "private",
+      "qs_rank_2025": 6,
+      "usnews_rank_2025": 4,
+      "tuition_intl_annual": 62484,
+      "avg_living_cost_annual": 30408,
+      "application_deadline_fall": "01-02",
+      "application_system": "Common App",
+      "acceptance_rate": 0.036,
+      "sat_range": [
+        1510,
+        1570
+      ],
+      "act_range": [
+        34,
+        35
+      ],
+      "ielts_min": 7,
+      "toefl_min": 100,
+      "gpa_avg": 3.9,
+      "popular_majors": [
+        "Computer Science",
+        "Engineering",
+        "Biology",
+        "Economics",
+        "Psychology"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Need-based aid available for international students",
+      "campus_setting": "suburban",
+      "chinese_student_community": "large",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Silicon Valley location; 3.6% acceptance rate",
+      "tags": [
+        "elite",
+        "research-university",
+        "need-blind"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admission.stanford.edu",
+        "https://www.gradgpt.com/common-data-set/stanford-university"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "syracuse",
+      "name_en": "Syracuse University",
+      "name_zh": "雪城大学",
+      "country": "US",
+      "region": "Northeast",
+      "city": "Syracuse, NY",
+      "type": "private",
+      "qs_rank_2025": 751,
+      "usnews_rank_2025": 67,
+      "tuition_intl_annual": 66580,
+      "avg_living_cost_annual": 22855,
+      "application_deadline_fall": "01-05",
+      "application_system": "Common App, Coalition App",
+      "acceptance_rate": 0.46,
+      "sat_range": [
+        1290,
+        1420
+      ],
+      "act_range": [
+        29,
+        32
+      ],
+      "ielts_min": 6.5,
+      "toefl_min": 80,
+      "gpa_avg": 3.7,
+      "popular_majors": [
+        "Business",
+        "Communications",
+        "Engineering",
+        "Public Affairs",
+        "Journalism"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Global Scholar Award $5,000-$10,000/yr; Founders, Chancellor, Deans Scholarships $10,000-$15,000/yr",
+      "campus_setting": "suburban",
+      "chinese_student_community": "medium",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Top communications and architecture programs; NCAA Division I athletics",
+      "tags": [
+        "communications",
+        "architecture",
+        "sports"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admissions.syr.edu",
+        "https://www.syracuse.edu/admissions-aid/application-process/apply/dates-deadlines/",
+        "https://www.syracuse.edu/admissions-aid/tuition-fees/international-costs/"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "tamu",
+      "name_en": "Texas A&M University",
+      "name_zh": "德克萨斯农工大学",
+      "country": "US",
+      "region": "Southwest",
+      "city": "College Station, TX",
+      "type": "public",
+      "qs_rank_2025": 144,
+      "usnews_rank_2025": 57,
+      "tuition_intl_annual": 40124,
+      "avg_living_cost_annual": 12000,
+      "application_deadline_fall": "12-01",
+      "application_system": "学校自设系统 (ApplyTexas)",
+      "acceptance_rate": 0.57,
+      "sat_range": [
+        1160,
+        1370
+      ],
+      "act_range": [
+        25,
+        31
+      ],
+      "ielts_min": 6,
+      "toefl_min": 80,
+      "gpa_avg": null,
+      "popular_majors": [
+        "Engineering",
+        "Business",
+        "Computer Science",
+        "Biological Sciences",
+        "Agriculture"
+      ],
+      "coop_available": true,
+      "scholarship_intl": true,
+      "scholarship_notes": "Top 4 public university in US; merit-based scholarships available",
+      "campus_setting": "suburban",
+      "chinese_student_community": "medium",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Land-grant institution; strong engineering program",
+      "tags": [
+        "public-research",
+        "land-grant",
+        "engineering-strong"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admissions.tamu.edu",
+        "https://www.usnews.com/best-colleges/texas-am-university-college-station-10366/applying",
+        "https://admissions.tamu.edu/apply/international/international-freshman"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "tulane",
+      "name_en": "Tulane University",
+      "name_zh": "杜兰大学",
+      "country": "US",
+      "region": "South",
+      "city": "New Orleans, LA",
+      "type": "private",
+      "qs_rank_2025": null,
+      "usnews_rank_2025": 63,
+      "tuition_intl_annual": 65538,
+      "avg_living_cost_annual": 22000,
+      "application_deadline_fall": "01-15",
+      "application_system": "Common App",
+      "acceptance_rate": 0.14,
+      "sat_range": [
+        1410,
+        1500
+      ],
+      "act_range": [
+        31,
+        34
+      ],
+      "ielts_min": 6.5,
+      "toefl_min": 95,
+      "gpa_avg": null,
+      "popular_majors": [
+        "Business",
+        "Social Sciences",
+        "Biological Sciences",
+        "Health Professions",
+        "Psychology"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Merit scholarships up to $40K/yr; max need-based $25K/yr for intl",
+      "campus_setting": "urban",
+      "chinese_student_community": "small",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Located in New Orleans; test-optional policy",
+      "tags": [
+        "private-research",
+        "test-optional",
+        "southern-charm"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admission.tulane.edu",
+        "https://admission.tulane.edu/international",
+        "https://studentaccounts.tulane.edu/sites/default/files/2024-03/2024-2025_NTC_COSTS_20240314.pdf"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "ucb",
+      "name_en": "University of California, Berkeley",
+      "name_zh": "加州大学伯克利分校",
+      "country": "US",
+      "region": "West Coast",
+      "city": "Berkeley, CA",
+      "type": "public",
+      "qs_rank_2025": 12,
+      "usnews_rank_2025": 15,
+      "tuition_intl_annual": 46326,
+      "avg_living_cost_annual": 21600,
+      "application_deadline_fall": "11-30",
+      "application_system": "UC Application",
+      "acceptance_rate": 0.11,
+      "sat_range": [
+        1440,
+        1540
+      ],
+      "act_range": [
+        29,
+        33
+      ],
+      "ielts_min": 7,
+      "toefl_min": 80,
+      "gpa_avg": 3.89,
+      "popular_majors": [
+        "Engineering",
+        "Computer Science",
+        "Business Administration",
+        "Biological Sciences",
+        "Social Sciences"
+      ],
+      "coop_available": false,
+      "scholarship_intl": false,
+      "scholarship_notes": "Limited financial aid for international; no merit scholarships for intl",
+      "campus_setting": "urban",
+      "chinese_student_community": "large",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "UC系统；国际生无merit aid；QS全球前30；工程/CS/商科全美顶尖。",
+      "tags": [
+        "public-ivy",
+        "top-engineering",
+        "test-blind"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admissions.berkeley.edu/apply-to-berkeley/student-profile/",
+        "https://registrar.berkeley.edu/tuition-fees/fee-schedule/",
+        "https://www.usnews.com/best-colleges/university-of-california-berkeley-1312"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "uf",
+      "name_en": "University of Florida",
+      "name_zh": "佛罗里达大学",
+      "country": "US",
+      "region": "Southeast",
+      "city": "Gainesville, FL",
+      "type": "public",
+      "qs_rank_2025": 215,
+      "usnews_rank_2025": 30,
+      "tuition_intl_annual": 30886,
+      "avg_living_cost_annual": 19920,
+      "application_deadline_fall": "01-15",
+      "application_system": "Common App",
+      "acceptance_rate": 0.24,
+      "sat_range": [
+        1320,
+        1500
+      ],
+      "act_range": [
+        30,
+        34
+      ],
+      "ielts_min": 6,
+      "toefl_min": 80,
+      "gpa_avg": 4,
+      "popular_majors": [
+        "Engineering",
+        "Business",
+        "Biology",
+        "Psychology",
+        "Health Sciences"
+      ],
+      "coop_available": true,
+      "scholarship_intl": false,
+      "scholarship_notes": "Limited intl aid; out-of-state tuition high; in-state very affordable",
+      "campus_setting": "urban",
+      "chinese_student_community": "medium",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "No ED/EA; Class of 2029: 91,896 applicants, 22.8% admit rate",
+      "tags": [
+        "large-public-research",
+        "no-early-decision",
+        "strong-stem"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admissions.ufl.edu/pdf/Freshman_Profile_Infographic_2025-26.pdf",
+        "https://www.usnews.com/best-colleges/university-of-florida-1535",
+        "https://www.sfa.ufl.edu/cost/"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "villanova",
+      "name_en": "Villanova University",
+      "name_zh": "维拉诺瓦大学",
+      "country": "US",
+      "region": "Northeast",
+      "city": "Villanova, PA",
+      "type": "private",
+      "qs_rank_2025": null,
+      "usnews_rank_2025": 57,
+      "tuition_intl_annual": 69846,
+      "avg_living_cost_annual": 19370,
+      "application_deadline_fall": "01-15",
+      "application_system": "Common App",
+      "acceptance_rate": 0.27,
+      "sat_range": [
+        1410,
+        1490
+      ],
+      "act_range": [
+        32,
+        34
+      ],
+      "ielts_min": 7.5,
+      "toefl_min": 100,
+      "gpa_avg": null,
+      "popular_majors": [
+        "Finance",
+        "Mechanical Engineering",
+        "Nursing",
+        "Marketing",
+        "Accounting"
+      ],
+      "coop_available": true,
+      "scholarship_intl": true,
+      "scholarship_notes": "Merit-based and athletic scholarships available for international students",
+      "campus_setting": "suburban",
+      "chinese_student_community": "small",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Augustinian Catholic university near Philadelphia. Top-ranked nursing and engineering programs.",
+      "tags": [
+        "catholic-university",
+        "co-op-program",
+        "northeast-elite"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://www1.villanova.edu/admission",
+        "https://www.villanova.edu/university/financial-affairs/bursar/tuition-and-fees.html",
+        "https://www.villanova.edu/content/dam/villanova/finaid/2526/2526InternationalInformationSheet.pdf",
+        "https://www.villanova.edu/content/dam/villanova/provost/decision_support/2024-2025-CDS_v2.pdf",
+        "https://www.villanova.edu/university/business/academics/undergraduate-programs/professional-development/experiential/coop.html",
+        "https://www.usnews.com/best-colleges/villanova-3388"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "vtech",
+      "name_en": "Virginia Polytechnic Institute and State University",
+      "name_zh": "弗吉尼亚理工大学",
+      "country": "US",
+      "region": "Southeast",
+      "city": "Blacksburg, VA",
+      "type": "public",
+      "qs_rank_2025": 389,
+      "usnews_rank_2025": 51,
+      "tuition_intl_annual": 35408,
+      "avg_living_cost_annual": 20946,
+      "application_deadline_fall": "01-15",
+      "application_system": "学校自设系统",
+      "acceptance_rate": 0.57,
+      "sat_range": [
+        1280,
+        1450
+      ],
+      "act_range": [
+        28,
+        32
+      ],
+      "ielts_min": 6.5,
+      "toefl_min": 80,
+      "gpa_avg": 4.06,
+      "popular_majors": [
+        "Engineering",
+        "Business",
+        "Computer Science",
+        "Biology",
+        "Psychology"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Merit and need-based scholarships available for international students",
+      "campus_setting": "suburban",
+      "chinese_student_community": "large",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Top 10 engineering programs nationally; record 57,622 applications in 2025",
+      "tags": [
+        "engineering",
+        "public",
+        "research"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admissions.vt.edu",
+        "https://lci.vt.edu/content/dam/lci_vt_edu/Intl-Admissions-Guide-25.pdf",
+        "https://news.vt.edu/articles/2025/03/bov-tuition-march25.html",
+        "https://www.princetonreview.com/college/virginia-tech-1022823"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "wake-forest",
+      "name_en": "Wake Forest University",
+      "name_zh": "维克森林大学",
+      "country": "US",
+      "region": "Southeast",
+      "city": "Winston-Salem, NC",
+      "type": "private",
+      "qs_rank_2025": null,
+      "usnews_rank_2025": 51,
+      "tuition_intl_annual": 70332,
+      "avg_living_cost_annual": 24268,
+      "application_deadline_fall": "01-01",
+      "application_system": "Common App",
+      "acceptance_rate": 0.22,
+      "sat_range": [
+        1410,
+        1520
+      ],
+      "act_range": [
+        32,
+        34
+      ],
+      "ielts_min": 6.5,
+      "toefl_min": 90,
+      "gpa_avg": null,
+      "popular_majors": [
+        "Business",
+        "Social Sciences",
+        "Biology",
+        "Communication",
+        "Psychology"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "NC families <$200K tuition-free from 2026; merit aid available",
+      "campus_setting": "suburban",
+      "chinese_student_community": "small",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Test-optional; 10:1 student-faculty ratio; 99% classes <50 students",
+      "tags": [
+        "suburban-campus",
+        "liberal-arts-focus",
+        "small-community"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admissions.wfu.edu/facts/",
+        "https://admissions.wfu.edu/affordability/",
+        "https://www.usnews.com/best-colleges/wake-forest-2978"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "washu",
+      "name_en": "Washington University in St. Louis",
+      "name_zh": "圣路易斯华盛顿大学",
+      "country": "US",
+      "region": "Midwest",
+      "city": "St. Louis, MO",
+      "type": "private",
+      "qs_rank_2025": 24,
+      "usnews_rank_2025": 21,
+      "tuition_intl_annual": 65790,
+      "avg_living_cost_annual": 22000,
+      "application_deadline_fall": "01-02",
+      "application_system": "Common App",
+      "acceptance_rate": 0.12,
+      "sat_range": [
+        1480,
+        1560
+      ],
+      "act_range": [
+        34,
+        35
+      ],
+      "ielts_min": 7,
+      "toefl_min": 100,
+      "gpa_avg": null,
+      "popular_majors": [
+        "Business",
+        "Biology",
+        "Engineering",
+        "Psychology",
+        "Computer Science"
+      ],
+      "coop_available": true,
+      "scholarship_intl": true,
+      "scholarship_notes": "Meets 100% demonstrated need; no application fee for aid applicants",
+      "campus_setting": "suburban",
+      "chinese_student_community": "large",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Strong pre-med and business programs; located near medical school",
+      "tags": [
+        "research-university",
+        "pre-med",
+        "business"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admissions.wustl.edu",
+        "https://www.sofi.com/washington-university-st-louis-tuition-fees/",
+        "https://blog.collegevine.com/washington-university-in-st-louis-acceptance-rates-and-admissions-requirements"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
+    },
+    {
+      "id": "yale",
+      "name_en": "Yale University",
+      "name_zh": "耶鲁大学",
+      "country": "US",
+      "region": "Northeast",
+      "city": "New Haven, CT",
+      "type": "private",
+      "qs_rank_2025": 23,
+      "usnews_rank_2025": 5,
+      "tuition_intl_annual": 64700,
+      "avg_living_cost_annual": 20980,
+      "application_deadline_fall": "01-01",
+      "application_system": "Common App",
+      "acceptance_rate": 0.045,
+      "sat_range": [
+        1480,
+        1560
+      ],
+      "act_range": [
+        33,
+        35
+      ],
+      "ielts_min": 7,
+      "toefl_min": 100,
+      "gpa_avg": 3.95,
+      "popular_majors": [
+        "Economics",
+        "Political Science",
+        "History",
+        "Biology",
+        "Psychology"
+      ],
+      "coop_available": false,
+      "scholarship_intl": true,
+      "scholarship_notes": "Need-blind for intl（2025起）；与国内生相同助学政策。",
+      "campus_setting": "urban",
+      "chinese_student_community": "medium",
+      "visa_type": "F-1",
+      "post_study_work": 36,
+      "special_notes": "Need-blind国际生（2025年起）；住宿学院制；戏剧/艺术顶尖。",
+      "tags": [
+        "ivy-league",
+        "elite",
+        "need-blind"
+      ],
+      "data_confidence": "medium",
+      "verified": true,
+      "source_urls": [
+        "https://admissions.yale.edu",
+        "https://www.gradgpt.com/common-data-set/yale-university"
+      ],
+      "tuition_currency": "USD",
+      "usnews_rank_2026": null
     },
     {
       "id": "unimelb",
       "name_en": "University of Melbourne",
       "name_zh": "墨尔本大学",
-      "country": "Australia",
+      "country": "AU",
       "region": "Oceania",
       "city": "Melbourne, VIC",
       "type": "public",
@@ -4717,7 +6334,7 @@
       "data_confidence": "medium",
       "special_notes": null,
       "english_note": "Overall IELTS 6.5 with no band below 6.0",
-      "avg_accepted_ielts": 7.0,
+      "avg_accepted_ielts": 7,
       "application_deadline": {
         "early_action": null,
         "regular": "2025-10-31"
@@ -4779,107 +6396,6 @@
       "difficulty_tier": "B",
       "official_url": "https://www.unimelb.edu.au",
       "batch_b_verified": true,
-      "batch_c_verified": false
-    },
-    {
-      "id": "stanford",
-      "name_en": "Stanford University",
-      "name_zh": "斯坦福大学",
-      "country": null,
-      "region": "West Coast",
-      "city": "Stanford, CA",
-      "type": "private",
-      "qs_rank_2025": null,
-      "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": null,
-      "tuition_currency": null,
-      "avg_living_cost_annual": null,
-      "application_deadline_fall": "01-05",
-      "application_system": "Common App",
-      "sat_range": [
-        1510,
-        1580
-      ],
-      "act_range": [
-        34,
-        35
-      ],
-      "ielts_min": null,
-      "toefl_min": 100,
-      "gpa_avg": null,
-      "popular_majors": [
-        "Computer Science",
-        "Economics",
-        "Engineering",
-        "Human Biology",
-        "Symbolic Systems",
-        "Political Science",
-        "Psychology",
-        "Physics",
-        "Mathematics",
-        "Management Science and Engineering"
-      ],
-      "coop_available": null,
-      "scholarship_intl": true,
-      "scholarship_notes": "Need-based aid only for international students; Stanford meets 100% of demonstrated need for all admitted students. No merit scholarships available.",
-      "campus_setting": "suburban",
-      "chinese_student_community": null,
-      "visa_type": null,
-      "post_study_work": null,
-      "tags": null,
-      "data_source": "schools.json (legacy merge)",
-      "verified": false,
-      "data_confidence": "medium",
-      "special_notes": null,
-      "english_note": "Stanford has no official minimum but 100+ TOEFL is strongly recommended. Test optional for SAT/ACT in 2026-27; proficiency results expected if native language is not English.",
-      "application_deadline": {
-        "early_action": "2026-11-01",
-        "regular": "2027-01-05"
-      },
-      "sat_mid50": {
-        "math": [
-          770,
-          800
-        ],
-        "reading": [
-          740,
-          780
-        ]
-      },
-      "act_mid50": [
-        34,
-        35
-      ],
-      "financial_aid_international": true,
-      "scholarship_typical_usd_annual": 0,
-      "_extraction_notes": {
-        "source_urls": [
-          "https://admission.stanford.edu/apply/first-year/",
-          "https://financialaid.stanford.edu/undergrad/apply/requirements/rd_international.html"
-        ],
-        "uncertainties": [
-          "avg_accepted_toefl/ielts 官网未公开具体均分",
-          "ielts_min 学校明确表示无最低分要求"
-        ],
-        "extraction_date": "2026-04-15"
-      },
-      "finance_sandbox": {
-        "tuition_usd_annual": null,
-        "duration_years": null,
-        "living_cost_usd_monthly": {
-          "low": null,
-          "mid": null,
-          "high": null
-        },
-        "scholarship_typical_usd_annual": 0,
-        "scholarship_coverage_rate": null,
-        "scholarship_condition": "need-based",
-        "health_insurance_usd_annual": null,
-        "fees_usd_annual": null
-      },
-      "official_url": "https://admission.stanford.edu",
-      "batch_b_verified": false,
       "batch_c_verified": false
     }
   ]
