@@ -47,7 +47,7 @@
       "data_source_urls": "Source URLs used to populate this record"
     },
     "merge_notes": "由 Claude Code 合并 schools_database.json（82所）+ 旧版 schools.json 项目字段（batch_c/finance_sandbox/meta 等）",
-    "data_updated": "2026-04-18",
+    "data_updated": "2026-04-19",
     "note": "合并自 schools_database.json v2（115所）+ 保留 unimelb，补全 usnews_rank_2026"
   },
   "_schema_legacy": {
@@ -4493,7 +4493,7 @@
         "https://blog.collegevine.com/what-does-it-take-to-get-into-boston-college"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 36
     },
     {
       "id": "brandeis",
@@ -4549,7 +4549,7 @@
         "https://www.brandeis.edu/about/facts/rankings.html"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 63
     },
     {
       "id": "brown",
@@ -4604,7 +4604,7 @@
         "https://admission.brown.edu/tuition-aid/tuition-fees"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 13
     },
     {
       "id": "caltech",
@@ -4659,7 +4659,7 @@
         "https://www.finaid.caltech.edu/costs"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 11
     },
     {
       "id": "cmu",
@@ -4715,7 +4715,7 @@
         "https://www.cmu.edu/ira/CDS/pdf/cds_2024-25/common-data-set-2024-2025-21feb2025.pdf"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 20
     },
     {
       "id": "dartmouth",
@@ -4771,7 +4771,7 @@
         "https://financialaid.dartmouth.edu/cost-attendance/cost-attendance-2025-2026"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 13
     },
     {
       "id": "duke",
@@ -4826,7 +4826,7 @@
         "https://admissions.duke.edu/financial-support/"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 7
     },
     {
       "id": "fordham",
@@ -4883,7 +4883,7 @@
         "https://www.usnews.com/best-colleges/fordham-university-2722"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 97
     },
     {
       "id": "georgetown",
@@ -4939,7 +4939,7 @@
         "https://www.sofi.com/georgetown-university-tuition-fees/"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 24
     },
     {
       "id": "gwu",
@@ -4995,7 +4995,7 @@
         "https://studentaccounts.gwu.edu/undergraduate-tuition"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 59
     },
     {
       "id": "harvard",
@@ -5050,7 +5050,7 @@
         "https://www.gradgpt.com/common-data-set/harvard-university"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 3
     },
     {
       "id": "howard",
@@ -5107,7 +5107,7 @@
         "https://financialservices.howard.edu/tuition-fees/tuition-faqs/cost-attendance/2024-2025-estimated-cost-attendance"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 88
     },
     {
       "id": "jhu",
@@ -5162,7 +5162,7 @@
         "https://apply.jhu.edu/tuition-aid/"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 7
     },
     {
       "id": "mit",
@@ -5274,7 +5274,7 @@
         "https://careers.dasa.ncsu.edu/overview/"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 64
     },
     {
       "id": "northwestern",
@@ -5329,7 +5329,7 @@
         "https://news.northwestern.edu/stories/2024/04/tuition-fees-and-financial-aid-for-2024-2025"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 7
     },
     {
       "id": "notre-dame",
@@ -5385,7 +5385,7 @@
         "https://studentaccounts.nd.edu/rates/undergraduate-programs/"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 20
     },
     {
       "id": "penn-state",
@@ -5441,7 +5441,7 @@
         "https://www.compassprep.com/college-profiles/"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 59
     },
     {
       "id": "pepperdine",
@@ -5498,7 +5498,7 @@
         "https://seaver.pepperdine.edu/admission/financial-aid/undergraduate/costs/budget-costs.htm"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 84
     },
     {
       "id": "princeton",
@@ -5553,7 +5553,7 @@
         "https://www.gradgpt.com/common-data-set/princeton-university"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 1
     },
     {
       "id": "rice",
@@ -5609,7 +5609,7 @@
         "https://news.rice.edu/news/2024/rice-announces-tuition-rates-2024-25-2025-26-academic-years-reiterates-commitment-meet"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 17
     },
     {
       "id": "rochester",
@@ -5666,7 +5666,7 @@
         "https://www.rochester.edu/provost/wp-content/uploads/2025/06/CDS_2024-2025_completed-for-web.pdf"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 46
     },
     {
       "id": "stanford",
@@ -5721,7 +5721,7 @@
         "https://www.gradgpt.com/common-data-set/stanford-university"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 4
     },
     {
       "id": "syracuse",
@@ -5777,7 +5777,7 @@
         "https://www.syracuse.edu/admissions-aid/tuition-fees/international-costs/"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 75
     },
     {
       "id": "tamu",
@@ -5833,7 +5833,7 @@
         "https://admissions.tamu.edu/apply/international/international-freshman"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 51
     },
     {
       "id": "tulane",
@@ -5889,7 +5889,7 @@
         "https://studentaccounts.tulane.edu/sites/default/files/2024-03/2024-2025_NTC_COSTS_20240314.pdf"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 63
     },
     {
       "id": "ucb",
@@ -5945,7 +5945,7 @@
         "https://www.usnews.com/best-colleges/university-of-california-berkeley-1312"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 15
     },
     {
       "id": "uf",
@@ -6001,7 +6001,7 @@
         "https://www.sfa.ufl.edu/cost/"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 30
     },
     {
       "id": "villanova",
@@ -6060,7 +6060,7 @@
         "https://www.usnews.com/best-colleges/villanova-3388"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 58
     },
     {
       "id": "vtech",
@@ -6117,7 +6117,7 @@
         "https://www.princetonreview.com/college/virginia-tech-1022823"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 51
     },
     {
       "id": "wake-forest",
@@ -6173,7 +6173,7 @@
         "https://www.usnews.com/best-colleges/wake-forest-2978"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 51
     },
     {
       "id": "washu",
@@ -6229,7 +6229,7 @@
         "https://blog.collegevine.com/washington-university-in-st-louis-acceptance-rates-and-admissions-requirements"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 20
     },
     {
       "id": "yale",
@@ -6284,7 +6284,7 @@
         "https://www.gradgpt.com/common-data-set/yale-university"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 4
     },
     {
       "id": "unimelb",
