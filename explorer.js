@@ -169,7 +169,9 @@ const ExplorerModule = (() => {
   function renderCard(school) {
     const compareList = Utils.storage.get(COMPARE_KEY) || [];
     const inCompare = compareList.includes(school.id);
-    const qs = school.qs_rank_2025 ? `QS #${school.qs_rank_2025}` : '未入QS榜';
+    const rankText = school.country === 'US'
+      ? (school.usnews_rank_2026 ? `US News #${school.usnews_rank_2026}` : (school.qs_rank_2025 ? `QS #${school.qs_rank_2025}` : ''))
+      : (school.qs_rank_2025 ? `QS #${school.qs_rank_2025}` : '');
 
     return `
 <div class="explorer-card" id="explorer-card-${school.id}"
@@ -184,7 +186,7 @@ const ExplorerModule = (() => {
   <div style="font-size:12px; color:#6B7280; margin-bottom:8px;">${school.name_en}</div>
   <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
     <div style="display:flex; gap:12px; align-items:center;">
-      <span style="font-size:12px; color:#6B7280;">${qs}</span>
+      <span style="font-size:12px; color:#6B7280;">${rankText}</span>
       ${renderBudget(school)}
     </div>
     <button class="explorer-compare-btn ${inCompare ? 'in-compare' : ''}"
