@@ -91,7 +91,10 @@ const ExplorerModule = (() => {
     });
   }
 
-  /** 获取本科学制年数（优先读 tag，无 tag 则 GB 默认3年，其他4年） */
+  /**
+   * 获取本科学制年数。
+   * 苏格兰（4-year-degree tag）→ 4年；英格兰/威尔士 GB → 3年（BSc基准）；其他 → 4年。
+   */
   function getStudyYears(school) {
     const tags = school.tags || [];
     if (tags.includes('4-year-degree')) return 4;
@@ -99,18 +102,30 @@ const ExplorerModule = (() => {
     return school.country === 'GB' ? 3 : 4;
   }
 
-  /** 计算本科阶段总费用（CNY，万元） */
-  function calc4YearCNY(school) {
+  /**
+   * 英格兰/威尔士学校同时提供 BSc(3年) 和 MSci/MEng(4年) 两轨，
+   * 需要显示双预算。苏格兰（有 4-year-degree tag）是单一4年制。
+   */
+  function isEnglandWales(school) {
+    const tags = school.tags || [];
+    return school.country === 'GB' && !tags.includes('4-year-degree');
+  }
+
+  /** 按指定年数计算本科总费用（CNY，万元） */
+  function calcTotalCNY(school, years) {
     const tuition = school.tuition_intl_annual;
     const living = school.avg_living_cost_annual;
     if (!tuition) return null;
     const currency = school.tuition_currency || 'USD';
-    const years = getStudyYears(school);
     const totalLocal = (tuition + (living || 0)) * years;
     const cnyRate = _rates['CNY'] || 7.25;
     const usdRate = _rates[currency] || 1;
-    const totalCNY = (totalLocal / usdRate) * cnyRate;
-    return Math.round(totalCNY / 10000); // 万元
+    return Math.round((totalLocal / usdRate) * cnyRate / 10000); // 万元
+  }
+
+  /** 计算本科总费用（CNY，万元），用于筛选（英格兰/威尔士以BSc 3年为基准） */
+  function calc4YearCNY(school) {
+    return calcTotalCNY(school, getStudyYears(school));
   }
 
   /** 过滤学校列表 */
@@ -168,8 +183,14 @@ const ExplorerModule = (() => {
     return `<span style="font-size:13px;">${c.flag} ${c.name}</span>`;
   }
 
-  /** 渲染本科总预算 */
+  /** 渲染本科总预算（英格兰/威尔士显示 BSc/MSci 双轨） */
   function renderBudget(school) {
+    if (isEnglandWales(school)) {
+      const bsc = calcTotalCNY(school, 3);
+      const msci = calcTotalCNY(school, 4);
+      if (bsc == null) return '<span style="color:#9CA3AF; font-size:12px;">费用待补充</span>';
+      return `<span style="font-size:12px; color:#1A1A2E;">BSc 3年 <strong>¥${bsc}万</strong> / MSci 4年 <strong>¥${msci}万</strong></span>`;
+    }
     const wan = calc4YearCNY(school);
     if (wan == null) return '<span style="color:#9CA3AF; font-size:12px;">费用待补充</span>';
     const years = getStudyYears(school);
@@ -235,7 +256,10 @@ const ExplorerModule = (() => {
     const country = COUNTRY_LABELS[school.country] || { flag: '', name: school.country };
     const wan = calc4YearCNY(school);
     const years = getStudyYears(school);
-    const budgetText = wan ? `¥${wan}万 CNY` : null;
+    const engWales = isEnglandWales(school);
+    const budgetText = engWales
+      ? (calcTotalCNY(school, 3) ? `BSc ¥${calcTotalCNY(school, 3)}万 / MSci ¥${calcTotalCNY(school, 4)}万` : null)
+      : (wan ? `¥${wan}万 CNY` : null);
     const tuitionText = school.tuition_intl_annual
       ? `${school.tuition_currency} ${school.tuition_intl_annual.toLocaleString()} / 年`
       : null;
@@ -308,10 +332,14 @@ const ExplorerModule = (() => {
           <div style="font-size:20px; font-weight:700; color:#1A1A2E;">#${school.usnews_rank_2026}</div>
           <div style="font-size:11px; color:#6B7280; margin-top:2px;">US News 2026</div>
         </div>` : ''}
-        ${wan ? `
+        ${wan || engWales ? `
         <div style="background:#FEF3C7; border-radius:10px; padding:12px; text-align:center;">
-          <div style="font-size:18px; font-weight:700; color:#92400E;">¥${wan}万</div>
-          <div style="font-size:11px; color:#6B7280; margin-top:2px;">${years}年本科总预算估算</div>
+          ${engWales
+            ? `<div style="font-size:13px; font-weight:700; color:#92400E;">BSc ¥${calcTotalCNY(school,3)}万<br><span style="font-size:11px; font-weight:400;">MSci ¥${calcTotalCNY(school,4)}万</span></div>
+               <div style="font-size:11px; color:#6B7280; margin-top:2px;">本科总预算估算</div>`
+            : `<div style="font-size:18px; font-weight:700; color:#92400E;">¥${wan}万</div>
+               <div style="font-size:11px; color:#6B7280; margin-top:2px;">${years}年本科总预算估算</div>`
+          }
         </div>` : ''}
         ${acceptText ? `
         <div style="background:#F8F7F4; border-radius:10px; padding:12px; text-align:center;">
@@ -326,7 +354,7 @@ const ExplorerModule = (() => {
           margin-bottom:6px; text-transform:uppercase;">费用</div>
         ${detailRow('学费（国际生）', tuitionText)}
         ${detailRow('生活费估算', livingText)}
-        ${detailRow(`${years}年本科总预算`, budgetText)}
+        ${detailRow(engWales ? 'BSc/MSci 本科总预算' : `${years}年本科总预算`, budgetText)}
       </div>
 
       <div style="margin-bottom:20px;">
