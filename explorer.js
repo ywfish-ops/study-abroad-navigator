@@ -165,14 +165,15 @@ const ExplorerModule = (() => {
     return `<span style="font-size:13px; color:#1A1A2E;">4年约 <strong>¥${wan}万</strong></span>`;
   }
 
-  /** 渲染单张学校卡片 */
+  /** 渲染单张学校卡片（点击卡片主体弹出详情） */
   function renderCard(school) {
     const compareList = Utils.storage.get(COMPARE_KEY) || [];
     const inCompare = compareList.includes(school.id);
     const qs = school.qs_rank_2025 ? `QS #${school.qs_rank_2025}` : '未入QS榜';
 
     return `
-<div class="explorer-card" id="explorer-card-${school.id}">
+<div class="explorer-card" id="explorer-card-${school.id}"
+  onclick="ExplorerModule.openDetail('${school.id}')" style="cursor:pointer;">
   <div style="display:flex; align-items:center; gap:6px; margin-bottom:6px; flex-wrap:wrap;">
     ${renderCountry(school)}
     ${renderDifficultyBadge(school)}
@@ -187,7 +188,7 @@ const ExplorerModule = (() => {
       ${renderBudget(school)}
     </div>
     <button class="explorer-compare-btn ${inCompare ? 'in-compare' : ''}"
-      onclick="ExplorerModule.toggleCompare('${school.id}')"
+      onclick="event.stopPropagation(); ExplorerModule.toggleCompare('${school.id}')"
       style="font-size:12px; padding:6px 12px; border-radius:6px; border:1.5px solid;
         cursor:pointer; white-space:nowrap; min-height:36px;
         ${inCompare
@@ -197,6 +198,203 @@ const ExplorerModule = (() => {
     </button>
   </div>
 </div>`;
+  }
+
+  // ─── 详情面板（Bottom Sheet）─────────────────────────────────────────────
+
+  /** 渲染一行信息条目 */
+  function detailRow(label, value) {
+    if (value == null || value === '' || value === false) return '';
+    return `
+<div style="display:flex; justify-content:space-between; align-items:flex-start;
+  padding:10px 0; border-bottom:1px solid #F3F4F6; gap:12px;">
+  <span style="font-size:13px; color:#6B7280; flex-shrink:0;">${label}</span>
+  <span style="font-size:13px; color:#1A1A2E; text-align:right; font-weight:500;">${value}</span>
+</div>`;
+  }
+
+  /** 渲染详情 bottom sheet 并注入 body */
+  function renderDetailSheet(school) {
+    const compareList = Utils.storage.get(COMPARE_KEY) || [];
+    const inCompare = compareList.includes(school.id);
+    const d = getDifficulty(school);
+    const cfg = d ? DIFFICULTY_CONFIG[d] : null;
+    const country = COUNTRY_LABELS[school.country] || { flag: '', name: school.country };
+    const wan = calc4YearCNY(school);
+    const budgetText = wan ? `¥${wan}万 CNY` : null;
+    const tuitionText = school.tuition_intl_annual
+      ? `${school.tuition_currency} ${school.tuition_intl_annual.toLocaleString()} / 年`
+      : null;
+    const livingText = school.avg_living_cost_annual
+      ? `${school.tuition_currency} ${school.avg_living_cost_annual.toLocaleString()} / 年`
+      : null;
+    const acceptText = school.acceptance_rate
+      ? `${(school.acceptance_rate * 100).toFixed(1)}%` + (cfg ? `（${cfg.desc}）` : '')
+      : null;
+    const satText = school.sat_range ? `${school.sat_range[0]}–${school.sat_range[1]}` : null;
+    const actText = school.act_range ? `${school.act_range[0]}–${school.act_range[1]}` : null;
+    const majorsText = (school.popular_majors || []).join('、') || null;
+    const deadlineText = school.application_deadline_fall
+      ? school.application_deadline_fall.replace('-', '月') + '日'
+      : null;
+    const pswText = school.post_study_work ? `${school.post_study_work} 个月` : null;
+    const settingMap = { urban: '城市', suburban: '郊区', rural: '小镇' };
+
+    // 奖学金
+    let scholarshipText = null;
+    if (school.scholarship_intl) {
+      scholarshipText = school.scholarship_notes || '有奖学金';
+    } else if (school.scholarship_intl === false) {
+      scholarshipText = '无国际生奖学金';
+    }
+
+    const html = `
+<div id="explorer-detail-overlay"
+  onclick="ExplorerModule.closeDetail()"
+  style="position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:500;
+    display:flex; align-items:flex-end; justify-content:center;">
+  <div onclick="event.stopPropagation()"
+    style="background:#fff; border-radius:20px 20px 0 0; width:100%; max-width:480px;
+      max-height:88dvh; overflow-y:auto; padding:0 0 32px;
+      animation:sheetSlideUp 0.28s cubic-bezier(0.32,0.72,0,1) forwards;">
+
+    <!-- 拖拽指示条 -->
+    <div style="display:flex; justify-content:center; padding:12px 0 4px;">
+      <div style="width:36px; height:4px; border-radius:2px; background:#E5E7EB;"></div>
+    </div>
+
+    <!-- 关闭按钮 -->
+    <button onclick="ExplorerModule.closeDetail()"
+      style="position:absolute; right:16px; top:16px; width:32px; height:32px;
+        border-radius:50%; border:none; background:#F3F4F6; cursor:pointer;
+        display:flex; align-items:center; justify-content:center; font-size:16px;">✕</button>
+
+    <div style="padding:4px 20px 0;">
+      <!-- 标题区 -->
+      <div style="margin-bottom:16px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap;">
+          <span style="font-size:20px;">${country.flag}</span>
+          <span style="font-size:13px; color:#6B7280;">${country.name} · ${school.city || ''}</span>
+          ${cfg ? `<span style="font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px;
+            background:${cfg.bg}; color:${cfg.color};">${d} 档 · ${cfg.desc}</span>` : ''}
+        </div>
+        <h2 style="font-size:20px; font-weight:700; color:#1A1A2E; margin:0 0 4px;">${school.name_zh || school.name_en}</h2>
+        <p style="font-size:13px; color:#6B7280; margin:0;">${school.name_en}</p>
+      </div>
+
+      <!-- 核心数据卡片 -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:20px;">
+        ${school.qs_rank_2025 ? `
+        <div style="background:#F8F7F4; border-radius:10px; padding:12px; text-align:center;">
+          <div style="font-size:20px; font-weight:700; color:#2B5CE6;">#${school.qs_rank_2025}</div>
+          <div style="font-size:11px; color:#6B7280; margin-top:2px;">QS 2025</div>
+        </div>` : ''}
+        ${school.usnews_rank_2026 ? `
+        <div style="background:#F8F7F4; border-radius:10px; padding:12px; text-align:center;">
+          <div style="font-size:20px; font-weight:700; color:#1A1A2E;">#${school.usnews_rank_2026}</div>
+          <div style="font-size:11px; color:#6B7280; margin-top:2px;">US News 2026</div>
+        </div>` : ''}
+        ${wan ? `
+        <div style="background:#FEF3C7; border-radius:10px; padding:12px; text-align:center;">
+          <div style="font-size:18px; font-weight:700; color:#92400E;">¥${wan}万</div>
+          <div style="font-size:11px; color:#6B7280; margin-top:2px;">4年总预算估算</div>
+        </div>` : ''}
+        ${acceptText ? `
+        <div style="background:#F8F7F4; border-radius:10px; padding:12px; text-align:center;">
+          <div style="font-size:18px; font-weight:700; color:#1A1A2E;">${(school.acceptance_rate * 100).toFixed(1)}%</div>
+          <div style="font-size:11px; color:#6B7280; margin-top:2px;">录取率</div>
+        </div>` : ''}
+      </div>
+
+      <!-- 详情列表 -->
+      <div style="margin-bottom:20px;">
+        <div style="font-size:12px; font-weight:600; color:#9CA3AF; letter-spacing:0.05em;
+          margin-bottom:6px; text-transform:uppercase;">费用</div>
+        ${detailRow('学费（国际生）', tuitionText)}
+        ${detailRow('生活费估算', livingText)}
+        ${detailRow('4年总预算', budgetText)}
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <div style="font-size:12px; font-weight:600; color:#9CA3AF; letter-spacing:0.05em;
+          margin-bottom:6px; text-transform:uppercase;">申请要求</div>
+        ${detailRow('录取率', acceptText)}
+        ${detailRow('SAT 区间', satText)}
+        ${detailRow('ACT 区间', actText)}
+        ${detailRow('IELTS 最低', school.ielts_min ? `${school.ielts_min} 分` : null)}
+        ${detailRow('TOEFL 最低', school.toefl_min ? `${school.toefl_min} 分` : null)}
+        ${detailRow('平均 GPA', school.gpa_avg ? `${school.gpa_avg} / 4.0` : null)}
+        ${detailRow('截止日期', deadlineText)}
+        ${detailRow('申请系统', school.application_system)}
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <div style="font-size:12px; font-weight:600; color:#9CA3AF; letter-spacing:0.05em;
+          margin-bottom:6px; text-transform:uppercase;">专业 & 就业</div>
+        ${majorsText ? `<div style="font-size:13px; color:#1A1A2E; line-height:1.7; padding:10px 0; border-bottom:1px solid #F3F4F6;">${majorsText}</div>` : ''}
+        ${detailRow('Co-op 实习', school.coop_available ? '✓ 支持' : null)}
+        ${detailRow('毕业后工签', pswText)}
+      </div>
+
+      <div style="margin-bottom:24px;">
+        <div style="font-size:12px; font-weight:600; color:#9CA3AF; letter-spacing:0.05em;
+          margin-bottom:6px; text-transform:uppercase;">其他信息</div>
+        ${detailRow('校园环境', settingMap[school.campus_setting] || null)}
+        ${detailRow('中国学生社区', school.chinese_student_community === 'large' ? '多' : school.chinese_student_community === 'medium' ? '中等' : school.chinese_student_community === 'small' ? '少' : null)}
+        ${detailRow('奖学金', scholarshipText)}
+        ${school.special_notes ? `<div style="margin-top:8px; font-size:12px; color:#6B7280; background:#F8F7F4; border-radius:8px; padding:10px;">${school.special_notes}</div>` : ''}
+      </div>
+
+      <!-- 底部按钮 -->
+      <button id="detail-compare-btn"
+        onclick="ExplorerModule.toggleCompare('${school.id}'); ExplorerModule._refreshDetailBtn('${school.id}')"
+        style="width:100%; padding:14px; border-radius:12px; font-size:15px; font-weight:600;
+          cursor:pointer; border:none; transition:background 0.15s;
+          ${inCompare
+            ? 'background:#EEF3FD; color:#2B5CE6;'
+            : 'background:#2B5CE6; color:#fff;'}">
+        ${inCompare ? '✓ 已加入财务对比' : '加入财务对比'}
+      </button>
+    </div>
+  </div>
+</div>`;
+
+    // 注入到 body，确保覆盖底部导航
+    const old = document.getElementById('explorer-detail-overlay');
+    if (old) old.remove();
+    document.body.insertAdjacentHTML('beforeend', html);
+
+    // 锁定背景滚动
+    document.body.style.overflow = 'hidden';
+  }
+
+  /** 打开详情面板 */
+  function openDetail(schoolId) {
+    const school = _schools.find(s => s.id === schoolId);
+    if (!school) return;
+    renderDetailSheet(school);
+  }
+
+  /** 关闭详情面板 */
+  function closeDetail() {
+    const el = document.getElementById('explorer-detail-overlay');
+    if (!el) return;
+    el.style.animation = 'sheetSlideDown 0.22s ease forwards';
+    setTimeout(() => {
+      el.remove();
+      document.body.style.overflow = '';
+    }, 200);
+  }
+
+  /** 详情面板内的对比按钮状态刷新（不重渲染整页） */
+  function _refreshDetailBtn(schoolId) {
+    const btn = document.getElementById('detail-compare-btn');
+    if (!btn) return;
+    const list = Utils.storage.get(COMPARE_KEY) || [];
+    const inCompare = list.includes(schoolId);
+    btn.style.background = inCompare ? '#EEF3FD' : '#2B5CE6';
+    btn.style.color = inCompare ? '#2B5CE6' : '#fff';
+    btn.textContent = inCompare ? '✓ 已加入财务对比' : '加入财务对比';
   }
 
   /** 渲染筛选面板 */
@@ -444,7 +642,7 @@ const ExplorerModule = (() => {
     return Utils.storage.get(COMPARE_KEY) || [];
   }
 
-  return { init, toggleFilterPanel, toggleFilter, setMajor, setBudget, setSearch, resetFilters, toggleCompare, getCompareList };
+  return { init, toggleFilterPanel, toggleFilter, setMajor, setBudget, setSearch, resetFilters, toggleCompare, getCompareList, openDetail, closeDetail, _refreshDetailBtn };
 
 })();
 
