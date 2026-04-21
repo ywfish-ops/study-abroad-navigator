@@ -524,7 +524,7 @@ const ExplorerModule = (() => {
       </svg>
       筛选${getActiveFilterCount() > 0 ? ` (${getActiveFilterCount()})` : ''}
     </button>
-    <span style="font-size:13px; color:#6B7280;">共 <strong style="color:#1A1A2E;">${filtered.length}</strong> 所院校</span>
+    <span style="font-size:13px; color:#6B7280;">共 <strong id="explorer-result-count" style="color:#1A1A2E;">${filtered.length}</strong> 所院校</span>
     ${compareCount > 0 ? `
     <button onclick="switchTab('finance')"
       style="margin-left:auto; font-size:12px; padding:8px 12px; border-radius:8px;
@@ -544,6 +544,20 @@ const ExplorerModule = (() => {
     }
   </div>
 </div>`;
+  }
+
+  /** 只刷新卡片列表和结果数，不重建搜索框（保持键盘焦点） */
+  function renderCardListOnly() {
+    const filtered = applyFilters(_schools);
+    const list = document.getElementById('explorer-card-list');
+    if (list) {
+      list.innerHTML = filtered.length === 0
+        ? `<div style="text-align:center; padding:60px 0; color:#9CA3AF;">没有符合条件的院校，试试调整筛选条件</div>`
+        : filtered.map(renderCard).join('');
+    }
+    // 同步更新结果数
+    const countEl = document.getElementById('explorer-result-count');
+    if (countEl) countEl.textContent = filtered.length;
   }
 
   /** 计算当前激活的筛选条件数量 */
@@ -607,7 +621,7 @@ const ExplorerModule = (() => {
 
   function setSearch(value) {
     _filters.search = value;
-    render();
+    renderCardListOnly();
   }
 
   function resetFilters() {
