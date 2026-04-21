@@ -458,7 +458,7 @@ const ExplorerModule = (() => {
   </div>
   <div style="margin-bottom:12px;">
     <div style="font-size:12px; color:#6B7280; margin-bottom:6px;">
-      4年总预算上限：<strong style="color:#1A1A2E;">${budgetLabel}</strong>
+      4年总预算上限：<strong id="explorer-budget-label" style="color:#1A1A2E;">${budgetLabel}</strong>
     </div>
     <input type="range" min="50" max="300" step="10" value="${budgetMax}"
       oninput="ExplorerModule.setBudget(this.value)"
@@ -623,7 +623,9 @@ const ExplorerModule = (() => {
 
   function setBudget(value) {
     _filters.budgetMax = parseInt(value, 10);
-    render();
+    const label = document.getElementById('explorer-budget-label');
+    if (label) label.textContent = _filters.budgetMax >= 300 ? '不限' : `¥${_filters.budgetMax}万`;
+    renderCardListOnly();
   }
 
   function setSearch(value) {
