@@ -91,13 +91,22 @@ const ExplorerModule = (() => {
     });
   }
 
-  /** 计算4年总费用（CNY，万元） */
+  /** 获取本科学制年数（优先读 tag，无 tag 则 GB 默认3年，其他4年） */
+  function getStudyYears(school) {
+    const tags = school.tags || [];
+    if (tags.includes('4-year-degree')) return 4;
+    if (tags.includes('3-year-degree')) return 3;
+    return school.country === 'GB' ? 3 : 4;
+  }
+
+  /** 计算本科阶段总费用（CNY，万元） */
   function calc4YearCNY(school) {
     const tuition = school.tuition_intl_annual;
     const living = school.avg_living_cost_annual;
     if (!tuition) return null;
     const currency = school.tuition_currency || 'USD';
-    const totalLocal = (tuition + (living || 0)) * 4;
+    const years = getStudyYears(school);
+    const totalLocal = (tuition + (living || 0)) * years;
     const cnyRate = _rates['CNY'] || 7.25;
     const usdRate = _rates[currency] || 1;
     const totalCNY = (totalLocal / usdRate) * cnyRate;
@@ -159,11 +168,12 @@ const ExplorerModule = (() => {
     return `<span style="font-size:13px;">${c.flag} ${c.name}</span>`;
   }
 
-  /** 渲染4年预算 */
+  /** 渲染本科总预算 */
   function renderBudget(school) {
     const wan = calc4YearCNY(school);
     if (wan == null) return '<span style="color:#9CA3AF; font-size:12px;">费用待补充</span>';
-    return `<span style="font-size:13px; color:#1A1A2E;">4年约 <strong>¥${wan}万</strong></span>`;
+    const years = getStudyYears(school);
+    return `<span style="font-size:13px; color:#1A1A2E;">${years}年约 <strong>¥${wan}万</strong></span>`;
   }
 
   /** 渲染单张学校卡片（点击卡片主体弹出详情） */
@@ -224,6 +234,7 @@ const ExplorerModule = (() => {
     const cfg = d ? DIFFICULTY_CONFIG[d] : null;
     const country = COUNTRY_LABELS[school.country] || { flag: '', name: school.country };
     const wan = calc4YearCNY(school);
+    const years = getStudyYears(school);
     const budgetText = wan ? `¥${wan}万 CNY` : null;
     const tuitionText = school.tuition_intl_annual
       ? `${school.tuition_currency} ${school.tuition_intl_annual.toLocaleString()} / 年`
@@ -300,7 +311,7 @@ const ExplorerModule = (() => {
         ${wan ? `
         <div style="background:#FEF3C7; border-radius:10px; padding:12px; text-align:center;">
           <div style="font-size:18px; font-weight:700; color:#92400E;">¥${wan}万</div>
-          <div style="font-size:11px; color:#6B7280; margin-top:2px;">4年总预算估算</div>
+          <div style="font-size:11px; color:#6B7280; margin-top:2px;">${years}年本科总预算估算</div>
         </div>` : ''}
         ${acceptText ? `
         <div style="background:#F8F7F4; border-radius:10px; padding:12px; text-align:center;">
@@ -315,7 +326,7 @@ const ExplorerModule = (() => {
           margin-bottom:6px; text-transform:uppercase;">费用</div>
         ${detailRow('学费（国际生）', tuitionText)}
         ${detailRow('生活费估算', livingText)}
-        ${detailRow('4年总预算', budgetText)}
+        ${detailRow(`${years}年本科总预算`, budgetText)}
       </div>
 
       <div style="margin-bottom:20px;">
@@ -458,7 +469,7 @@ const ExplorerModule = (() => {
   </div>
   <div style="margin-bottom:12px;">
     <div style="font-size:12px; color:#6B7280; margin-bottom:6px;">
-      4年总预算上限：<strong id="explorer-budget-label" style="color:#1A1A2E;">${budgetLabel}</strong>
+      本科总预算上限：<strong id="explorer-budget-label" style="color:#1A1A2E;">${budgetLabel}</strong>
     </div>
     <input type="range" min="50" max="300" step="10" value="${budgetMax}"
       oninput="ExplorerModule.setBudget(this.value)"
