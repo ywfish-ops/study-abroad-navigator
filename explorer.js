@@ -65,8 +65,13 @@ const ExplorerModule = (() => {
     countries: [],
     difficulties: [],
     major: '',
-    budgetMax: 300,   // 万元 CNY，300 = 不限
+    budgetMax: 300,     // 万元 CNY，300 = 不限
     settings: [],
+    types: [],          // 'public' | 'private'
+    ieltsMax: 0,        // 0 = 不限；6.5 = 最低 ≤6.5；7 = 最低 ≤7.0
+    scholarshipOnly: false,
+    pswMin: 0,          // 0 = 不限；24 = 工签≥24个月；36 = ≥36个月
+    chineseCommunity: [],  // 'large' | 'medium' | 'small'
   };
 
   // ─── 工具函数 ──────────────────────────────────────────────────────────────
@@ -161,6 +166,21 @@ const ExplorerModule = (() => {
 
       // 城市规模
       if (_filters.settings.length && !_filters.settings.includes(s.campus_setting)) return false;
+
+      // 学校性质
+      if (_filters.types.length && !_filters.types.includes(s.type)) return false;
+
+      // IELTS 要求上限
+      if (_filters.ieltsMax > 0 && s.ielts_min != null && s.ielts_min > _filters.ieltsMax) return false;
+
+      // 仅显示有奖学金
+      if (_filters.scholarshipOnly && !s.scholarship_intl) return false;
+
+      // 毕业后工签最短时长
+      if (_filters.pswMin > 0 && (s.post_study_work == null || s.post_study_work < _filters.pswMin)) return false;
+
+      // 中国学生社区
+      if (_filters.chineseCommunity.length && !_filters.chineseCommunity.includes(s.chinese_student_community)) return false;
 
       return true;
     });
@@ -440,78 +460,135 @@ const ExplorerModule = (() => {
   }
 
   /** 渲染筛选面板 */
+  function chip(label, active, onclick, activeStyle) {
+    const s = active ? (activeStyle || 'background:#2B5CE6;color:#fff;border-color:#2B5CE6;') : '';
+    return `<button class="filter-chip" onclick="${onclick}" style="${s}">${label}</button>`;
+  }
+
   function renderFilters() {
-    const activeCountries = _filters.countries;
-    const activeDiffs = _filters.difficulties;
-    const activeSettings = _filters.settings;
+    const budgetMax = _filters.budgetMax;
+    const budgetLabel = budgetMax >= 300 ? '不限' : `¥${budgetMax}万`;
 
-    const countryBtns = Object.entries(COUNTRY_LABELS).map(([code, info]) => {
-      const active = activeCountries.includes(code);
-      return `<button class="filter-chip ${active ? 'active' : ''}"
-        onclick="ExplorerModule.toggleFilter('countries','${code}')"
-        style="${active ? 'background:#2B5CE6;color:#fff;border-color:#2B5CE6;' : ''}">
-        ${info.flag} ${info.name}</button>`;
-    }).join('');
+    const countryBtns = Object.entries(COUNTRY_LABELS).map(([code, info]) =>
+      chip(`${info.flag} ${info.name}`, _filters.countries.includes(code),
+        `ExplorerModule.toggleFilter('countries','${code}')`)
+    ).join('');
 
-    const diffBtns = Object.entries(DIFFICULTY_CONFIG).map(([key, cfg]) => {
-      const active = activeDiffs.includes(key);
-      return `<button class="filter-chip ${active ? 'active' : ''}"
-        onclick="ExplorerModule.toggleFilter('difficulties','${key}')"
-        style="${active ? `background:${cfg.color};color:#fff;border-color:${cfg.color};` : ''}">
-        ${key} 档</button>`;
-    }).join('');
-
-    const settingBtns = Object.entries(SETTING_LABELS).map(([key, label]) => {
-      const active = activeSettings.includes(key);
-      return `<button class="filter-chip ${active ? 'active' : ''}"
-        onclick="ExplorerModule.toggleFilter('settings','${key}')"
-        style="${active ? 'background:#2B5CE6;color:#fff;border-color:#2B5CE6;' : ''}">
-        ${label}</button>`;
-    }).join('');
+    const diffBtns = Object.entries(DIFFICULTY_CONFIG).map(([key, cfg]) =>
+      chip(`${key} 档`, _filters.difficulties.includes(key),
+        `ExplorerModule.toggleFilter('difficulties','${key}')`,
+        `background:${cfg.color};color:#fff;border-color:${cfg.color};`)
+    ).join('');
 
     const majorOptions = `<option value="">全部专业</option>` +
       Object.entries(MAJOR_GROUP_LABELS).map(([key, label]) =>
         `<option value="${key}" ${_filters.major === key ? 'selected' : ''}>${label}</option>`
       ).join('');
 
-    const budgetMax = _filters.budgetMax;
-    const budgetLabel = budgetMax >= 300 ? '不限' : `¥${budgetMax}万`;
+    const settingBtns = Object.entries(SETTING_LABELS).map(([key, label]) =>
+      chip(label, _filters.settings.includes(key), `ExplorerModule.toggleFilter('settings','${key}')`)
+    ).join('');
+
+    const typeBtns = [['public','公立'],['private','私立']].map(([key, label]) =>
+      chip(label, _filters.types.includes(key), `ExplorerModule.toggleFilter('types','${key}')`)
+    ).join('');
+
+    const ieltsBtns = [
+      [6.5, 'IELTS ≤6.5'],
+      [7,   'IELTS ≤7.0'],
+    ].map(([val, label]) =>
+      chip(label, _filters.ieltsMax === val, `ExplorerModule.setIeltsMax(${val})`)
+    ).join('');
+
+    const scholarshipBtn = chip(
+      '✦ 有国际生奖学金', _filters.scholarshipOnly,
+      'ExplorerModule.toggleScholarship()',
+      'background:#059669;color:#fff;border-color:#059669;'
+    );
+
+    const pswBtns = [
+      [24, '工签 2年+'],
+      [36, '工签 3年+'],
+    ].map(([val, label]) =>
+      chip(label, _filters.pswMin === val, `ExplorerModule.setPswMin(${val})`)
+    ).join('');
+
+    const communityBtns = [
+      ['large','中国学生多'],
+      ['medium','中国学生中'],
+      ['small','中国学生少'],
+    ].map(([key, label]) =>
+      chip(label, _filters.chineseCommunity.includes(key),
+        `ExplorerModule.toggleFilter('chineseCommunity','${key}')`)
+    ).join('');
 
     return `
 <div id="explorer-filter-panel" style="background:#fff; border-radius:12px; padding:16px; margin-bottom:12px; border:1px solid #E5E7EB;">
-  <div style="margin-bottom:12px;">
-    <div style="font-size:12px; color:#6B7280; margin-bottom:6px;">国家</div>
+
+  <div style="margin-bottom:14px;">
+    <div style="font-size:12px; color:#9CA3AF; font-weight:600; letter-spacing:.04em; margin-bottom:8px;">目标国家</div>
     <div style="display:flex; flex-wrap:wrap; gap:6px;">${countryBtns}</div>
   </div>
-  <div style="margin-bottom:12px;">
-    <div style="font-size:12px; color:#6B7280; margin-bottom:6px;">难度档位</div>
+
+  <div style="margin-bottom:14px;">
+    <div style="font-size:12px; color:#9CA3AF; font-weight:600; letter-spacing:.04em; margin-bottom:8px;">录取难度</div>
     <div style="display:flex; flex-wrap:wrap; gap:6px;">${diffBtns}</div>
   </div>
-  <div style="margin-bottom:12px;">
-    <div style="font-size:12px; color:#6B7280; margin-bottom:6px;">专业方向</div>
+
+  <div style="margin-bottom:14px;">
+    <div style="font-size:12px; color:#9CA3AF; font-weight:600; letter-spacing:.04em; margin-bottom:8px;">专业方向</div>
     <select onchange="ExplorerModule.setMajor(this.value)"
-      style="width:100%; padding:8px 10px; border:1.5px solid #E5E7EB; border-radius:8px;
+      style="width:100%; padding:9px 12px; border:1.5px solid #E5E7EB; border-radius:8px;
         font-size:14px; background:#fff; color:#1A1A2E; -webkit-appearance:none;">
       ${majorOptions}
     </select>
   </div>
-  <div style="margin-bottom:12px;">
-    <div style="font-size:12px; color:#6B7280; margin-bottom:6px;">
-      本科总预算上限：<strong id="explorer-budget-label" style="color:#1A1A2E;">${budgetLabel}</strong>
+
+  <div style="margin-bottom:14px;">
+    <div style="font-size:12px; color:#9CA3AF; font-weight:600; letter-spacing:.04em; margin-bottom:4px;">
+      本科总预算上限 <strong id="explorer-budget-label" style="color:#1A1A2E; font-size:13px;">${budgetLabel}</strong>
     </div>
     <input type="range" min="50" max="300" step="10" value="${budgetMax}"
-      oninput="ExplorerModule.setBudget(this.value)"
-      style="width:100%;">
+      oninput="ExplorerModule.setBudget(this.value)" style="width:100%; margin-top:6px;">
     <div style="display:flex; justify-content:space-between; font-size:11px; color:#9CA3AF; margin-top:2px;">
       <span>¥50万</span><span>¥150万</span><span>不限</span>
     </div>
   </div>
-  <div>
-    <div style="font-size:12px; color:#6B7280; margin-bottom:6px;">城市规模</div>
+
+  <div style="height:1px; background:#F3F4F6; margin-bottom:14px;"></div>
+
+  <div style="margin-bottom:14px;">
+    <div style="font-size:12px; color:#9CA3AF; font-weight:600; letter-spacing:.04em; margin-bottom:8px;">学校性质</div>
+    <div style="display:flex; flex-wrap:wrap; gap:6px;">${typeBtns}</div>
+  </div>
+
+  <div style="margin-bottom:14px;">
+    <div style="font-size:12px; color:#9CA3AF; font-weight:600; letter-spacing:.04em; margin-bottom:8px;">语言要求</div>
+    <div style="display:flex; flex-wrap:wrap; gap:6px;">${ieltsBtns}</div>
+  </div>
+
+  <div style="margin-bottom:14px;">
+    <div style="font-size:12px; color:#9CA3AF; font-weight:600; letter-spacing:.04em; margin-bottom:8px;">奖学金</div>
+    <div style="display:flex; flex-wrap:wrap; gap:6px;">${scholarshipBtn}</div>
+  </div>
+
+  <div style="margin-bottom:14px;">
+    <div style="font-size:12px; color:#9CA3AF; font-weight:600; letter-spacing:.04em; margin-bottom:8px;">毕业后工签</div>
+    <div style="display:flex; flex-wrap:wrap; gap:6px;">${pswBtns}</div>
+  </div>
+
+  <div style="margin-bottom:14px;">
+    <div style="font-size:12px; color:#9CA3AF; font-weight:600; letter-spacing:.04em; margin-bottom:8px;">城市规模</div>
     <div style="display:flex; flex-wrap:wrap; gap:6px;">${settingBtns}</div>
   </div>
+
+  <div style="margin-bottom:6px;">
+    <div style="font-size:12px; color:#9CA3AF; font-weight:600; letter-spacing:.04em; margin-bottom:8px;">中国学生社区</div>
+    <div style="display:flex; flex-wrap:wrap; gap:6px;">${communityBtns}</div>
+  </div>
+
   <button onclick="ExplorerModule.resetFilters()"
-    style="margin-top:14px; font-size:12px; color:#6B7280; background:none; border:none; cursor:pointer; padding:0;">
+    style="margin-top:16px; font-size:12px; color:#6B7280; background:none; border:none; cursor:pointer; padding:0;">
     重置全部筛选
   </button>
 </div>`;
@@ -614,6 +691,11 @@ const ExplorerModule = (() => {
     if (_filters.major) n++;
     if (_filters.budgetMax < 300) n++;
     if (_filters.settings.length) n++;
+    if (_filters.types.length) n++;
+    if (_filters.ieltsMax > 0) n++;
+    if (_filters.scholarshipOnly) n++;
+    if (_filters.pswMin > 0) n++;
+    if (_filters.chineseCommunity.length) n++;
     return n;
   }
 
@@ -695,8 +777,28 @@ const ExplorerModule = (() => {
     _filters.major = '';
     _filters.budgetMax = 300;
     _filters.settings.length = 0;
+    _filters.types.length = 0;
+    _filters.ieltsMax = 0;
+    _filters.scholarshipOnly = false;
+    _filters.pswMin = 0;
+    _filters.chineseCommunity.length = 0;
     const searchInput = document.getElementById('explorer-search');
     if (searchInput) searchInput.value = '';
+    render();
+  }
+
+  function setIeltsMax(val) {
+    _filters.ieltsMax = _filters.ieltsMax === val ? 0 : val;
+    render();
+  }
+
+  function toggleScholarship() {
+    _filters.scholarshipOnly = !_filters.scholarshipOnly;
+    render();
+  }
+
+  function setPswMin(val) {
+    _filters.pswMin = _filters.pswMin === val ? 0 : val;
     render();
   }
 
@@ -722,7 +824,7 @@ const ExplorerModule = (() => {
     return Utils.storage.get(COMPARE_KEY) || [];
   }
 
-  return { init, toggleFilterPanel, toggleFilter, setMajor, setBudget, setSearch, clearSearch, resetFilters, toggleCompare, getCompareList, openDetail, closeDetail, _refreshDetailBtn };
+  return { init, toggleFilterPanel, toggleFilter, setMajor, setBudget, setSearch, clearSearch, resetFilters, setIeltsMax, toggleScholarship, setPswMin, toggleCompare, getCompareList, openDetail, closeDetail, _refreshDetailBtn };
 
 })();
 
