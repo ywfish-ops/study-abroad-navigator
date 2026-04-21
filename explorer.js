@@ -70,6 +70,7 @@ const ExplorerModule = (() => {
     types: [],          // 'public' | 'private'
     ieltsMax: 0,        // 0 = 不限；6.5 = 最低 ≤6.5；7 = 最低 ≤7.0
     scholarshipOnly: false,
+    testOptional: false,   // true = 仅显示 test-optional 或 test-blind
     pswMin: 0,          // 0 = 不限；24 = 工签≥24个月；36 = ≥36个月
     chineseCommunity: [],  // 'large' | 'medium' | 'small'
   };
@@ -94,6 +95,14 @@ const ExplorerModule = (() => {
       const upper = m.toUpperCase();
       return keywords.some(kw => upper.includes(kw));
     });
+  }
+
+  /** 获取标化考试政策：'blind'（不接受）| 'optional'（可选）| 'required'（必须） */
+  function getTestPolicy(school) {
+    const tags = school.tags || [];
+    if (tags.includes('test-blind')) return 'blind';
+    if (tags.includes('test-optional')) return 'optional';
+    return 'required';
   }
 
   /**
@@ -176,6 +185,9 @@ const ExplorerModule = (() => {
       // 仅显示有奖学金
       if (_filters.scholarshipOnly && !s.scholarship_intl) return false;
 
+      // 仅显示 test-optional / test-blind
+      if (_filters.testOptional && getTestPolicy(s) === 'required') return false;
+
       // 毕业后工签最短时长
       if (_filters.pswMin > 0 && (s.post_study_work == null || s.post_study_work < _filters.pswMin)) return false;
 
@@ -231,6 +243,8 @@ const ExplorerModule = (() => {
   <div style="display:flex; align-items:center; gap:6px; margin-bottom:6px; flex-wrap:wrap;">
     ${renderCountry(school)}
     ${renderDifficultyBadge(school)}
+    ${getTestPolicy(school) === 'blind' ? '<span style="font-size:11px;padding:2px 6px;border-radius:4px;background:#F1F5F9;color:#64748B;">无需标化</span>' : ''}
+    ${getTestPolicy(school) === 'optional' ? '<span style="font-size:11px;padding:2px 6px;border-radius:4px;background:#F1F5F9;color:#64748B;">标化可选</span>' : ''}
   </div>
   <div style="margin-bottom:2px;">
     <span style="font-size:16px; font-weight:600; color:#1A1A2E;">${school.name_zh || school.name_en}</span>
@@ -289,8 +303,11 @@ const ExplorerModule = (() => {
     const acceptText = school.acceptance_rate
       ? `${(school.acceptance_rate * 100).toFixed(1)}%` + (cfg ? `（${cfg.desc}）` : '')
       : null;
-    const satText = school.sat_range ? `${school.sat_range[0]}–${school.sat_range[1]}` : null;
-    const actText = school.act_range ? `${school.act_range[0]}–${school.act_range[1]}` : null;
+    const testPolicy = getTestPolicy(school);
+    const testPolicyText = testPolicy === 'blind' ? '不接受标化成绩' : testPolicy === 'optional' ? '可选提交（非必须）' : null;
+    const satSuffix = testPolicy !== 'required' ? '（供参考）' : '';
+    const satText = school.sat_range ? `${school.sat_range[0]}–${school.sat_range[1]}${satSuffix}` : null;
+    const actText = school.act_range ? `${school.act_range[0]}–${school.act_range[1]}${satSuffix}` : null;
     const majorsText = (school.popular_majors || []).join('、') || null;
     const deadlineText = school.application_deadline_fall
       ? school.application_deadline_fall.replace('-', '月') + '日'
@@ -381,6 +398,7 @@ const ExplorerModule = (() => {
         <div style="font-size:12px; font-weight:600; color:#9CA3AF; letter-spacing:0.05em;
           margin-bottom:6px; text-transform:uppercase;">申请要求</div>
         ${detailRow('录取率', acceptText)}
+        ${testPolicyText ? detailRow('标化政策', testPolicyText) : ''}
         ${detailRow('SAT 区间', satText)}
         ${detailRow('ACT 区间', actText)}
         ${detailRow('IELTS 最低', school.ielts_min ? `${school.ielts_min} 分` : null)}
@@ -568,8 +586,11 @@ const ExplorerModule = (() => {
   </div>
 
   <div style="margin-bottom:14px;">
-    <div style="font-size:12px; color:#9CA3AF; font-weight:600; letter-spacing:.04em; margin-bottom:8px;">奖学金</div>
-    <div style="display:flex; flex-wrap:wrap; gap:6px;">${scholarshipBtn}</div>
+    <div style="font-size:12px; color:#9CA3AF; font-weight:600; letter-spacing:.04em; margin-bottom:8px;">申请条件</div>
+    <div style="display:flex; flex-wrap:wrap; gap:6px;">
+      ${scholarshipBtn}
+      ${chip('标化可选/免除', _filters.testOptional, 'ExplorerModule.toggleTestOptional()', 'background:#0369A1;color:#fff;border-color:#0369A1;')}
+    </div>
   </div>
 
   <div style="margin-bottom:14px;">
@@ -694,6 +715,7 @@ const ExplorerModule = (() => {
     if (_filters.types.length) n++;
     if (_filters.ieltsMax > 0) n++;
     if (_filters.scholarshipOnly) n++;
+    if (_filters.testOptional) n++;
     if (_filters.pswMin > 0) n++;
     if (_filters.chineseCommunity.length) n++;
     return n;
@@ -780,6 +802,7 @@ const ExplorerModule = (() => {
     _filters.types.length = 0;
     _filters.ieltsMax = 0;
     _filters.scholarshipOnly = false;
+    _filters.testOptional = false;
     _filters.pswMin = 0;
     _filters.chineseCommunity.length = 0;
     const searchInput = document.getElementById('explorer-search');
@@ -794,6 +817,11 @@ const ExplorerModule = (() => {
 
   function toggleScholarship() {
     _filters.scholarshipOnly = !_filters.scholarshipOnly;
+    render();
+  }
+
+  function toggleTestOptional() {
+    _filters.testOptional = !_filters.testOptional;
     render();
   }
 
@@ -824,7 +852,7 @@ const ExplorerModule = (() => {
     return Utils.storage.get(COMPARE_KEY) || [];
   }
 
-  return { init, toggleFilterPanel, toggleFilter, setMajor, setBudget, setSearch, clearSearch, resetFilters, setIeltsMax, toggleScholarship, setPswMin, toggleCompare, getCompareList, openDetail, closeDetail, _refreshDetailBtn };
+  return { init, toggleFilterPanel, toggleFilter, setMajor, setBudget, setSearch, clearSearch, resetFilters, setIeltsMax, toggleScholarship, toggleTestOptional, setPswMin, toggleCompare, getCompareList, openDetail, closeDetail, _refreshDetailBtn };
 
 })();
 
