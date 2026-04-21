@@ -328,6 +328,28 @@
     .tab-pane { display: none; }
     .tab-pane.active { display: block; }
 
+    /* ── 选校探索 filter chip ─────────────────── */
+    .filter-chip {
+      padding: 6px 12px;
+      border: 1.5px solid #E5E7EB;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      background: #fff;
+      color: #1A1A2E;
+      transition: background 0.12s, color 0.12s, border-color 0.12s;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 32px;
+    }
+    .explorer-card {
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+
     /* ══════════════════════════════════════════
        Finance 模块
     ══════════════════════════════════════════ */
@@ -768,6 +790,163 @@
       font-size: 14px; color: var(--text-secondary);
     }
 
+    /* ══════════════════════════════════════════
+       付费墙 样式
+    ══════════════════════════════════════════ */
+    .paywall-blur-zone {
+      filter: blur(6px);
+      pointer-events: none;
+      user-select: none;
+    }
+    .paywall-overlay {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 220px;
+      background: linear-gradient(to bottom, transparent, var(--bg-primary));
+      z-index: 100;
+      pointer-events: none;
+    }
+    .paywall-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 24px 20px;
+      margin: 8px 0 100px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.14);
+      text-align: center;
+      position: relative;
+      z-index: 101;
+    }
+    .paywall-card-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: #1A3A5C;
+      margin-bottom: 16px;
+    }
+    .paywall-value-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 18px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .paywall-value-list li {
+      font-size: 14px;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+    .paywall-price {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    .paywall-cta-btn {
+      width: 100%;
+      height: 52px;
+      background: #E8581A;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .paywall-cta-btn:active { background: #cf4e17; }
+    .paywall-sticky-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 64px;
+      background: #E8581A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      cursor: pointer;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    .paywall-sticky-bar.visible { transform: translateY(0); }
+    .paywall-sticky-bar span { color: #fff; font-size: 16px; font-weight: 600; }
+
+    /* 支付 Modal */
+    .payment-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+    }
+    .payment-modal-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 28px 24px;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+    }
+    .payment-qr-placeholder {
+      width: 160px;
+      height: 160px;
+      background: var(--bg-primary);
+      border: 1.5px dashed var(--border);
+      border-radius: 12px;
+      margin: 16px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* ══════════════════════════════════════════
+       分享面板 样式
+    ══════════════════════════════════════════ */
+    .share-sheet-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 400;
+    }
+    .share-sheet {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--bg-card);
+      border-radius: 20px 20px 0 0;
+      padding: 16px 20px calc(32px + env(safe-area-inset-bottom));
+      z-index: 401;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    .share-sheet.open { transform: translateY(0); }
+    .share-sheet-handle {
+      width: 36px;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin: 0 auto 20px;
+    }
+    .share-option-btn {
+      width: 100%;
+      height: 52px;
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+      border-radius: 12px;
+      font-size: 15px;
+      color: var(--text-primary);
+      cursor: pointer;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
     /* Toast */
     .rec-toast {
       position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
@@ -784,7 +963,11 @@
      底部 Tab 导航条
 ════════════════════════════════════════════ -->
 <nav id="tab-bar">
-  <button id="tab-btn-quiz"    class="tab-btn active" onclick="switchTab('quiz')">
+  <button id="tab-btn-explorer"    class="tab-btn active" onclick="switchTab('explorer')">
+    <span class="tab-btn-icon">🔭</span>
+    <span class="tab-btn-label">选校探索</span>
+  </button>
+  <button id="tab-btn-quiz"    class="tab-btn" onclick="switchTab('quiz')">
     <span class="tab-btn-icon">🧠</span>
     <span class="tab-btn-label">学术定位</span>
   </button>
@@ -799,9 +982,18 @@
 </nav>
 
 <!-- ════════════════════════════════════════════
+     Tab：选校探索（Explorer 模块）
+════════════════════════════════════════════ -->
+<div id="tab-explorer" class="tab-pane active">
+  <div id="explorer-content" data-filter-open="0" style="min-height:100dvh; padding-top:8px;">
+    <div style="text-align:center; padding:60px 0; color:#9CA3AF;">加载中...</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
      Tab：学术定位（Quiz 模块）
 ════════════════════════════════════════════ -->
-<div id="tab-quiz" class="tab-pane active">
+<div id="tab-quiz" class="tab-pane">
 
 <!-- ════════════════════════════════════════════
      视图 0：欢迎页
@@ -930,7 +1122,7 @@
      视图 3：结果页（占位，任务5完成）
 ════════════════════════════════════════════ -->
 <div id="view-result" class="view">
-  <div class="quiz-container" style="padding-top:32px;">
+  <div id="report-container" class="quiz-container" style="padding-top:32px; position:relative;">
 
     <p style="color:var(--text-secondary); font-size:13px; margin-bottom:8px;">你的学术画像</p>
 
@@ -975,7 +1167,7 @@
     </button>
 
     <!-- 分享/保存 -->
-    <div style="display:flex; gap:12px; margin-bottom:40px;">
+    <div id="report-actions" style="display:flex; gap:12px; margin-bottom:40px;">
       <button onclick="shareResult()" style="flex:1; height:48px; border:1.5px solid var(--accent-main); color:var(--accent-main); background:none; border-radius:8px; font-size:14px; cursor:pointer;">
         分享我的画像
       </button>
@@ -1184,6 +1376,11 @@
      Recommender Module
 ════════════════════════════════════════════ -->
 <script src="recommender.js"></script>
+
+<!-- ════════════════════════════════════════════
+     Explorer Module
+════════════════════════════════════════════ -->
+<script src="explorer.js"></script>
 
 <script>
 'use strict';
@@ -1881,10 +2078,11 @@ function renderResultPage(r) {
     </div>
   `).join('');
 
-  // 雷达图（销毁旧实例再重建，避免 canvas reuse 报错）
-  renderRadarChart(r.radarScores);
-
   showView('view-result');
+  initShareSheet();
+  initPaywall('quiz1A');
+  // 雷达图必须在 view 可见后渲染，否则 canvas 尺寸为 0
+  requestAnimationFrame(() => renderRadarChart(r.radarScores));
 }
 
 function renderRadarChart(radarScores) {
@@ -2239,6 +2437,9 @@ function switchTab(tabId) {
   const btn = document.getElementById('tab-btn-' + tabId);
   if (btn) btn.classList.add('active');
 
+  if (tabId === 'explorer') {
+    ExplorerModule.init();
+  }
   if (tabId === 'finance') {
     FinanceModule.init();
   }
@@ -2247,8 +2448,231 @@ function switchTab(tabId) {
   }
 }
 
+// ══════════════════════════════════════════════════════════════════
+// 付费墙模块
+// ══════════════════════════════════════════════════════════════════
+
+function isUnlocked(reportId) {
+  return !!localStorage.getItem('unlocked_' + reportId);
+}
+
+function unlockReport(reportId) {
+  localStorage.setItem('unlocked_' + reportId, '1');
+  document.querySelectorAll('.paywall-blur-zone').forEach(el => el.classList.remove('paywall-blur-zone'));
+  document.querySelector('.paywall-overlay')?.remove();
+  document.querySelector('.paywall-card')?.remove();
+  document.querySelector('.paywall-sticky-bar')?.remove();
+  const shareBtn = document.getElementById('share-report-btn');
+  if (shareBtn) shareBtn.style.display = '';
+  showToastGlobal('✅ 报告已解锁，随时可分享');
+}
+
+function initPaywall(reportId) {
+  // 每次进入结果页前先清理旧遮罩
+  document.querySelectorAll('.paywall-blur-zone').forEach(el => el.classList.remove('paywall-blur-zone'));
+  document.querySelector('.paywall-overlay')?.remove();
+  document.querySelector('.paywall-card')?.remove();
+  document.querySelector('.paywall-sticky-bar')?.remove();
+
+  if (isUnlocked(reportId)) {
+    const shareBtn = document.getElementById('share-report-btn');
+    if (shareBtn) shareBtn.style.display = '';
+    return;
+  }
+
+  const container = document.getElementById('report-container');
+  if (!container) return;
+
+  // 从第5个 div（index 4，即 tips 区块）起加模糊，保留画像卡片和雷达图
+  const divChildren = Array.from(container.children).filter(el => el.tagName === 'DIV');
+  divChildren.slice(4).forEach(el => el.classList.add('paywall-blur-zone'));
+
+  // 渐变遮罩
+  const overlay = document.createElement('div');
+  overlay.className = 'paywall-overlay';
+  container.appendChild(overlay);
+
+  // 付费卡片
+  const card = document.createElement('div');
+  card.className = 'paywall-card';
+  card.innerHTML = `
+    <div class="paywall-card-title">你的 Offer 对比报告已生成 ↓</div>
+    <ul class="paywall-value-list">
+      <li>📊 完整院校匹配分析 · 冲 / 稳 / 保三档详解</li>
+      <li>💡 专属申请策略 · 基于你的学术画像量身定制</li>
+      <li>🔒 一次付费 · 永久保存，多设备随时查看</li>
+    </ul>
+    <p class="paywall-price">¥199 · 一次付费，终身访问</p>
+    <button class="paywall-cta-btn" onclick="showPaymentModal('${reportId}')">立即解锁完整报告 →</button>
+  `;
+  container.appendChild(card);
+
+  // 底部固定栏（滑入动画）
+  const bar = document.createElement('div');
+  bar.className = 'paywall-sticky-bar';
+  bar.onclick = () => showPaymentModal(reportId);
+  bar.innerHTML = '<span>立即解锁完整报告 →</span>';
+  document.body.appendChild(bar);
+  requestAnimationFrame(() => requestAnimationFrame(() => bar.classList.add('visible')));
+}
+
+function showPaymentModal(reportId) {
+  if (document.getElementById('payment-modal')) return;
+  const modal = document.createElement('div');
+  modal.className = 'payment-modal-overlay';
+  modal.id = 'payment-modal';
+  modal.innerHTML = `
+    <div class="payment-modal-card">
+      <p style="font-size:17px;font-weight:600;margin-bottom:4px;">解锁完整报告</p>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:4px;">¥199 · 一次付费，终身访问</p>
+      <div class="payment-qr-placeholder">收款码占位图</div>
+      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:20px;">扫码付款后，点击下方按钮确认</p>
+      <button class="paywall-cta-btn" onclick="confirmPayment('${reportId}')">✅ 我已付款，立即解锁</button>
+      <button onclick="document.getElementById('payment-modal').remove()"
+        style="width:100%;margin-top:10px;height:44px;border:none;background:none;color:var(--text-secondary);font-size:14px;cursor:pointer;">
+        取消
+      </button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+
+function confirmPayment(reportId) {
+  document.getElementById('payment-modal')?.remove();
+  unlockReport(reportId);
+}
+
+// ══════════════════════════════════════════════════════════════════
+// 分享模块
+// ══════════════════════════════════════════════════════════════════
+
+function generateShareId() {
+  const chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefghjkmnpqrstwxyz23456789';
+  return Array.from({ length: 6 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+}
+
+function generateShareLink(shareId, userId) {
+  const base = window.location.origin + window.location.pathname;
+  const params = new URLSearchParams({
+    ref: userId || 'user',
+    share: shareId,
+    utm_source: 'share',
+    utm_medium: 'link',
+    utm_campaign: 'quiz1A',
+  });
+  return `${base}?${params.toString()}`;
+}
+
+function saveShareSnapshot(shareId, summary) {
+  try {
+    localStorage.setItem('share_' + shareId, JSON.stringify({ ...summary, _ts: Date.now() }));
+  } catch (_) {}
+}
+
+function initShareSheet() {
+  const actions = document.getElementById('report-actions');
+  if (!actions || document.getElementById('share-report-btn')) return;
+  const btn = document.createElement('button');
+  btn.id = 'share-report-btn';
+  btn.style.cssText = 'flex:1;height:48px;border:1.5px solid #E8581A;color:#E8581A;background:none;border-radius:8px;font-size:14px;cursor:pointer;display:none;';
+  btn.textContent = '分享报告';
+  btn.onclick = openShareSheet;
+  actions.prepend(btn);
+}
+
+function openShareSheet() {
+  if (document.getElementById('share-sheet')) return;
+  const overlay = document.createElement('div');
+  overlay.className = 'share-sheet-overlay';
+  overlay.id = 'share-sheet-overlay';
+  overlay.onclick = closeShareSheet;
+  const sheet = document.createElement('div');
+  sheet.className = 'share-sheet';
+  sheet.id = 'share-sheet';
+  sheet.innerHTML = `
+    <div class="share-sheet-handle"></div>
+    <p style="font-size:16px;font-weight:600;margin-bottom:16px;color:var(--text-primary);">分享你的留学画像</p>
+    <button class="share-option-btn" onclick="copyShareLink()">🔗 复制分享链接</button>
+    <button class="share-option-btn" onclick="generateShareImage()">🖼️ 保存分享图片</button>
+    <button class="share-option-btn" onclick="copyShareText()">📝 复制分享文案</button>
+    <button onclick="closeShareSheet()" style="width:100%;height:44px;border:none;background:none;color:var(--text-secondary);font-size:14px;cursor:pointer;margin-top:4px;">取消</button>
+  `;
+  document.body.appendChild(overlay);
+  document.body.appendChild(sheet);
+  requestAnimationFrame(() => sheet.classList.add('open'));
+}
+
+function closeShareSheet() {
+  const sheet = document.getElementById('share-sheet');
+  const overlay = document.getElementById('share-sheet-overlay');
+  if (sheet) {
+    sheet.classList.remove('open');
+    setTimeout(() => { sheet.remove(); overlay?.remove(); }, 300);
+  }
+}
+
+function copyShareLink() {
+  const shareId = generateShareId();
+  const userId = 'u' + Date.now().toString(36);
+  const link = generateShareLink(shareId, userId);
+  if (state?.result) {
+    saveShareSnapshot(shareId, {
+      archetype: state.result.archetypeResult?.primary,
+      label: state.result.archetypeResult?.primaryLabel,
+    });
+  }
+  navigator.clipboard.writeText(link).then(() => showToastGlobal('✅ 已复制分享链接'));
+  closeShareSheet();
+}
+
+function generateShareImage() {
+  const target = document.getElementById('share-card-content') || document.getElementById('result-card');
+  if (!target || typeof html2canvas === 'undefined') {
+    showToastGlobal('截图功能暂不可用');
+    return;
+  }
+  closeShareSheet();
+  html2canvas(target, { scale: 2, useCORS: true, backgroundColor: null }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = '留学决策报告_分享.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    showToastGlobal('✅ 图片已保存');
+  });
+}
+
+function copyShareText() {
+  const arch = state?.result?.archetypeResult;
+  const label = arch?.primaryLabel || '留学决策型';
+  const text = `我在「全球留学决策导航」完成了学术定位测试，画像类型是「${label}」。快来测测你的留学定位！\n${window.location.origin + window.location.pathname}`;
+  navigator.clipboard.writeText(text).then(() => showToastGlobal('✅ 已复制分享文案'));
+  closeShareSheet();
+}
+
+function handleIncomingShare() {
+  const params = new URLSearchParams(window.location.search);
+  const shareId = params.get('share');
+  if (!shareId) return;
+  try {
+    const raw = localStorage.getItem('share_' + shareId);
+    if (!raw) return;
+    const snap = JSON.parse(raw);
+    showToastGlobal(`好友分享了「${snap.label || '留学画像'}」，开始你的测试 →`);
+  } catch (_) {}
+}
+
+function showToastGlobal(msg) {
+  const t = document.createElement('div');
+  t.className = 'rec-toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2800);
+}
+
 // ── 启动 ─────────────────────────────────────────────────────────────────────
+ExplorerModule.init(); // 选校探索是默认首页，优先初始化
 init();
+handleIncomingShare();
 </script>
 
 </body>
