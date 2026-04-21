@@ -112,7 +112,8 @@ const ExplorerModule = (() => {
         const q = _filters.search.toLowerCase();
         const hit = (s.name_zh || '').includes(_filters.search)
           || (s.name_en || '').toLowerCase().includes(q)
-          || (s.city || '').toLowerCase().includes(q);
+          || (s.city || '').toLowerCase().includes(q)
+          || (s.id || '').toLowerCase().includes(q);
         if (!hit) return false;
       }
 
