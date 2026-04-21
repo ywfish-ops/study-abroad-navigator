@@ -176,8 +176,14 @@ const ExplorerModule = (() => {
       // 城市规模
       if (_filters.settings.length && !_filters.settings.includes(s.campus_setting)) return false;
 
-      // 学校性质
-      if (_filters.types.length && !_filters.types.includes(s.type)) return false;
+      // 学校性质（public/private 匹配 type 字段；lac 匹配 liberal-arts tag）
+      if (_filters.types.length) {
+        const tags = s.tags || [];
+        const isLac = tags.includes('liberal-arts') || tags.includes('liberal-arts-focus');
+        const typeMatch = _filters.types.includes(s.type);
+        const lacMatch = _filters.types.includes('lac') && isLac;
+        if (!typeMatch && !lacMatch) return false;
+      }
 
       // IELTS 要求上限
       if (_filters.ieltsMax > 0 && s.ielts_min != null && s.ielts_min > _filters.ieltsMax) return false;
@@ -294,6 +300,11 @@ const ExplorerModule = (() => {
     const budgetText = engWales
       ? (calcTotalCNY(school, 3) ? `BSc ¥${calcTotalCNY(school, 3)}万 / MSci ¥${calcTotalCNY(school, 4)}万` : null)
       : (wan ? `¥${wan}万 CNY` : null);
+    const schoolTags = school.tags || [];
+    const isLac = schoolTags.includes('liberal-arts') || schoolTags.includes('liberal-arts-focus');
+    const schoolTypeText = isLac
+      ? (school.type === 'public' ? '公立文理学院 (LAC)' : '私立文理学院 (LAC)')
+      : (school.type === 'public' ? '公立大学' : '私立大学');
     const tuitionText = school.tuition_intl_annual
       ? `${school.tuition_currency} ${school.tuition_intl_annual.toLocaleString()} / 年`
       : null;
@@ -419,6 +430,7 @@ const ExplorerModule = (() => {
       <div style="margin-bottom:24px;">
         <div style="font-size:12px; font-weight:600; color:#9CA3AF; letter-spacing:0.05em;
           margin-bottom:6px; text-transform:uppercase;">其他信息</div>
+        ${detailRow('学校性质', schoolTypeText)}
         ${detailRow('校园环境', settingMap[school.campus_setting] || null)}
         ${detailRow('中国学生社区', school.chinese_student_community === 'large' ? '多' : school.chinese_student_community === 'medium' ? '中等' : school.chinese_student_community === 'small' ? '少' : null)}
         ${detailRow('奖学金', scholarshipText)}
@@ -507,7 +519,7 @@ const ExplorerModule = (() => {
       chip(label, _filters.settings.includes(key), `ExplorerModule.toggleFilter('settings','${key}')`)
     ).join('');
 
-    const typeBtns = [['public','公立'],['private','私立']].map(([key, label]) =>
+    const typeBtns = [['public','公立'],['private','私立'],['lac','文理学院 LAC']].map(([key, label]) =>
       chip(label, _filters.types.includes(key), `ExplorerModule.toggleFilter('types','${key}')`)
     ).join('');
 
