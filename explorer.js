@@ -500,7 +500,7 @@ const ExplorerModule = (() => {
     <input id="explorer-search" type="text" placeholder="搜索学校名称或城市..."
       value="${_filters.search.replace(/"/g, '&quot;')}"
       oninput="ExplorerModule.setSearch(this.value)"
-      style="width:100%; padding:10px 14px 10px 38px; border:1.5px solid #E5E7EB;
+      style="width:100%; padding:10px ${_filters.search ? '36px' : '14px'} 10px 38px; border:1.5px solid #E5E7EB;
         border-radius:10px; font-size:14px; background:#fff; color:#1A1A2E;
         -webkit-appearance:none; outline:none;">
     <svg style="position:absolute; left:12px; top:50%; transform:translateY(-50%); pointer-events:none;"
@@ -508,6 +508,12 @@ const ExplorerModule = (() => {
       <circle cx="6.5" cy="6.5" r="5" stroke="#9CA3AF" stroke-width="1.5"/>
       <line x1="10.5" y1="10.5" x2="14" y2="14" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/>
     </svg>
+    <button id="explorer-search-clear" onclick="ExplorerModule.clearSearch()"
+      style="position:absolute; right:10px; top:50%; transform:translateY(-50%);
+        width:20px; height:20px; border-radius:50%; border:none; background:#D1D5DB;
+        cursor:pointer; align-items:center; justify-content:center;
+        font-size:12px; color:#6B7280; line-height:1; padding:0;
+        display:${_filters.search ? 'flex' : 'none'};">✕</button>
   </div>
 
   <!-- 筛选按钮 -->
@@ -622,7 +628,23 @@ const ExplorerModule = (() => {
 
   function setSearch(value) {
     _filters.search = value;
+    // 同步清空按钮显示（局部更新，不重建搜索框）
+    const clearBtn = document.getElementById('explorer-search-clear');
+    const input = document.getElementById('explorer-search');
+    if (clearBtn) clearBtn.style.display = value ? 'flex' : 'none';
+    if (input) input.style.paddingRight = value ? '36px' : '14px';
     renderCardListOnly();
+  }
+
+  function clearSearch() {
+    _filters.search = '';
+    const input = document.getElementById('explorer-search');
+    if (input) { input.value = ''; input.focus(); }
+    renderCardListOnly();
+    // 隐藏清空按钮
+    const clearBtn = document.getElementById('explorer-search-clear');
+    if (clearBtn) clearBtn.style.display = 'none';
+    if (input) input.style.paddingRight = '14px';
   }
 
   function resetFilters() {
@@ -659,7 +681,7 @@ const ExplorerModule = (() => {
     return Utils.storage.get(COMPARE_KEY) || [];
   }
 
-  return { init, toggleFilterPanel, toggleFilter, setMajor, setBudget, setSearch, resetFilters, toggleCompare, getCompareList, openDetail, closeDetail, _refreshDetailBtn };
+  return { init, toggleFilterPanel, toggleFilter, setMajor, setBudget, setSearch, clearSearch, resetFilters, toggleCompare, getCompareList, openDetail, closeDetail, _refreshDetailBtn };
 
 })();
 
