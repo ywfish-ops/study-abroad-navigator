@@ -4594,8 +4594,7 @@
       "special_notes": "Open Curriculum; Ivy League; no required courses",
       "tags": [
         "ivy-league",
-        "open-curriculum",
-        "liberal-arts"
+        "open-curriculum"
       ],
       "data_confidence": "medium",
       "verified": true,
@@ -4760,7 +4759,6 @@
       "special_notes": "Need-blind国际生；常春藤最小规模；D-Plan弹性学期制。",
       "tags": [
         "ivy-league",
-        "liberal-arts",
         "rural"
       ],
       "data_confidence": "medium",
@@ -5095,7 +5093,6 @@
       "special_notes": "Top HBCU; strong liberal arts and pre-med programs; located in Washington DC",
       "tags": [
         "hbcu",
-        "liberal-arts",
         "pre-med"
       ],
       "data_confidence": "medium",
@@ -5374,7 +5371,6 @@
       "special_notes": "Catholic university; strong alumni network; study abroad programs worldwide",
       "tags": [
         "catholic-university",
-        "liberal-arts",
         "business"
       ],
       "data_confidence": "medium",
@@ -6162,7 +6158,6 @@
       "special_notes": "Test-optional; 10:1 student-faculty ratio; 99% classes <50 students",
       "tags": [
         "suburban-campus",
-        "liberal-arts-focus",
         "small-community"
       ],
       "data_confidence": "medium",

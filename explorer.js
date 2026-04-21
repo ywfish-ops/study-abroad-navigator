@@ -239,8 +239,9 @@ const ExplorerModule = (() => {
   function renderCard(school) {
     const compareList = Utils.storage.get(COMPARE_KEY) || [];
     const inCompare = compareList.includes(school.id);
+    const cardIsLac = (school.tags || []).includes('liberal-arts') || (school.tags || []).includes('liberal-arts-focus');
     const rankText = school.country === 'US'
-      ? (school.usnews_rank_2026 ? `US News #${school.usnews_rank_2026}` : (school.qs_rank_2025 ? `QS #${school.qs_rank_2025}` : ''))
+      ? (school.usnews_rank_2026 ? `US News ${cardIsLac ? 'LAC' : ''} #${school.usnews_rank_2026}`.trim() : (school.qs_rank_2025 ? `QS #${school.qs_rank_2025}` : ''))
       : (school.qs_rank_2025 ? `QS #${school.qs_rank_2025}` : '');
 
     return `
@@ -378,7 +379,7 @@ const ExplorerModule = (() => {
         ${school.usnews_rank_2026 ? `
         <div style="background:#F8F7F4; border-radius:10px; padding:12px; text-align:center;">
           <div style="font-size:20px; font-weight:700; color:#1A1A2E;">#${school.usnews_rank_2026}</div>
-          <div style="font-size:11px; color:#6B7280; margin-top:2px;">US News 2026</div>
+          <div style="font-size:11px; color:#6B7280; margin-top:2px;">${isLac ? 'US News LAC 2026' : 'US News 2026'}</div>
         </div>` : ''}
         ${wan || engWales ? `
         <div style="background:#FEF3C7; border-radius:10px; padding:12px; text-align:center;">
