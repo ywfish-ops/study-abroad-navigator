@@ -100,9 +100,26 @@ const FinanceModule = (() => {
 
   // ─── 初始化 ─────────────────────────────────────────────────────────────────
 
+  /** 消费 explorer 传入的对比列表，合并到已选学校（最多3所），消费后清空 */
+  function _consumeExplorerCompare() {
+    const COMPARE_KEY = 'gs_explorer_compare_v1';
+    const ids = Utils.storage.get(COMPARE_KEY);
+    if (!ids?.length) return;
+    Utils.storage.remove(COMPARE_KEY);
+
+    const existing = new Set(state.selectedSchools.map(s => s.id));
+    for (const id of ids) {
+      if (state.selectedSchools.length >= 3) break;
+      if (existing.has(id)) continue;
+      const school = state.allSchools.find(s => s.id === id);
+      if (school) { state.selectedSchools.push(school); existing.add(id); }
+    }
+  }
+
   async function init() {
     if (state.inited) {
-      // 已初始化则只刷新列表（可能有新数据）
+      // 已初始化：检查 explorer 是否传入了新的对比学校
+      if (state.allSchools.length) _consumeExplorerCompare();
       renderSchoolList();
       renderSelectedChips();
       return;
@@ -122,6 +139,9 @@ const FinanceModule = (() => {
         .map(id => state.allSchools.find(s => s.id === id))
         .filter(Boolean);
     }
+
+    // 合并 explorer 传入的对比学校
+    _consumeExplorerCompare();
 
     renderCountryFilter();
     renderSchoolList();
