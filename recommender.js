@@ -34,9 +34,9 @@ const RecommenderModule = (() => {
 
   /** 梯队配置 */
   const TIER_CONFIG = {
-    safe:   { label: '保', className: 'tier-safe',   order: 0 },
+    reach:  { label: '冲', className: 'tier-reach',   order: 0 },
     target: { label: '稳', className: 'tier-target',  order: 1 },
-    reach:  { label: '冲', className: 'tier-reach',   order: 2 },
+    safe:   { label: '保', className: 'tier-safe',   order: 2 },
   };
 
   // ── 全局状态 ─────────────────────────────────────────────────────────────
@@ -250,10 +250,22 @@ const RecommenderModule = (() => {
     return Math.min(99, Math.round(academic + major + priority + ec + lang));
   }
 
-  /** 梯队判定 */
-  function getTier(score) {
-    if (score >= 72) return 'safe';
-    if (score >= 52) return 'target';
+  /**
+   * 录取可能性分（max 55）：仅用于冲稳保判定，与排名偏好/专业匹配无关。
+   * academic(0-40) + ec(0-10) + lang(0-5)
+   *
+   * 判定阈值：
+   *   ≥ 45 → 保（学生成绩明显超过要求）
+   *   ≥ 32 → 稳（成绩在录取区间内）
+   *   <  32 → 冲（成绩低于要求，有挑战）
+   */
+  function calcAdmitScore(school, profile) {
+    return calcAcademic(school, profile) + calcEC(school, profile) + calcLang(school, profile);
+  }
+
+  function getTier(admitScore) {
+    if (admitScore >= 45) return 'safe';
+    if (admitScore >= 32) return 'target';
     return 'reach';
   }
 
@@ -313,12 +325,13 @@ const RecommenderModule = (() => {
     const results = [];
     for (const school of state.schools) {
       if (!isEligible(school, state.profile)) continue;
+      const admitScore = calcAdmitScore(school, state.profile);
       const matchScore = calcMatchScore(school, state.profile);
-      const tier = getTier(matchScore);
-      results.push({ school, matchScore, tier });
+      const tier = getTier(admitScore);
+      results.push({ school, matchScore, admitScore, tier });
     }
-    // 排序：先梯队（safe→target→reach），同梯队内按分数降序
-    const TIER_ORDER = { safe: 0, target: 1, reach: 2 };
+    // 排序：冲 → 稳 → 保；同梯队内按综合匹配分降序
+    const TIER_ORDER = { reach: 0, target: 1, safe: 2 };
     results.sort((a, b) =>
       TIER_ORDER[a.tier] - TIER_ORDER[b.tier] || b.matchScore - a.matchScore
     );
