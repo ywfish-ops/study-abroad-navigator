@@ -2681,6 +2681,26 @@ function showToastGlobal(msg) {
 ExplorerModule.init(); // 选校探索是默认首页，优先初始化
 init();
 handleIncomingShare();
+
+// ── 键盘弹出时隐藏底部 Tab Bar（iOS visualViewport）─────────────────────────
+(function () {
+  if (!window.visualViewport) return;
+  const tabBar = document.getElementById('tab-bar');
+  let keyboardOpen = false;
+  const THRESHOLD = 120; // px，低于此值判定为键盘弹出
+
+  window.visualViewport.addEventListener('resize', () => {
+    const diff = window.innerHeight - window.visualViewport.height;
+    if (diff > THRESHOLD && !keyboardOpen) {
+      keyboardOpen = true;
+      tabBar.style.transform = 'translateY(100%)';
+      tabBar.style.transition = 'transform 0.2s ease';
+    } else if (diff <= THRESHOLD && keyboardOpen) {
+      keyboardOpen = false;
+      tabBar.style.transform = '';
+    }
+  });
+})();
 </script>
 
 </body>
