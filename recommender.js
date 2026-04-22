@@ -32,6 +32,41 @@ const RecommenderModule = (() => {
   /** 国家旗帜 */
   const COUNTRY_FLAG = { US: '🇺🇸', GB: '🇬🇧', CA: '🇨🇦', AU: '🇦🇺', SG: '🇸🇬', HK: '🇭🇰' };
 
+  /**
+   * 竞赛列表：tier 4=国际奥林匹克 3=顶尖美国/国际 2=全国顶尖 1=省级/入围
+   * hasMedal=true 时需要选金/银/铜/荣誉，否则入围即为成就
+   */
+  const COMP_LIST = [
+    { key: 'imo',         label: 'IMO 国际数学奥林匹克',         tier: 4, hasMedal: true },
+    { key: 'ipho',        label: 'IPhO 国际物理奥林匹克',        tier: 4, hasMedal: true },
+    { key: 'icho',        label: 'IChO 国际化学奥林匹克',        tier: 4, hasMedal: true },
+    { key: 'ibo',         label: 'IBO 国际生物奥林匹克',         tier: 4, hasMedal: true },
+    { key: 'ioi',         label: 'IOI 国际信息学奥林匹克',       tier: 4, hasMedal: true },
+    { key: 'ieo',         label: 'IEO 国际经济学奥林匹克',       tier: 4, hasMedal: true },
+    { key: 'usamo',       label: 'USAMO / USAJMO（入围即顶）',   tier: 3, hasMedal: false },
+    { key: 'isef_gd',     label: 'Regeneron ISEF 大奖',          tier: 3, hasMedal: true },
+    { key: 'sts_fin',     label: 'Regeneron STS Finalist',       tier: 3, hasMedal: false },
+    { key: 'aime',        label: 'AIME 晋级',                    tier: 2, hasMedal: false },
+    { key: 'usaco_plat',  label: 'USACO Platinum',               tier: 2, hasMedal: false },
+    { key: 'usaco_gold',  label: 'USACO Gold',                   tier: 2, hasMedal: false },
+    { key: 'cn_natl_1',   label: '全国联赛 / 学科竞赛一等奖',   tier: 2, hasMedal: false },
+    { key: 'usaco_silver',label: 'USACO Silver',                 tier: 1, hasMedal: false },
+    { key: 'amc_hr',      label: 'AMC 12 Honor Roll / 高分',    tier: 1, hasMedal: false },
+    { key: 'cn_natl_2',   label: '全国联赛 / 学科竞赛二等奖',   tier: 1, hasMedal: false },
+    { key: 'cn_prov_1',   label: '省级联赛一等奖',               tier: 1, hasMedal: false },
+  ];
+
+  /** 根据竞赛+奖项计算学术强度加成（0–0.20） */
+  function calcCompAdj(competition) {
+    if (!competition?.comp) return 0;
+    const info = COMP_LIST.find(c => c.key === competition.comp);
+    if (!info) return 0;
+    const tierBase = [0, 0.05, 0.10, 0.15, 0.20][info.tier] ?? 0;
+    if (!info.hasMedal) return tierBase;
+    const medalW = { gold: 1.0, silver: 0.7, bronze: 0.45, honor: 0.2 }[competition.medal] ?? 0;
+    return tierBase * medalW;
+  }
+
   /** 梯队配置 */
   const TIER_CONFIG = {
     reach:  { label: '冲', className: 'tier-reach',   order: 0 },
@@ -60,9 +95,11 @@ const RecommenderModule = (() => {
       budget_usd: '30–50k',
       priority: 'ranking',
       scholarship_only: false,
-      test_optional_apply: false,   // AP学生是否以免标化方式申请
-      competition_award: 'none',    // 竞赛奖项: 'none' | 'national' | 'intl'
-      research_exp: 'none',         // 研究经历: 'none' | 'basic' | 'strong'
+      test_optional_apply: false,          // 以免标化方式申请（不提交 SAT/ACT）
+      competition: { comp: '', medal: '' },// 竞赛奖项
+      research_exp: 'none',               // 研究经历: 'none' | 'basic' | 'strong'
+      leadership: 'none',                 // 校内任职: 'none' | 'officer' | 'founder'
+      community_service: 'none',          // 公益活动: 'none' | 'regular' | 'impact'
     },
     results: null,       // null=未计算; []=无结果; [...]=有结果
   };
@@ -155,12 +192,13 @@ const RecommenderModule = (() => {
     const { curriculum, score_ap, score_ap_avg, score_alevel, score_ib, gpa_us } = profile;
     let base = 0;
 
+    const schoolIsTestOpt = (school.tags || []).includes('test-optional');
+
     if (curriculum === 'ap') {
       if (profile.test_optional_apply) {
-        // 免标化申请：基础分来自 GPA，不比较 SAT；test-optional 学校额外加分
+        // 免标化申请：基础分来自 GPA，test-optional 学校额外加分，否则轻微扣分
         const gpaForBase = gpa_us || 3.5;
         const gpaBase = gpaForBase >= 3.9 ? 30 : gpaForBase >= 3.7 ? 24 : gpaForBase >= 3.5 ? 18 : 12;
-        const schoolIsTestOpt = (school.tags || []).includes('test-optional');
         base = schoolIsTestOpt ? gpaBase + 6 : gpaBase - 4;
       } else if (school.sat_range) {
         const avgMap = { '3': 3, '4': 4, '5': 5 };
@@ -188,13 +226,19 @@ const RecommenderModule = (() => {
       }
     } else { // ib
       const ib = score_ib || 30;
-      const rate = school.acceptance_rate;
-      if (ib >= 38) {
-        base = rate <= 0.15 ? 10 : rate <= 0.30 ? 28 : 38;
-      } else if (ib >= 32) {
-        base = rate <= 0.25 ? 28 : rate <= 0.50 ? 33 : 38;
+      if (profile.test_optional_apply) {
+        // 免标化：基础分来自 IB 分数，test-optional 学校额外加分
+        const ibBase = ib >= 40 ? 36 : ib >= 37 ? 30 : ib >= 34 ? 24 : ib >= 31 ? 18 : 12;
+        base = schoolIsTestOpt ? ibBase + 6 : ibBase - 4;
       } else {
-        base = rate <= 0.50 ? 20 : 38;
+        const rate = school.acceptance_rate;
+        if (ib >= 38) {
+          base = rate <= 0.15 ? 10 : rate <= 0.30 ? 28 : 38;
+        } else if (ib >= 32) {
+          base = rate <= 0.25 ? 28 : rate <= 0.50 ? 33 : 38;
+        } else {
+          base = rate <= 0.50 ? 20 : 38;
+        }
       }
     }
 
@@ -234,10 +278,11 @@ const RecommenderModule = (() => {
     const ecMap = { strong: 10, good: 7, basic: 4 };
     const base = ecMap[profile.ec_level] ?? 4;
     const penalty = (profile.ec_level !== 'strong' && (school.acceptance_rate ?? 1) < 0.15) ? -3 : 0;
-    // 竞赛直接拉高 EC 天花板：国际级相当于降维打击
-    const compBonus = profile.competition_award === 'intl' ? 3
-      : profile.competition_award === 'national' ? 1 : 0;
-    return Math.max(0, Math.min(10, base + penalty + compBonus));
+    const adj = calcCompAdj(profile.competition);
+    const compBonus  = adj >= 0.15 ? 3 : adj >= 0.10 ? 2 : adj >= 0.05 ? 1 : 0;
+    const leadBonus  = profile.leadership === 'founder' ? 1 : 0;
+    const csBonus    = profile.community_service === 'impact' ? 1 : 0;
+    return Math.max(0, Math.min(10, base + penalty + compBonus + leadBonus + csBonus));
   }
 
   // ── 算法：语言舒适度分（5分） ────────────────────────────────────────────
@@ -288,14 +333,12 @@ const RecommenderModule = (() => {
     const gpa    = profile.gpa_us || 3.5;
     const gpaAdj = gpa >= 3.9 ? 0.08 : gpa >= 3.7 ? 0.04 : gpa >= 3.0 ? 0 : -0.08;
     const ecAdj  = profile.ec_level === 'strong' ? 0.05 : profile.ec_level === 'basic' ? -0.05 : 0;
-    // 竞赛加成：国际级奖牌是顶校真正看重的硬指标
-    const compAdj = profile.competition_award === 'intl' ? 0.15
-      : profile.competition_award === 'national' ? 0.07 : 0;
-    // 研究经历加成
-    const resAdj = profile.research_exp === 'strong' ? 0.06
-      : profile.research_exp === 'basic' ? 0.02 : 0;
+    const compAdj   = calcCompAdj(profile.competition);
+    const resAdj    = profile.research_exp === 'strong' ? 0.06 : profile.research_exp === 'basic' ? 0.02 : 0;
+    const leadAdj   = profile.leadership === 'founder' ? 0.05 : profile.leadership === 'officer' ? 0.02 : 0;
+    const csAdj     = profile.community_service === 'impact' ? 0.03 : profile.community_service === 'regular' ? 0.01 : 0;
 
-    return Math.max(0, Math.min(100, (pct + gpaAdj + ecAdj + compAdj + resAdj) * 100));
+    return Math.max(0, Math.min(100, (pct + gpaAdj + ecAdj + compAdj + resAdj + leadAdj + csAdj) * 100));
   }
 
   /**
@@ -523,14 +566,6 @@ const RecommenderModule = (() => {
                   `).join('')}
                 </div>
               </div>
-              <div class="rec-field-group">
-                <label class="rec-checkbox-label">
-                  <input type="checkbox" id="rec-test-optional"
-                    ${state.profile.test_optional_apply ? 'checked' : ''}
-                    onchange="RecommenderModule._updateProfile({test_optional_apply: this.checked})">
-                  以免标化方式申请（不提交 SAT / ACT 成绩）
-                </label>
-              </div>
             </div>
 
             <!-- A-Level 字段 -->
@@ -602,14 +637,14 @@ const RecommenderModule = (() => {
               </div>
             ` : ''}
 
-            <!-- 课外活动 -->
+            <!-- 课外活动整体水平 -->
             <div class="rec-field-group">
-              <div class="rec-label">课外活动水平</div>
+              <div class="rec-label">课外活动整体水平</div>
               <div class="rec-chip-group rec-chip-group--col">
                 ${[
-                  { v: 'strong', l: '强势', sub: '国际竞赛 / 科研 / 创业' },
-                  { v: 'good',   l: '良好', sub: '省级 / 校级荣誉' },
-                  { v: 'basic',  l: '一般', sub: '普通参与' },
+                  { v: 'strong', l: '强势', sub: '多项亮眼成就，有独特故事线' },
+                  { v: 'good',   l: '良好', sub: '参与多样，有若干荣誉' },
+                  { v: 'basic',  l: '一般', sub: '普通参与，无突出亮点' },
                 ].map(({ v, l, sub }) => `
                   <button type="button"
                     class="rec-chip rec-chip--row${state.profile.ec_level === v ? ' active' : ''}"
@@ -623,30 +658,63 @@ const RecommenderModule = (() => {
 
             <!-- 竞赛奖项 -->
             <div class="rec-field-group">
-              <div class="rec-label">竞赛奖项 <span class="rec-label-hint">（影响冲稳保判定）</span></div>
-              <div class="rec-chip-group rec-chip-group--col">
-                ${[
-                  { v: 'none',     l: '无',     sub: '未参加或未获奖' },
-                  { v: 'national', l: '全国级', sub: 'AIME / USACO Gold+ / 全国一等奖等' },
-                  { v: 'intl',     l: '国际级', sub: 'IMO / IPhO / IOI / USAMO 奖牌等' },
-                ].map(({ v, l, sub }) => `
-                  <button type="button"
-                    class="rec-chip rec-chip--row${state.profile.competition_award === v ? ' active' : ''}"
-                    onclick="RecommenderModule._updateProfile({competition_award: '${v}'})">
-                    <span class="rec-chip-main">${l}</span>
-                    <span class="rec-chip-sub">${sub}</span>
-                  </button>
-                `).join('')}
-              </div>
+              <div class="rec-label">竞赛奖项 <span class="rec-label-hint">（直接影响冲刺线）</span></div>
+              <select class="rec-select" onchange="RecommenderModule._setComp(this.value)">
+                <option value="">— 无竞赛奖项 —</option>
+                <optgroup label="★★★★ 国际奥林匹克">
+                  ${COMP_LIST.filter(c => c.tier === 4).map(c =>
+                    `<option value="${c.key}" ${state.profile.competition.comp === c.key ? 'selected' : ''}>${c.label}</option>`
+                  ).join('')}
+                </optgroup>
+                <optgroup label="★★★ 顶尖赛事">
+                  ${COMP_LIST.filter(c => c.tier === 3).map(c =>
+                    `<option value="${c.key}" ${state.profile.competition.comp === c.key ? 'selected' : ''}>${c.label}</option>`
+                  ).join('')}
+                </optgroup>
+                <optgroup label="★★ 全国顶尖">
+                  ${COMP_LIST.filter(c => c.tier === 2).map(c =>
+                    `<option value="${c.key}" ${state.profile.competition.comp === c.key ? 'selected' : ''}>${c.label}</option>`
+                  ).join('')}
+                </optgroup>
+                <optgroup label="★ 省级 / 入围">
+                  ${COMP_LIST.filter(c => c.tier === 1).map(c =>
+                    `<option value="${c.key}" ${state.profile.competition.comp === c.key ? 'selected' : ''}>${c.label}</option>`
+                  ).join('')}
+                </optgroup>
+              </select>
+              ${(() => {
+                const info = COMP_LIST.find(c => c.key === state.profile.competition.comp);
+                if (!info) return '';
+                const adj = calcCompAdj(state.profile.competition);
+                const pts = Math.round(adj * 100);
+                const medalHtml = info.hasMedal ? `
+                  <div class="rec-chip-group" style="margin-top:8px;">
+                    ${[
+                      { v: 'gold',   l: '金牌 / 一等' },
+                      { v: 'silver', l: '银牌 / 二等' },
+                      { v: 'bronze', l: '铜牌 / 三等' },
+                      { v: 'honor',  l: '荣誉奖' },
+                    ].map(({ v, l }) => `
+                      <button type="button"
+                        class="rec-chip${state.profile.competition.medal === v ? ' active' : ''}"
+                        onclick="RecommenderModule._setCompMedal('${v}')">
+                        ${l}
+                      </button>
+                    `).join('')}
+                  </div>` : '';
+                return medalHtml + `<div style="font-size:11px;color:#6B7280;margin-top:6px;">
+                  学术强度加成：+${pts} 分（满分100）
+                </div>`;
+              })()}
             </div>
 
-            <!-- 研究经历 -->
+            <!-- 科研经历 -->
             <div class="rec-field-group">
-              <div class="rec-label">研究经历</div>
+              <div class="rec-label">科研经历</div>
               <div class="rec-chip-group rec-chip-group--col">
                 ${[
-                  { v: 'none',   l: '无',   sub: '未参与正式研究' },
-                  { v: 'basic',  l: '基础', sub: '夏校 / 实验室助理 / 课题组参与' },
+                  { v: 'none',   l: '无',   sub: '未参与正式科研' },
+                  { v: 'basic',  l: '基础', sub: '夏校项目 / 实验室助理 / 课题组参与' },
                   { v: 'strong', l: '强势', sub: '有发表论文 / 专利 / 机构认证成果' },
                 ].map(({ v, l, sub }) => `
                   <button type="button"
@@ -657,6 +725,54 @@ const RecommenderModule = (() => {
                   </button>
                 `).join('')}
               </div>
+            </div>
+
+            <!-- 校内任职 -->
+            <div class="rec-field-group">
+              <div class="rec-label">校内任职 / 领导力</div>
+              <div class="rec-chip-group rec-chip-group--col">
+                ${[
+                  { v: 'none',    l: '无',     sub: '无任职或普通成员' },
+                  { v: 'officer', l: '干部',   sub: '班委 / 社团干部 / 学生会成员' },
+                  { v: 'founder', l: '领袖',   sub: '学生会主席 / 社团创始人 / 市级以上代表' },
+                ].map(({ v, l, sub }) => `
+                  <button type="button"
+                    class="rec-chip rec-chip--row${state.profile.leadership === v ? ' active' : ''}"
+                    onclick="RecommenderModule._updateProfile({leadership: '${v}'})">
+                    <span class="rec-chip-main">${l}</span>
+                    <span class="rec-chip-sub">${sub}</span>
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- 公益服务 -->
+            <div class="rec-field-group">
+              <div class="rec-label">公益 / 社区服务</div>
+              <div class="rec-chip-group rec-chip-group--col">
+                ${[
+                  { v: 'none',    l: '无',       sub: '未参与或零散参加' },
+                  { v: 'regular', l: '定期参与', sub: '长期志愿者 / 公益组织成员' },
+                  { v: 'impact',  l: '有影响力', sub: '主导项目 / 受益人显著 / 媒体报道' },
+                ].map(({ v, l, sub }) => `
+                  <button type="button"
+                    class="rec-chip rec-chip--row${state.profile.community_service === v ? ' active' : ''}"
+                    onclick="RecommenderModule._updateProfile({community_service: '${v}'})">
+                    <span class="rec-chip-main">${l}</span>
+                    <span class="rec-chip-sub">${sub}</span>
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- 免标化申请 -->
+            <div class="rec-field-group">
+              <label class="rec-checkbox-label">
+                <input type="checkbox" id="rec-test-optional"
+                  ${state.profile.test_optional_apply ? 'checked' : ''}
+                  onchange="RecommenderModule._updateProfile({test_optional_apply: this.checked})">
+                以免标化方式申请（不提交 SAT / ACT，适用任何课程体系）
+              </label>
             </div>
           </div>
 
@@ -1153,6 +1269,14 @@ GPA：${p.gpa_us ?? '—'}，英语：${p.english_test.toUpperCase()} ${p.englis
     });
   }
 
+  function _setComp(compKey) {
+    updateProfile({ competition: { comp: compKey, medal: '' } });
+  }
+
+  function _setCompMedal(medal) {
+    updateProfile({ competition: { ...state.profile.competition, medal } });
+  }
+
   function _updateProfile(patch) {
     updateProfile(patch);
   }
@@ -1169,6 +1293,8 @@ GPA：${p.gpa_us ?? '—'}，英语：${p.english_test.toUpperCase()} ${p.englis
     _setEnglishTest,
     _toggleCountry,
     _updateProfile,
+    _setComp,
+    _setCompMedal,
   };
 
 })();
