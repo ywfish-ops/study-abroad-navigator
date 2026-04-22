@@ -6470,7 +6470,7 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 1
     },
     {
       "id": "amherst",
@@ -6523,7 +6523,7 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 2
     },
     {
       "id": "swarthmore",
@@ -6577,7 +6577,7 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": "对国际生为need-aware（非need-blind），但援助政策仍较慷慨，STEM强校，工程专业全美前列",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 3
     },
     {
       "id": "pomona",
@@ -6631,7 +6631,7 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": "综合费用约$87,000",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 4
     },
     {
       "id": "wellesley",
@@ -6685,7 +6685,7 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": "综合费用约$87,000",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 5
     },
     {
       "id": "bowdoin",
@@ -6738,7 +6738,7 @@
       "verified": false,
       "data_confidence": "medium",
       "special_notes": "语言要求未在官网明确找到，请人工核查",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 6
     },
     {
       "id": "middlebury",
@@ -6792,7 +6792,7 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 8
     },
     {
       "id": "colby",
@@ -6846,7 +6846,7 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 18
     },
     {
       "id": "hamilton",
@@ -6900,7 +6900,7 @@
       "verified": false,
       "data_confidence": "medium",
       "special_notes": "语言要求未在官网明确找到，请人工核查",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 17
     },
     {
       "id": "colgate",
@@ -6953,7 +6953,7 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 16
     },
     {
       "id": "harvey-mudd",
@@ -7007,7 +7007,7 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 9
     },
     {
       "id": "cmc",
@@ -7061,7 +7061,7 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 7
     },
     {
       "id": "smith",
@@ -7111,7 +7111,7 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 15
     },
     {
       "id": "bryn-mawr",
@@ -7160,7 +7160,7 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 28
     },
     {
       "id": "davidson",
@@ -7213,7 +7213,7 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 10
     },
     {
       "id": "macalester",
@@ -7262,7 +7262,7 @@
       "verified": false,
       "data_confidence": "medium",
       "special_notes": "语言要求未在官网明确找到，请人工核查",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 24
     },
     {
       "id": "grinnell",
@@ -7311,7 +7311,7 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 11
     },
     {
       "id": "oberlin",
@@ -7360,7 +7360,7 @@
       "verified": false,
       "data_confidence": "medium",
       "special_notes": "语言要求未在官网明确找到，请人工核查",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 29
     },
     {
       "id": "lafayette",
@@ -7414,7 +7414,7 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 35
     },
     {
       "id": "kenyon",
@@ -7463,7 +7463,7 @@
       "verified": false,
       "data_confidence": "medium",
       "special_notes": "语言要求未在官网明确找到，请人工核查",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 30
     },
     {
       "id": "trinity-ct",
@@ -7512,7 +7512,7 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 44
     },
     {
       "id": "union-college",
@@ -7611,7 +7611,7 @@
       "verified": false,
       "data_confidence": "medium",
       "special_notes": "语言要求未在官网明确找到，请人工核查",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": 20
     }
   ]
 }
