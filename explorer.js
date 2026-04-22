@@ -202,10 +202,14 @@ const ExplorerModule = (() => {
 
       return true;
     }).sort((a, b) => {
-      // QS 排名优先；无 QS 则用 USNews LAC 排名；都没有排最后
-      const rankA = a.qs_rank_2025 ?? (a.usnews_rank_2026 != null ? 1000 + a.usnews_rank_2026 : 9999);
-      const rankB = b.qs_rank_2025 ?? (b.usnews_rank_2026 != null ? 1000 + b.usnews_rank_2026 : 9999);
-      return rankA - rankB;
+      // 三套排名体系分区间：QS(1-999) → USNews综合(1001-1999) → USNews LAC(2001-2999) → 无排名(9999)
+      const sortKey = s => {
+        if (s.qs_rank_2025 != null) return s.qs_rank_2025;
+        const isLac = (s.tags || []).includes('liberal-arts');
+        if (s.usnews_rank_2026 != null) return isLac ? 2000 + s.usnews_rank_2026 : 1000 + s.usnews_rank_2026;
+        return 9999;
+      };
+      return sortKey(a) - sortKey(b);
     });
   }
 
