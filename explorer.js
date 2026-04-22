@@ -256,30 +256,28 @@ const ExplorerModule = (() => {
     return `
 <div class="explorer-card" id="explorer-card-${school.id}"
   onclick="ExplorerModule.openDetail('${school.id}')" style="cursor:pointer;">
-  <div style="display:flex; align-items:center; gap:6px; margin-bottom:6px; flex-wrap:wrap;">
+  <div style="display:flex; align-items:center; gap:6px; margin-bottom:6px;">
     ${renderCountry(school)}
     ${renderDifficultyBadge(school)}
     ${getTestPolicy(school) === 'blind' ? '<span style="font-size:11px;padding:2px 6px;border-radius:4px;background:#F1F5F9;color:#64748B;">无需标化</span>' : ''}
     ${getTestPolicy(school) === 'optional' ? '<span style="font-size:11px;padding:2px 6px;border-radius:4px;background:#F1F5F9;color:#64748B;">标化可选</span>' : ''}
+    <button class="explorer-compare-btn ${inCompare ? 'in-compare' : ''}"
+      onclick="event.stopPropagation(); ExplorerModule.toggleCompare('${school.id}')"
+      style="margin-left:auto; font-size:12px; padding:4px 10px; border-radius:6px; border:1.5px solid;
+        cursor:pointer; white-space:nowrap; min-height:32px; flex-shrink:0;
+        ${inCompare
+          ? 'background:#EEF3FD; color:#2B5CE6; border-color:#2B5CE6;'
+          : 'background:#fff; color:#6B7280; border-color:#D1D5DB;'}">
+      ${inCompare ? '✓ 已加入' : '+ 对比'}
+    </button>
   </div>
   <div style="margin-bottom:2px;">
     <span style="font-size:16px; font-weight:600; color:#1A1A2E;">${school.name_zh || school.name_en}</span>
   </div>
   <div style="font-size:12px; color:#6B7280; margin-bottom:8px;">${school.name_en}</div>
-  <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
-    <div style="display:flex; gap:12px; align-items:center;">
-      <span style="font-size:12px; color:#6B7280;">${rankText}</span>
-      ${renderBudget(school)}
-    </div>
-    <button class="explorer-compare-btn ${inCompare ? 'in-compare' : ''}"
-      onclick="event.stopPropagation(); ExplorerModule.toggleCompare('${school.id}')"
-      style="font-size:12px; padding:6px 12px; border-radius:6px; border:1.5px solid;
-        cursor:pointer; white-space:nowrap; min-height:36px;
-        ${inCompare
-          ? 'background:#EEF3FD; color:#2B5CE6; border-color:#2B5CE6;'
-          : 'background:#fff; color:#6B7280; border-color:#D1D5DB;'}">
-      ${inCompare ? '✓ 已加入对比' : '加入财务对比'}
-    </button>
+  <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+    <span style="font-size:12px; color:#6B7280;">${rankText}</span>
+    ${renderBudget(school)}
   </div>
 </div>`;
   }
