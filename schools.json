@@ -1390,7 +1390,10 @@
       "a_level_typical": "AAA",
       "special_notes": "学费按专业£26,250-£47,250；医学最贵；400+专业；无学院制；Cohort Guarantee学费在学期间固定。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "admissions_tests": {
+        "law": "lnat"
+      }
     },
     {
       "id": "edinburgh",
@@ -1590,7 +1593,8 @@
       "a_level_typical": "A*AA",
       "special_notes": "仅社会科学类专业，无理工医学；录取率全英最低；需GCSE英语/数学B/6成绩。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "admissions_tests": {}
     },
     {
       "id": "bristol",
@@ -4330,7 +4334,15 @@
       "data_source": "Oxford Admissions + UCAS",
       "verified": true,
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "admissions_tests": {
+        "cs": "mat",
+        "engineering": "pat",
+        "natural_sci": "pat",
+        "business": "tsa",
+        "social_sci": "tsa",
+        "law": "lnat"
+      }
     },
     {
       "id": "cambridge",
@@ -4353,7 +4365,7 @@
       "ielts_min": 7.5,
       "toefl_min": 110,
       "gpa_avg": null,
-      "a_level_typical": "A*A*A–A*A*A*",
+      "a_level_typical": "A*A*A*",
       "popular_majors": [
         "Natural Sciences",
         "Engineering",
@@ -4382,7 +4394,14 @@
       "data_source": "Cambridge Admissions + UCAS",
       "verified": true,
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "admissions_tests": {
+        "cs": "esat",
+        "engineering": "esat",
+        "natural_sci": "esat",
+        "life_sci": "esat",
+        "business": "tmua"
+      }
     },
     {
       "id": "imperial",
@@ -4437,7 +4456,13 @@
       "data_source": "Imperial Admissions + UCAS",
       "verified": true,
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "admissions_tests": {
+        "cs": "tmua",
+        "engineering": "esat",
+        "natural_sci": "esat",
+        "life_sci": "esat"
+      }
     },
     {
       "id": "boston-college",

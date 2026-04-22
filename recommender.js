@@ -97,6 +97,20 @@ const RecommenderModule = (() => {
     { key: 'igem',        group: '综合科研', label: 'iGEM 国际遗传工程机器大赛（金牌）',   tier: 3, hasMedal: true  },
   ];
 
+  /** 英国G5笔试信息（key → {label, desc}） */
+  const UK_TEST_INFO = {
+    tmua: { label: 'TMUA',  desc: '剑桥数学/经济、帝国理工 CS/数学' },
+    esat: { label: 'ESAT',  desc: '剑桥工程/CS/自然科学/生命科学' },
+    mat:  { label: 'MAT',   desc: '牛津数学/计算机' },
+    pat:  { label: 'PAT',   desc: '牛津物理/工程' },
+    step: { label: 'STEP',  desc: '剑桥数学 offer 条件（II/III级）' },
+    lnat: { label: 'LNAT',  desc: '牛津 / UCL 法律' },
+    tsa:  { label: 'TSA',   desc: '牛津 PPE / 经济 / 心理 / 地理' },
+  };
+
+  /** 笔试表现 → 学术分修正（满分40分制） */
+  const UK_TEST_PERF_ADJ = { top: 8, strong: 4, average: 0, weak: -5, na: -3 };
+
   /** 根据竞赛+奖项计算学术强度加成（0–0.20；tier4金=+20，tier1=+5，hasMedal时×奖项系数） */
   function calcCompAdj(competition) {
     if (!competition?.comp) return 0;
@@ -137,6 +151,7 @@ const RecommenderModule = (() => {
       priority: 'ranking',
       scholarship_only: false,
       test_optional_apply: false,          // 以免标化方式申请（不提交 SAT/ACT）
+      uk_written_tests: { tmua:'na', esat:'na', mat:'na', pat:'na', step:'na', lnat:'na', tsa:'na' },
       competition: { comp: '', medal: '' },// 竞赛奖项
       research_exp: 'none',               // 研究经历: 'none' | 'basic' | 'strong'
       leadership: 'none',                 // 校内任职: 'none' | 'officer' | 'founder'
@@ -255,11 +270,18 @@ const RecommenderModule = (() => {
       if (school.a_level_typical) {
         const schoolReq = ALEVEL_RANK[school.a_level_typical];
         const userScore = ALEVEL_RANK[score_alevel] ?? 2;
-        const gap = userScore - schoolReq;
+        const gap = userScore - (schoolReq ?? userScore); // schoolReq 未知时 gap=0
         if (gap >= 1) base = 40;
         else if (gap === 0) base = 28;
         else if (gap === -1) base = 16;
         else base = 6;
+
+        // G5 笔试修正：按 school.admissions_tests[major_interest] 查对应笔试
+        const testKey = (school.admissions_tests || {})[profile.major_interest];
+        if (testKey) {
+          const perf = (profile.uk_written_tests || {})[testKey] ?? 'na';
+          base += UK_TEST_PERF_ADJ[perf] ?? 0;
+        }
       } else {
         // 无 A-Level 要求数据（非英国院校）：按学生成绩估算，冲稳保由 getTier 单独判定
         const alevelBase = { 'A*A*A*': 38, 'A*A*A': 34, 'A*AA': 30, 'AAA': 26, 'AAB': 20, 'ABB': 15, 'BBB': 10 };
@@ -829,6 +851,36 @@ const RecommenderModule = (() => {
               <div id="rec-err-country" class="rec-field-error" style="display:none;">请至少选择一个目标国家</div>
             </div>
 
+            <!-- 英国G5笔试（仅选了GB时显示） -->
+            ${state.profile.target_countries.includes('GB') ? `
+            <div class="rec-field-group">
+              <div class="rec-label">英国G5前置笔试 <span class="rec-label-hint">（仅填写你会参加的）</span></div>
+              <div style="font-size:11px;color:#6B7280;margin-bottom:10px;">不同专业要求不同笔试，填写后算法自动匹配。未参加/不适用选"—"即可。</div>
+              ${Object.entries(UK_TEST_INFO).map(([key, info]) => `
+                <div style="margin-bottom:12px;">
+                  <div style="font-size:13px;font-weight:600;color:#1A1A2E;">${info.label}
+                    <span style="font-size:11px;font-weight:400;color:#6B7280;margin-left:4px;">${info.desc}</span>
+                  </div>
+                  <div class="rec-chip-group" style="margin-top:5px;">
+                    ${[
+                      { v: 'na',      l: '—' },
+                      { v: 'weak',    l: '一般' },
+                      { v: 'average', l: '良好' },
+                      { v: 'strong',  l: '优秀' },
+                      { v: 'top',     l: 'Top 10%' },
+                    ].map(({ v, l }) => `
+                      <button type="button"
+                        class="rec-chip${(state.profile.uk_written_tests[key] ?? 'na') === v ? ' active' : ''}"
+                        onclick="RecommenderModule._setUKTest('${key}','${v}')">
+                        ${l}
+                      </button>
+                    `).join('')}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+            ` : ''}
+
             <!-- 意向专业 -->
             <div class="rec-field-group">
               <label class="rec-label" for="rec-major">意向专业</label>
@@ -1302,6 +1354,10 @@ GPA：${p.gpa_us ?? '—'}，英语：${p.english_test.toUpperCase()} ${p.englis
     });
   }
 
+  function _setUKTest(testKey, level) {
+    updateProfile({ uk_written_tests: { ...state.profile.uk_written_tests, [testKey]: level } });
+  }
+
   function _setComp(compKey) {
     updateProfile({ competition: { comp: compKey, medal: '' } });
   }
@@ -1328,6 +1384,7 @@ GPA：${p.gpa_us ?? '—'}，英语：${p.english_test.toUpperCase()} ${p.englis
     _updateProfile,
     _setComp,
     _setCompMedal,
+    _setUKTest,
   };
 
 })();
