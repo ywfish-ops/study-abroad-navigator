@@ -250,22 +250,61 @@ const RecommenderModule = (() => {
     return Math.min(99, Math.round(academic + major + priority + ec + lang));
   }
 
+  // ── 算法：冲稳保相对判定 ────────────────────────────────────────────────
+
   /**
-   * 录取可能性分（max 55）：仅用于冲稳保判定，与排名偏好/专业匹配无关。
-   * academic(0-40) + ec(0-10) + lang(0-5)
-   *
-   * 判定阈值：
-   *   ≥ 45 → 保（学生成绩明显超过要求）
-   *   ≥ 32 → 稳（成绩在录取区间内）
-   *   <  32 → 冲（成绩低于要求，有挑战）
+   * 学生综合学术强度（0-100），与具体学校无关。
+   * 用于与学校选择性做相对比较，实现「你的冲是别人的保」。
    */
-  function calcAdmitScore(school, profile) {
-    return calcAcademic(school, profile) + calcEC(school, profile) + calcLang(school, profile);
+  function calcStudentStrength(profile) {
+    let pct = 0;
+
+    if (profile.curriculum === 'ap') {
+      const avgWeight = { '3': 0.35, '4': 0.60, '5': 0.88 };
+      const avgPct   = avgWeight[profile.score_ap_avg] ?? 0.60;
+      const countPct = Math.min(1.0, (profile.score_ap || 5) / 8);
+      pct = avgPct * 0.70 + countPct * 0.30;
+    } else if (profile.curriculum === 'alevel') {
+      const rank = ALEVEL_RANK[profile.score_alevel] ?? 2;
+      pct = (rank - 1) / 6;
+    } else { // ib
+      const ib = profile.score_ib || 30;
+      pct = Math.max(0, Math.min(1, (ib - 24) / 21));
+    }
+
+    const gpa    = profile.gpa_us || 3.5;
+    const gpaAdj = gpa >= 3.9 ? 0.08 : gpa >= 3.7 ? 0.04 : gpa >= 3.0 ? 0 : -0.08;
+    const ecAdj  = profile.ec_level === 'strong' ? 0.05 : profile.ec_level === 'basic' ? -0.05 : 0;
+
+    return Math.max(0, Math.min(100, (pct + gpaAdj + ecAdj) * 100));
   }
 
-  function getTier(admitScore) {
-    if (admitScore >= 45) return 'safe';
-    if (admitScore >= 32) return 'target';
+  /**
+   * 学校录取选择性（0-100，越高越难进）。
+   * 优先级：SAT 中位数 > A-Level 要求 > 录取率代理。
+   */
+  function calcSchoolSelectivity(school, profile) {
+    if (school.sat_range && profile.curriculum !== 'alevel') {
+      const mid = (school.sat_range[0] + school.sat_range[1]) / 2;
+      return Math.max(0, Math.min(100, (mid - 800) / 800 * 100));
+    }
+    if (school.a_level_typical && profile.curriculum === 'alevel') {
+      const req = ALEVEL_RANK[school.a_level_typical] ?? 3;
+      return (req - 1) / 6 * 100;
+    }
+    const rate = school.acceptance_rate;
+    if (rate == null) return 50;
+    return Math.max(0, Math.min(100, (1 - rate) * 100));
+  }
+
+  /**
+   * 冲稳保判定：gap = 学生强度 - 学校选择性
+   *   gap ≥ 22 → 保；gap ≥ -8 → 稳；gap < -8 → 冲
+   */
+  function getTier(school, profile) {
+    const gap = calcStudentStrength(profile) - calcSchoolSelectivity(school, profile);
+    if (gap >= 22) return 'safe';
+    if (gap >= -8) return 'target';
     return 'reach';
   }
 
@@ -325,10 +364,9 @@ const RecommenderModule = (() => {
     const results = [];
     for (const school of state.schools) {
       if (!isEligible(school, state.profile)) continue;
-      const admitScore = calcAdmitScore(school, state.profile);
       const matchScore = calcMatchScore(school, state.profile);
-      const tier = getTier(admitScore);
-      results.push({ school, matchScore, admitScore, tier });
+      const tier = getTier(school, state.profile);
+      results.push({ school, matchScore, tier });
     }
     // 排序：冲 → 稳 → 保；同梯队内按综合匹配分降序
     const TIER_ORDER = { reach: 0, target: 1, safe: 2 };
