@@ -284,14 +284,26 @@ const RecommenderModule = (() => {
    * 优先级：SAT 中位数 > A-Level 要求 > 录取率代理。
    */
   function calcSchoolSelectivity(school, profile) {
+    // AP / IB 申请美国学校：SAT 中位数最准确
     if (school.sat_range && profile.curriculum !== 'alevel') {
       const mid = (school.sat_range[0] + school.sat_range[1]) / 2;
       return Math.max(0, Math.min(100, (mid - 800) / 800 * 100));
     }
-    if (school.a_level_typical && profile.curriculum === 'alevel') {
+
+    // A-Level 学生 + 有 A-Level 要求数据：直接比较成绩要求
+    if (profile.curriculum === 'alevel' && school.a_level_typical) {
       const req = ALEVEL_RANK[school.a_level_typical] ?? 3;
       return (req - 1) / 6 * 100;
     }
+
+    // A-Level 学生 + 英国学校 + 无 A-Level 要求数据：
+    // 英国大学录取率受申请量影响，不能反映难度（Oxford/Leeds 录取率相近但要求相差极大）
+    // 用 50 作为保守中间值，避免误判
+    if (profile.curriculum === 'alevel' && school.country === 'GB') {
+      return 50;
+    }
+
+    // 其他情况（含非英国学校、IB/AP 申请无 SAT 数据的学校）：录取率代理
     const rate = school.acceptance_rate;
     if (rate == null) return 50;
     return Math.max(0, Math.min(100, (1 - rate) * 100));
