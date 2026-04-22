@@ -201,6 +201,11 @@ const ExplorerModule = (() => {
       if (_filters.chineseCommunity.length && !_filters.chineseCommunity.includes(s.chinese_student_community)) return false;
 
       return true;
+    }).sort((a, b) => {
+      // QS 排名优先；无 QS 则用 USNews LAC 排名；都没有排最后
+      const rankA = a.qs_rank_2025 ?? (a.usnews_rank_2026 != null ? 1000 + a.usnews_rank_2026 : 9999);
+      const rankB = b.qs_rank_2025 ?? (b.usnews_rank_2026 != null ? 1000 + b.usnews_rank_2026 : 9999);
+      return rankA - rankB;
     });
   }
 
