@@ -854,8 +854,8 @@ const RecommenderModule = (() => {
             <!-- 英国G5笔试（仅选了GB时显示） -->
             ${state.profile.target_countries.includes('GB') ? `
             <div class="rec-field-group">
-              <div class="rec-label">英国G5前置笔试 <span class="rec-label-hint">（仅填写你会参加的）</span></div>
-              <div style="font-size:11px;color:#6B7280;margin-bottom:10px;">不同专业要求不同笔试，填写后算法自动匹配。未参加/不适用选"—"即可。</div>
+              <div class="rec-label">英国G5前置笔试（预估） <span class="rec-label-hint">（仅填你会参加的）</span></div>
+              <div style="font-size:11px;color:#6B7280;margin-bottom:10px;">笔试通常在10月进行，此处填写<strong>预估表现</strong>，仅作参考定位，不影响实际申请结果。不参加或尚未确定选"—"。</div>
               ${Object.entries(UK_TEST_INFO).map(([key, info]) => `
                 <div style="margin-bottom:12px;">
                   <div style="font-size:13px;font-weight:600;color:#1A1A2E;">${info.label}
@@ -864,10 +864,10 @@ const RecommenderModule = (() => {
                   <div class="rec-chip-group" style="margin-top:5px;">
                     ${[
                       { v: 'na',      l: '—' },
-                      { v: 'weak',    l: '一般' },
-                      { v: 'average', l: '良好' },
-                      { v: 'strong',  l: '优秀' },
-                      { v: 'top',     l: 'Top 10%' },
+                      { v: 'weak',    l: '预估偏弱' },
+                      { v: 'average', l: '预估一般' },
+                      { v: 'strong',  l: '预估良好' },
+                      { v: 'top',     l: '预估Top 10%' },
                     ].map(({ v, l }) => `
                       <button type="button"
                         class="rec-chip${(state.profile.uk_written_tests[key] ?? 'na') === v ? ' active' : ''}"
