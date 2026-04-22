@@ -33,30 +33,71 @@ const RecommenderModule = (() => {
   const COUNTRY_FLAG = { US: '🇺🇸', GB: '🇬🇧', CA: '🇨🇦', AU: '🇦🇺', SG: '🇸🇬', HK: '🇭🇰' };
 
   /**
-   * 竞赛列表：tier 4=国际奥林匹克 3=顶尖美国/国际 2=全国顶尖 1=省级/入围
-   * hasMedal=true 时需要选金/银/铜/荣誉，否则入围即为成就
+   * 竞赛列表（面向中国学生可参加、英美认可度高的赛事）
+   * tier: 4=顶尖科研级 3=顶尖竞赛 2=全国/知名竞赛 1=入门/参与级
+   * hasMedal=true → 需选金/银/铜/荣誉；false → 入围/达到该级别即为成就
+   * group: 用于下拉分组标题
    */
   const COMP_LIST = [
-    { key: 'imo',         label: 'IMO 国际数学奥林匹克',         tier: 4, hasMedal: true },
-    { key: 'ipho',        label: 'IPhO 国际物理奥林匹克',        tier: 4, hasMedal: true },
-    { key: 'icho',        label: 'IChO 国际化学奥林匹克',        tier: 4, hasMedal: true },
-    { key: 'ibo',         label: 'IBO 国际生物奥林匹克',         tier: 4, hasMedal: true },
-    { key: 'ioi',         label: 'IOI 国际信息学奥林匹克',       tier: 4, hasMedal: true },
-    { key: 'ieo',         label: 'IEO 国际经济学奥林匹克',       tier: 4, hasMedal: true },
-    { key: 'usamo',       label: 'USAMO / USAJMO（入围即顶）',   tier: 3, hasMedal: false },
-    { key: 'isef_gd',     label: 'Regeneron ISEF 大奖',          tier: 3, hasMedal: true },
-    { key: 'sts_fin',     label: 'Regeneron STS Finalist',       tier: 3, hasMedal: false },
-    { key: 'aime',        label: 'AIME 晋级',                    tier: 2, hasMedal: false },
-    { key: 'usaco_plat',  label: 'USACO Platinum',               tier: 2, hasMedal: false },
-    { key: 'usaco_gold',  label: 'USACO Gold',                   tier: 2, hasMedal: false },
-    { key: 'cn_natl_1',   label: '全国联赛 / 学科竞赛一等奖',   tier: 2, hasMedal: false },
-    { key: 'usaco_silver',label: 'USACO Silver',                 tier: 1, hasMedal: false },
-    { key: 'amc_hr',      label: 'AMC 12 Honor Roll / 高分',    tier: 1, hasMedal: false },
-    { key: 'cn_natl_2',   label: '全国联赛 / 学科竞赛二等奖',   tier: 1, hasMedal: false },
-    { key: 'cn_prov_1',   label: '省级联赛一等奖',               tier: 1, hasMedal: false },
+    // ── 数学 ──────────────────────────────────────────────────────────────
+    { key: 'aime',        group: '数学',   label: 'AIME 美国数学邀请赛（晋级）',          tier: 3, hasMedal: false },
+    { key: 'bmo',         group: '数学',   label: 'BMO 英国数学奥林匹克（晋级）',         tier: 3, hasMedal: false },
+    { key: 'amc_hr',      group: '数学',   label: 'AMC 10/12 高分 / Honor Roll',          tier: 2, hasMedal: false },
+    { key: 'smc_gold',    group: '数学',   label: 'SMC 英国高级数学测评（金奖）',          tier: 2, hasMedal: false },
+    { key: 'euclid',      group: '数学',   label: 'Euclid 欧几里得数学竞赛（高分）',       tier: 2, hasMedal: false },
+    { key: 'himcm',       group: '数学',   label: 'HiMCM 数学建模（Outstanding）',         tier: 2, hasMedal: false },
+    { key: 'yau_math',    group: '数学',   label: '丘成桐中学科学奖（数学方向）',          tier: 4, hasMedal: true  },
+    { key: 'amc10',       group: '数学',   label: 'AMC 10/12 参赛（普通分段）',            tier: 1, hasMedal: false },
+    { key: 'smc_slv',     group: '数学',   label: 'SMC 英国高级数学测评（银奖及以下）',    tier: 1, hasMedal: false },
+    // ── 物理 ──────────────────────────────────────────────────────────────
+    { key: 'bpho_gold',   group: '物理',   label: 'BPhO 英国物理奥赛（金奖）',             tier: 3, hasMedal: false },
+    { key: 'yau_phys',    group: '物理',   label: '丘成桐中学科学奖（物理方向）',          tier: 4, hasMedal: true  },
+    { key: 'pupc',        group: '物理',   label: 'PUPC 普林斯顿物理竞赛（获奖）',         tier: 2, hasMedal: true  },
+    { key: 'pbowl',       group: '物理',   label: 'PhysicsBowl 物理碗（全国前列）',        tier: 2, hasMedal: false },
+    { key: 'asdan_phys',  group: '物理',   label: 'ASDAN Physics Challenge（高分）',       tier: 1, hasMedal: false },
+    { key: 'bpho_slv',    group: '物理',   label: 'BPhO 英国物理奥赛（银奖及以下）',       tier: 1, hasMedal: false },
+    // ── 化学 ──────────────────────────────────────────────────────────────
+    { key: 'ukcho',       group: '化学',   label: 'UKChO 英国化学奥赛（金/银奖）',         tier: 3, hasMedal: true  },
+    { key: 'yau_chem',    group: '化学',   label: '丘成桐中学科学奖（化学方向）',          tier: 4, hasMedal: true  },
+    { key: 'ccc',         group: '化学',   label: 'CCC 加拿大化学竞赛',                    tier: 1, hasMedal: true  },
+    { key: 'asoc',        group: '化学',   label: 'ASOC 澳大利亚化学奥赛',                 tier: 1, hasMedal: true  },
+    { key: 'jcco',        group: '化学',   label: 'JCCO 加拿大初级化学奥赛',               tier: 1, hasMedal: true  },
+    // ── 生物 ──────────────────────────────────────────────────────────────
+    { key: 'usabo',       group: '生物',   label: 'USABO 美国生物奥赛（半决赛+）',         tier: 3, hasMedal: false },
+    { key: 'yau_bio',     group: '生物',   label: '丘成桐中学科学奖（生物方向）',          tier: 4, hasMedal: true  },
+    { key: 'bbo',         group: '生物',   label: 'BBO 英国生物奥赛（金奖）',              tier: 2, hasMedal: false },
+    { key: 'hosa',        group: '生物',   label: 'HOSA 全美生物健康挑战（获奖）',         tier: 1, hasMedal: true  },
+    { key: 'brain_bee',   group: '生物',   label: 'Brain Bee 脑科学竞赛',                  tier: 1, hasMedal: true  },
+    // ── CS与机器人 ─────────────────────────────────────────────────────────
+    { key: 'noi',         group: 'CS与机器人', label: 'NOI 全国信息学奥林匹克',            tier: 4, hasMedal: true  },
+    { key: 'usaco_plat',  group: 'CS与机器人', label: 'USACO Platinum',                    tier: 3, hasMedal: false },
+    { key: 'yau_cs',      group: 'CS与机器人', label: '丘成桐中学科学奖（计算机方向）',    tier: 4, hasMedal: true  },
+    { key: 'usaco_gold',  group: 'CS与机器人', label: 'USACO Gold',                        tier: 2, hasMedal: false },
+    { key: 'noip',        group: 'CS与机器人', label: 'NOIP 全国青少年信息学（省级一等）', tier: 2, hasMedal: false },
+    { key: 'vex',         group: 'CS与机器人', label: 'VEX Robotics 机器人大赛（世锦赛+）', tier: 2, hasMedal: false },
+    { key: 'frc',         group: 'CS与机器人', label: 'FRC FIRST机器人挑战赛（区域冠军+）', tier: 2, hasMedal: false },
+    { key: 'usaco_silver',group: 'CS与机器人', label: 'USACO Silver',                      tier: 1, hasMedal: false },
+    // ── 商科与经济 ─────────────────────────────────────────────────────────
+    { key: 'yau_econ',    group: '商科经济', label: '丘成桐中学科学奖（经济金融方向）',    tier: 4, hasMedal: true  },
+    { key: 'wharton',     group: '商科经济', label: 'Wharton 沃顿投资竞赛（Finalist）',    tier: 2, hasMedal: false },
+    { key: 'nec',         group: '商科经济', label: 'NEC 全美经济学挑战赛（全国级）',      tier: 2, hasMedal: false },
+    { key: 'ieo',         group: '商科经济', label: 'IEO 国际经济学奥林匹克（中国区）',   tier: 1, hasMedal: true  },
+    { key: 'fbla',        group: '商科经济', label: 'FBLA 商业领袖挑战（全国/国际级）',   tier: 1, hasMedal: true  },
+    { key: 'bpa',         group: '商科经济', label: 'BPA 商业全能挑战',                   tier: 1, hasMedal: true  },
+    { key: 'sic',         group: '商科经济', label: 'SIC 中学生投资挑战',                  tier: 1, hasMedal: true  },
+    // ── 人文社科与写作 ─────────────────────────────────────────────────────
+    { key: 'john_locke',  group: '人文社科', label: 'John Locke 写作赛（Finalist/获奖）',  tier: 3, hasMedal: true  },
+    { key: 'marshall',    group: '人文社科', label: 'Marshall Society 经济论文赛（获奖）',  tier: 3, hasMedal: true  },
+    { key: 'nsda',        group: '人文社科', label: 'NSDA 演讲辩论（大区/全国级）',        tier: 2, hasMedal: false },
+    { key: 'nhsdlc',      group: '人文社科', label: 'NHSDLC 中国高中美式辩论（冠军级）',   tier: 2, hasMedal: false },
+    { key: 'nyt',         group: '人文社科', label: 'NYT Writing 纽约时报写作竞赛',        tier: 1, hasMedal: true  },
+    // ── 综合科研 ──────────────────────────────────────────────────────────
+    { key: 'isef_gd',     group: '综合科研', label: 'ISEF 大奖（Grand Award）',            tier: 4, hasMedal: true  },
+    { key: 'isef_3rd',    group: '综合科研', label: 'ISEF 三等奖 / 特别奖',                tier: 3, hasMedal: false },
+    { key: 'igem',        group: '综合科研', label: 'iGEM 国际遗传工程机器大赛（金牌）',   tier: 3, hasMedal: true  },
   ];
 
-  /** 根据竞赛+奖项计算学术强度加成（0–0.20） */
+  /** 根据竞赛+奖项计算学术强度加成（0–0.20；tier4金=+20，tier1=+5，hasMedal时×奖项系数） */
   function calcCompAdj(competition) {
     if (!competition?.comp) return 0;
     const info = COMP_LIST.find(c => c.key === competition.comp);
@@ -661,26 +702,18 @@ const RecommenderModule = (() => {
               <div class="rec-label">竞赛奖项 <span class="rec-label-hint">（直接影响冲刺线）</span></div>
               <select class="rec-select" onchange="RecommenderModule._setComp(this.value)">
                 <option value="">— 无竞赛奖项 —</option>
-                <optgroup label="★★★★ 国际奥林匹克">
-                  ${COMP_LIST.filter(c => c.tier === 4).map(c =>
-                    `<option value="${c.key}" ${state.profile.competition.comp === c.key ? 'selected' : ''}>${c.label}</option>`
-                  ).join('')}
-                </optgroup>
-                <optgroup label="★★★ 顶尖赛事">
-                  ${COMP_LIST.filter(c => c.tier === 3).map(c =>
-                    `<option value="${c.key}" ${state.profile.competition.comp === c.key ? 'selected' : ''}>${c.label}</option>`
-                  ).join('')}
-                </optgroup>
-                <optgroup label="★★ 全国顶尖">
-                  ${COMP_LIST.filter(c => c.tier === 2).map(c =>
-                    `<option value="${c.key}" ${state.profile.competition.comp === c.key ? 'selected' : ''}>${c.label}</option>`
-                  ).join('')}
-                </optgroup>
-                <optgroup label="★ 省级 / 入围">
-                  ${COMP_LIST.filter(c => c.tier === 1).map(c =>
-                    `<option value="${c.key}" ${state.profile.competition.comp === c.key ? 'selected' : ''}>${c.label}</option>`
-                  ).join('')}
-                </optgroup>
+                ${(() => {
+                  const groups = [...new Set(COMP_LIST.map(c => c.group))];
+                  return groups.map(g => `
+                    <optgroup label="${g}">
+                      ${COMP_LIST.filter(c => c.group === g).map(c =>
+                        `<option value="${c.key}" ${state.profile.competition.comp === c.key ? 'selected' : ''}>${
+                          ['★','★★','★★★','★★★★'][c.tier - 1]
+                        } ${c.label}</option>`
+                      ).join('')}
+                    </optgroup>
+                  `).join('');
+                })()}
               </select>
               ${(() => {
                 const info = COMP_LIST.find(c => c.key === state.profile.competition.comp);
