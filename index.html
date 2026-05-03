@@ -112,7 +112,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .tab .ic svg{display:block;}
 .tab .lbl{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;letter-spacing:.3px;}
 .tab.active{color:var(--tab-active);}
-.tab.active::after{content:"";position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);
+.tab.active::after{content:"";position:absolute;bottom:4px;left:50%;transform:translateX(-50%);
   width:16px;height:2px;border-radius:2px;background:var(--tab-active);}
 
 
@@ -188,13 +188,18 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .school.ca{border-top:none;}.school.ca .stripe{background:linear-gradient(90deg,#FF4747,#FF8585);}
 .school.au{border-top:none;}.school.au .stripe{background:linear-gradient(90deg,#B8D43A,#E8E94A);}
 .school.sg{border-top:none;}.school.sg .stripe{background:linear-gradient(90deg,#FF6B6B,#fff);}
-.school-badge-row{display:flex;align-items:center;gap:8px;margin-bottom:9px;}
-.flag{font-size:16px;}
-.school-name{font-family:'Noto Sans SC',sans-serif;font-size:17px;font-weight:700;color:var(--text-primary);letter-spacing:-.2px;line-height:1.25;margin-bottom:3px;}
-.school-eng{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-secondary);letter-spacing:.3px;margin-bottom:10px;}
-.school-stats{font-family:'Inter','Noto Sans SC',sans-serif;font-size:13px;color:var(--text-secondary);margin-bottom:12px;display:flex;flex-wrap:wrap;align-items:center;gap:4px;}
+.school-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+.school-info{flex:1;min-width:0;}
+.school-name{font-family:'Noto Sans SC',sans-serif;font-size:17px;font-weight:700;color:var(--text-primary);letter-spacing:-.2px;line-height:1.2;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+.school-name .flag{font-size:16px;}
+.school-eng{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-secondary);letter-spacing:.3px;margin-top:4px;}
+.rank{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--rank-bg);color:var(--rank-color);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;}
+.rank .rank-prefix{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.5px;opacity:.65;margin-bottom:1px;}
+.rank .rank-num{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:-.5px;}
+.school-divider{height:1px;background:var(--divider);margin:12px 0 10px;}
+.school-stats{font-family:'Inter','Noto Sans SC',sans-serif;font-size:13px;color:var(--text-secondary);margin-bottom:10px;display:flex;flex-wrap:wrap;align-items:center;gap:4px;}
 .stat-sep{color:var(--text-tertiary);}
-.school-action{display:flex;justify-content:flex-end;}
+.school-action{display:flex;align-items:center;justify-content:space-between;gap:8px;}
 .tag{display:inline-flex;align-items:center;padding:4px 10px;font-family:'Noto Sans SC',sans-serif;font-size:11px;font-weight:600;border-radius:999px;letter-spacing:.5px;}
 .tag.chong{background:var(--tag-chong-bg);color:var(--tag-chong-color);}
 .tag.wen{background:var(--tag-wen-bg);color:var(--tag-wen-color);}
@@ -1051,23 +1056,30 @@ window.ExplorerModule = (function() {
       : `<div class="rank" style="font-size:9px;padding:4px">未入榜</div>`;
 
     const statsItems = [];
-    if (rank) statsItems.push(`${rank.prefix} ${rank.num}`);
-    if (fourYr) statsItems.push(`4年约 ¥${fourYr}万`);
+    if (rank) statsItems.push(`${rank.prefix}&nbsp;${rank.num}`);
+    if (fourYr) statsItems.push(`4年约&nbsp;¥${fourYr}万`);
     const statsHtml = statsItems.join('<span class="stat-sep"> · </span>');
 
-    const compareLabel = inCompare ? '✓ 已加入' : '加入财务对比 →';
+    const rankHtml = rank
+      ? `<div class="rank"><div class="rank-prefix">${rank.prefix}</div><div class="rank-num">${rank.num}</div></div>`
+      : '';
+
+    const compareLabel = inCompare ? '✓ 已加入' : '加入对比 →';
     const compareClass = inCompare ? 'add-compare-btn added' : 'add-compare-btn';
 
     return `<div class="school ${countryClass}" onclick="ExplorerModule.openDetail('${school.id}')">
   <div class="stripe"></div>
-  <div class="school-badge-row">
-    <span class="flag">${flag}</span>
-    ${diff ? `<span class="tag ${tagClass}">${diff}</span>` : ''}
+  <div class="school-head">
+    <div class="school-info">
+      <div class="school-name"><span class="flag">${flag}</span>${school.name_zh || school.name_en}</div>
+      <div class="school-eng">${school.name_en || ''}</div>
+    </div>
+    ${rankHtml}
   </div>
-  <div class="school-name">${school.name_zh || school.name_en}</div>
-  <div class="school-eng">${school.name_en || ''}</div>
+  <div class="school-divider"></div>
   ${statsHtml ? `<div class="school-stats">${statsHtml}</div>` : ''}
   <div class="school-action">
+    ${diff ? `<span class="tag ${tagClass}">${diff}</span>` : '<span></span>'}
     <div class="${compareClass}" onclick="event.stopPropagation();ExplorerModule.toggleCompare('${school.id}',this)">${compareLabel}</div>
   </div>
 </div>`;
