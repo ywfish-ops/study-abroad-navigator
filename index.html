@@ -98,11 +98,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
   background:radial-gradient(ellipse 70% 60% at 50% 0%,#FFE8D6 0%,rgba(255,232,214,.55) 35%,rgba(255,232,214,0) 80%);
   z-index:0;opacity:0;transition:opacity 0.35s ease;}
 [data-theme="light"] .halo{opacity:1;}
-.mode-toggle{position:fixed;top:20px;right:20px;z-index:999;display:flex;align-items:center;gap:8px;
-  padding:8px 14px;border-radius:999px;border:1px solid #3a3a52;
-  background:rgba(15,12,29,.85);color:rgba(255,255,255,.85);font-family:'Inter',sans-serif;
-  font-size:12px;font-weight:500;cursor:pointer;transition:all .25s ease;
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);user-select:none;}
+.mode-toggle{display:none;}
 .mode-toggle:hover{opacity:.85;}
 .status{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;
   padding:16px 28px 6px;font-family:-apple-system,'SF Pro Text',system-ui;
@@ -436,8 +432,13 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
   #page-home .screen-content { height:calc(100dvh - 114px - env(safe-area-inset-top, 0px)); }
   #page-locate .quiz-body    { height:calc(100dvh - 114px - 47px - env(safe-area-inset-top, 0px)); }
   .result-body               { height:calc(100dvh - 114px - 47px - env(safe-area-inset-top, 0px)); }
-  /* PWA 模式下不需要模拟 home bar */
+  /* 浏览器模式隐藏模拟 home bar */
   .home-bar { display: none; }
+}
+
+/* PWA 独立模式：恢复 home bar（贴合系统安全区视觉） */
+@media (display-mode: standalone) {
+  .home-bar { display: block; }
 }
 
 /* 院校卡片 foot 区间距收窄，防止在 390px 内溢出 */
