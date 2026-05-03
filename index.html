@@ -411,6 +411,29 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .sandbox-compare-btn{flex:1;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:6px;font-family:'Noto Sans SC',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;}
 .sandbox-compare-btn.primary{background:var(--accent-bg);border:1px solid var(--accent-border);color:var(--accent);}
 .sandbox-compare-btn.secondary{background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-secondary);}
+
+/* ── Mobile fullscreen ──────────────────────────────────────
+   手机直接打开时：填满屏幕，tabbar 固定底部
+─────────────────────────────────────────────────────────── */
+@media (max-width: 430px) {
+  body { display:block; min-height:100dvh; }
+  .screen { max-width:100vw; height:100vh; height:100dvh; }
+  .tabbar {
+    position:fixed !important;
+    bottom:0; left:0; right:0; width:100%;
+    /* 适配全面屏底部安全区 */
+    padding-bottom:env(safe-area-inset-bottom, 8px);
+  }
+  .home-bar { position:fixed; bottom:env(safe-area-inset-bottom, 8px); }
+  /* 各页可滚动区适配 */
+  #page-home .screen-content { height:calc(100dvh - 114px); }
+  #page-locate .quiz-body    { height:calc(100dvh - 114px - 47px); }
+  .result-body               { height:calc(100dvh - 114px - 47px); }
+}
+
+/* 院校卡片 foot 区间距收窄，防止在 390px 内溢出 */
+.metrics { gap:12px; }
+.school-foot { gap:8px; }
 </style>
 </head>
 <body>
@@ -783,13 +806,19 @@ function navigate(page) {
   if (page === 'sandbox') setTimeout(() => { fixSandboxHeight(); SandboxModule.onShow(); }, 50);
 }
 
+function screenH(pageId) {
+  const s = document.querySelector(pageId + ' .screen');
+  return (s && s.offsetHeight > 100 ? s.offsetHeight : null) || window.innerHeight;
+}
+
 function fixSchoolsHeight() {
   const screen = document.querySelector('#page-explore .screen');
   const el = document.getElementById('schools-list');
   const tabbar = document.querySelector('#page-explore .tabbar');
   if (!el || !tabbar || !screen) return;
+  const h = screenH('#page-explore');
   const top = el.getBoundingClientRect().top - screen.getBoundingClientRect().top;
-  el.style.height = (844 - top - tabbar.offsetHeight) + 'px';
+  el.style.height = Math.max(120, h - top - tabbar.offsetHeight) + 'px';
 }
 
 function fixSandboxHeight() {
@@ -798,8 +827,9 @@ function fixSandboxHeight() {
   const status = document.querySelector('#page-sandbox .status');
   const topnav = document.querySelector('#page-sandbox .topnav');
   if (!body || !tabbar) return;
+  const h = screenH('#page-sandbox');
   const used = (status?.offsetHeight || 47) + (topnav?.offsetHeight || 44);
-  body.style.height = (844 - used - tabbar.offsetHeight) + 'px';
+  body.style.height = Math.max(120, h - used - tabbar.offsetHeight) + 'px';
 }
 
 /* ── Filter drawer ── */
