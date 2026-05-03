@@ -444,6 +444,11 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 /* 院校卡片 foot 区间距收窄，防止在 390px 内溢出 */
 .metrics { gap:12px; }
 .school-foot { gap:8px; }
+
+/* PWA 独立模式：隐藏首页模拟 iOS 状态栏（系统真实状态栏已叠加在上方） */
+@media (display-mode: standalone) {
+  #page-home .status { display: none; }
+}
 </style>
 </head>
 <body>
