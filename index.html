@@ -430,6 +430,14 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
   #page-home .screen-content { height:calc(100dvh - 114px - env(safe-area-inset-top, 0px)); }
   #page-locate .quiz-body    { height:calc(100dvh - 114px - 47px - env(safe-area-inset-top, 0px)); }
   .result-body               { height:calc(100dvh - 114px - 47px - env(safe-area-inset-top, 0px)); }
+
+  /* 探索页：flex 列布局，school 列表自动填充剩余高度，彻底消除卡片重叠 */
+  #page-explore .screen { display:flex; flex-direction:column; }
+  #page-explore .schools {
+    flex:1; min-height:0;
+    height:auto !important;          /* 覆盖 JS 内联样式 */
+    padding-bottom:calc(114px + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 
@@ -802,6 +810,8 @@ function screenH(pageId) {
 }
 
 function fixSchoolsHeight() {
+  /* 移动端用 CSS flex 自动填充，跳过 JS 计算 */
+  if (window.innerWidth <= 430) return;
   const screen = document.querySelector('#page-explore .screen');
   const el = document.getElementById('schools-list');
   const tabbar = document.querySelector('#page-explore .tabbar');
