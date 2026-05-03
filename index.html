@@ -112,9 +112,8 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .tab .ic svg{display:block;}
 .tab .lbl{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;letter-spacing:.3px;}
 .tab.active{color:var(--tab-active);}
-.tab.active::after{content:"";position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);
-  width:16px;height:2px;border-radius:2px;background:var(--tab-active);}
-[data-theme="dark"] .tab.active::after{box-shadow:0 0 8px rgba(255,107,107,.6);}
+.tab.active::after{display:none;}
+
 .home-bar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
   width:134px;height:5px;border-radius:3px;background:var(--home-indicator);z-index:8;transition:var(--transition);}
 
@@ -436,10 +435,6 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
   .home-bar { display: none; }
 }
 
-/* PWA 独立模式：恢复 home bar（贴合系统安全区视觉） */
-@media (display-mode: standalone) {
-  .home-bar { display: block; }
-}
 
 /* 院校卡片 foot 区间距收窄，防止在 390px 内溢出 */
 .metrics { gap:12px; }
