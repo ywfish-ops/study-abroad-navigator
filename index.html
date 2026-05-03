@@ -112,10 +112,9 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .tab .ic svg{display:block;}
 .tab .lbl{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;letter-spacing:.3px;}
 .tab.active{color:var(--tab-active);}
-.tab.active::after{display:none;}
+.tab.active::after{content:"";position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);
+  width:16px;height:2px;border-radius:2px;background:var(--tab-active);}
 
-.home-bar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
-  width:134px;height:5px;border-radius:3px;background:var(--home-indicator);z-index:8;transition:var(--transition);}
 
 /* ── Home ── */
 #page-home .screen-content{position:relative;z-index:5;height:calc(844px - 114px);overflow-y:auto;scrollbar-width:none;}
@@ -431,8 +430,6 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
   #page-home .screen-content { height:calc(100dvh - 114px - env(safe-area-inset-top, 0px)); }
   #page-locate .quiz-body    { height:calc(100dvh - 114px - 47px - env(safe-area-inset-top, 0px)); }
   .result-body               { height:calc(100dvh - 114px - 47px - env(safe-area-inset-top, 0px)); }
-  /* 浏览器模式隐藏模拟 home bar */
-  .home-bar { display: none; }
 }
 
 
@@ -514,7 +511,6 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
     <div class="tab" onclick="navigate('locate')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M12 2L4 12.5H10.5L9.5 20L18 9.5H11.5L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">定位</div></div>
     <div class="tab" onclick="navigate('sandbox')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 6.5V15.5M13.5 8.5C13.5 8.5 12.5 7.8 11 7.8C9.5 7.8 8.7 8.5 8.7 9.5C8.7 12 13.3 11 13.3 13.5C13.3 14.5 12.5 15.2 11 15.2C9.5 15.2 8.5 14.5 8.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="lbl">预算</div></div>
   </nav>
-  <div class="home-bar"></div>
 </div>
 </div>
 
@@ -596,7 +592,6 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
     <div class="tab" onclick="navigate('locate')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M12 2L4 12.5H10.5L9.5 20L18 9.5H11.5L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">定位</div></div>
     <div class="tab" onclick="navigate('sandbox')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 6.5V15.5M13.5 8.5C13.5 8.5 12.5 7.8 11 7.8C9.5 7.8 8.7 8.5 8.7 9.5C8.7 12 13.3 11 13.3 13.5C13.3 14.5 12.5 15.2 11 15.2C9.5 15.2 8.5 14.5 8.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="lbl">预算</div></div>
   </nav>
-  <div class="home-bar"></div>
 </div>
 </div>
 
@@ -629,7 +624,6 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
     <div class="tab active" onclick="navigate('locate')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M12 2L4 12.5H10.5L9.5 20L18 9.5H11.5L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">定位</div></div>
     <div class="tab" onclick="navigate('sandbox')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 6.5V15.5M13.5 8.5C13.5 8.5 12.5 7.8 11 7.8C9.5 7.8 8.7 8.5 8.7 9.5C8.7 12 13.3 11 13.3 13.5C13.3 14.5 12.5 15.2 11 15.2C9.5 15.2 8.5 14.5 8.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="lbl">预算</div></div>
   </nav>
-  <div class="home-bar"></div>
 </div>
 </div>
 
@@ -707,7 +701,6 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
     <div class="tab active" onclick="navigate('locate')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M12 2L4 12.5H10.5L9.5 20L18 9.5H11.5L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">定位</div></div>
     <div class="tab" onclick="navigate('sandbox')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 6.5V15.5M13.5 8.5C13.5 8.5 12.5 7.8 11 7.8C9.5 7.8 8.7 8.5 8.7 9.5C8.7 12 13.3 11 13.3 13.5C13.3 14.5 12.5 15.2 11 15.2C9.5 15.2 8.5 14.5 8.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="lbl">预算</div></div>
   </nav>
-  <div class="home-bar"></div>
 </div>
 </div>
 
@@ -789,7 +782,6 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
     <div class="tab" onclick="navigate('locate')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M12 2L4 12.5H10.5L9.5 20L18 9.5H11.5L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">定位</div></div>
     <div class="tab active" onclick="navigate('sandbox')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 6.5V15.5M13.5 8.5C13.5 8.5 12.5 7.8 11 7.8C9.5 7.8 8.7 8.5 8.7 9.5C8.7 12 13.3 11 13.3 13.5C13.3 14.5 12.5 15.2 11 15.2C9.5 15.2 8.5 14.5 8.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="lbl">预算</div></div>
   </nav>
-  <div class="home-bar"></div>
 </div>
 </div>
 
