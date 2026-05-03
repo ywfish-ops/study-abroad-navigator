@@ -445,6 +445,47 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .metrics { gap:12px; }
 .school-foot { gap:8px; }
 
+/* ── 学校详情底部抽屉 ── */
+.sheet-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;opacity:0;pointer-events:none;transition:opacity .25s ease;}
+.sheet-overlay.open{opacity:1;pointer-events:auto;}
+.sheet{position:fixed;bottom:0;left:0;right:0;max-height:88vh;
+  background:var(--screen-bg);border-radius:20px 20px 0 0;z-index:201;
+  transform:translateY(100%);transition:transform .32s cubic-bezier(.32,.72,0,1);
+  display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0px);}
+.sheet.open{transform:translateY(0);}
+.sheet-handle{width:36px;height:4px;border-radius:2px;background:var(--text-tertiary);
+  margin:12px auto 0;flex-shrink:0;opacity:.35;}
+.sheet-header{padding:16px 20px 12px;display:flex;align-items:flex-start;gap:12px;flex-shrink:0;
+  border-bottom:1px solid var(--divider);}
+.sheet-title{font-family:'Noto Sans SC',sans-serif;font-size:19px;font-weight:700;
+  color:var(--text-primary);line-height:1.25;margin-bottom:4px;}
+.sheet-eng-name{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-secondary);}
+.sheet-meta{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:var(--text-tertiary);margin-top:5px;}
+.sheet-close{width:28px;height:28px;border-radius:50%;background:var(--bg-secondary);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-top:2px;}
+.sheet-body{overflow-y:auto;padding:16px 20px 8px;flex:1;min-height:0;scrollbar-width:none;}
+.sheet-body::-webkit-scrollbar{display:none;}
+.sheet-section{margin-bottom:20px;}
+.sheet-section-title{font-family:'Noto Sans SC',sans-serif;font-size:9.5px;font-weight:600;
+  letter-spacing:2px;color:var(--text-tertiary);text-transform:uppercase;margin-bottom:10px;}
+.sheet-row{display:flex;justify-content:space-between;align-items:baseline;
+  padding:6px 0;border-bottom:1px solid var(--divider);}
+.sheet-row:last-child{border-bottom:none;}
+.sheet-label{font-family:'Noto Sans SC',sans-serif;font-size:13px;color:var(--text-secondary);}
+.sheet-value{font-family:'Inter','Noto Sans SC',sans-serif;font-size:13px;font-weight:600;
+  color:var(--text-primary);text-align:right;max-width:62%;}
+.sheet-majors{display:flex;flex-wrap:wrap;gap:6px;}
+.sheet-major-tag{padding:4px 10px;border-radius:999px;background:var(--bg-secondary);
+  border:1px solid var(--divider);font-family:'Noto Sans SC',sans-serif;font-size:11px;color:var(--text-secondary);}
+.sheet-note{font-family:'Noto Sans SC',sans-serif;font-size:12px;color:var(--text-secondary);
+  line-height:1.65;padding:10px 12px;background:var(--bg-secondary);border-radius:10px;margin-top:6px;}
+.sheet-footer{padding:12px 20px;border-top:1px solid var(--divider);flex-shrink:0;}
+.sheet-add-btn{width:100%;padding:13px;border-radius:12px;background:var(--accent);
+  color:#fff;font-family:'Noto Sans SC',sans-serif;font-size:15px;font-weight:600;
+  border:none;cursor:pointer;transition:opacity .2s;}
+.sheet-add-btn:active{opacity:.8;}
+.sheet-add-btn.added{background:var(--tag-wen-bg);color:var(--tag-wen-color);}
+
 </style>
 </head>
 <body>
@@ -898,6 +939,7 @@ window.ExplorerModule = (function() {
   let _sort = 'rank';
   let _compare = [];
   let _loaded = false;
+  let _sheetId = null;
 
   function getCompare() {
     try { return JSON.parse(localStorage.getItem(COMPARE_KEY) || '[]'); } catch { return []; }
@@ -1025,7 +1067,7 @@ window.ExplorerModule = (function() {
     const compareLabel = inCompare ? '✓ 已加入' : '+ 加入对比';
     const compareClass = inCompare ? 'add-compare-btn added' : 'add-compare-btn';
 
-    return `<div class="school ${countryClass}">
+    return `<div class="school ${countryClass}" onclick="ExplorerModule.openDetail('${school.id}')">
   <div class="stripe"></div>
   <div class="school-head">
     <div class="school-info">
@@ -1043,7 +1085,7 @@ window.ExplorerModule = (function() {
     </div>
     <div class="actions">
       ${diff ? `<span class="tag ${tagClass}">${diff}</span>` : ''}
-      <div class="${compareClass}" onclick="ExplorerModule.toggleCompare('${school.id}',this)">${compareLabel}</div>
+      <div class="${compareClass}" onclick="event.stopPropagation();ExplorerModule.toggleCompare('${school.id}',this)">${compareLabel}</div>
     </div>
   </div>
 </div>`;
@@ -1172,6 +1214,114 @@ window.ExplorerModule = (function() {
     CNY_RATE,
     toUSD,
     fourYearCNY,
+    openDetail(id) {
+      const s = _schools.find(sch => sch.id === id);
+      if (!s) return;
+      const CNAMES = { US:'美国', GB:'英国', HK:'香港', SG:'新加坡', CA:'加拿大', AU:'澳大利亚' };
+      const SNAMES = { urban:'城市型', suburban:'郊区型', rural:'小镇型' };
+      const TNAMES = { public:'公立', private:'私立', 'public-research':'公立研究型' };
+      const COMMS  = { large:'大型', medium:'中型', small:'小型' };
+      const row = (l, v) => `<div class="sheet-row"><span class="sheet-label">${l}</span><span class="sheet-value">${v}</span></div>`;
+
+      document.getElementById('sheet-name').textContent = s.name_zh || s.name_en;
+      document.getElementById('sheet-eng').textContent  = s.name_en || '';
+      document.getElementById('sheet-meta').textContent =
+        [TNAMES[s.type], s.city, SNAMES[s.campus_setting], CNAMES[s.country]].filter(Boolean).join(' · ');
+
+      let html = '';
+
+      /* 排名 */
+      const ranks = [];
+      if (s.qs_rank_2025)           ranks.push(['QS 2025', `#${s.qs_rank_2025}`]);
+      if (s.usnews_global_rank_2025) ranks.push(['USNews 全球', `#${s.usnews_global_rank_2025}`]);
+      if (s.usnews_rank_2026)        ranks.push(['USNews 2026', `#${s.usnews_rank_2026}`]);
+      if (ranks.length) {
+        html += `<div class="sheet-section"><div class="sheet-section-title">排名</div>`;
+        ranks.forEach(([l, v]) => { html += row(l, v); });
+        html += `</div>`;
+      }
+
+      /* 入学要求 */
+      html += `<div class="sheet-section"><div class="sheet-section-title">入学要求</div>`;
+      if (s.acceptance_rate != null) html += row('录取率', (s.acceptance_rate * 100).toFixed(1) + '%');
+      if (s.gpa_avg)                 html += row('GPA 均值', s.gpa_avg.toFixed(2));
+      if (s.sat_range)               html += row('SAT', s.sat_range.join(' – '));
+      if (s.act_range)               html += row('ACT', s.act_range.join(' – '));
+      if (s.ielts_min)               html += row('IELTS', `≥ ${s.ielts_min}`);
+      if (s.toefl_min)               html += row('TOEFL', `≥ ${s.toefl_min}`);
+      if (s.application_system)      html += row('申请系统', s.application_system);
+      if (s.application_deadline_fall) {
+        const [m, d] = s.application_deadline_fall.split('-');
+        html += row('秋季截止', `${parseInt(m)}月${parseInt(d)}日`);
+      }
+      html += `</div>`;
+
+      /* 费用 */
+      html += `<div class="sheet-section"><div class="sheet-section-title">费用</div>`;
+      if (s.tuition_intl_annual) {
+        const cur = s.tuition_currency || 'USD';
+        const sym = { USD:'$', GBP:'£', HKD:'HK$', CAD:'CA$', AUD:'A$', SGD:'S$' }[cur] || cur;
+        html += row(`学费/年 (${cur})`, `${sym}${s.tuition_intl_annual.toLocaleString()}`);
+      }
+      if (s.avg_living_cost_annual) html += row('生活费/年 (USD)', `$${s.avg_living_cost_annual.toLocaleString()}`);
+      const total = s.tuition_intl_annual ? fourYearCNY(s) : null;
+      if (total) html += row('4年总计 (估算)', `约 ¥${total} 万`);
+      html += `</div>`;
+
+      /* 奖学金 */
+      if (s.scholarship_intl !== undefined || s.scholarship_notes) {
+        html += `<div class="sheet-section"><div class="sheet-section-title">奖学金</div>`;
+        if (s.scholarship_intl !== undefined) html += row('国际生奖学金', s.scholarship_intl ? '✓ 有' : '✗ 无');
+        if (s.scholarship_notes) html += `<div class="sheet-note">${s.scholarship_notes}</div>`;
+        html += `</div>`;
+      }
+
+      /* 热门专业 */
+      if (s.popular_majors && s.popular_majors.length) {
+        html += `<div class="sheet-section"><div class="sheet-section-title">热门专业</div>`;
+        html += `<div class="sheet-majors">${s.popular_majors.map(m => `<span class="sheet-major-tag">${m}</span>`).join('')}</div>`;
+        html += `</div>`;
+      }
+
+      /* 其他信息 */
+      const others = [];
+      if (s.post_study_work)             others.push(['毕业后工签', `${s.post_study_work} 个月`]);
+      if (s.coop_available !== undefined) others.push(['Co-op/实习项目', s.coop_available ? '✓ 有' : '✗ 无']);
+      if (s.chinese_student_community)   others.push(['中国学生社区', COMMS[s.chinese_student_community] || s.chinese_student_community]);
+      if (s.visa_type)                   others.push(['签证类型', s.visa_type]);
+      if (others.length) {
+        html += `<div class="sheet-section"><div class="sheet-section-title">其他</div>`;
+        others.forEach(([l, v]) => { html += row(l, v); });
+        html += `</div>`;
+      }
+
+      /* 备注 */
+      if (s.special_notes) html += `<div class="sheet-section"><div class="sheet-section-title">备注</div><div class="sheet-note">${s.special_notes}</div></div>`;
+
+      document.getElementById('sheet-body').innerHTML = html;
+      document.getElementById('sheet-body').scrollTop = 0;
+
+      _sheetId = id;
+      const inC = getCompare().includes(id);
+      const btn = document.getElementById('sheet-add-btn');
+      btn.textContent = inC ? '✓ 已加入财务对比' : '+ 加入财务对比';
+      btn.className = 'sheet-add-btn' + (inC ? ' added' : '');
+
+      document.getElementById('school-sheet-overlay').classList.add('open');
+      document.getElementById('school-sheet').classList.add('open');
+    },
+    closeDetail() {
+      document.getElementById('school-sheet-overlay').classList.remove('open');
+      document.getElementById('school-sheet').classList.remove('open');
+    },
+    sheetToggleCompare() {
+      if (!_sheetId) return;
+      this.toggleCompare(_sheetId, null);
+      const inC = getCompare().includes(_sheetId);
+      const btn = document.getElementById('sheet-add-btn');
+      btn.textContent = inC ? '✓ 已加入财务对比' : '+ 加入财务对比';
+      btn.className = 'sheet-add-btn' + (inC ? ' added' : '');
+    },
   };
 })();
 
@@ -1847,5 +1997,24 @@ document.addEventListener('DOMContentLoaded', () => {
   fixSandboxHeight();
 });
 </script>
+<!-- 学校详情底部抽屉 -->
+<div class="sheet-overlay" id="school-sheet-overlay" onclick="ExplorerModule.closeDetail()"></div>
+<div class="sheet" id="school-sheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-header">
+    <div style="flex:1;min-width:0;">
+      <div id="sheet-name" class="sheet-title"></div>
+      <div id="sheet-eng" class="sheet-eng-name"></div>
+      <div id="sheet-meta" class="sheet-meta"></div>
+    </div>
+    <div class="sheet-close" onclick="ExplorerModule.closeDetail()">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1L11 11M11 1L1 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+  <div class="sheet-body" id="sheet-body"></div>
+  <div class="sheet-footer">
+    <button class="sheet-add-btn" id="sheet-add-btn" onclick="ExplorerModule.sheetToggleCompare()">+ 加入财务对比</button>
+  </div>
+</div>
 </body>
 </html>
