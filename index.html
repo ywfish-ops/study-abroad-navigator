@@ -188,21 +188,13 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .school.ca{border-top:none;}.school.ca .stripe{background:linear-gradient(90deg,#FF4747,#FF8585);}
 .school.au{border-top:none;}.school.au .stripe{background:linear-gradient(90deg,#B8D43A,#E8E94A);}
 .school.sg{border-top:none;}.school.sg .stripe{background:linear-gradient(90deg,#FF6B6B,#fff);}
-.school-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
-.school-info{flex:1;min-width:0;}
-.school-name{font-family:'Noto Sans SC',sans-serif;font-size:17px;font-weight:700;color:var(--text-primary);letter-spacing:-.2px;line-height:1.2;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
-.school-name .flag{font-size:16px;}
-.school-eng{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-secondary);letter-spacing:.3px;margin-top:4px;}
-.rank{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--rank-bg);color:var(--rank-color);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;}
-.rank .rank-prefix{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.5px;opacity:.65;margin-bottom:1px;}
-.rank .rank-num{font-family:'Inter',sans-serif;font-size:16px;font-weight:700;letter-spacing:-.5px;}
-.school-divider{height:1px;background:var(--divider);margin:12px 0 11px;}
-.school-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;}
-.metrics{display:flex;gap:22px;}
-.metric{display:flex;flex-direction:column;gap:3px;}
-.metric-label{font-family:'Noto Sans SC',sans-serif;font-size:10px;color:var(--text-secondary);letter-spacing:.2px;}
-.metric-value{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;color:var(--text-primary);letter-spacing:-.3px;}
-.actions{display:flex;align-items:center;gap:8px;}
+.school-badge-row{display:flex;align-items:center;gap:8px;margin-bottom:9px;}
+.flag{font-size:16px;}
+.school-name{font-family:'Noto Sans SC',sans-serif;font-size:17px;font-weight:700;color:var(--text-primary);letter-spacing:-.2px;line-height:1.25;margin-bottom:3px;}
+.school-eng{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-secondary);letter-spacing:.3px;margin-bottom:10px;}
+.school-stats{font-family:'Inter','Noto Sans SC',sans-serif;font-size:13px;color:var(--text-secondary);margin-bottom:12px;display:flex;flex-wrap:wrap;align-items:center;gap:4px;}
+.stat-sep{color:var(--text-tertiary);}
+.school-action{display:flex;justify-content:flex-end;}
 .tag{display:inline-flex;align-items:center;padding:4px 10px;font-family:'Noto Sans SC',sans-serif;font-size:11px;font-weight:600;border-radius:999px;letter-spacing:.5px;}
 .tag.chong{background:var(--tag-chong-bg);color:var(--tag-chong-color);}
 .tag.wen{background:var(--tag-wen-bg);color:var(--tag-wen-color);}
@@ -441,9 +433,6 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 }
 
 
-/* 院校卡片 foot 区间距收窄，防止在 390px 内溢出 */
-.metrics { gap:12px; }
-.school-foot { gap:8px; }
 
 /* ── 学校详情底部抽屉 ── */
 .sheet-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;opacity:0;pointer-events:none;transition:opacity .25s ease;}
@@ -1061,32 +1050,25 @@ window.ExplorerModule = (function() {
       ? `<div class="rank"><div class="rank-prefix">${rank.prefix}</div><div class="rank-num">${rank.num}</div></div>`
       : `<div class="rank" style="font-size:9px;padding:4px">未入榜</div>`;
 
-    const budgetHtml = fourYr
-      ? `<div class="metric"><div class="metric-label">4年预算</div><div class="metric-value">¥${fourYr}万</div></div>` : '';
+    const statsItems = [];
+    if (rank) statsItems.push(`${rank.prefix} ${rank.num}`);
+    if (fourYr) statsItems.push(`4年约 ¥${fourYr}万`);
+    const statsHtml = statsItems.join('<span class="stat-sep"> · </span>');
 
-    const compareLabel = inCompare ? '✓ 已加入' : '+ 加入对比';
+    const compareLabel = inCompare ? '✓ 已加入' : '加入财务对比 →';
     const compareClass = inCompare ? 'add-compare-btn added' : 'add-compare-btn';
 
     return `<div class="school ${countryClass}" onclick="ExplorerModule.openDetail('${school.id}')">
   <div class="stripe"></div>
-  <div class="school-head">
-    <div class="school-info">
-      <div class="school-name"><span class="flag">${flag}</span>${school.name_zh || school.name_en}</div>
-      <div class="school-eng">${school.name_en || ''}</div>
-    </div>
-    ${rankHtml}
+  <div class="school-badge-row">
+    <span class="flag">${flag}</span>
+    ${diff ? `<span class="tag ${tagClass}">${diff}</span>` : ''}
   </div>
-  <div class="school-divider"></div>
-  <div class="school-foot">
-    <div class="metrics">
-      ${tuition !== '—' ? `<div class="metric"><div class="metric-label">学费/年</div><div class="metric-value">${tuition}</div></div>` : ''}
-      ${rate !== '—' ? `<div class="metric"><div class="metric-label">录取率</div><div class="metric-value">${rate}</div></div>` : ''}
-      ${budgetHtml}
-    </div>
-    <div class="actions">
-      ${diff ? `<span class="tag ${tagClass}">${diff}</span>` : ''}
-      <div class="${compareClass}" onclick="event.stopPropagation();ExplorerModule.toggleCompare('${school.id}',this)">${compareLabel}</div>
-    </div>
+  <div class="school-name">${school.name_zh || school.name_en}</div>
+  <div class="school-eng">${school.name_en || ''}</div>
+  ${statsHtml ? `<div class="school-stats">${statsHtml}</div>` : ''}
+  <div class="school-action">
+    <div class="${compareClass}" onclick="event.stopPropagation();ExplorerModule.toggleCompare('${school.id}',this)">${compareLabel}</div>
   </div>
 </div>`;
   }
@@ -1309,10 +1291,12 @@ window.ExplorerModule = (function() {
 
       document.getElementById('school-sheet-overlay').classList.add('open');
       document.getElementById('school-sheet').classList.add('open');
+      document.body.style.overflow = 'hidden';
     },
     closeDetail() {
       document.getElementById('school-sheet-overlay').classList.remove('open');
       document.getElementById('school-sheet').classList.remove('open');
+      document.body.style.overflow = '';
     },
     sheetToggleCompare() {
       if (!_sheetId) return;
