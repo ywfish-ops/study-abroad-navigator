@@ -445,8 +445,9 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .sheet{position:fixed;bottom:0;left:0;right:0;max-height:88vh;
   background:var(--screen-bg);border-radius:20px 20px 0 0;z-index:201;
   transform:translateY(100%);transition:transform .32s cubic-bezier(.32,.72,0,1);
-  display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0px);}
-.sheet.open{transform:translateY(0);}
+  display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0px);
+  pointer-events:none;}
+.sheet.open{transform:translateY(0);pointer-events:auto;}
 .sheet-handle{width:36px;height:4px;border-radius:2px;background:var(--text-tertiary);
   margin:12px auto 0;flex-shrink:0;opacity:.35;}
 .sheet-header{padding:16px 20px 12px;display:flex;align-items:flex-start;gap:12px;flex-shrink:0;
@@ -831,6 +832,8 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 <script>
 /* ── Navigation ── */
 function navigate(page) {
+  document.body.style.overflow = '';          // 确保 sheet 打开时导航不被锁死
+  ExplorerModule.closeDetail?.();             // 关闭可能残留的 sheet
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + page)?.classList.add('active');
   window.scrollTo(0, 0);
