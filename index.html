@@ -1056,16 +1056,12 @@ window.ExplorerModule = (function() {
 
     const rankHtml = rank
       ? `<div class="rank"><div class="rank-prefix">${rank.prefix}</div><div class="rank-num">${rank.num}</div></div>`
-      : `<div class="rank" style="font-size:9px;padding:4px">未入榜</div>`;
+      : '';
 
     const statsItems = [];
     if (rank) statsItems.push(`${rank.prefix}&nbsp;${rank.num}`);
     if (fourYr) statsItems.push(`4年约&nbsp;¥${fourYr}万`);
     const statsHtml = statsItems.join('<span class="stat-sep"> · </span>');
-
-    const rankHtml = rank
-      ? `<div class="rank"><div class="rank-prefix">${rank.prefix}</div><div class="rank-num">${rank.num}</div></div>`
-      : '';
 
     const compareLabel = inCompare ? '✓ 已加入' : '加入对比 →';
     const compareClass = inCompare ? 'add-compare-btn added' : 'add-compare-btn';
