@@ -149,7 +149,7 @@ const RecommenderModule = (() => {
       english_test: 'ielts',
       english_score: null,
       ec_level: 'good',
-      target_countries: ['US', 'GB'],
+      target_countries: [],
       major_interest: 'cs',
       budget_usd: '30–50k',
       priority: 'ranking',
@@ -1325,11 +1325,11 @@ GPA：${p.gpa_us ?? '—'}，英语：${p.english_test.toUpperCase()} ${p.englis
     });
   }
 
-  /** 重置：清空结果，滚回表单顶部 */
+  /** 重置：清空结果，滚回页面顶部（保持 topnav 可见） */
   function reset() {
     updateState({ results: null });
-    const wrap = document.getElementById('rec-root');
-    if (wrap) wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // 走文档级滚动；用 scrollIntoView({block:'start'}) 会把 topnav 推出屏幕
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   // ── 内部事件处理（供 HTML 内联调用） ────────────────────────────────────
