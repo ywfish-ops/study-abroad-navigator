@@ -135,32 +135,35 @@ const RecommenderModule = (() => {
 
   // ── 全局状态 ─────────────────────────────────────────────────────────────
 
+  /** 出厂默认画像 — reset() 用它做深拷贝重置 */
+  const DEFAULT_PROFILE = {
+    curriculum: 'ap',
+    score_ap: null,
+    score_ap_avg: '4',
+    score_alevel: 'AAA',
+    score_ib: null,
+    gpa_us: null,
+    english_test: 'ielts',
+    english_score: null,
+    ec_level: 'good',
+    target_countries: [],
+    major_interest: 'cs',
+    budget_usd: '30–50k',
+    priority: 'ranking',
+    scholarship_only: false,
+    test_optional_apply: false,          // 以免标化方式申请（不提交 SAT/ACT）
+    uk_written_tests: { tmua:'na', esat:'na', mat:'na', pat:'na', step:'na', lnat:'na', tsa:'na' },
+    competitions: [],                    // 竞赛奖项（多项）[{ comp, medal }]
+    research_exp: 'none',               // 研究经历: 'none' | 'basic' | 'strong'
+    leadership: 'none',                 // 校内任职: 'none' | 'officer' | 'founder'
+    community_service: 'none',          // 公益活动: 'none' | 'regular' | 'impact'
+  };
+
   const state = {
     schools: [],        // 清洗后的院校数组
     loading: false,
     error: null,
-    profile: {
-      curriculum: 'ap',
-      score_ap: null,
-      score_ap_avg: '4',
-      score_alevel: 'AAA',
-      score_ib: null,
-      gpa_us: null,
-      english_test: 'ielts',
-      english_score: null,
-      ec_level: 'good',
-      target_countries: [],
-      major_interest: 'cs',
-      budget_usd: '30–50k',
-      priority: 'ranking',
-      scholarship_only: false,
-      test_optional_apply: false,          // 以免标化方式申请（不提交 SAT/ACT）
-      uk_written_tests: { tmua:'na', esat:'na', mat:'na', pat:'na', step:'na', lnat:'na', tsa:'na' },
-      competitions: [],                    // 竞赛奖项（多项）[{ comp, medal }]
-      research_exp: 'none',               // 研究经历: 'none' | 'basic' | 'strong'
-      leadership: 'none',                 // 校内任职: 'none' | 'officer' | 'founder'
-      community_service: 'none',          // 公益活动: 'none' | 'regular' | 'impact'
-    },
+    profile: JSON.parse(JSON.stringify(DEFAULT_PROFILE)),
     results: null,       // null=未计算; []=无结果; [...]=有结果
   };
 
@@ -1325,10 +1328,18 @@ GPA：${p.gpa_us ?? '—'}，英语：${p.english_test.toUpperCase()} ${p.englis
     });
   }
 
-  /** 重置：清空结果，滚回页面顶部（保持 topnav 可见） */
+  /** 重置：清空结果 + 把 profile 还原到出厂默认 + 清掉 localStorage */
   function reset() {
-    updateState({ results: null });
-    // 走文档级滚动；用 scrollIntoView({block:'start'}) 会把 topnav 推出屏幕
+    state.profile = JSON.parse(JSON.stringify(DEFAULT_PROFILE));
+    state.results = null;
+    try { localStorage.removeItem('1b_profile'); } catch (_) {}
+    // 隐藏可能挂着的"偏好已变更"banner
+    const banner = document.getElementById('rec-change-banner');
+    if (banner) banner.style.display = 'none';
+    // 强制重建表单（清空 input 显示值、chip 选中态）
+    const root = document.getElementById('rec-root');
+    if (root) root.innerHTML = '';
+    render();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
