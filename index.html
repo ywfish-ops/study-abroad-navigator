@@ -429,8 +429,10 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 
 /* ── Mobile fullscreen ──────────────────────────────────────
    手机直接打开时：填满屏幕，tabbar 固定底部
+   PWA standalone 同样走这套规则——避免首帧 viewport 探测延迟
+   导致 desktop 居中布局闪现，引发 tabbar 悬空。
 ─────────────────────────────────────────────────────────── */
-@media (max-width: 430px) {
+@media (max-width: 430px), (display-mode: standalone) {
   body { display:block; min-height:100dvh; overflow-x:hidden; }
   .screen {
     max-width:100vw;
@@ -445,6 +447,16 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
     position:fixed !important;
     bottom:0; left:0; right:0; width:100%;
     padding:6px 12px env(safe-area-inset-bottom, 6px);
+  }
+  /* 兜底：若首帧 dvh / safe-area 尚未就绪，tabbar 与屏底之间出现缝隙时，
+     用同色伪元素延伸到屏外，遮住可能的"悬空"视觉。 */
+  .tabbar::after {
+    content:'';
+    position:absolute;
+    left:0; right:0;
+    top:100%; height:80px;
+    background:var(--tabbar-bg);
+    pointer-events:none;
   }
   /* 各页可滚动区：扣除顶部安全区 */
   #page-home .screen-content { height:calc(100dvh - var(--tabbar-h) - env(safe-area-inset-top, 0px)); }
@@ -590,6 +602,19 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 @media (max-width: 430px){
   #page-recommender .screen{height:auto !important;min-height:100dvh;padding-bottom:calc(var(--tabbar-h) + 12px);}
   .rec-body{height:auto !important;overflow:visible !important;-webkit-overflow-scrolling:auto !important;}
+
+  /* topnav 贴顶常驻：fixed 而非 sticky（.screen overflow:hidden 会让 sticky 退化为静态）。
+     滚多长内容都能看到「联申定位 / 重填」入口，避免被滚走。*/
+  #page-recommender .topnav{
+    position:fixed;
+    top:env(safe-area-inset-top, 0px);
+    left:0;right:0;
+    z-index:10;
+    padding:8px 20px;
+    background:transparent;
+  }
+  /* 给 fixed topnav 让位（topnav 高 ~44px） */
+  #page-recommender .rec-body{padding-top:44px;}
 }
 
 /* ── 学校详情底部抽屉 ── */
@@ -819,25 +844,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
     </div>
   </div>
   <div class="quiz-body" id="quiz-body">
-    <div id="quiz-container">
-      <div class="quiz-start-screen">
-        <div class="quiz-start-icon">🎯</div>
-        <div class="quiz-start-title">学术画像测试</div>
-        <div class="quiz-start-desc">20 道题，5 个维度，找到最适合你的学术环境和申请策略。</div>
-        <div class="quiz-start-features">
-          <div class="quiz-start-feat"><div class="quiz-start-feat-badge">5</div><div class="quiz-start-feat-text">学习驱动 · 环境偏好 · 风险承受 · 职业方向 · 身份认同</div></div>
-          <div class="quiz-start-feat"><div class="quiz-start-feat-badge">8</div><div class="quiz-start-feat-text">种学术画像类型，匹配推荐院校风格</div></div>
-          <div class="quiz-start-feat"><div class="quiz-start-feat-badge">8'</div><div class="quiz-start-feat-text">约 8 分钟完成，结果保存本地</div></div>
-        </div>
-        <div class="quiz-start-hint">
-          很多同学在这里第一次看清自己真正适合什么。<br/>
-          测试结果将直接影响你的选校策略。
-        </div>
-        <div class="quiz-nav" style="width:100%;padding-top:20px">
-          <div class="quiz-btn-next ready" onclick="QuizModule.start()">开始测试 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3L9 7L5 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        </div>
-      </div>
-    </div>
+    <div id="quiz-container"></div>
   </div>
   <nav class="tabbar">
     <div class="tab" onclick="navigate('home')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 9.5L11 3L19 9.5V19H14V14H8V19H3V9.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">首页</div></div>
@@ -1066,6 +1073,7 @@ function navigate(page) {
   if (page === 'result')  setTimeout(initRadar, 100);
   if (page === 'sandbox') setTimeout(() => { fixSandboxHeight(); SandboxModule.onShow(); }, 50);
   if (page === 'recommender') setTimeout(() => { window.RecommenderModule?.init?.(); }, 50);
+  if (page === 'locate')  setTimeout(() => { window.QuizModule?.init?.(); }, 0);
 }
 
 function screenH(pageId) {
@@ -2002,7 +2010,51 @@ window.QuizModule = (function() {
     });
   }
 
+  // 起始屏模板：根据本地是否已有结果，按需追加"再次查看上次结果"入口
+  function startScreenHtml() {
+    const hasResult = !!localStorage.getItem(QUIZ_KEY);
+    const startText = hasResult ? '重新测试' : '开始测试';
+    const viewLink = hasResult ? `
+      <div onclick="QuizModule.viewResult()" style="cursor:pointer;font-family:'Noto Sans SC',sans-serif;font-size:13.5px;font-weight:500;color:var(--accent);text-align:center;padding:14px 16px 0;width:100%;letter-spacing:.2px">
+        再次查看上次结果 →
+      </div>` : '';
+    return `
+      <div class="quiz-start-screen">
+        <div class="quiz-start-icon">🎯</div>
+        <div class="quiz-start-title">学术画像测试</div>
+        <div class="quiz-start-desc">20 道题，5 个维度，找到最适合你的学术环境和申请策略。</div>
+        <div class="quiz-start-features">
+          <div class="quiz-start-feat"><div class="quiz-start-feat-badge">5</div><div class="quiz-start-feat-text">学习驱动 · 环境偏好 · 风险承受 · 职业方向 · 身份认同</div></div>
+          <div class="quiz-start-feat"><div class="quiz-start-feat-badge">8</div><div class="quiz-start-feat-text">种学术画像类型，匹配推荐院校风格</div></div>
+          <div class="quiz-start-feat"><div class="quiz-start-feat-badge">8'</div><div class="quiz-start-feat-text">约 8 分钟完成，结果保存本地</div></div>
+        </div>
+        <div class="quiz-start-hint">
+          很多同学在这里第一次看清自己真正适合什么。<br/>
+          测试结果将直接影响你的选校策略。
+        </div>
+        <div class="quiz-nav" style="width:100%;padding-top:20px">
+          <div class="quiz-btn-next ready" onclick="QuizModule.start()">${startText} <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3L9 7L5 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        ${viewLink}
+      </div>`;
+  }
+
   return {
+    /** 进入定位页时调用：若不在做题中，则刷新起始屏（反映最新的"已有结果"状态） */
+    init() {
+      const c = ct();
+      if (!c) return;
+      // 正在做题中（DOM 中有进度条）→ 保持现状，不打断
+      if (c.querySelector('.quiz-progress-wrap')) return;
+      c.innerHTML = startScreenHtml();
+    },
+    /** 直接跳到结果页查看上次保存的画像 */
+    viewResult() {
+      let saved = null;
+      try { saved = JSON.parse(localStorage.getItem(QUIZ_KEY) || 'null'); } catch {}
+      if (!saved) { showToast('暂无结果记录，请先完成测试'); return; }
+      renderResult(saved);
+    },
     start() {
       _idx = 0; _answers = {}; _needsClarify = false;
       _currentRound = {}; _roundAnswers = {}; _roundScores = {}; _scaleAnswers = {};
@@ -2318,6 +2370,8 @@ document.addEventListener('DOMContentLoaded', () => {
   fixSandboxHeight();
   setupSheetDrag();
   pinTabbarToBottom();
+  // 学术定位起始屏：首次进入即根据是否已有结果决定是否显示"再次查看"
+  window.QuizModule?.init?.();
 });
 // PWA 从后台恢复 / iOS Home 切回时也校正一次
 window.addEventListener('pageshow', pinTabbarToBottom);
