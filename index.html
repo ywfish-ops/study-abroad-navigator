@@ -586,14 +586,10 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 /* 雷达图（如有 canvas） */
 #page-recommender canvas{max-width:100%;}
 
-/* 移动端：1B 也走文档级滚动 + topnav 贴顶常驻 */
+/* 移动端：1B 走文档级滚动（与 explore / sandbox 一致） */
 @media (max-width: 430px){
   #page-recommender .screen{height:auto !important;min-height:100dvh;overflow:visible !important;padding-bottom:calc(var(--tabbar-h) + 12px);}
-  .rec-body{height:auto !important;overflow:visible !important;}
-  /* 表单很长，topnav 贴在视口顶部，方便随时返回/重填，不用滚回去 */
-  #page-recommender .topnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;
-    background:var(--tabbar-bg);border-bottom:1px solid var(--tabbar-border);
-    padding:10px 20px;margin:0;}
+  .rec-body{height:auto !important;overflow:visible !important;-webkit-overflow-scrolling:auto !important;}
 }
 
 /* ── 学校详情底部抽屉 ── */
@@ -2263,15 +2259,8 @@ function setupSheetDrag() {
   const drag  = document.getElementById('sheet-drag');
   const header = sheet?.querySelector('.sheet-header');
   if (!sheet || !drag || !header) return;
-  let startY = 0, lastY = 0, dragging = false, startT = 0;
-  const onStart = (e) => {
-    if (e.target.closest('.sheet-close')) return;
-    const y = e.touches ? e.touches[0].clientY : e.clientY;
-    startY = lastY = y; startT = Date.now(); dragging = true;
-    sheet.style.transition = 'none';
-  };
+  let startY = 0, lastY = 0, startT = 0;
   const onMove = (e) => {
-    if (!dragging) return;
     const y = e.touches ? e.touches[0].clientY : e.clientY;
     lastY = y;
     const dy = Math.max(0, y - startY);
@@ -2279,25 +2268,35 @@ function setupSheetDrag() {
     if (e.cancelable) e.preventDefault();
   };
   const onEnd = () => {
-    if (!dragging) return;
-    dragging = false;
     const dy = lastY - startY;
     const dt = Math.max(1, Date.now() - startT);
     const v  = dy / dt;
     sheet.style.transition = '';
     sheet.style.transform = '';
+    document.removeEventListener('touchmove', onMove, { passive: false });
+    document.removeEventListener('mousemove', onMove);
+    document.removeEventListener('touchend', onEnd);
+    document.removeEventListener('touchcancel', onEnd);
+    document.removeEventListener('mouseup', onEnd);
     if (dy > 100 || v > 0.5) ExplorerModule.closeDetail();
+  };
+  const onStart = (e) => {
+    if (e.target.closest('.sheet-close')) return;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+    startY = lastY = y; startT = Date.now();
+    sheet.style.transition = 'none';
+    // 仅在拖拽进行中挂监听，结束/释放即摘除——避免 passive:false 全局拦截 iOS 滚动判定
+    document.addEventListener('touchmove', onMove, { passive: false });
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('touchend', onEnd);
+    document.addEventListener('touchcancel', onEnd);
+    document.addEventListener('mouseup', onEnd);
   };
   // drag handle 区 + 抽屉 header 都可下滑关闭
   [drag, header].forEach(el => {
     el.addEventListener('touchstart', onStart, { passive: true });
     el.addEventListener('mousedown', onStart);
   });
-  document.addEventListener('touchmove', onMove, { passive: false });
-  document.addEventListener('mousemove', onMove);
-  document.addEventListener('touchend', onEnd);
-  document.addEventListener('touchcancel', onEnd);
-  document.addEventListener('mouseup', onEnd);
 }
 
 /* ── iOS PWA：解决首帧 safe-area 未就绪导致 tabbar 悬空 ── */
