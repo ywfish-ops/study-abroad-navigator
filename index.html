@@ -12,11 +12,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="recommender.js" defer></script>
 <style>
 /* ═══════════════════════════════════
    TOKENS
 ═══════════════════════════════════ */
-:root { --transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease; }
+:root { --transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease; --tabbar-h: 64px; }
 [data-theme="dark"] {
   --screen-bg: linear-gradient(180deg,#0F0C29 0%,#302B63 55%,#24243e 100%);
   --page-bg: #07060f; --text-primary: #fff;
@@ -103,21 +105,24 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .status{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;
   padding:16px 28px 6px;font-family:-apple-system,'SF Pro Text',system-ui;
   font-size:15px;font-weight:600;color:var(--text-primary);letter-spacing:.2px;transition:var(--transition);}
-.tabbar{position:absolute;left:0;right:0;bottom:0;height:114px;padding:10px 12px 34px;
+.tabbar{position:absolute;left:0;right:0;bottom:0;height:var(--tabbar-h);padding:6px 12px;
   background:var(--tabbar-bg);border-top:1px solid var(--tabbar-border);
-  display:grid;grid-template-columns:repeat(4,1fr);z-index:6;transition:var(--transition);}
+  display:grid;grid-template-columns:repeat(5,1fr);z-index:6;transition:var(--transition);
+  /* iOS PWA：进合成层 + 用 translateZ 锁底，防止首帧 safe-area 未就绪时悬空 */
+  transform:translate3d(0,0,0);-webkit-transform:translate3d(0,0,0);
+  will-change:transform;backface-visibility:hidden;}
 .tab{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:5px;padding-top:8px;color:var(--tab-inactive);cursor:pointer;transition:color .25s ease;}
+  gap:3px;padding-top:4px;color:var(--tab-inactive);cursor:pointer;transition:color .25s ease;}
 .tab .ic{width:22px;height:22px;display:flex;align-items:center;justify-content:center;}
 .tab .ic svg{display:block;}
-.tab .lbl{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;letter-spacing:.3px;}
+.tab .lbl{display:none;}
 .tab.active{color:var(--tab-active);}
-.tab.active::after{content:"";position:absolute;bottom:4px;left:50%;transform:translateX(-50%);
-  width:16px;height:2px;border-radius:2px;background:var(--tab-active);}
+.tab.active::after{content:"";position:absolute;bottom:2px;left:50%;transform:translateX(-50%);
+  width:14px;height:2px;border-radius:2px;background:var(--tab-active);}
 
 
 /* ── Home ── */
-#page-home .screen-content{position:relative;z-index:5;height:calc(844px - 114px);overflow-y:auto;scrollbar-width:none;}
+#page-home .screen-content{position:relative;z-index:5;height:calc(844px - var(--tabbar-h));overflow-y:auto;scrollbar-width:none;}
 #page-home .screen-content::-webkit-scrollbar{display:none;}
 .nav{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 24px 0;}
 .brand{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;letter-spacing:.4px;color:var(--brand-color);display:inline-flex;align-items:center;gap:8px;transition:var(--transition);}
@@ -137,6 +142,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .card.c1{border-top:none;}.card.c1 .topbar{background:linear-gradient(90deg,#FF6B6B,#FF8C69);}
 .card.c2{border-top:none;}.card.c2 .topbar{background:linear-gradient(90deg,#52C4A0,#70E8C5);}
 .card.c3{border-top:none;}.card.c3 .topbar{background:linear-gradient(90deg,#6B7BFF,#70B8FF);}
+.card.c4{border-top:none;}.card.c4 .topbar{background:linear-gradient(90deg,#9B5BFF,#D86BFF);}
 .card-row{display:flex;align-items:center;justify-content:space-between;gap:14px;}
 .card-left{flex:1;min-width:0;}
 .card-num{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:2px;color:var(--card-num-color);margin-bottom:4px;}
@@ -179,7 +185,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 #page-explore .screen{overflow:hidden;}
 .schools{position:relative;z-index:5;margin-top:10px;padding:0 20px 20px;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;gap:12px;}
 .schools::-webkit-scrollbar{display:none;}
-.school{position:relative;border-radius:18px;padding:14px 16px 14px 18px;background:var(--card-bg);border:1px solid var(--card-border);box-shadow:var(--card-shadow);overflow:hidden;cursor:pointer;transition:transform .25s ease,var(--transition);}
+.school{position:relative;flex-shrink:0;border-radius:18px;padding:14px 16px 14px 18px;background:var(--card-bg);border:1px solid var(--card-border);box-shadow:var(--card-shadow);overflow:hidden;cursor:pointer;transition:transform .25s ease,var(--transition);}
 .school:active{transform:scale(.985);}
 .school .stripe{position:absolute;top:-1px;left:-1px;right:-1px;height:3px;}
 .school.us{border-top:none;}.school.us .stripe{background:linear-gradient(90deg,#FF6B4A,#FF9A5C);}
@@ -196,17 +202,28 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .rank{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--rank-bg);color:var(--rank-color);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;}
 .rank .rank-prefix{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.5px;opacity:.65;margin-bottom:1px;}
 .rank .rank-num{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:-.5px;}
-.school-divider{height:1px;background:var(--divider);margin:12px 0 10px;}
-.school-stats{font-family:'Inter','Noto Sans SC',sans-serif;font-size:13px;color:var(--text-secondary);margin-bottom:10px;display:flex;flex-wrap:wrap;align-items:center;gap:4px;}
-.stat-sep{color:var(--text-tertiary);}
-.school-action{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.school-divider{height:1px;background:var(--divider);margin:12px 0 11px;}
+.school-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;}
+.metrics{display:flex;gap:22px;min-width:0;}
+.metric{display:flex;flex-direction:column;gap:3px;min-width:0;}
+.metric-label{font-family:'Noto Sans SC',sans-serif;font-size:10px;color:var(--text-secondary);letter-spacing:.2px;}
+.metric-value{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;color:var(--text-primary);letter-spacing:-.3px;}
+.actions{display:flex;align-items:center;gap:8px;flex-shrink:0;}
 .tag{display:inline-flex;align-items:center;padding:4px 10px;font-family:'Noto Sans SC',sans-serif;font-size:11px;font-weight:600;border-radius:999px;letter-spacing:.5px;}
 .tag.chong{background:var(--tag-chong-bg);color:var(--tag-chong-color);}
 .tag.wen{background:var(--tag-wen-bg);color:var(--tag-wen-color);}
 .tag.bao{background:var(--tag-bao-bg);color:var(--tag-bao-color);}
 .add-compare-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:999px;font-family:'Noto Sans SC',sans-serif;font-size:11px;font-weight:600;background:var(--accent-bg);border:1px solid var(--accent-border);color:var(--accent);cursor:pointer;transition:all .2s;white-space:nowrap;}
 .add-compare-btn.added{background:var(--tag-wen-bg);border-color:var(--tag-wen-color);color:var(--tag-wen-color);}
+.add-compare-btn.disabled{background:transparent;border-color:var(--card-border);color:var(--text-tertiary);opacity:.7;}
 .add-compare-btn:active{opacity:.75;}
+/* ── 轻提示 toast ── */
+.toast{position:fixed;top:60px;left:50%;transform:translate(-50%,-12px);z-index:300;
+  padding:10px 18px;border-radius:24px;background:rgba(20,20,28,.92);color:#fff;
+  font-family:'Noto Sans SC',sans-serif;font-size:13px;font-weight:500;letter-spacing:.2px;
+  box-shadow:0 6px 18px rgba(0,0,0,.18);
+  opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;}
+.toast.show{opacity:1;transform:translate(-50%,0);}
 
 /* Filter drawer */
 .filter-drawer{position:relative;z-index:5;margin:8px 20px 0;background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;overflow:hidden;max-height:0;opacity:0;pointer-events:none;transition:max-height .3s ease,opacity .25s ease;}
@@ -223,7 +240,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 
 /* ── Quiz ── */
 #page-locate .screen{overflow:hidden;}
-#page-locate .quiz-body{position:relative;z-index:5;height:calc(844px - 114px - 47px);overflow-y:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+#page-locate .quiz-body{position:relative;z-index:5;height:calc(844px - var(--tabbar-h) - 47px);overflow-y:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
 #page-locate .quiz-body::-webkit-scrollbar{display:none;}
 .quiz-progress-wrap{position:relative;z-index:5;padding:14px 24px 0;}
 .quiz-progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
@@ -277,7 +294,9 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .quiz-img-opt.selected .quiz-img-thumb{background:var(--accent-bg);}
 .quiz-img-caption{padding:8px 10px 10px;font-family:'Noto Sans SC',sans-serif;font-size:11.5px;line-height:1.4;color:var(--text-primary);}
 /* Quiz nav & start */
-.quiz-start-screen{padding:28px 24px 0;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.quiz-start-screen{padding:28px 24px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;
+  min-height:calc(844px - var(--tabbar-h) - 47px);box-sizing:border-box;}
+.quiz-start-screen .quiz-nav{margin-top:auto;padding-top:24px;}
 .quiz-start-icon{font-size:44px;margin-bottom:14px;}
 .quiz-start-title{font-family:'Noto Sans SC',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.3px;color:var(--text-primary);margin-bottom:8px;}
 .quiz-start-desc{font-family:'Noto Sans SC',sans-serif;font-size:13px;line-height:1.7;color:var(--text-secondary);max-width:280px;}
@@ -285,6 +304,8 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .quiz-start-feat{display:flex;align-items:center;gap:12px;text-align:left;padding:11px 14px;border-radius:12px;background:var(--card-bg);border:1px solid var(--card-border);}
 .quiz-start-feat-badge{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--accent-bg);border:1px solid var(--accent-border);font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:var(--accent);}
 .quiz-start-feat-text{font-family:'Noto Sans SC',sans-serif;font-size:12px;color:var(--text-secondary);line-height:1.5;flex:1;}
+.quiz-start-hint{margin-top:24px;padding:0 8px;font-family:'Noto Sans SC',sans-serif;
+  font-size:13.5px;line-height:1.75;color:var(--text-secondary);opacity:.6;text-align:center;letter-spacing:.3px;}
 .quiz-nav{display:flex;gap:12px;padding:16px 20px 28px;margin-top:8px;}
 .quiz-btn-prev{width:48px;height:48px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-secondary);cursor:pointer;transition:all .2s ease;}
 .quiz-btn-next{flex:1;height:48px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:#fff;font-family:'Noto Sans SC',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s ease;opacity:.45;pointer-events:none;}
@@ -303,7 +324,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 
 /* ── Result ── */
 #page-result .screen{overflow:hidden;}
-.result-body{position:relative;z-index:5;height:calc(844px - 114px - 47px);overflow-y:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:20px;}
+.result-body{position:relative;z-index:5;height:calc(844px - var(--tabbar-h) - 47px);overflow-y:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:20px;}
 .result-body::-webkit-scrollbar{display:none;}
 .result-header{padding:14px 24px 0;display:flex;align-items:center;justify-content:space-between;}
 .result-header-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;}
@@ -410,7 +431,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
    手机直接打开时：填满屏幕，tabbar 固定底部
 ─────────────────────────────────────────────────────────── */
 @media (max-width: 430px) {
-  body { display:block; min-height:100dvh; }
+  body { display:block; min-height:100dvh; overflow-x:hidden; }
   .screen {
     max-width:100vw;
     height:100dvh;
@@ -418,26 +439,158 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
     padding-top: env(safe-area-inset-top, 0px);
     box-sizing: border-box;
   }
+  /* tab bar：底部安全区单独占空间，整体高度更紧凑 */
+  :root { --tabbar-h: calc(56px + env(safe-area-inset-bottom, 0px)); }
   .tabbar {
     position:fixed !important;
     bottom:0; left:0; right:0; width:100%;
-    padding-bottom:env(safe-area-inset-bottom, 8px);
+    padding:6px 12px env(safe-area-inset-bottom, 6px);
   }
   /* 各页可滚动区：扣除顶部安全区 */
-  #page-home .screen-content { height:calc(100dvh - 114px - env(safe-area-inset-top, 0px)); }
-  #page-locate .quiz-body    { height:calc(100dvh - 114px - 47px - env(safe-area-inset-top, 0px)); }
-  .result-body               { height:calc(100dvh - 114px - 47px - env(safe-area-inset-top, 0px)); }
+  #page-home .screen-content { height:calc(100dvh - var(--tabbar-h) - env(safe-area-inset-top, 0px)); }
+  #page-locate .quiz-body    { height:calc(100dvh - var(--tabbar-h) - 47px - env(safe-area-inset-top, 0px)); }
+  .quiz-start-screen          { min-height:calc(100dvh - var(--tabbar-h) - 47px - env(safe-area-inset-top, 0px)); }
+  .result-body               { height:calc(100dvh - var(--tabbar-h) - 47px - env(safe-area-inset-top, 0px)); }
 
-  /* 探索页：flex 列布局，school 列表自动填充剩余高度，彻底消除卡片重叠 */
-  #page-explore .screen { display:flex; flex-direction:column; }
-  #page-explore .schools {
-    flex:1; min-height:0;
-    height:auto !important;          /* 覆盖 JS 内联样式 */
-    padding-bottom:calc(114px + env(safe-area-inset-bottom, 0px));
+  /* 探索页 + 预算页：改为文档级滚动，整页可滑动浏览 */
+  #page-explore .screen, #page-sandbox .screen {
+    height:auto !important;
+    min-height:100dvh;
+    padding-bottom:calc(var(--tabbar-h) + 12px);
+  }
+  #page-explore .schools, #page-sandbox .sandbox-body {
+    overflow:visible !important;
+    height:auto !important;
+    flex:none !important;
   }
 }
 
 
+
+/* ════════════════════════════════════════
+   1B 联申定位 — 输入表单 + 结果卡
+   ════════════════════════════════════════ */
+#page-recommender .screen{overflow:hidden;}
+.rec-body{position:relative;z-index:5;height:calc(844px - var(--tabbar-h) - 47px);overflow-y:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:0 0 20px;}
+.rec-body::-webkit-scrollbar{display:none;}
+.rec-wrap{padding:8px 0 0;}
+.rec-section{margin:14px 20px 0;border-radius:18px;background:var(--card-bg);border:1px solid var(--card-border);box-shadow:var(--card-shadow);padding:16px;}
+.rec-step-label{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:2px;color:var(--text-tertiary);text-transform:uppercase;margin-bottom:6px;}
+.rec-section-title{font-family:'Noto Sans SC',sans-serif;font-size:16px;font-weight:700;color:var(--text-primary);margin-bottom:14px;letter-spacing:-.2px;}
+.rec-field-group{margin-bottom:14px;}
+.rec-field-group:last-child{margin-bottom:0;}
+.rec-label{display:block;font-family:'Noto Sans SC',sans-serif;font-size:12.5px;font-weight:500;color:var(--text-secondary);margin-bottom:8px;}
+.rec-label-hint{font-size:11px;color:var(--text-tertiary);font-weight:400;margin-left:4px;}
+.rec-input,.rec-select{width:100%;padding:11px 14px;border-radius:12px;background:var(--search-bg);
+  border:1px solid #D4CEC2;
+  font-family:'Inter','Noto Sans SC',sans-serif;font-size:14px;color:var(--text-primary);outline:none;
+  transition:border-color .2s,box-shadow .2s;
+  box-sizing:border-box;-webkit-appearance:none;appearance:none;}
+[data-theme="dark"] .rec-input,[data-theme="dark"] .rec-select{border-color:rgba(255,255,255,.20);}
+.rec-input:hover,.rec-select:hover{border-color:#A8A095;}
+[data-theme="dark"] .rec-input:hover,[data-theme="dark"] .rec-select:hover{border-color:rgba(255,255,255,.32);}
+.rec-input:focus,.rec-select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-bg);}
+.rec-select{background-image:linear-gradient(45deg,transparent 50%,var(--text-secondary) 50%),linear-gradient(135deg,var(--text-secondary) 50%,transparent 50%);
+  background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:36px;}
+.rec-chip-group{display:flex;gap:8px;flex-wrap:wrap;}
+.rec-chip-group--col{flex-direction:column;gap:8px;}
+.rec-chip-group--wrap{flex-wrap:wrap;}
+.rec-chip{padding:8px 14px;border-radius:999px;background:var(--pill-bg);border:1px solid var(--pill-border);
+  font-family:'Noto Sans SC',sans-serif;font-size:12.5px;font-weight:500;color:var(--pill-color);
+  cursor:pointer;transition:all .2s;white-space:nowrap;text-align:center;}
+.rec-chip:active{transform:scale(.97);}
+.rec-chip.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.rec-chip--row{display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:10px 14px;border-radius:12px;width:100%;box-sizing:border-box;}
+.rec-chip-main{font-size:13px;font-weight:600;color:inherit;}
+.rec-chip-sub{font-size:11px;font-weight:400;color:var(--text-tertiary);margin-top:2px;}
+.rec-chip--row.active .rec-chip-sub{color:rgba(255,255,255,.78);}
+.rec-checkbox-label{display:flex;align-items:center;gap:8px;font-family:'Noto Sans SC',sans-serif;font-size:13px;color:var(--text-secondary);cursor:pointer;padding:6px 0;}
+.rec-checkbox-label input{accent-color:var(--accent);width:16px;height:16px;}
+.rec-curriculum-fields{margin-top:8px;padding-top:8px;border-top:1px dashed var(--divider);}
+.rec-field-error{color:#ef4444;font-size:11px;margin-top:4px;}
+/* 操作按钮 */
+.rec-action-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:14px 18px;border-radius:14px;
+  font-family:'Noto Sans SC',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .2s;
+  background:var(--card-bg);color:var(--text-primary);border:1px solid var(--card-border);}
+.rec-action-btn--primary{background:var(--accent);color:#fff;border-color:var(--accent);width:100%;}
+.rec-action-btn:active{transform:scale(.98);}
+.rec-action-btn:disabled{opacity:.5;cursor:not-allowed;}
+.rec-submit-btn{display:block;width:calc(100% - 40px);margin:18px 20px 0;padding:15px 18px;border-radius:14px;
+  background:var(--accent);color:#fff;border:none;font-family:'Noto Sans SC',sans-serif;font-size:15px;font-weight:700;
+  letter-spacing:.3px;cursor:pointer;transition:transform .2s,opacity .2s;box-shadow:0 8px 20px rgba(255,107,107,.18);}
+.rec-submit-btn:active{transform:scale(.98);opacity:.92;}
+.rec-reset-btn{padding:10px 16px;border-radius:999px;background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-secondary);
+  font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;cursor:pointer;}
+.rec-reset-btn:active{transform:scale(.97);}
+/* 状态/横幅 */
+.rec-loading,.rec-error{padding:32px 20px;text-align:center;font-family:'Noto Sans SC',sans-serif;font-size:13px;color:var(--text-secondary);}
+.rec-banner{margin:14px 20px 0;padding:10px 14px;border-radius:12px;background:var(--accent-bg);border:1px solid var(--accent-border);
+  font-family:'Noto Sans SC',sans-serif;font-size:12.5px;color:var(--text-primary);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.rec-banner-btn{padding:5px 12px;border-radius:999px;background:var(--accent);color:#fff;border:none;
+  font-family:'Noto Sans SC',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer;}
+/* 结果区 */
+.rec-results{padding:0;}
+.rec-summary{margin:14px 20px 0;padding:14px 16px;border-radius:14px;background:var(--card-bg);border:1px solid var(--card-border);}
+.rec-summary-title{font-family:'Noto Sans SC',sans-serif;font-size:14px;font-weight:700;color:var(--text-primary);}
+.rec-summary-dist{font-family:'Noto Sans SC',sans-serif;font-size:12px;color:var(--text-secondary);margin-top:4px;}
+.rec-summary-actions{margin-top:10px;display:flex;gap:8px;}
+.rec-tier-group{margin-top:18px;}
+.rec-tier-header{margin:0 20px 8px;display:flex;align-items:center;justify-content:space-between;}
+.rec-tier-count{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-tertiary);}
+.rec-tier-chip{display:inline-flex;align-items:center;padding:4px 10px;font-family:'Noto Sans SC',sans-serif;font-size:11px;font-weight:600;border-radius:999px;letter-spacing:.5px;}
+.rec-tier-chip--sm{font-size:10px;padding:3px 8px;}
+.rec-tier-chip.tier-reach,.rec-tier-chip.reach{background:var(--tag-chong-bg);color:var(--tag-chong-color);}
+.rec-tier-chip.tier-target,.rec-tier-chip.target{background:var(--tag-wen-bg);color:var(--tag-wen-color);}
+.rec-tier-chip.tier-safe,.rec-tier-chip.safe{background:var(--tag-bao-bg);color:var(--tag-bao-color);}
+/* 院校卡片 */
+.rec-card-list{padding:0 20px;display:flex;flex-direction:column;gap:10px;}
+.rec-card{position:relative;border-radius:16px;padding:14px 16px;background:var(--card-bg);border:1px solid var(--card-border);
+  box-shadow:var(--card-shadow);cursor:pointer;transition:transform .25s ease,var(--transition);}
+.rec-card:active{transform:scale(.985);}
+.rec-card-header{display:flex;align-items:center;gap:10px;}
+.rec-card-name{font-family:'Noto Sans SC',sans-serif;font-size:14.5px;font-weight:700;color:var(--text-primary);flex:1;min-width:0;}
+.rec-card-meta{font-family:'Noto Sans SC',sans-serif;font-size:11.5px;color:var(--text-secondary);margin-top:4px;}
+.rec-score-row{display:flex;align-items:center;gap:10px;margin-top:10px;}
+.rec-score-bar-wrap{flex:1;height:5px;background:var(--card-border);border-radius:999px;overflow:hidden;}
+.rec-score-bar{height:100%;background:linear-gradient(90deg,var(--accent),#FF8C69);border-radius:999px;transition:width .8s ease;}
+.rec-score-num{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--text-primary);min-width:28px;text-align:right;}
+.rec-card-toggle{margin-top:10px;padding-top:10px;border-top:1px solid var(--divider);font-family:'Noto Sans SC',sans-serif;font-size:11.5px;color:var(--text-tertiary);text-align:center;}
+.rec-toggle-icon{margin-left:4px;display:inline-block;transition:transform .25s;}
+.rec-card.rec-card-expanded .rec-toggle-icon,.rec-card.expanded .rec-toggle-icon{transform:rotate(180deg);}
+/* 卡片展开区 */
+.rec-card-expanded{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.rec-expanded-inner{padding-top:14px;}
+.rec-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px;}
+.rec-metric-card{padding:10px 12px;border-radius:10px;background:var(--bg-secondary,rgba(0,0,0,.04));}
+[data-theme="dark"] .rec-metric-card{background:rgba(255,255,255,.04);}
+.rec-metric-val{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;color:var(--text-primary);letter-spacing:-.3px;}
+.rec-metric-label{font-family:'Noto Sans SC',sans-serif;font-size:10.5px;color:var(--text-secondary);margin-top:2px;letter-spacing:.2px;}
+.rec-detail-rows{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+.rec-detail-row{display:flex;justify-content:space-between;align-items:baseline;font-family:'Noto Sans SC',sans-serif;font-size:12.5px;}
+.rec-detail-row > :first-child{color:var(--text-secondary);}
+.rec-detail-row > :last-child{color:var(--text-primary);font-weight:600;text-align:right;}
+.rec-detail-majors{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+.rec-tag{display:inline-flex;padding:3px 9px;border-radius:999px;background:var(--pill-bg);border:1px solid var(--pill-border);
+  font-family:'Noto Sans SC',sans-serif;font-size:10.5px;color:var(--text-secondary);}
+.rec-card-actions{display:flex;gap:8px;margin-top:12px;}
+.rec-card-actions .rec-action-btn{flex:1;font-size:12.5px;padding:10px 12px;}
+/* 空态 / 免责 */
+.rec-empty{padding:32px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.rec-empty-icon{font-size:36px;}
+.rec-empty-title{font-family:'Noto Sans SC',sans-serif;font-size:14px;font-weight:600;color:var(--text-primary);}
+.rec-empty-hint{font-family:'Noto Sans SC',sans-serif;font-size:12px;color:var(--text-secondary);line-height:1.6;max-width:280px;}
+.rec-disclaimer{margin:18px 20px 0;padding:10px 14px;border-radius:10px;background:var(--bg-secondary,rgba(0,0,0,.03));
+  font-family:'Noto Sans SC',sans-serif;font-size:11px;color:var(--text-tertiary);line-height:1.65;}
+[data-theme="dark"] .rec-disclaimer{background:rgba(255,255,255,.03);}
+.rec-radar-wrap{margin-top:12px;}
+/* 雷达图（如有 canvas） */
+#page-recommender canvas{max-width:100%;}
+
+/* 移动端：1B 也走文档级滚动 */
+@media (max-width: 430px){
+  #page-recommender .screen{height:auto !important;min-height:100dvh;padding-bottom:calc(var(--tabbar-h) + 12px);}
+  .rec-body{height:auto !important;overflow:visible !important;}
+}
 
 /* ── 学校详情底部抽屉 ── */
 .sheet-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;opacity:0;pointer-events:none;transition:opacity .25s ease;}
@@ -448,8 +601,10 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
   display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0px);
   pointer-events:none;}
 .sheet.open{transform:translateY(0);pointer-events:auto;}
-.sheet-handle{width:36px;height:4px;border-radius:2px;background:var(--text-tertiary);
-  margin:12px auto 0;flex-shrink:0;opacity:.35;}
+.sheet-drag{padding:10px 0 6px;cursor:grab;flex-shrink:0;touch-action:none;}
+.sheet-drag:active{cursor:grabbing;}
+.sheet-handle{width:40px;height:5px;border-radius:3px;background:var(--text-tertiary);
+  margin:0 auto;opacity:.55;pointer-events:none;}
 .sheet-header{padding:16px 20px 12px;display:flex;align-items:flex-start;gap:12px;flex-shrink:0;
   border-bottom:1px solid var(--divider);}
 .sheet-title{font-family:'Noto Sans SC',sans-serif;font-size:19px;font-weight:700;
@@ -504,23 +659,11 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
     <p class="sub">不是中介，也不赚佣金。三个小工具，帮你把选校焦虑变成心里有数。</p>
   </section>
   <div class="cards">
-    <div class="card c1" onclick="navigate('locate')">
-      <div class="topbar"></div>
-      <div class="card-row">
-        <div class="card-left">
-          <div class="card-num">01</div>
-          <div class="card-title">学术定位<span class="badge"><span class="glow-dot"></span>最多人用</span></div>
-          <div class="card-eng">Find your fit<span class="sep">·</span>约 8 分钟</div>
-          <div class="card-desc">5 维度实力画像，匹配梦校</div>
-        </div>
-        <div class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      </div>
-    </div>
     <div class="card c2" onclick="navigate('explore')">
       <div class="topbar"></div>
       <div class="card-row">
         <div class="card-left">
-          <div class="card-num">02</div>
+          <div class="card-num">01</div>
           <div class="card-title">院校探索</div>
           <div class="card-eng">Browse schools<span class="sep">·</span>随时看</div>
           <div class="card-desc">全球 139 所院校数据对比</div>
@@ -529,11 +672,36 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
         <div class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
     </div>
-    <div class="card c3" onclick="navigate('sandbox')">
+    <div class="card c1" onclick="navigate('locate')">
+      <div class="topbar"></div>
+      <div class="card-row">
+        <div class="card-left">
+          <div class="card-num">02</div>
+          <div class="card-title">学术定位<span class="badge"><span class="glow-dot"></span>最多人用</span></div>
+          <div class="card-eng">Find your fit<span class="sep">·</span>约 8 分钟</div>
+          <div class="card-desc">5 维度实力画像，匹配梦校</div>
+        </div>
+        <div class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+    <div class="card c4" onclick="navigate('recommender')">
       <div class="topbar"></div>
       <div class="card-row">
         <div class="card-left">
           <div class="card-num">03</div>
+          <div class="card-title">联申定位</div>
+          <div class="card-eng">Multi-country fit<span class="sep">·</span>约 5 分钟</div>
+          <div class="card-desc">填学术画像，输出冲/稳/保三档</div>
+          <div class="card-extra">基于 GPA / 标化 / 预算，跨国推荐院校梯队</div>
+        </div>
+        <div class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+    <div class="card c3" onclick="navigate('sandbox')">
+      <div class="topbar"></div>
+      <div class="card-row">
+        <div class="card-left">
+          <div class="card-num">04</div>
           <div class="card-title">财务预算</div>
           <div class="card-eng">Money sandbox<span class="sep">·</span>约 3 分钟</div>
           <div class="card-desc">四年总花费，实时推演</div>
@@ -553,6 +721,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
     <div class="tab active" onclick="navigate('home')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 9.5L11 3L19 9.5V19H14V14H8V19H3V9.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">首页</div></div>
     <div class="tab" onclick="navigate('explore')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="9.5" cy="9.5" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M14.5 14.5L19 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><div class="lbl">探索</div></div>
     <div class="tab" onclick="navigate('locate')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M12 2L4 12.5H10.5L9.5 20L18 9.5H11.5L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">定位</div></div>
+    <div class="tab" onclick="navigate('recommender')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="5" width="16" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="5" y="10" width="12" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="7" y="15" width="8" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/></svg></div><div class="lbl">联申</div></div>
     <div class="tab" onclick="navigate('sandbox')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 6.5V15.5M13.5 8.5C13.5 8.5 12.5 7.8 11 7.8C9.5 7.8 8.7 8.5 8.7 9.5C8.7 12 13.3 11 13.3 13.5C13.3 14.5 12.5 15.2 11 15.2C9.5 15.2 8.5 14.5 8.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="lbl">预算</div></div>
   </nav>
 </div>
@@ -562,7 +731,6 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 <div class="page" id="page-explore">
 <div class="screen">
   <div class="glow-a"></div><div class="glow-b"></div><div class="halo"></div><div class="noise"></div>
-  <div class="status"><span>探索</span></div>
   <div class="topnav">
     <div class="back-group">
       <div class="back-btn" onclick="navigate('home')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 3L5 7L9 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -634,6 +802,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
     <div class="tab" onclick="navigate('home')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 9.5L11 3L19 9.5V19H14V14H8V19H3V9.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">首页</div></div>
     <div class="tab active" onclick="navigate('explore')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="9.5" cy="9.5" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M14.5 14.5L19 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><div class="lbl">探索</div></div>
     <div class="tab" onclick="navigate('locate')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M12 2L4 12.5H10.5L9.5 20L18 9.5H11.5L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">定位</div></div>
+    <div class="tab" onclick="navigate('recommender')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="5" width="16" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="5" y="10" width="12" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="7" y="15" width="8" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/></svg></div><div class="lbl">联申</div></div>
     <div class="tab" onclick="navigate('sandbox')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 6.5V15.5M13.5 8.5C13.5 8.5 12.5 7.8 11 7.8C9.5 7.8 8.7 8.5 8.7 9.5C8.7 12 13.3 11 13.3 13.5C13.3 14.5 12.5 15.2 11 15.2C9.5 15.2 8.5 14.5 8.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="lbl">预算</div></div>
   </nav>
 </div>
@@ -643,7 +812,12 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 <div class="page" id="page-locate">
 <div class="screen">
   <div class="glow-a"></div><div class="glow-b"></div><div class="halo"></div><div class="noise"></div>
-  <div class="status"><span>定位</span></div>
+  <div class="topnav">
+    <div class="back-group">
+      <div class="back-btn" onclick="navigate('home')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 3L5 7L9 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="page-title">学术定位</div>
+    </div>
+  </div>
   <div class="quiz-body" id="quiz-body">
     <div id="quiz-container">
       <div class="quiz-start-screen">
@@ -655,8 +829,11 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
           <div class="quiz-start-feat"><div class="quiz-start-feat-badge">8</div><div class="quiz-start-feat-text">种学术画像类型，匹配推荐院校风格</div></div>
           <div class="quiz-start-feat"><div class="quiz-start-feat-badge">8'</div><div class="quiz-start-feat-text">约 8 分钟完成，结果保存本地</div></div>
         </div>
+        <div class="quiz-start-hint">
+          很多同学在这里第一次看清自己真正适合什么。<br/>
+          测试结果将直接影响你的选校策略。
+        </div>
         <div class="quiz-nav" style="width:100%;padding-top:20px">
-          <div class="quiz-btn-prev" onclick="navigate('home')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 3L5 7L9 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <div class="quiz-btn-next ready" onclick="QuizModule.start()">开始测试 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3L9 7L5 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
       </div>
@@ -666,6 +843,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
     <div class="tab" onclick="navigate('home')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 9.5L11 3L19 9.5V19H14V14H8V19H3V9.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">首页</div></div>
     <div class="tab" onclick="navigate('explore')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="9.5" cy="9.5" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M14.5 14.5L19 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><div class="lbl">探索</div></div>
     <div class="tab active" onclick="navigate('locate')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M12 2L4 12.5H10.5L9.5 20L18 9.5H11.5L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">定位</div></div>
+    <div class="tab" onclick="navigate('recommender')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="5" width="16" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="5" y="10" width="12" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="7" y="15" width="8" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/></svg></div><div class="lbl">联申</div></div>
     <div class="tab" onclick="navigate('sandbox')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 6.5V15.5M13.5 8.5C13.5 8.5 12.5 7.8 11 7.8C9.5 7.8 8.7 8.5 8.7 9.5C8.7 12 13.3 11 13.3 13.5C13.3 14.5 12.5 15.2 11 15.2C9.5 15.2 8.5 14.5 8.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="lbl">预算</div></div>
   </nav>
 </div>
@@ -699,30 +877,32 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
       <div class="result-header-label">你的学术画像 · 已完成</div>
       <div class="pill" style="font-size:10px" id="result-conf-pill">置信度 —%</div>
     </div>
-    <div class="result-archetype-card">
-      <div class="result-archetype-emoji" id="result-emoji">🎯</div>
-      <div class="result-archetype-name" id="result-name">—</div>
-      <div class="result-archetype-en" id="result-en">—</div>
-      <div class="result-archetype-desc" id="result-desc">完成测试后查看你的学术画像描述。</div>
-      <div class="result-confidence">
-        <div class="result-conf-label">画像匹配度</div>
-        <div class="result-conf-bar"><div class="result-conf-fill" id="result-conf-fill" style="width:0%"></div></div>
-        <div class="result-conf-val" id="result-conf-val">—</div>
+    <div id="result-shot">
+      <div class="result-archetype-card">
+        <div class="result-archetype-emoji" id="result-emoji">🎯</div>
+        <div class="result-archetype-name" id="result-name">—</div>
+        <div class="result-archetype-en" id="result-en">—</div>
+        <div class="result-archetype-desc" id="result-desc">完成测试后查看你的学术画像描述。</div>
+        <div class="result-confidence">
+          <div class="result-conf-label">画像匹配度</div>
+          <div class="result-conf-bar"><div class="result-conf-fill" id="result-conf-fill" style="width:0%"></div></div>
+          <div class="result-conf-val" id="result-conf-val">—</div>
+        </div>
+      </div>
+      <div class="result-radar-wrap">
+        <div class="result-section-title">五维画像</div>
+        <div class="radar-canvas-wrap"><canvas id="radarChart"></canvas></div>
+      </div>
+      <div class="result-dims">
+        <div class="result-section-title">维度得分</div>
+        <div id="result-dims-list"></div>
+      </div>
+      <div class="result-tips">
+        <div class="result-section-title">你最应该关注的3件事</div>
+        <div id="result-tips-list"></div>
       </div>
     </div>
-    <div class="result-radar-wrap">
-      <div class="result-section-title">五维画像</div>
-      <div class="radar-canvas-wrap"><canvas id="radarChart"></canvas></div>
-    </div>
-    <div class="result-dims">
-      <div class="result-section-title">维度得分</div>
-      <div id="result-dims-list"></div>
-    </div>
-    <div class="result-tips">
-      <div class="result-section-title">你最应该关注的3件事</div>
-      <div id="result-tips-list"></div>
-    </div>
-    <div class="result-cta" onclick="navigate('explore')">
+    <div class="result-cta" onclick="navigate('recommender')">
       <div>
         <div class="result-cta-text">查看适合我的院校推荐 →</div>
         <div class="result-cta-sub" id="result-cta-sub">基于你的画像，为你匹配推荐院校</div>
@@ -743,6 +923,32 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
     <div class="tab" onclick="navigate('home')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 9.5L11 3L19 9.5V19H14V14H8V19H3V9.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">首页</div></div>
     <div class="tab" onclick="navigate('explore')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="9.5" cy="9.5" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M14.5 14.5L19 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><div class="lbl">探索</div></div>
     <div class="tab active" onclick="navigate('locate')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M12 2L4 12.5H10.5L9.5 20L18 9.5H11.5L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">定位</div></div>
+    <div class="tab" onclick="navigate('recommender')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="5" width="16" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="5" y="10" width="12" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="7" y="15" width="8" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/></svg></div><div class="lbl">联申</div></div>
+    <div class="tab" onclick="navigate('sandbox')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 6.5V15.5M13.5 8.5C13.5 8.5 12.5 7.8 11 7.8C9.5 7.8 8.7 8.5 8.7 9.5C8.7 12 13.3 11 13.3 13.5C13.3 14.5 12.5 15.2 11 15.2C9.5 15.2 8.5 14.5 8.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="lbl">预算</div></div>
+  </nav>
+</div>
+</div>
+
+<!-- PAGE: RECOMMENDER (1B 联申定位) -->
+<div class="page" id="page-recommender">
+<div class="screen">
+  <div class="glow-a"></div><div class="glow-b"></div><div class="halo"></div><div class="noise"></div>
+  <div class="topnav">
+    <div class="back-group">
+      <div class="back-btn" onclick="navigate('home')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 3L5 7L9 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="page-title">联申定位</div>
+    </div>
+    <div class="pill" style="font-size:10px;cursor:pointer" onclick="RecommenderModule.reset && RecommenderModule.reset()">重填</div>
+  </div>
+  <div class="rec-body" id="rec-body">
+    <div id="rec-root"></div>
+    <div style="height:24px"></div>
+  </div>
+  <nav class="tabbar">
+    <div class="tab" onclick="navigate('home')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 9.5L11 3L19 9.5V19H14V14H8V19H3V9.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">首页</div></div>
+    <div class="tab" onclick="navigate('explore')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="9.5" cy="9.5" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M14.5 14.5L19 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><div class="lbl">探索</div></div>
+    <div class="tab" onclick="navigate('locate')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M12 2L4 12.5H10.5L9.5 20L18 9.5H11.5L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">定位</div></div>
+    <div class="tab active" onclick="navigate('recommender')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="5" width="16" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="5" y="10" width="12" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="7" y="15" width="8" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/></svg></div><div class="lbl">联申</div></div>
     <div class="tab" onclick="navigate('sandbox')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 6.5V15.5M13.5 8.5C13.5 8.5 12.5 7.8 11 7.8C9.5 7.8 8.7 8.5 8.7 9.5C8.7 12 13.3 11 13.3 13.5C13.3 14.5 12.5 15.2 11 15.2C9.5 15.2 8.5 14.5 8.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="lbl">预算</div></div>
   </nav>
 </div>
@@ -752,9 +958,11 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 <div class="page" id="page-sandbox">
 <div class="screen">
   <div class="glow-a"></div><div class="glow-b"></div><div class="halo"></div><div class="noise"></div>
-  <div class="status"><span>预算</span></div>
   <div class="topnav">
-    <div class="back-group"><div class="page-title">财务预算</div></div>
+    <div class="back-group">
+      <div class="back-btn" onclick="navigate('home')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 3L5 7L9 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="page-title">财务预算</div>
+    </div>
     <div class="pill" style="font-size:10px;cursor:pointer" onclick="SandboxModule.reset && SandboxModule.reset()">重置</div>
   </div>
   <div class="sandbox-body" id="sandbox-body">
@@ -824,12 +1032,29 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
     <div class="tab" onclick="navigate('home')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 9.5L11 3L19 9.5V19H14V14H8V19H3V9.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">首页</div></div>
     <div class="tab" onclick="navigate('explore')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="9.5" cy="9.5" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M14.5 14.5L19 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><div class="lbl">探索</div></div>
     <div class="tab" onclick="navigate('locate')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M12 2L4 12.5H10.5L9.5 20L18 9.5H11.5L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">定位</div></div>
+    <div class="tab" onclick="navigate('recommender')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="5" width="16" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="5" y="10" width="12" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="7" y="15" width="8" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/></svg></div><div class="lbl">联申</div></div>
     <div class="tab active" onclick="navigate('sandbox')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 6.5V15.5M13.5 8.5C13.5 8.5 12.5 7.8 11 7.8C9.5 7.8 8.7 8.5 8.7 9.5C8.7 12 13.3 11 13.3 13.5C13.3 14.5 12.5 15.2 11 15.2C9.5 15.2 8.5 14.5 8.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="lbl">预算</div></div>
   </nav>
 </div>
 </div>
 
 <script>
+/* ── 轻提示 ── */
+function showToast(msg) {
+  let el = document.getElementById('app-toast');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'app-toast';
+    el.className = 'toast';
+    document.body.appendChild(el);
+  }
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => el.classList.remove('show'), 1800);
+}
+window.showToast = showToast;
+
 /* ── Navigation ── */
 function navigate(page) {
   document.body.style.overflow = '';          // 确保 sheet 打开时导航不被锁死
@@ -840,6 +1065,7 @@ function navigate(page) {
   if (page === 'explore') setTimeout(() => { fixSchoolsHeight(); ExplorerModule.onShow(); }, 50);
   if (page === 'result')  setTimeout(initRadar, 100);
   if (page === 'sandbox') setTimeout(() => { fixSandboxHeight(); SandboxModule.onShow(); }, 50);
+  if (page === 'recommender') setTimeout(() => { window.RecommenderModule?.init?.(); }, 50);
 }
 
 function screenH(pageId) {
@@ -860,6 +1086,8 @@ function fixSchoolsHeight() {
 }
 
 function fixSandboxHeight() {
+  /* 移动端走文档级滚动，跳过 JS 高度计算 */
+  if (window.innerWidth <= 430) return;
   const body = document.getElementById('sandbox-body');
   const tabbar = document.querySelector('#page-sandbox .tabbar');
   const status = document.querySelector('#page-sandbox .status');
@@ -1052,19 +1280,14 @@ window.ExplorerModule = (function() {
     const tuition = fmtTuition(school);
     const rate = fmtRate(school.acceptance_rate);
     const inCompare = _compare.includes(school.id);
-    const fourYr = school.tuition_intl_annual ? fourYearCNY(school) : null;
+    const compareFull = !inCompare && _compare.length >= 3;
 
     const rankHtml = rank
       ? `<div class="rank"><div class="rank-prefix">${rank.prefix}</div><div class="rank-num">${rank.num}</div></div>`
       : '';
 
-    const statsItems = [];
-    if (rank) statsItems.push(`${rank.prefix}&nbsp;${rank.num}`);
-    if (fourYr) statsItems.push(`4年约&nbsp;¥${fourYr}万`);
-    const statsHtml = statsItems.join('<span class="stat-sep"> · </span>');
-
-    const compareLabel = inCompare ? '✓ 已加入' : '加入对比 →';
-    const compareClass = inCompare ? 'add-compare-btn added' : 'add-compare-btn';
+    const compareLabel = inCompare ? '✓ 已加入' : (compareFull ? '已满 3 所' : '+ 加入对比');
+    const compareClass = 'add-compare-btn' + (inCompare ? ' added' : '') + (compareFull ? ' disabled' : '');
 
     return `<div class="school ${countryClass}" onclick="ExplorerModule.openDetail('${school.id}')">
   <div class="stripe"></div>
@@ -1076,10 +1299,15 @@ window.ExplorerModule = (function() {
     ${rankHtml}
   </div>
   <div class="school-divider"></div>
-  ${statsHtml ? `<div class="school-stats">${statsHtml}</div>` : ''}
-  <div class="school-action">
-    ${diff ? `<span class="tag ${tagClass}">${diff}</span>` : '<span></span>'}
-    <div class="${compareClass}" onclick="event.stopPropagation();ExplorerModule.toggleCompare('${school.id}',this)">${compareLabel}</div>
+  <div class="school-foot">
+    <div class="metrics">
+      <div class="metric"><div class="metric-label">学费/年</div><div class="metric-value">${tuition}</div></div>
+      <div class="metric"><div class="metric-label">录取率</div><div class="metric-value">${rate}</div></div>
+    </div>
+    <div class="actions">
+      ${diff ? `<span class="tag ${tagClass}">${diff}</span>` : ''}
+      <div class="${compareClass}" onclick="event.stopPropagation();ExplorerModule.toggleCompare('${school.id}',this)">${compareLabel}</div>
+    </div>
   </div>
 </div>`;
   }
@@ -1104,8 +1332,9 @@ window.ExplorerModule = (function() {
       const id = btn.getAttribute('onclick')?.match(/'([^']+)'/)?.[1];
       if (!id) return;
       const inList = _compare.includes(id);
-      btn.textContent = inList ? '✓ 已加入' : '+ 加入对比';
-      btn.className = inList ? 'add-compare-btn added' : 'add-compare-btn';
+      const full = !inList && _compare.length >= 3;
+      btn.textContent = inList ? '✓ 已加入' : (full ? '已满 3 所' : '+ 加入对比');
+      btn.className = 'add-compare-btn' + (inList ? ' added' : '') + (full ? ' disabled' : '');
     });
     // Update filter pill badge
     const badge = document.getElementById('filter-count-badge');
@@ -1192,7 +1421,7 @@ window.ExplorerModule = (function() {
       _compare = getCompare();
       const idx = _compare.indexOf(id);
       if (idx === -1) {
-        if (_compare.length >= 5) { alert('最多加入5所院校'); return; }
+        if (_compare.length >= 3) { showToast('最多对比 3 所学校'); return; }
         _compare.push(id);
       } else {
         _compare.splice(idx, 1);
@@ -1784,21 +2013,60 @@ window.QuizModule = (function() {
     _goPrev() { goPrev(); },
     _selectSingle, _updateSlider, _selectScale, _selectTot, _selectImg, _selectMulti,
     renderRadar,
-    shareResult() {
+    ARCHETYPES,
+    async shareResult() {
       const r = JSON.parse(localStorage.getItem(QUIZ_KEY) || 'null');
-      if (!r) { alert('请先完成测试'); return; }
+      if (!r) { showToast('请先完成测试'); return; }
       const arch = ARCHETYPES[r.archetype];
-      const txt = `我的学术画像是「${arch?.name||r.archetype}」${arch?.emoji||''}，置信度${r.confidence}%，快来测测你的类型！`;
-      if (navigator.share) { navigator.share({title:'DecideOn 学术画像', text:txt}).catch(()=>{}); }
-      else { navigator.clipboard?.writeText(txt).then(()=>alert('已复制到剪贴板')).catch(()=>alert(txt)); }
+      const text = `我在 DecideOn 完成了学术画像测试——我的画像是「${arch?.name||r.archetype}」${arch?.emoji||''}，置信度 ${r.confidence}%。快来看看你的类型！`;
+      const url  = window.location.href;
+      const payload = { title: '我的学术画像结果', text, url };
+      try {
+        if (navigator.share) { await navigator.share(payload); return; }
+      } catch (e) { if (e?.name === 'AbortError') return; /* 用户取消则静默 */ }
+      // 不支持 / 抛错 → 复制链接 + toast
+      try {
+        await navigator.clipboard?.writeText(url);
+        showToast('链接已复制');
+      } catch { showToast(url); }
     },
-    saveResult() {
-      const r = localStorage.getItem(QUIZ_KEY);
-      if (!r) { alert('暂无结果，请先完成测试'); return; }
+    async saveResult() {
+      const r = JSON.parse(localStorage.getItem(QUIZ_KEY) || 'null');
+      if (!r) { showToast('暂无结果，请先完成测试'); return; }
+      const node = document.getElementById('result-shot');
+      if (!node || typeof html2canvas === 'undefined') {
+        showToast('保存功能加载中，请稍后重试'); return;
+      }
+      showToast('正在生成图片…');
+      // 取当前主题对应的截图背景色，避免透明区拍出黑底
+      const bg = getComputedStyle(document.documentElement).getPropertyValue('--page-bg').trim() || '#fff';
+      let canvas;
+      try {
+        canvas = await html2canvas(node, {
+          backgroundColor: bg,
+          scale: Math.min(2, window.devicePixelRatio || 1),
+          useCORS: true,
+          logging: false
+        });
+      } catch (err) {
+        showToast('生成失败，请重试'); return;
+      }
+      const dataUrl = canvas.toDataURL('image/png');
+      const filename = 'decideon-' + (ARCHETYPES[r.archetype]?.en || r.archetype || 'result').toLowerCase().replace(/\s+/g,'-') + '.png';
+      // 优先 Web Share API + file（PWA 可保存到相册 / 转发）
+      try {
+        const blob = await (await fetch(dataUrl)).blob();
+        const file = new File([blob], filename, { type: 'image/png' });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ files: [file], title: '我的学术画像' });
+          return;
+        }
+      } catch (e) { if (e?.name === 'AbortError') return; }
+      // 兜底：触发下载
       const a = document.createElement('a');
-      a.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(r);
-      a.download = 'decideon_quiz_result.json';
-      a.click();
+      a.href = dataUrl; a.download = filename;
+      document.body.appendChild(a); a.click(); a.remove();
+      showToast('已保存到下载');
     },
     getResult() { try { return JSON.parse(localStorage.getItem(QUIZ_KEY)); } catch { return null; } }
   };
@@ -1985,17 +2253,77 @@ window.SandboxModule = (function() {
   };
 })();
 
+/* ── 抽屉下滑关闭手势 ── */
+function setupSheetDrag() {
+  const sheet = document.getElementById('school-sheet');
+  const drag  = document.getElementById('sheet-drag');
+  const header = sheet?.querySelector('.sheet-header');
+  if (!sheet || !drag || !header) return;
+  let startY = 0, lastY = 0, dragging = false, startT = 0;
+  const onStart = (e) => {
+    if (e.target.closest('.sheet-close')) return;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+    startY = lastY = y; startT = Date.now(); dragging = true;
+    sheet.style.transition = 'none';
+  };
+  const onMove = (e) => {
+    if (!dragging) return;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+    lastY = y;
+    const dy = Math.max(0, y - startY);
+    sheet.style.transform = `translateY(${dy}px)`;
+    if (e.cancelable) e.preventDefault();
+  };
+  const onEnd = () => {
+    if (!dragging) return;
+    dragging = false;
+    const dy = lastY - startY;
+    const dt = Math.max(1, Date.now() - startT);
+    const v  = dy / dt;
+    sheet.style.transition = '';
+    sheet.style.transform = '';
+    if (dy > 100 || v > 0.5) ExplorerModule.closeDetail();
+  };
+  // drag handle 区 + 抽屉 header 都可下滑关闭
+  [drag, header].forEach(el => {
+    el.addEventListener('touchstart', onStart, { passive: true });
+    el.addEventListener('mousedown', onStart);
+  });
+  document.addEventListener('touchmove', onMove, { passive: false });
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('touchend', onEnd);
+  document.addEventListener('touchcancel', onEnd);
+  document.addEventListener('mouseup', onEnd);
+}
+
+/* ── iOS PWA：解决首帧 safe-area 未就绪导致 tabbar 悬空 ── */
+function pinTabbarToBottom() {
+  // 强制读 layout 触发 reflow，让 env(safe-area-inset-*) 完成解析
+  void document.body.offsetHeight;
+  window.scrollTo(0, 0);
+  // 再来一帧，覆盖部分 iOS PWA 冷启动后 dvh 二次校正的情况
+  requestAnimationFrame(() => {
+    void document.body.offsetHeight;
+    window.scrollTo(0, 0);
+  });
+}
+
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded', () => {
   applyTheme(currentTheme);
   fixSchoolsHeight();
   fixSandboxHeight();
+  setupSheetDrag();
+  pinTabbarToBottom();
 });
+// PWA 从后台恢复 / iOS Home 切回时也校正一次
+window.addEventListener('pageshow', pinTabbarToBottom);
+window.addEventListener('orientationchange', () => setTimeout(pinTabbarToBottom, 50));
 </script>
 <!-- 学校详情底部抽屉 -->
 <div class="sheet-overlay" id="school-sheet-overlay" onclick="ExplorerModule.closeDetail()"></div>
 <div class="sheet" id="school-sheet">
-  <div class="sheet-handle"></div>
+  <div class="sheet-drag" id="sheet-drag"><div class="sheet-handle"></div></div>
   <div class="sheet-header">
     <div style="flex:1;min-width:0;">
       <div id="sheet-name" class="sheet-title"></div>
