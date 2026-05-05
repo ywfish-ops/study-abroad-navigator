@@ -586,10 +586,14 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 /* 雷达图（如有 canvas） */
 #page-recommender canvas{max-width:100%;}
 
-/* 移动端：1B 也走文档级滚动 */
+/* 移动端：1B 也走文档级滚动 + topnav 贴顶常驻 */
 @media (max-width: 430px){
-  #page-recommender .screen{height:auto !important;min-height:100dvh;padding-bottom:calc(var(--tabbar-h) + 12px);}
+  #page-recommender .screen{height:auto !important;min-height:100dvh;overflow:visible !important;padding-bottom:calc(var(--tabbar-h) + 12px);}
   .rec-body{height:auto !important;overflow:visible !important;}
+  /* 表单很长，topnav 贴在视口顶部，方便随时返回/重填，不用滚回去 */
+  #page-recommender .topnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;
+    background:var(--tabbar-bg);border-bottom:1px solid var(--tabbar-border);
+    padding:10px 20px;margin:0;}
 }
 
 /* ── 学校详情底部抽屉 ── */
