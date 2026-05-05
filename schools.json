@@ -56,12 +56,12 @@
     "target_user": "中国高中生申请海外本科",
     "batch_strategy": {
       "A": "自动化采集（College Scorecard / QS API）",
-      "B": "Gemini 提取官网",
+      "B": "OpenClaw 提取官网",
       "C": "手工验证"
     },
     "currency_note": "所有金额统一换算为 USD，保留原始货币字段供汇率模拟使用"
   },
-  "_gemini_prompt_template": {
+  "_openclaw_prompt_template": {
     "instruction": "以下是院校数据 schema，请按照此结构填写指定学校的 batch_b 字段。数据来源：学校官网招生页面。不确定的字段填 null，不要猜测。",
     "fields_to_fill": [
       "programs（主要本科专业，最多10个，英文）",
