@@ -90,8 +90,8 @@
       "type": "public",
       "qs_rank_2025": 44,
       "usnews_global_rank_2025": 14,
-      "acceptance_rate": 0.095,
-      "tuition_intl_annual": 48976,
+      "acceptance_rate": 0.086,
+      "tuition_intl_annual": 54258,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 35737,
       "application_deadline_fall": "11-30",
@@ -134,7 +134,12 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "UC系统；国际生无merit aid；洛杉矶生活费高。",
-      "usnews_rank_2026": 17
+      "usnews_rank_2026": 17,
+      "data_source_urls": [
+        "https://admission.ucla.edu/tuition-aid/tuition-fees",
+        "https://admission.universityofcalifornia.edu/tuition-financial-aid/tuition-cost-of-attendance/"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "ucsd",
@@ -530,7 +535,7 @@
       "qs_rank_2025": 82,
       "usnews_global_rank_2025": 52,
       "acceptance_rate": 0.45,
-      "tuition_intl_annual": 45000,
+      "tuition_intl_annual": 46000,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 14000,
       "application_deadline_fall": "01-05",
@@ -572,7 +577,12 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "EA截止11月1日；CS/工程全美顶尖；Illinois Award奖学金。",
-      "usnews_rank_2026": 36
+      "usnews_rank_2026": 36,
+      "data_source_urls": [
+        "https://registrar.illinois.edu/ug-tuition-rates-2627/",
+        "https://www.osfa.illinois.edu/cost/undergraduate-cost/undergraduate-international-cost/"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "gatech",
@@ -639,8 +649,8 @@
       "type": "public",
       "qs_rank_2025": 105,
       "usnews_global_rank_2025": 71,
-      "acceptance_rate": 0.53,
-      "tuition_intl_annual": 45000,
+      "acceptance_rate": 0.52,
+      "tuition_intl_annual": 28794,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 13000,
       "application_deadline_fall": "01-15",
@@ -682,7 +692,12 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "EA截止11月1日；航空/工程全美顶尖。",
-      "usnews_rank_2026": 46
+      "usnews_rank_2026": 46,
+      "data_source_urls": [
+        "https://www.purdue.edu/treasurer/finance/bursar-office/tuition/fee-rates-2026-2027/",
+        "https://www.purdue.edu/admissions/undergrad/deadlines/"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "osu",
@@ -695,10 +710,10 @@
       "qs_rank_2025": 171,
       "usnews_global_rank_2025": 96,
       "acceptance_rate": 0.53,
-      "tuition_intl_annual": 48000,
+      "tuition_intl_annual": 42423,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 14000,
-      "application_deadline_fall": "01-15",
+      "application_deadline_fall": "02-01",
       "application_system": "Common App",
       "sat_range": [
         1330,
@@ -737,7 +752,12 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "EA截止11月1日；大型旗舰校；商科/工程强。",
-      "usnews_rank_2026": 41
+      "usnews_rank_2026": 41,
+      "data_source_urls": [
+        "https://undergrad.osu.edu/cost-and-aid/basic-costs",
+        "https://sfa.osu.edu/international-student/about-aid/financial-aid-eligibility"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "uw-seattle",
@@ -749,8 +769,8 @@
       "type": "public",
       "qs_rank_2025": 61,
       "usnews_global_rank_2025": 26,
-      "acceptance_rate": 0.52,
-      "tuition_intl_annual": 42105,
+      "acceptance_rate": 0.48,
+      "tuition_intl_annual": 44640,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 15000,
       "application_deadline_fall": "11-15",
@@ -791,7 +811,12 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "Test-optional；Seattle科技就业生态强（Amazon/Microsoft）。",
-      "usnews_rank_2026": 42
+      "usnews_rank_2026": 42,
+      "data_source_urls": [
+        "https://www.washington.edu/financialaid/getting-started/student-budgets/",
+        "https://www.washington.edu/opb/tuition-fees/estimated-annual-cost-of-attendance-for-first-year-undergraduates/"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "bu",
@@ -803,11 +828,11 @@
       "type": "private",
       "qs_rank_2025": 119,
       "usnews_global_rank_2025": 72,
-      "acceptance_rate": 0.105,
-      "tuition_intl_annual": 65040,
+      "acceptance_rate": 0.14,
+      "tuition_intl_annual": 73024,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 17980,
-      "application_deadline_fall": "01-03",
+      "application_deadline_fall": "01-04",
       "application_system": "Common App",
       "sat_range": [
         1480,
@@ -847,7 +872,12 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "Intl merit aid available；波士顿医疗/科技就业生态强。",
-      "usnews_rank_2026": 42
+      "usnews_rank_2026": 42,
+      "data_source_urls": [
+        "https://www.bu.edu/finaid/undergraduate-students/undergraduate/",
+        "https://www.bu.edu/admissions/apply/deadlines/"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "neu",
@@ -914,11 +944,11 @@
       "type": "private",
       "qs_rank_2025": 58,
       "usnews_global_rank_2025": 30,
-      "acceptance_rate": 0.052,
-      "tuition_intl_annual": 60472,
+      "acceptance_rate": 0.12,
+      "tuition_intl_annual": 62000,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 24690,
-      "application_deadline_fall": "01-04",
+      "application_deadline_fall": "01-05",
       "application_system": "Common App",
       "sat_range": [
         1450,
@@ -957,7 +987,12 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "纽约生活费高；多校区全球学习项目（Abu Dhabi/Shanghai）。",
-      "usnews_rank_2026": 32
+      "usnews_rank_2026": 32,
+      "data_source_urls": [
+        "https://www.nyu.edu/admissions/financial-aid-and-scholarships/cost-of-attendance.html",
+        "https://www.nyu.edu/admissions/undergraduate-admissions/apply/deadlines.html"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "asu",
@@ -1025,7 +1060,7 @@
       "qs_rank_2025": 104,
       "usnews_global_rank_2025": 61,
       "acceptance_rate": 0.29,
-      "tuition_intl_annual": 42000,
+      "tuition_intl_annual": 47144,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 15000,
       "application_deadline_fall": "12-01",
@@ -1067,7 +1102,12 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "SAT申请必要；EA截止10月15日；McCombs商学院顶尖。",
-      "usnews_rank_2026": 30
+      "usnews_rank_2026": 30,
+      "data_source_urls": [
+        "https://admissions.utexas.edu/tuition-costs",
+        "https://utexas.edu/student-accounts/tuition-fees"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "ucf",
@@ -1189,11 +1229,11 @@
       "type": "public",
       "qs_rank_2025": 151,
       "usnews_global_rank_2025": 55,
-      "acceptance_rate": 0.58,
-      "tuition_intl_annual": 45000,
+      "acceptance_rate": 0.49,
+      "tuition_intl_annual": 38500,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 13000,
-      "application_deadline_fall": "04-01",
+      "application_deadline_fall": "01-15",
       "application_system": "Common App",
       "sat_range": [
         1280,
@@ -1232,7 +1272,11 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "Rolling admission；医学/公共卫生研究强。",
-      "usnews_rank_2026": 69
+      "usnews_rank_2026": 69,
+      "data_source_urls": [
+        "https://www.oafa.pitt.edu/costs/"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "rutgers",
@@ -1245,7 +1289,7 @@
       "qs_rank_2025": 194,
       "usnews_global_rank_2025": 87,
       "acceptance_rate": 0.66,
-      "tuition_intl_annual": 42000,
+      "tuition_intl_annual": 38000,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 14000,
       "application_deadline_fall": "12-01",
@@ -1286,7 +1330,11 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "EA截止11月1日；纽约周边，就业生态强。",
-      "usnews_rank_2026": 42
+      "usnews_rank_2026": 42,
+      "data_source_urls": [
+        "https://admissions.rutgers.edu/tuition-financial-aid"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "cu-boulder",
@@ -1298,8 +1346,8 @@
       "type": "public",
       "qs_rank_2025": 274,
       "usnews_global_rank_2025": 158,
-      "acceptance_rate": 0.78,
-      "tuition_intl_annual": 47000,
+      "acceptance_rate": 0.8,
+      "tuition_intl_annual": 43000,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 14000,
       "application_deadline_fall": "01-15",
@@ -1340,7 +1388,11 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "EA截止11月15日；航空/环境/商科强；户外生活质量高。",
-      "usnews_rank_2026": 97
+      "usnews_rank_2026": 97,
+      "data_source_urls": [
+        "https://www.colorado.edu/financialaid/cost"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "ucl",
@@ -2838,8 +2890,8 @@
       "type": "private",
       "qs_rank_2025": 13,
       "usnews_global_rank_2025": 18,
-      "acceptance_rate": 0.085,
-      "tuition_intl_annual": 67944,
+      "acceptance_rate": 0.084,
+      "tuition_intl_annual": 71000,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 19202,
       "application_deadline_fall": "01-02",
@@ -2882,7 +2934,12 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "Need-aware for intl；不同学院学费略有差异。",
-      "usnews_rank_2026": 12
+      "usnews_rank_2026": 12,
+      "data_source_urls": [
+        "https://bursar.cornell.edu/students-parents/tuition-rates-and-fees",
+        "https://irp.cornell.edu/common-data-set"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "columbia",
@@ -2894,11 +2951,11 @@
       "type": "private",
       "qs_rank_2025": 12,
       "usnews_global_rank_2025": 8,
-      "acceptance_rate": 0.038,
-      "tuition_intl_annual": 71170,
+      "acceptance_rate": 0.049,
+      "tuition_intl_annual": 71845,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 21572,
-      "application_deadline_fall": "01-03",
+      "application_deadline_fall": "01-01",
       "application_system": "Common App",
       "sat_range": [
         1460,
@@ -2938,7 +2995,12 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "Need-aware for intl；申请时须同时申请助学金；CSS Profile required。",
-      "usnews_rank_2026": 15
+      "usnews_rank_2026": 15,
+      "data_source_urls": [
+        "https://undergrad.admissions.columbia.edu/affordability/cost",
+        "https://opir.columbia.edu/common-data-set"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "upenn",
@@ -2950,11 +3012,11 @@
       "type": "private",
       "qs_rank_2025": 14,
       "usnews_global_rank_2025": 13,
-      "acceptance_rate": 0.056,
-      "tuition_intl_annual": 66464,
+      "acceptance_rate": 0.059,
+      "tuition_intl_annual": 65670,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 17720,
-      "application_deadline_fall": "01-04",
+      "application_deadline_fall": "01-05",
       "application_system": "Common App",
       "sat_range": [
         1480,
@@ -2994,7 +3056,12 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "Need-aware for intl；Wharton商学院学费略高。",
-      "usnews_rank_2026": 7
+      "usnews_rank_2026": 7,
+      "data_source_urls": [
+        "https://penntoday.upenn.edu/news/penn-trustees-approve-2026-2027-undergraduate-charges-and-financial-aid-budget",
+        "https://admissions.upenn.edu/apply/deadlines"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "usc",
@@ -3006,11 +3073,11 @@
       "type": "private",
       "qs_rank_2025": 113,
       "usnews_global_rank_2025": 60,
-      "acceptance_rate": 0.093,
-      "tuition_intl_annual": 66930,
+      "acceptance_rate": 0.1,
+      "tuition_intl_annual": 75384,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 22100,
-      "application_deadline_fall": "12-01",
+      "application_deadline_fall": "01-15",
       "application_system": "Common App",
       "sat_range": [
         1420,
@@ -3050,7 +3117,12 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "RD截止12月1日（比大多数私立早）；洛杉矶影视资源丰富。",
-      "usnews_rank_2026": 28
+      "usnews_rank_2026": 28,
+      "data_source_urls": [
+        "https://arr.usc.edu/tuition-and-fees/",
+        "https://www.uscannenbergmedia.com/2026/03/10/usc-tuition-hike-will-likely-push-cost-of-attendance-over-100k/"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "emory",
@@ -3062,8 +3134,8 @@
       "type": "private",
       "qs_rank_2025": 150,
       "usnews_global_rank_2025": 54,
-      "acceptance_rate": 0.111,
-      "tuition_intl_annual": 62220,
+      "acceptance_rate": 0.11,
+      "tuition_intl_annual": 70300,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 18750,
       "application_deadline_fall": "01-01",
@@ -3106,7 +3178,12 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "Intl merit aid available；尽早申请竞争力更强。",
-      "usnews_rank_2026": 24
+      "usnews_rank_2026": 24,
+      "data_source_urls": [
+        "https://news.emory.edu/stories/2026/03/er_undergraduate_tuition_update_19-03-2026/story.html",
+        "https://studentaid.emory.edu/_includes/documents/sections/undergraduate/apply/cost-of-attendance-worksheet.pdf"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "vanderbilt",
@@ -3229,7 +3306,7 @@
       "type": "private",
       "qs_rank_2025": 193,
       "usnews_global_rank_2025": 104,
-      "acceptance_rate": 0.096,
+      "acceptance_rate": 0.28,
       "tuition_intl_annual": 71410,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 24294,
@@ -3273,7 +3350,12 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "生物医学/工程/护理强；Cleveland医疗研究生态丰富。",
-      "usnews_rank_2026": 46
+      "usnews_rank_2026": 46,
+      "data_source_urls": [
+        "https://case.edu/financialaid/undergraduates/cost-undergraduate-attendance",
+        "https://case.edu/studentaccounts/tuition-fees/undergraduate-tuition-fees"
+      ],
+      "acceptance_rate_year": "Class of 2029"
     },
     {
       "id": "unc",
@@ -3286,7 +3368,7 @@
       "qs_rank_2025": 155,
       "usnews_global_rank_2025": 68,
       "acceptance_rate": 0.17,
-      "tuition_intl_annual": 43000,
+      "tuition_intl_annual": 40500,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 14000,
       "application_deadline_fall": "01-15",
@@ -3328,7 +3410,11 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "EA截止10月15日；Kenan-Flagler商学院/公共卫生顶尖。",
-      "usnews_rank_2026": 22
+      "usnews_rank_2026": 22,
+      "data_source_urls": [
+        "https://admissions.unc.edu/tuition-costs/"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "uva",
@@ -3396,7 +3482,7 @@
       "qs_rank_2025": 157,
       "usnews_global_rank_2025": 78,
       "acceptance_rate": 0.45,
-      "tuition_intl_annual": 45000,
+      "tuition_intl_annual": 42300,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 14000,
       "application_deadline_fall": "01-20",
@@ -3439,7 +3525,11 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "EA截止11月1日；CS/工程强；DC周边就业优势。",
-      "usnews_rank_2026": 42
+      "usnews_rank_2026": 42,
+      "data_source_urls": [
+        "https://financialaid.umd.edu/cost-attendance"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "msu",
@@ -3451,11 +3541,11 @@
       "type": "public",
       "qs_rank_2025": 202,
       "usnews_global_rank_2025": 138,
-      "acceptance_rate": 0.85,
-      "tuition_intl_annual": 48000,
+      "acceptance_rate": 0.83,
+      "tuition_intl_annual": 44000,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 13000,
-      "application_deadline_fall": "04-01",
+      "application_deadline_fall": "02-01",
       "application_system": "Common App",
       "sat_range": [
         1180,
@@ -3495,7 +3585,11 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "Rolling admission；供应链/农业/传播强。",
-      "usnews_rank_2026": 64
+      "usnews_rank_2026": 64,
+      "data_source_urls": [
+        "https://admissions.msu.edu/tuition"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "umn",
@@ -3507,11 +3601,11 @@
       "type": "public",
       "qs_rank_2025": 171,
       "usnews_global_rank_2025": 89,
-      "acceptance_rate": 0.8,
-      "tuition_intl_annual": 42000,
+      "acceptance_rate": 0.73,
+      "tuition_intl_annual": 39000,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 14000,
-      "application_deadline_fall": "01-15",
+      "application_deadline_fall": "01-01",
       "application_system": "Common App",
       "sat_range": [
         1320,
@@ -3551,7 +3645,11 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "Rolling admission；Carlson商学院强。",
-      "usnews_rank_2026": 59
+      "usnews_rank_2026": 59,
+      "data_source_urls": [
+        "https://admissions.tc.umn.edu/cost-tuition"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "indiana",
@@ -3563,7 +3661,7 @@
       "type": "public",
       "qs_rank_2025": 291,
       "usnews_global_rank_2025": 161,
-      "acceptance_rate": 0.82,
+      "acceptance_rate": 0.8,
       "tuition_intl_annual": 42000,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 12000,
@@ -3606,7 +3704,11 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "EA截止11月1日；Kelley商学院全美顶尖；音乐学院著名。",
-      "usnews_rank_2026": 73
+      "usnews_rank_2026": 73,
+      "data_source_urls": [
+        "https://studentcentral.indiana.edu/tuition-costs/index.html"
+      ],
+      "acceptance_rate_year": "2026-2027"
     },
     {
       "id": "vassar",
@@ -3732,7 +3834,7 @@
       "tuition_intl_annual": 64956,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 15000,
-      "application_deadline_fall": "01-07",
+      "application_deadline_fall": "11-15",
       "application_system": "Common App",
       "sat_range": [
         1350,
@@ -3772,7 +3874,12 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "EA截止11月1日；硅谷地理优势；就业网络强。",
-      "usnews_rank_2026": 59
+      "usnews_rank_2026": 59,
+      "data_source_urls": [
+        "https://www.scu.edu/media/offices/bursar/2026-27-Tuition-&-Student-Fees-Schedule-UG-and-Graduate-Programs--Mar-2026.pdf",
+        "https://www.scu.edu/financialaid/cost-of-attendance/"
+      ],
+      "acceptance_rate_year": "Class of 2029"
     },
     {
       "id": "kcl",
@@ -6088,9 +6195,9 @@
       "usnews_rank_2025": 30,
       "tuition_intl_annual": 30886,
       "avg_living_cost_annual": 19920,
-      "application_deadline_fall": "01-15",
+      "application_deadline_fall": "03-01",
       "application_system": "Common App",
-      "acceptance_rate": 0.24,
+      "acceptance_rate": 0.23,
       "sat_range": [
         1320,
         1500
@@ -6130,7 +6237,12 @@
         "https://www.sfa.ufl.edu/cost/"
       ],
       "tuition_currency": "USD",
-      "usnews_rank_2026": 30
+      "usnews_rank_2026": 30,
+      "data_source_urls": [
+        "https://www.sfa.ufl.edu/cost/",
+        "https://admissions.ufl.edu/apply/deadlines"
+      ],
+      "acceptance_rate_year": "2024-25"
     },
     {
       "id": "villanova",
@@ -6557,11 +6669,11 @@
       "type": "private",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": 67200,
+      "acceptance_rate": 0.074,
+      "tuition_intl_annual": 76300,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 18200,
-      "application_deadline_fall": "01-05",
+      "application_deadline_fall": "11-15",
       "application_system": "Common App",
       "sat_range": [
         1480,
@@ -6599,7 +6711,13 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": 1
+      "usnews_rank_2026": 1,
+      "data_source_urls": [
+        "https://www.williams.edu/sfs/manage-your-account/tuition-fees/",
+        "https://www.williams.edu/sfs/files/2026/03/Tuition-letter-26-27-FINAL-2.pdf",
+        "https://www.williams.edu/admission-aid/financial-aid/cost-and-aid/"
+      ],
+      "acceptance_rate_year": "Class of 2030"
     },
     {
       "id": "amherst",
@@ -6611,11 +6729,11 @@
       "type": "private",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": 66440,
+      "acceptance_rate": 0.074,
+      "tuition_intl_annual": 75330,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 18560,
-      "application_deadline_fall": "01-05",
+      "application_deadline_fall": "11-07",
       "application_system": "Common App",
       "sat_range": [
         1440,
@@ -6652,7 +6770,12 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": 2
+      "usnews_rank_2026": 2,
+      "data_source_urls": [
+        "https://www.amherst.edu/admission/apply/firstyear/calendar_deadlines",
+        "https://www.amherst.edu/offices/controller/student-accounts/tuition-and-fees/node/608551"
+      ],
+      "acceptance_rate_year": "Class of 2030"
     },
     {
       "id": "swarthmore",
@@ -6664,11 +6787,11 @@
       "type": "private",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": 64998,
+      "acceptance_rate": 0.074,
+      "tuition_intl_annual": 72722,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 17490,
-      "application_deadline_fall": "01-05",
+      "application_deadline_fall": "11-15",
       "application_system": "Common App",
       "sat_range": [
         1470,
@@ -6706,7 +6829,12 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": "对国际生为need-aware（非need-blind），但援助政策仍较慷慨，STEM强校，工程专业全美前列",
-      "usnews_rank_2026": 3
+      "usnews_rank_2026": 3,
+      "data_source_urls": [
+        "https://www.swarthmore.edu/financial-aid/tuition-books-housing-food-plan-activities-fee",
+        "https://www.swarthmore.edu/news-events/swarthmore-admits-965-to-class-2029"
+      ],
+      "acceptance_rate_year": "Class of 2029"
     },
     {
       "id": "pomona",
@@ -6718,11 +6846,11 @@
       "type": "private",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": 65980,
+      "acceptance_rate": 0.072,
+      "tuition_intl_annual": 73600,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 20230,
-      "application_deadline_fall": "01-08",
+      "application_deadline_fall": "01-01",
       "application_system": "Common App",
       "sat_range": [
         1470,
@@ -6760,7 +6888,11 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": "综合费用约$87,000",
-      "usnews_rank_2026": 4
+      "usnews_rank_2026": 4,
+      "data_source_urls": [
+        "https://www.pomona.edu/administration/finance-office/student-accounts/tuition-and-costs"
+      ],
+      "acceptance_rate_year": "Class of 2029"
     },
     {
       "id": "wellesley",
@@ -6772,11 +6904,11 @@
       "type": "private",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": 67000,
+      "acceptance_rate": 0.137,
+      "tuition_intl_annual": 72570,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 20000,
-      "application_deadline_fall": "01-05",
+      "application_deadline_fall": "11-15",
       "application_system": "Common App",
       "sat_range": [
         1440,
@@ -6814,7 +6946,11 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": "综合费用约$87,000",
-      "usnews_rank_2026": 5
+      "usnews_rank_2026": 5,
+      "data_source_urls": [
+        "https://www.wellesley.edu/admission-aid/student-financial-services/tuition-cost"
+      ],
+      "acceptance_rate_year": "Class of 2029"
     },
     {
       "id": "bowdoin",
@@ -6879,11 +7015,11 @@
       "type": "private",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": 66475,
+      "acceptance_rate": 0.13,
+      "tuition_intl_annual": 73466,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 18960,
-      "application_deadline_fall": "01-05",
+      "application_deadline_fall": "11-15",
       "application_system": "Common App",
       "sat_range": [
         1440,
@@ -6921,7 +7057,12 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": 8
+      "usnews_rank_2026": 8,
+      "data_source_urls": [
+        "https://www.middlebury.edu/student-financial-services/tuition-fees-and-payment/tuition-and-fees",
+        "https://www.middlebury.edu/international-student-and-scholar-services/forms-and-resources/new-and-returning-student-forms-0"
+      ],
+      "acceptance_rate_year": "Class of 2029"
     },
     {
       "id": "colby",
@@ -6933,11 +7074,11 @@
       "type": "private",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": 65480,
+      "acceptance_rate": 0.08,
+      "tuition_intl_annual": 75790,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 18200,
-      "application_deadline_fall": "01-05",
+      "application_deadline_fall": "11-15",
       "application_system": "Common App",
       "sat_range": [
         1440,
@@ -6975,7 +7116,12 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": 18
+      "usnews_rank_2026": 18,
+      "data_source_urls": [
+        "https://www.colby.edu/people/offices-directory/student-financial-services/student-account-information/student-charges-payment-schedule/",
+        "https://afa.colby.edu/cost-and-aid/tuition-and-fees/"
+      ],
+      "acceptance_rate_year": "Class of 2029"
     },
     {
       "id": "hamilton",
@@ -7041,8 +7187,8 @@
       "type": "private",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": 66350,
+      "acceptance_rate": 0.12,
+      "tuition_intl_annual": 76828,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 19000,
       "application_deadline_fall": "01-15",
@@ -7082,7 +7228,11 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": 16
+      "usnews_rank_2026": 16,
+      "data_source_urls": [
+        "https://www.colgate.edu/admission-aid/tuition-fees/cost-attendance-2026-27"
+      ],
+      "acceptance_rate_year": "Class of 2027"
     },
     {
       "id": "harvey-mudd",
@@ -7148,11 +7298,11 @@
       "type": "private",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": 67250,
+      "acceptance_rate": 0.103,
+      "tuition_intl_annual": 71700,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 21000,
-      "application_deadline_fall": "01-12",
+      "application_deadline_fall": "01-05",
       "application_system": "Common App",
       "sat_range": [
         1450,
@@ -7190,7 +7340,12 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": 7
+      "usnews_rank_2026": 7,
+      "data_source_urls": [
+        "https://www.cmc.edu/institutional-research/fact-sheet",
+        "https://www.cmc.edu/washington-program/program-costs"
+      ],
+      "acceptance_rate_year": "Class of 2029"
     },
     {
       "id": "smith",
@@ -7202,8 +7357,8 @@
       "type": "private",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": 64200,
+      "acceptance_rate": 0.23,
+      "tuition_intl_annual": 70460,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 20000,
       "application_deadline_fall": "01-15",
@@ -7240,7 +7395,11 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": 15
+      "usnews_rank_2026": 15,
+      "data_source_urls": [
+        "https://www.smith.edu/admission-aid/tuition-aid-applicants/transfer-applicants"
+      ],
+      "acceptance_rate_year": "Class of 2029"
     },
     {
       "id": "bryn-mawr",
@@ -7301,11 +7460,11 @@
       "type": "private",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": 63250,
+      "acceptance_rate": 0.17,
+      "tuition_intl_annual": 73090,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 18000,
-      "application_deadline_fall": "01-05",
+      "application_deadline_fall": "11-15",
       "application_system": "Common App",
       "sat_range": [
         1460,
@@ -7342,7 +7501,12 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": 10
+      "usnews_rank_2026": 10,
+      "data_source_urls": [
+        "https://www.davidson.edu/admission-and-financial-aid/cost-attendance",
+        "https://www.davidson.edu/offices-and-services/controllers-office/students-and-families"
+      ],
+      "acceptance_rate_year": "Class of 2029"
     },
     {
       "id": "macalester",
@@ -7354,11 +7518,11 @@
       "type": "private",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": 65750,
+      "acceptance_rate": 0.29,
+      "tuition_intl_annual": 74394,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 18000,
-      "application_deadline_fall": "01-15",
+      "application_deadline_fall": "11-15",
       "application_system": "Common App",
       "sat_range": null,
       "act_range": null,
@@ -7391,7 +7555,11 @@
       "verified": false,
       "data_confidence": "medium",
       "special_notes": "语言要求未在官网明确找到，请人工核查",
-      "usnews_rank_2026": 24
+      "usnews_rank_2026": 24,
+      "data_source_urls": [
+        "https://www.macalester.edu/financial-aid/tuition/"
+      ],
+      "acceptance_rate_year": "Class of 2029"
     },
     {
       "id": "grinnell",
@@ -7403,11 +7571,11 @@
       "type": "private",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": 61710,
+      "acceptance_rate": 0.11,
+      "tuition_intl_annual": 73582,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 15600,
-      "application_deadline_fall": "01-05",
+      "application_deadline_fall": "01-15",
       "application_system": "Common App",
       "sat_range": null,
       "act_range": null,
@@ -7440,7 +7608,12 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": 11
+      "usnews_rank_2026": 11,
+      "data_source_urls": [
+        "https://www.grinnell.edu/about/leadership/offices-services/treasurer/student-accounts/comprehensive",
+        "https://www.grinnell.edu/news/comprehensive-fees-2026-27-academic-year"
+      ],
+      "acceptance_rate_year": "Class of 2029"
     },
     {
       "id": "oberlin",
@@ -7452,11 +7625,11 @@
       "type": "private",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": 65224,
+      "acceptance_rate": 0.35,
+      "tuition_intl_annual": 70320,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 17000,
-      "application_deadline_fall": "01-15",
+      "application_deadline_fall": "11-15",
       "application_system": "Common App",
       "sat_range": null,
       "act_range": null,
@@ -7489,7 +7662,12 @@
       "verified": false,
       "data_confidence": "medium",
       "special_notes": "语言要求未在官网明确找到，请人工核查",
-      "usnews_rank_2026": 29
+      "usnews_rank_2026": 29,
+      "data_source_urls": [
+        "https://www.oberlin.edu/student-accounts/tuition-and-fees",
+        "https://www.oberlin.edu/admissions-and-aid/tuition-and-fees"
+      ],
+      "acceptance_rate_year": "Class of 2029"
     },
     {
       "id": "lafayette",
@@ -7555,8 +7733,8 @@
       "type": "private",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": 66940,
+      "acceptance_rate": 0.34,
+      "tuition_intl_annual": 72880,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 15000,
       "application_deadline_fall": "01-15",
@@ -7592,7 +7770,11 @@
       "verified": false,
       "data_confidence": "medium",
       "special_notes": "语言要求未在官网明确找到，请人工核查",
-      "usnews_rank_2026": 30
+      "usnews_rank_2026": 30,
+      "data_source_urls": [
+        "https://www.kenyon.edu/offices-and-services/office-of-accounting/student-accounts-3/billing-and-payment-information/explanation-of-fees-and-charges/"
+      ],
+      "acceptance_rate_year": "Class of 2029"
     },
     {
       "id": "trinity-ct",
@@ -7702,11 +7884,11 @@
       "type": "private",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": null,
-      "tuition_intl_annual": 65150,
+      "acceptance_rate": 0.14,
+      "tuition_intl_annual": 63478,
       "tuition_currency": "USD",
       "avg_living_cost_annual": 17500,
-      "application_deadline_fall": "01-15",
+      "application_deadline_fall": "01-10",
       "application_system": "Common App",
       "sat_range": null,
       "act_range": null,
@@ -7740,7 +7922,12 @@
       "verified": false,
       "data_confidence": "medium",
       "special_notes": "语言要求未在官网明确找到，请人工核查",
-      "usnews_rank_2026": 20
+      "usnews_rank_2026": 20,
+      "data_source_urls": [
+        "https://www.bates.edu/financial-services/",
+        "https://www.bates.edu/admission/apply/application-options/"
+      ],
+      "acceptance_rate_year": "Class of 2029"
     }
   ]
 }
