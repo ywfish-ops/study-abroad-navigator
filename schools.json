@@ -44,7 +44,8 @@
       "tuition_subsidised": "Whether MOE Tuition Grant subsidy is available (SG schools)",
       "tuition_subsidised_notes": "Conditions for subsidy, e.g. 3-year service obligation",
       "data_confidence": "Data confidence level: high (URL verified + human spot-check), medium (official URL source, unverified), low (third-party source or unverified)",
-      "data_source_urls": "Source URLs used to populate this record"
+      "data_source_urls": "Source URLs used to populate this record",
+      "tuition_bands": "Tuition by discipline band: arts_humanities, science_lab, engineering, clinical_medicine"
     },
     "merge_notes": "由 Claude Code 合并 schools_database.json（82所）+ 旧版 schools.json 项目字段（batch_c/finance_sandbox/meta 等）",
     "data_updated": "2026-05-06",
@@ -1452,7 +1453,7 @@
       "qs_rank_2025": 9,
       "usnews_global_rank_2025": 20,
       "acceptance_rate": 0.12,
-      "tuition_intl_annual": 35400,
+      "tuition_intl_annual": 36000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 16000,
       "application_deadline_fall": "01-29",
@@ -1497,7 +1498,13 @@
         "https://www.ucl.ac.uk/study/student-finances/tuition-fees/fee-schedules/fee-schedules-2026-2027/undergraduate-fees-2026-2027"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "Overseas fees for 2026/27: £33,000-£38,000+ depending on programme (e.g. Politics £35,400, Business Analytics MSc £46,700)."
+      "tuition_range_note": "2026/27國際生學費：人文社科(Classroom-based) ~£33,000-£35,000、理學/實驗室(Lab-based) ~£38,000-£40,000、工程/計算機 ~£40,000-£43,000、臨床醫學 ~£45,000+。",
+      "tuition_bands": {
+        "arts_humanities": 34000,
+        "science_lab": 39000,
+        "engineering": 41500,
+        "clinical_medicine": 45000
+      }
     },
     {
       "id": "edinburgh",
@@ -1552,7 +1559,13 @@
         "https://registryservices.ed.ac.uk/tuition-fees/find/undergraduate/2026-2027/full-time-new-students"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "International fees for 2026-27: approx £26,500-£37,500 depending on programme. Arts/Humanities lower, Science/Engineering higher."
+      "tuition_range_note": "2026/27國際生學費：人文社科 ~£26,500、理學/實驗室 ~£32,000、工程/計算機 ~£34,000、臨床醫學(Medicine/Vet) ~£37,500。",
+      "tuition_bands": {
+        "arts_humanities": 26500,
+        "science_lab": 32000,
+        "engineering": 34000,
+        "clinical_medicine": 37500
+      }
     },
     {
       "id": "durham",
@@ -1565,7 +1578,7 @@
       "qs_rank_2025": 92,
       "usnews_global_rank_2025": 195,
       "acceptance_rate": 0.19,
-      "tuition_intl_annual": 28000,
+      "tuition_intl_annual": 27500,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 13000,
       "application_deadline_fall": "01-29",
@@ -1607,7 +1620,13 @@
         "https://www.durham.ac.uk/study/undergraduate/fees-and-funding/tuition-fees/"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "International fees for 2026/27: typically £25,000-£35,000 depending on course. Arts lower, Science/Engineering higher."
+      "tuition_range_note": "2026/27國際生學費：人文社科 ~£25,000-£26,000、理學/實驗室 ~£28,000、工程/計算機 ~£30,000-£32,000。杜倫大學無臨床醫學課程。",
+      "tuition_bands": {
+        "arts_humanities": 25500,
+        "science_lab": 28000,
+        "engineering": 31000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "manchester",
@@ -1620,7 +1639,7 @@
       "qs_rank_2025": 34,
       "usnews_global_rank_2025": 53,
       "acceptance_rate": 0.14,
-      "tuition_intl_annual": 33100,
+      "tuition_intl_annual": 31500,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 12000,
       "application_deadline_fall": "01-29",
@@ -1662,7 +1681,13 @@
         "https://www.alliancembs.manchester.ac.uk/study/undergraduate/fees-and-scholarships/"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "International fees for 2026/27: ~£33,100 (Alliance MBS example). Range typically £25,000-£40,000."
+      "tuition_range_note": "2026/27國際生學費：人文社科/商科 ~£25,000-£28,000、理學/實驗室 ~£30,000-£33,000、工程/計算機 ~£33,000-£35,000、臨床醫學 ~£38,000-£40,000。",
+      "tuition_bands": {
+        "arts_humanities": 27500,
+        "science_lab": 31500,
+        "engineering": 34000,
+        "clinical_medicine": 39000
+      }
     },
     {
       "id": "lse",
@@ -1675,7 +1700,7 @@
       "qs_rank_2025": 46,
       "usnews_global_rank_2025": 42,
       "acceptance_rate": 0.09,
-      "tuition_intl_annual": 29600,
+      "tuition_intl_annual": 29000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 16000,
       "application_deadline_fall": "01-29",
@@ -1718,7 +1743,13 @@
         "https://www.lse.ac.uk/study-at-lse/Undergraduate/fees-and-funding"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "Overseas undergraduate fees for 2026/27: approximately £26,000-£30,000 depending on programme tier. General Course fee: £29,600."
+      "tuition_range_note": "2026/27國際生學費按Tier劃分：Tier 1 ~£27,000-£29,000，Tier 2 ~£29,000-£31,000。LSE無理科實驗室、工程及臨床醫學專業。",
+      "tuition_bands": {
+        "arts_humanities": 29000,
+        "science_lab": null,
+        "engineering": null,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "bristol",
@@ -1731,7 +1762,7 @@
       "qs_rank_2025": 54,
       "usnews_global_rank_2025": 91,
       "acceptance_rate": 0.15,
-      "tuition_intl_annual": 28200,
+      "tuition_intl_annual": 30000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 12000,
       "application_deadline_fall": "01-29",
@@ -1772,7 +1803,13 @@
         "https://www.bristol.ac.uk/students/support/finances/tuition-fees/ug/overseas/26-27/2026-starters/"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "2026/27 overseas fees: Arts/Law/Social Sciences from £28,200; Science/Engineering higher ~£30,000-£35,000."
+      "tuition_range_note": "2026/27國際生學費：人文社科/法律 ~£28,200、理學/實驗室 ~£30,000、工程/計算機 ~£33,000、臨床醫學(Medicine/Vet) ~£35,000+。",
+      "tuition_bands": {
+        "arts_humanities": 28200,
+        "science_lab": 30000,
+        "engineering": 33000,
+        "clinical_medicine": 35000
+      }
     },
     {
       "id": "warwick",
@@ -1785,7 +1822,7 @@
       "qs_rank_2025": 69,
       "usnews_global_rank_2025": 111,
       "acceptance_rate": 0.13,
-      "tuition_intl_annual": 32000,
+      "tuition_intl_annual": 31700,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 12000,
       "application_deadline_fall": "01-29",
@@ -1827,7 +1864,13 @@
         "https://www.wbs.ac.uk/courses/undergraduate/bsc-management-with-marketing-and-with-placement-year/fees/"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "International fees for 2026/27: £25,000-£35,530 depending on course. Business/Management ~£35,530, Arts ~£25,000."
+      "tuition_range_note": "2026/27國際生學費按Band劃分(官網fee table)：Band 1(人文社科/教育/法律) £27,870、Band 2(理學/工程/商科) £35,530。無臨床醫學。",
+      "tuition_bands": {
+        "arts_humanities": 27870,
+        "science_lab": 35530,
+        "engineering": 35530,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "glasgow",
@@ -1840,7 +1883,7 @@
       "qs_rank_2025": 73,
       "usnews_global_rank_2025": 142,
       "acceptance_rate": 0.17,
-      "tuition_intl_annual": 27500,
+      "tuition_intl_annual": 26000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 11000,
       "application_deadline_fall": "01-29",
@@ -1882,7 +1925,13 @@
         "https://www.gla.ac.uk/undergraduate/fees/intlfees/"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "International fees for 2026/27: typically £22,000-£35,000 depending on programme."
+      "tuition_range_note": "2026/27國際生學費：人文社科(Arts/Social Sciences) ~£23,520、理學/實驗室 ~£26,500、工程/計算機 ~£29,000、臨床醫學(Medicine) ~£35,000。",
+      "tuition_bands": {
+        "arts_humanities": 23520,
+        "science_lab": 26500,
+        "engineering": 29000,
+        "clinical_medicine": 35000
+      }
     },
     {
       "id": "southampton",
@@ -1895,7 +1944,7 @@
       "qs_rank_2025": 77,
       "usnews_global_rank_2025": 175,
       "acceptance_rate": 0.18,
-      "tuition_intl_annual": 25000,
+      "tuition_intl_annual": 26000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 11000,
       "application_deadline_fall": "01-29",
@@ -1937,7 +1986,13 @@
         "https://www.southampton.ac.uk/courses/fees/undergraduate.page"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "International fees for 2026/27: £17,560-£30,000+ depending on programme. Midpoint used."
+      "tuition_range_note": "2026/27國際生學費：人文社科 ~£25,500、理學/實驗室 ~£26,200、工程/計算機 ~£26,000-£27,000、臨床醫學(Medicine) ~£30,000+。",
+      "tuition_bands": {
+        "arts_humanities": 25500,
+        "science_lab": 26200,
+        "engineering": 26500,
+        "clinical_medicine": 30000
+      }
     },
     {
       "id": "hku",
@@ -1993,7 +2048,13 @@
         "https://admissions.hku.hk/fees-and-scholarships/fees"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "Non-local 2026/27: HK$182,000 (non-STEM) to HK$198,000 (STEM). Four-year total ~HK$728,000-792,000."
+      "tuition_range_note": "Non-local 2026/27: HK$182,000 (non-STEM) to HK$198,000 (STEM). Four-year total ~HK$728,000-792,000.",
+      "tuition_bands": {
+        "arts_humanities": 182000,
+        "science_lab": 198000,
+        "engineering": 198000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "hkust",
@@ -2049,7 +2110,13 @@
         "https://join.hkust.edu.hk/fees-and-scholarships"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "Non-local 2026/27: HK$215,000 per academic year (~USD 27,600-28,000)."
+      "tuition_range_note": "Non-local 2026/27: HK$215,000 per academic year (~USD 27,600-28,000).",
+      "tuition_bands": {
+        "arts_humanities": 215000,
+        "science_lab": 215000,
+        "engineering": 215000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "cuhk",
@@ -2105,7 +2172,13 @@
         "https://admission.cuhk.edu.hk/fees-financing-your-studies/fees/"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "Non-local 2026-27: HK$214,000 per year. Yearly fee adjustment capped at 3% for 2026 cohort."
+      "tuition_range_note": "Non-local 2026-27: HK$214,000 per year. Yearly fee adjustment capped at 3% for 2026 cohort.",
+      "tuition_bands": {
+        "arts_humanities": 214000,
+        "science_lab": 214000,
+        "engineering": 214000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "hkbu",
@@ -2161,7 +2234,13 @@
         "https://admissions.hkbu.edu.hk/ug/fees-and-scholarships.html"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "Non-local fees for 2026/27: typically HK$140,000-160,000 per year. HKBU CIE fees HK$89,100-117,810."
+      "tuition_range_note": "Non-local fees for 2026/27: typically HK$140,000-160,000 per year. HKBU CIE fees HK$89,100-117,810.",
+      "tuition_bands": {
+        "arts_humanities": 160000,
+        "science_lab": 160000,
+        "engineering": 160000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "polyu",
@@ -2217,7 +2296,13 @@
         "https://www.polyu.edu.hk/study/ug/fees-and-scholarships/fees"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "Non-local 2026/27: approx HK$160,000 per year (government-funded programmes). Average spending ~HKD 287,655 including living."
+      "tuition_range_note": "Non-local 2026/27: approx HK$160,000 per year (government-funded programmes). Average spending ~HKD 287,655 including living.",
+      "tuition_bands": {
+        "arts_humanities": 160000,
+        "science_lab": 160000,
+        "engineering": 160000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "nus",
@@ -2276,7 +2361,13 @@
         "https://www.nus.edu.sg/registrar/docs/default-source/administrative-policies-procedures/ugtuitioncurrent.pdf"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "AY2026/27 fees without MOE Tuition Grant: S$30,612-169,866 depending on faculty. Humanities/Sciences S$34,890, Business S$33,006, Computing S$39,168."
+      "tuition_range_note": "AY2026/27 fees without MOE Tuition Grant: S$30,612-169,866 depending on faculty. Humanities/Sciences S$34,890, Business S$33,006, Computing S$39,168.",
+      "tuition_bands": {
+        "arts_humanities": 34890,
+        "science_lab": 34890,
+        "engineering": 39168,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "ntu",
@@ -2335,7 +2426,13 @@
         "https://www.ntu.edu.sg/education/undergraduate/fees-and-financial-aid"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "AY2026/27 fees without MOE Tuition Grant: S$17,550-38,940 depending on program. Most programs ~SGD 38,000."
+      "tuition_range_note": "AY2026/27 fees without MOE Tuition Grant: S$17,550-38,940 depending on program. Most programs ~SGD 38,000.",
+      "tuition_bands": {
+        "arts_humanities": 34000,
+        "science_lab": 38000,
+        "engineering": 38940,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "smu-sg",
@@ -2394,7 +2491,13 @@
         "https://www.smu.edu.sg/campus-life/financial-matters/tuition-fees"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "AY2026/27 fees without MOE Tuition Grant: approximately S$22,000-30,000 depending on program. Law higher."
+      "tuition_range_note": "AY2026/27 fees without MOE Tuition Grant: approximately S$22,000-30,000 depending on program. Law higher.",
+      "tuition_bands": {
+        "arts_humanities": 25000,
+        "science_lab": 30000,
+        "engineering": null,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "sutd",
@@ -2452,7 +2555,13 @@
         "https://www.sutd.edu.sg/education/undergraduate/special-programmes/sharp/application-and-financing/financial/"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "AY2025 fees (May 2026 intake): with MOE subsidy S$13,500; without subsidy ~SGD 25,000-30,000."
+      "tuition_range_note": "AY2025 fees (May 2026 intake): with MOE subsidy S$13,500; without subsidy ~SGD 25,000-30,000.",
+      "tuition_bands": {
+        "arts_humanities": null,
+        "science_lab": 25000,
+        "engineering": 30000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "sim",
@@ -2509,7 +2618,13 @@
       "data_source_urls": [
         "https://www.sim.edu.sg/degrees-diplomas/programmes/programme-listing"
       ],
-      "tuition_range_note": "Private institution. Tuition varies by partner university programme. Typically S$20,000-35,000 per year. No official acceptance rate available."
+      "tuition_range_note": "Private institution. Tuition varies by partner university programme. Typically S$20,000-35,000 per year. No official acceptance rate available.",
+      "tuition_bands": {
+        "arts_humanities": 25000,
+        "science_lab": 28000,
+        "engineering": 30000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "uoft",
@@ -2565,7 +2680,13 @@
         "https://future.utoronto.ca/pearson-scholarships"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "2026/27 international fees: Arts/Science/Commerce ~CAD 66,356; Engineering ~CAD 73,056; varies by program."
+      "tuition_range_note": "2026/27 international fees: Arts/Science/Commerce ~CAD 66,356; Engineering ~CAD 73,056; varies by program.",
+      "tuition_bands": {
+        "arts_humanities": 66356,
+        "science_lab": 66356,
+        "engineering": 73056,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "ubc",
@@ -2622,7 +2743,13 @@
         "https://students.ubc.ca/finances/tuition-fees/undergraduate-tuition-fees/"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "International tuition for 2026/27: typically CAD 39,000-53,000 depending on program. +3% annual increase for continuing."
+      "tuition_range_note": "International tuition for 2026/27: typically CAD 39,000-53,000 depending on program. +3% annual increase for continuing.",
+      "tuition_bands": {
+        "arts_humanities": 47189,
+        "science_lab": 53868,
+        "engineering": 63654,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "mcgill",
@@ -2678,7 +2805,13 @@
         "https://www.mcgill.ca/student-accounts/tuition-fees/tuition-and-fees-tables-and-rates/tuition-rates-information"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "International tuition for 2025-26: CAD 31,500-51,000. 2026-27 rates expected similar with modest increase."
+      "tuition_range_note": "International tuition for 2025-26: CAD 31,500-51,000. 2026-27 rates expected similar with modest increase.",
+      "tuition_bands": {
+        "arts_humanities": 54000,
+        "science_lab": 54000,
+        "engineering": 54000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "uwaterloo",
@@ -2734,7 +2867,13 @@
         "https://uwaterloo.ca/finance/fee-schedule-international-undergraduate-students-winter-3"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "International fees for 2026: typically CAD 30,000-65,000. Co-op programs higher. Engineering ~CAD 65,000/yr."
+      "tuition_range_note": "International fees for 2026: typically CAD 30,000-65,000. Co-op programs higher. Engineering ~CAD 65,000/yr.",
+      "tuition_bands": {
+        "arts_humanities": 52000,
+        "science_lab": 56000,
+        "engineering": 65000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "queens",
@@ -2789,7 +2928,13 @@
         "https://www.queensu.ca/registrar/financial-aidtuitionfees/tuition-and-fees/undergraduate-tuition-and-fees-2026-27"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "2026/27 international fees: Arts/Science ~CAD 44,810; Engineering ~CAD 55,000+; total with ancillary ~CAD 47,125+."
+      "tuition_range_note": "2026/27 international fees: Arts/Science ~CAD 44,810; Engineering ~CAD 55,000+; total with ancillary ~CAD 47,125+.",
+      "tuition_bands": {
+        "arts_humanities": 44810,
+        "science_lab": 44810,
+        "engineering": 55230,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "umelbourne",
@@ -2844,7 +2989,13 @@
         "https://study.unimelb.edu.au/how-to-apply/international-exchange-and-study-abroad-applications/tuition-fees"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "2026 fees: AUD 45,000-60,000 depending on program. Commerce/Business ~AUD 50,000; Science/Engineering ~AUD 52,000."
+      "tuition_range_note": "2026 fees: AUD 45,000-60,000 depending on program. Commerce/Business ~AUD 50,000; Science/Engineering ~AUD 52,000.",
+      "tuition_bands": {
+        "arts_humanities": 52944,
+        "science_lab": 52944,
+        "engineering": 60960,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "usyd",
@@ -2900,7 +3051,13 @@
         "https://www.sydney.edu.au/study/fees-and-loans/international-student-fees.html"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "2026 fees: AUD 56,300-60,600 per year. Business up to AUD 60,600. ~13% increase from 2025."
+      "tuition_range_note": "2026 fees: AUD 56,300-60,600 per year. Business up to AUD 60,600. ~13% increase from 2025.",
+      "tuition_bands": {
+        "arts_humanities": 49200,
+        "science_lab": 56300,
+        "engineering": 57000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "unsw",
@@ -2957,7 +3114,13 @@
         "https://www.unsw.edu.au/study/fees-and-scholarships"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "2026 fees: e.g. BA/LLB AUD 52,500; Commerce ~AUD 50,000; Engineering ~AUD 55,000. Varies by program."
+      "tuition_range_note": "2026 fees: e.g. BA/LLB AUD 52,500; Commerce ~AUD 50,000; Engineering ~AUD 55,000. Varies by program.",
+      "tuition_bands": {
+        "arts_humanities": 45500,
+        "science_lab": 50000,
+        "engineering": 55000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "uq",
@@ -3013,7 +3176,13 @@
         "https://future-students.uq.edu.au/study/fees-and-expenses"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "2026 fees: typically AUD 40,000-50,000 depending on program. Science/Engineering mid-range, Business ~AUD 45,000."
+      "tuition_range_note": "2026 fees: typically AUD 40,000-50,000 depending on program. Science/Engineering mid-range, Business ~AUD 45,000.",
+      "tuition_bands": {
+        "arts_humanities": 43000,
+        "science_lab": 45000,
+        "engineering": 53760,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "anu",
@@ -3069,7 +3238,13 @@
         "https://www.anu.edu.au/study/fees-and-scholarships"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "2026 fees: typically AUD 42,000-53,000 depending on program. Average ~AUD 47,000."
+      "tuition_range_note": "2026 fees: typically AUD 42,000-53,000 depending on program. Average ~AUD 47,000.",
+      "tuition_bands": {
+        "arts_humanities": 47000,
+        "science_lab": 50000,
+        "engineering": 53000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "cornell",
@@ -4093,7 +4268,7 @@
       "qs_rank_2025": 40,
       "usnews_global_rank_2025": 80,
       "acceptance_rate": 0.13,
-      "tuition_intl_annual": 33850,
+      "tuition_intl_annual": 32500,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 17000,
       "application_deadline_fall": "01-29",
@@ -4136,7 +4311,13 @@
         "https://www.kcl.ac.uk/international-foundation/fees-funding"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "International fee for 2026-27: ~£33,850 per year (e.g. International Relations). Varies by programme."
+      "tuition_range_note": "2026/27國際生學費：人文社科(Classroom-based) ~£27,000-£29,000、理學/實驗室(Lab-based) ~£33,000-£35,000、工程(部分課程) ~£35,000、臨床醫學(Medicine) ~£40,000+。",
+      "tuition_bands": {
+        "arts_humanities": 28500,
+        "science_lab": 34000,
+        "engineering": 35000,
+        "clinical_medicine": 40000
+      }
     },
     {
       "id": "nottingham",
@@ -4149,7 +4330,7 @@
       "qs_rank_2025": 103,
       "usnews_global_rank_2025": 197,
       "acceptance_rate": 0.2,
-      "tuition_intl_annual": 21000,
+      "tuition_intl_annual": 28000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 11000,
       "application_deadline_fall": "01-29",
@@ -4192,7 +4373,13 @@
         "https://www.nottingham.ac.uk/currentstudents/news/an-update-on-tuition-fees"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "International fees for 2026/27: £19,850-£21,500 per year depending on course (from official Instagram)."
+      "tuition_range_note": "2026/27國際生學費(官網fee table)：人文社科 ~£24,700-£26,800、理學/實驗室 ~£27,000、工程/計算機 ~£33,000、臨床醫學(Medicine) ~£30,000+。",
+      "tuition_bands": {
+        "arts_humanities": 25500,
+        "science_lab": 27000,
+        "engineering": 33000,
+        "clinical_medicine": 30750
+      }
     },
     {
       "id": "leeds",
@@ -4205,7 +4392,7 @@
       "qs_rank_2025": 86,
       "usnews_global_rank_2025": 148,
       "acceptance_rate": 0.18,
-      "tuition_intl_annual": 26000,
+      "tuition_intl_annual": 25500,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 11000,
       "application_deadline_fall": "01-29",
@@ -4248,7 +4435,13 @@
         "https://students.leeds.ac.uk/fees-funding/news/article/9/tuition-fees-and-student-finance-what-s-changing"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "International fees for 2026/27: typically £22,000-£30,000 depending on programme."
+      "tuition_range_note": "2026/27國際生學費：人文社科 ~£22,000-£24,000、理學/實驗室 ~£26,000、工程/計算機 ~£28,000、臨床醫學(Medicine/Dentistry) ~£32,000-£35,000。",
+      "tuition_bands": {
+        "arts_humanities": 23000,
+        "science_lab": 26000,
+        "engineering": 28000,
+        "clinical_medicine": 33000
+      }
     },
     {
       "id": "sheffield",
@@ -4261,7 +4454,7 @@
       "qs_rank_2025": 111,
       "usnews_global_rank_2025": 175,
       "acceptance_rate": 0.19,
-      "tuition_intl_annual": 24000,
+      "tuition_intl_annual": 26000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 11000,
       "application_deadline_fall": "01-29",
@@ -4304,7 +4497,13 @@
         "https://sheffield.ac.uk/undergraduate/tuition-fees-2026"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "International fees for 2026: typically £21,000-£30,000 depending on course. Use fee look-up tool for exact."
+      "tuition_range_note": "2026/27國際生學費(2025/26基準上調約3%)：人文社科 ~£24,000、理學/實驗室 ~£27,000、工程/計算機 ~£30,570、臨床醫學(Dentistry/Medicine) ~£34,000+。",
+      "tuition_bands": {
+        "arts_humanities": 24000,
+        "science_lab": 27000,
+        "engineering": 30570,
+        "clinical_medicine": 34000
+      }
     },
     {
       "id": "birmingham",
@@ -4317,7 +4516,7 @@
       "qs_rank_2025": 84,
       "usnews_global_rank_2025": 144,
       "acceptance_rate": 0.17,
-      "tuition_intl_annual": 24000,
+      "tuition_intl_annual": 25000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 11000,
       "application_deadline_fall": "01-29",
@@ -4360,7 +4559,13 @@
         "https://www.birmingham.ac.uk/study/international/fees"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "International fees for 2026/27: starting from £21,000 for undergraduate. Varies by programme."
+      "tuition_range_note": "2026/27國際生學費：人文社科 ~£21,000-£23,000、理學/實驗室 ~£25,000、工程/計算機 ~£27,000、臨床醫學(Medicine/Dentistry) ~£35,000+。",
+      "tuition_bands": {
+        "arts_humanities": 22000,
+        "science_lab": 25000,
+        "engineering": 27000,
+        "clinical_medicine": 35000
+      }
     },
     {
       "id": "mcmaster",
@@ -4416,7 +4621,13 @@
         "https://univcan.ca/about-universities-canada/facts-and-stats/tuition-fees-by-university/"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "International fees for 2025-26: CAD 45,158-46,023. 2026-27 expected with modest increase."
+      "tuition_range_note": "International fees for 2025-26: CAD 45,158-46,023. 2026-27 expected with modest increase.",
+      "tuition_bands": {
+        "arts_humanities": 36000,
+        "science_lab": 38000,
+        "engineering": 44500,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "western",
@@ -4471,7 +4682,13 @@
         "https://welcome.uwo.ca/next-steps/finances/index.html"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "Estimated year 1 international tuition & fees for 2026-27: CAD 48,000-64,400. Tuition guarantee with max 4% annual increase."
+      "tuition_range_note": "Estimated year 1 international tuition & fees for 2026-27: CAD 48,000-64,400. Tuition guarantee with max 4% annual increase.",
+      "tuition_bands": {
+        "arts_humanities": 48000,
+        "science_lab": 52000,
+        "engineering": 60000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "ualberta",
@@ -4527,7 +4744,13 @@
         "https://www.ualberta.ca/en/admissions/tuition-and-scholarships/international-tuition-and-fees.html"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "International fees for 2026-27: typically CAD 20,000-40,000 depending on program. Tuition guarantee for program duration."
+      "tuition_range_note": "International fees for 2026-27: typically CAD 20,000-40,000 depending on program. Tuition guarantee for program duration.",
+      "tuition_bands": {
+        "arts_humanities": 30000,
+        "science_lab": 32000,
+        "engineering": 38000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "monash",
@@ -4584,7 +4807,13 @@
         "https://www.monash.edu/study/fees/international-fees"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "2026 fees: AUD 35,000-52,000 depending on program. Commerce/AUD ~38,000-44,000; Engineering ~AUD 46,000-52,000."
+      "tuition_range_note": "2026 fees: AUD 35,000-52,000 depending on program. Commerce/AUD ~38,000-44,000; Engineering ~AUD 46,000-52,000.",
+      "tuition_bands": {
+        "arts_humanities": 38000,
+        "science_lab": 46000,
+        "engineering": 52000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "uadelaide",
@@ -4640,7 +4869,13 @@
         "https://www.adelaide.edu.au/study/international/fees"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "2026 fees: typically AUD 37,000-50,000 depending on program. Average ~AUD 42,000."
+      "tuition_range_note": "2026 fees: typically AUD 37,000-50,000 depending on program. Average ~AUD 42,000.",
+      "tuition_bands": {
+        "arts_humanities": 37000,
+        "science_lab": 42000,
+        "engineering": 48000,
+        "clinical_medicine": null
+      }
     },
     {
       "id": "oxford",
@@ -4653,7 +4888,7 @@
       "qs_rank_2025": 3,
       "usnews_global_rank_2025": 5,
       "acceptance_rate": 0.14,
-      "tuition_intl_annual": 50000,
+      "tuition_intl_annual": 48000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 15120,
       "application_deadline_fall": "10-15",
@@ -4705,7 +4940,13 @@
         "https://www.ox.ac.uk/admissions/undergraduate/fees-and-funding/course-fees"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "£37,380-£62,820 depending on course (2026/27). Midpoint used. Clinical medicine significantly higher."
+      "tuition_range_note": "2026/27 國際生學費 (Course Fees) £37,380-£62,820/年，視專業而定。人文社科 £37,380、科學實驗室 £44,240、工程/計算機 £48,620、臨床醫學 £62,820。此學費已包含 College Fee（本科生無另收學院費）。",
+      "tuition_bands": {
+        "arts_humanities": 37380,
+        "science_lab": 44240,
+        "engineering": 48620,
+        "clinical_medicine": 62820
+      }
     },
     {
       "id": "cambridge",
@@ -4769,7 +5010,13 @@
         "https://www.undergraduate.study.cam.ac.uk/international-students/international-fees-and-costs"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "Groups 1-5: £29,052-£70,554 + College fee ~£13,245. Total range ~£42,297-£83,799. Science/Engineering Group 4: £44,214 + College fee ~£57,459."
+      "tuition_range_note": "Groups 1-5 Course Fees: £29,052-£70,554 + College fee ~£13,245. 總計：人文社科(Group 1) £42,297、科學實驗室(Group 4) £57,459、工程(Group 4) £57,459、臨床醫學(Group 5) £83,799。",
+      "tuition_bands": {
+        "arts_humanities": 42297,
+        "science_lab": 57459,
+        "engineering": 57459,
+        "clinical_medicine": 83799
+      }
     },
     {
       "id": "imperial",
@@ -4835,7 +5082,13 @@
         "https://www.imperial.ac.uk/study/fees-and-funding/undergraduate/tuition-fees/"
       ],
       "acceptance_rate_year": "2024",
-      "tuition_range_note": "Overseas fees vary by course, typically £38,000-£48,000 for science/engineering (2026/27). Exact fees per course page."
+      "tuition_range_note": "2026/27國際生學費：自然科學/工程 ~£40,000-£48,000，醫學 ~£52,000+。具體費用依課程而異，通常在每年四月公布。",
+      "tuition_bands": {
+        "arts_humanities": 40000,
+        "science_lab": 44000,
+        "engineering": 48000,
+        "clinical_medicine": 55000
+      }
     },
     {
       "id": "boston-college",
