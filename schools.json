@@ -2,7 +2,7 @@
   "_meta": {
     "version": "1.0.0",
     "last_updated": "2026-05-06",
-    "total_schools": 139,
+    "total_schools": 138,
     "data_cycle": "2025-2026 Academic Year",
     "notes": "Base data for 全球留学决策导航系统. Financial figures in USD (US/CA/AU) or GBP (UK) or HKD (HK) or SGD (SG). Tuition = annual undergraduate international student tuition. Rankings: QS 2025, USNews Global 2025.",
     "schema_version": "v1",
@@ -1451,8 +1451,8 @@
       "type": "public",
       "qs_rank_2025": 9,
       "usnews_global_rank_2025": 20,
-      "acceptance_rate": 0.16,
-      "tuition_intl_annual": 35000,
+      "acceptance_rate": 0.12,
+      "tuition_intl_annual": 35400,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 16000,
       "application_deadline_fall": "01-29",
@@ -1492,7 +1492,12 @@
       "usnews_rank_2026": null,
       "admissions_tests": {
         "law": "lnat"
-      }
+      },
+      "data_source_urls": [
+        "https://www.ucl.ac.uk/study/student-finances/tuition-fees/fee-schedules/fee-schedules-2026-2027/undergraduate-fees-2026-2027"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "Overseas fees for 2026/27: £33,000-£38,000+ depending on programme (e.g. Politics £35,400, Business Analytics MSc £46,700)."
     },
     {
       "id": "edinburgh",
@@ -1504,8 +1509,8 @@
       "type": "public",
       "qs_rank_2025": 27,
       "usnews_global_rank_2025": 48,
-      "acceptance_rate": 0.13,
-      "tuition_intl_annual": 28500,
+      "acceptance_rate": 0.14,
+      "tuition_intl_annual": 32000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 12000,
       "application_deadline_fall": "01-29",
@@ -1542,7 +1547,12 @@
       "a_level_typical": "AAA",
       "special_notes": "苏格兰四年制学位；医学/兽医独立申请（A*AA）；部分文科专业低至ABB。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://registryservices.ed.ac.uk/tuition-fees/find/undergraduate/2026-2027/full-time-new-students"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "International fees for 2026-27: approx £26,500-£37,500 depending on programme. Arts/Humanities lower, Science/Engineering higher."
     },
     {
       "id": "durham",
@@ -1554,8 +1564,8 @@
       "type": "public",
       "qs_rank_2025": 92,
       "usnews_global_rank_2025": 195,
-      "acceptance_rate": 0.14,
-      "tuition_intl_annual": 27000,
+      "acceptance_rate": 0.19,
+      "tuition_intl_annual": 28000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 13000,
       "application_deadline_fall": "01-29",
@@ -1592,7 +1602,12 @@
       "a_level_typical": "A*AA",
       "special_notes": "学院制申请（类Oxbridge）；文科/神学/理科强；无医学院；部分课程需面试。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.durham.ac.uk/study/undergraduate/fees-and-funding/tuition-fees/"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "International fees for 2026/27: typically £25,000-£35,000 depending on course. Arts lower, Science/Engineering higher."
     },
     {
       "id": "manchester",
@@ -1604,8 +1619,8 @@
       "type": "public",
       "qs_rank_2025": 34,
       "usnews_global_rank_2025": 53,
-      "acceptance_rate": 0.12,
-      "tuition_intl_annual": 28000,
+      "acceptance_rate": 0.14,
+      "tuition_intl_annual": 33100,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 12000,
       "application_deadline_fall": "01-29",
@@ -1642,7 +1657,12 @@
       "a_level_typical": "AAA",
       "special_notes": "英国最大单一校区大学；医学需UCAT入学考试；Alliance Manchester Business School录取竞争激烈。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.alliancembs.manchester.ac.uk/study/undergraduate/fees-and-scholarships/"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "International fees for 2026/27: ~£33,100 (Alliance MBS example). Range typically £25,000-£40,000."
     },
     {
       "id": "lse",
@@ -1654,8 +1674,8 @@
       "type": "public",
       "qs_rank_2025": 46,
       "usnews_global_rank_2025": 42,
-      "acceptance_rate": 0.085,
-      "tuition_intl_annual": 28000,
+      "acceptance_rate": 0.09,
+      "tuition_intl_annual": 29600,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 16000,
       "application_deadline_fall": "01-29",
@@ -1693,7 +1713,12 @@
       "special_notes": "仅社会科学类专业，无理工医学；录取率全英最低；需GCSE英语/数学B/6成绩。",
       "data_confidence": "medium",
       "usnews_rank_2026": null,
-      "admissions_tests": {}
+      "admissions_tests": {},
+      "data_source_urls": [
+        "https://www.lse.ac.uk/study-at-lse/Undergraduate/fees-and-funding"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "Overseas undergraduate fees for 2026/27: approximately £26,000-£30,000 depending on programme tier. General Course fee: £29,600."
     },
     {
       "id": "bristol",
@@ -1705,8 +1730,8 @@
       "type": "public",
       "qs_rank_2025": 54,
       "usnews_global_rank_2025": 91,
-      "acceptance_rate": 0.11,
-      "tuition_intl_annual": 27000,
+      "acceptance_rate": 0.15,
+      "tuition_intl_annual": 28200,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 12000,
       "application_deadline_fall": "01-29",
@@ -1742,7 +1767,12 @@
       "a_level_typical": "AAA",
       "special_notes": "工程/理科实力强；牙医/医学A*AA；许多专业要求特定A-Level科目组合。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.bristol.ac.uk/students/support/finances/tuition-fees/ug/overseas/26-27/2026-starters/"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "2026/27 overseas fees: Arts/Law/Social Sciences from £28,200; Science/Engineering higher ~£30,000-£35,000."
     },
     {
       "id": "warwick",
@@ -1755,7 +1785,7 @@
       "qs_rank_2025": 69,
       "usnews_global_rank_2025": 111,
       "acceptance_rate": 0.13,
-      "tuition_intl_annual": 28000,
+      "tuition_intl_annual": 32000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 12000,
       "application_deadline_fall": "01-29",
@@ -1792,7 +1822,12 @@
       "a_level_typical": "AAA",
       "special_notes": "数学/经济/WBS商学院全英顶尖；无医学院；部分课程需面试或提交书面作品。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.wbs.ac.uk/courses/undergraduate/bsc-management-with-marketing-and-with-placement-year/fees/"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "International fees for 2026/27: £25,000-£35,530 depending on course. Business/Management ~£35,530, Arts ~£25,000."
     },
     {
       "id": "glasgow",
@@ -1804,8 +1839,8 @@
       "type": "public",
       "qs_rank_2025": 73,
       "usnews_global_rank_2025": 142,
-      "acceptance_rate": 0.12,
-      "tuition_intl_annual": 25000,
+      "acceptance_rate": 0.17,
+      "tuition_intl_annual": 27500,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 11000,
       "application_deadline_fall": "01-29",
@@ -1842,7 +1877,12 @@
       "a_level_typical": "AAA",
       "special_notes": "苏格兰最古老大学；文科/医学/理科均强；医学/兽医有额外申请要求。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.gla.ac.uk/undergraduate/fees/intlfees/"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "International fees for 2026/27: typically £22,000-£35,000 depending on programme."
     },
     {
       "id": "southampton",
@@ -1854,8 +1894,8 @@
       "type": "public",
       "qs_rank_2025": 77,
       "usnews_global_rank_2025": 175,
-      "acceptance_rate": 0.14,
-      "tuition_intl_annual": 26000,
+      "acceptance_rate": 0.18,
+      "tuition_intl_annual": 25000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 11000,
       "application_deadline_fall": "01-29",
@@ -1892,7 +1932,12 @@
       "a_level_typical": "AAA",
       "special_notes": "电子工程/海洋科学全球顶尖；物理声誉极高；无医学院；海事专业世界领先。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.southampton.ac.uk/courses/fees/undergraduate.page"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "International fees for 2026/27: £17,560-£30,000+ depending on programme. Midpoint used."
     },
     {
       "id": "hku",
@@ -1904,7 +1949,7 @@
       "type": "public",
       "qs_rank_2025": 17,
       "usnews_global_rank_2025": 62,
-      "acceptance_rate": 0.14,
+      "acceptance_rate": 0.1,
       "tuition_intl_annual": 198000,
       "tuition_currency": "HKD",
       "avg_living_cost_annual": 50000,
@@ -1943,7 +1988,12 @@
       "dse_accepted": true,
       "special_notes": "内地生通过自主招生选拔，STEM学院年学费为24.9万港币（含STEM费）；26-27学年非STEM学费22.4万，STEM学费24.9万。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://admissions.hku.hk/fees-and-scholarships/fees"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "Non-local 2026/27: HK$182,000 (non-STEM) to HK$198,000 (STEM). Four-year total ~HK$728,000-792,000."
     },
     {
       "id": "hkust",
@@ -1955,11 +2005,11 @@
       "type": "public",
       "qs_rank_2025": 47,
       "usnews_global_rank_2025": 128,
-      "acceptance_rate": 0.27,
-      "tuition_intl_annual": 185000,
+      "acceptance_rate": 0.3,
+      "tuition_intl_annual": 215000,
       "tuition_currency": "HKD",
       "avg_living_cost_annual": 80000,
-      "application_deadline_fall": "01-08",
+      "application_deadline_fall": "11-21",
       "application_system": "Direct",
       "sat_range": null,
       "act_range": null,
@@ -1994,7 +2044,12 @@
       "dse_accepted": true,
       "special_notes": "26/27学年学费定为21.5万港币。部分专业录取竞争极激烈。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://join.hkust.edu.hk/fees-and-scholarships"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "Non-local 2026/27: HK$215,000 per academic year (~USD 27,600-28,000)."
     },
     {
       "id": "cuhk",
@@ -2006,11 +2061,11 @@
       "type": "public",
       "qs_rank_2025": 36,
       "usnews_global_rank_2025": 94,
-      "acceptance_rate": 0.21,
-      "tuition_intl_annual": 178000,
+      "acceptance_rate": 0.35,
+      "tuition_intl_annual": 214000,
       "tuition_currency": "HKD",
       "avg_living_cost_annual": 62000,
-      "application_deadline_fall": "01-07",
+      "application_deadline_fall": "11-15",
       "application_system": "Direct",
       "sat_range": null,
       "act_range": null,
@@ -2045,7 +2100,12 @@
       "dse_accepted": true,
       "special_notes": "内地生采取统招提前批模式。26-27学年学费将调整至21.4万港币。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://admission.cuhk.edu.hk/fees-financing-your-studies/fees/"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "Non-local 2026-27: HK$214,000 per year. Yearly fee adjustment capped at 3% for 2026 cohort."
     },
     {
       "id": "hkbu",
@@ -2057,11 +2117,11 @@
       "type": "public",
       "qs_rank_2025": 332,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": 0.45,
-      "tuition_intl_annual": 175000,
+      "acceptance_rate": 0.25,
+      "tuition_intl_annual": 160000,
       "tuition_currency": "HKD",
       "avg_living_cost_annual": 60000,
-      "application_deadline_fall": "02-01",
+      "application_deadline_fall": "05-31",
       "application_system": "Direct",
       "sat_range": null,
       "act_range": null,
@@ -2096,7 +2156,12 @@
       "dse_accepted": true,
       "special_notes": "26-27学年学费升至19万港币。内地生需高考达一本线及以上，英语成绩有硬性要求。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://admissions.hkbu.edu.hk/ug/fees-and-scholarships.html"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "Non-local fees for 2026/27: typically HK$140,000-160,000 per year. HKBU CIE fees HK$89,100-117,810."
     },
     {
       "id": "polyu",
@@ -2108,11 +2173,11 @@
       "type": "public",
       "qs_rank_2025": 57,
       "usnews_global_rank_2025": 295,
-      "acceptance_rate": 0.35,
-      "tuition_intl_annual": 175000,
+      "acceptance_rate": 0.3,
+      "tuition_intl_annual": 160000,
       "tuition_currency": "HKD",
       "avg_living_cost_annual": 87000,
-      "application_deadline_fall": "02-05",
+      "application_deadline_fall": "02-10",
       "application_system": "Direct",
       "sat_range": null,
       "act_range": null,
@@ -2147,7 +2212,12 @@
       "dse_accepted": true,
       "special_notes": "内地生通道主要看高考成绩和面试。设计等热门学科竞争极为激烈。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.polyu.edu.hk/study/ug/fees-and-scholarships/fees"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "Non-local 2026/27: approx HK$160,000 per year (government-funded programmes). Average spending ~HKD 287,655 including living."
     },
     {
       "id": "nus",
@@ -2159,11 +2229,11 @@
       "type": "public",
       "qs_rank_2025": 8,
       "usnews_global_rank_2025": 27,
-      "acceptance_rate": 0.07,
-      "tuition_intl_annual": 33400,
+      "acceptance_rate": 0.1,
+      "tuition_intl_annual": 35000,
       "tuition_currency": "SGD",
       "avg_living_cost_annual": 12000,
-      "application_deadline_fall": "02-23",
+      "application_deadline_fall": "03-03",
       "application_system": "Direct (NUS Application Portal)",
       "sat_range": null,
       "act_range": null,
@@ -2201,7 +2271,12 @@
       "tuition_subsidised_notes": "MOE补贴后学费约1.7-2.8万新币，需毕业后在新加坡注册公司工作3年。",
       "special_notes": "国际学历（非IB/A-Level）截止日期为2月23日。录取极看重综合素质及面试表现。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.nus.edu.sg/registrar/docs/default-source/administrative-policies-procedures/ugtuitioncurrent.pdf"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "AY2026/27 fees without MOE Tuition Grant: S$30,612-169,866 depending on faculty. Humanities/Sciences S$34,890, Business S$33,006, Computing S$39,168."
     },
     {
       "id": "ntu",
@@ -2213,11 +2288,11 @@
       "type": "public",
       "qs_rank_2025": 15,
       "usnews_global_rank_2025": 50,
-      "acceptance_rate": 0.25,
-      "tuition_intl_annual": 36250,
+      "acceptance_rate": 0.2,
+      "tuition_intl_annual": 38000,
       "tuition_currency": "SGD",
       "avg_living_cost_annual": 12000,
-      "application_deadline_fall": "03-19",
+      "application_deadline_fall": "03-15",
       "application_system": "Direct",
       "sat_range": null,
       "act_range": null,
@@ -2255,7 +2330,12 @@
       "tuition_subsidised_notes": "实行固定学费制。补贴后国际生学费约2-2.17万新币，附带3年服务条款。",
       "special_notes": "申请时需勾选MOE补贴意向。固定学费制：入学时费率在整个本科期间保持不变。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.ntu.edu.sg/education/undergraduate/fees-and-financial-aid"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "AY2026/27 fees without MOE Tuition Grant: S$17,550-38,940 depending on program. Most programs ~SGD 38,000."
     },
     {
       "id": "smu-sg",
@@ -2267,8 +2347,8 @@
       "type": "public",
       "qs_rank_2025": 511,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": 0.1,
-      "tuition_intl_annual": 47700,
+      "acceptance_rate": 0.2,
+      "tuition_intl_annual": 25000,
       "tuition_currency": "SGD",
       "avg_living_cost_annual": 12000,
       "application_deadline_fall": "03-19",
@@ -2309,7 +2389,12 @@
       "tuition_subsidised_notes": "补贴后国际生学费约2.62万新币，需为新加坡注册实体服务3年。",
       "special_notes": "商科对英语要求严苛。面试是选拔过程中的决定性环节。无大型校内宿舍，市中心生活成本较高。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.smu.edu.sg/campus-life/financial-matters/tuition-fees"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "AY2026/27 fees without MOE Tuition Grant: approximately S$22,000-30,000 depending on program. Law higher."
     },
     {
       "id": "sutd",
@@ -2321,8 +2406,8 @@
       "type": "public",
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
-      "acceptance_rate": 0.15,
-      "tuition_intl_annual": 62076,
+      "acceptance_rate": 0.35,
+      "tuition_intl_annual": 25000,
       "tuition_currency": "SGD",
       "avg_living_cost_annual": 12000,
       "application_deadline_fall": "03-19",
@@ -2362,7 +2447,12 @@
       "tuition_subsidised_notes": "补贴后学费约3.14万新币，需通过Tuition Grant签约工作3年。",
       "special_notes": "跨学科设计课程，非常看重数学及物理背景。校内住宿强制要求。MIT合作教育模式，学位由SUTD独立颁发。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.sutd.edu.sg/education/undergraduate/special-programmes/sharp/application-and-financing/financial/"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "AY2025 fees (May 2026 intake): with MOE subsidy S$13,500; without subsidy ~SGD 25,000-30,000."
     },
     {
       "id": "sim",
@@ -2375,10 +2465,10 @@
       "qs_rank_2025": null,
       "usnews_global_rank_2025": null,
       "acceptance_rate": null,
-      "tuition_intl_annual": 16500,
+      "tuition_intl_annual": 25000,
       "tuition_currency": "SGD",
       "avg_living_cost_annual": 21000,
-      "application_deadline_fall": "05-08",
+      "application_deadline_fall": "06-30",
       "application_system": "Direct",
       "sat_range": null,
       "act_range": null,
@@ -2415,7 +2505,11 @@
       "tuition_subsidised_notes": "私立机构，不适用MOE政府学费补贴。",
       "special_notes": "私人教育机构。合作伙伴含伦敦大学、伯明翰大学等。学费因合作院校不同有差异。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.sim.edu.sg/degrees-diplomas/programmes/programme-listing"
+      ],
+      "tuition_range_note": "Private institution. Tuition varies by partner university programme. Typically S$20,000-35,000 per year. No official acceptance rate available."
     },
     {
       "id": "uoft",
@@ -2428,7 +2522,7 @@
       "qs_rank_2025": 25,
       "usnews_global_rank_2025": 16,
       "acceptance_rate": 0.43,
-      "tuition_intl_annual": 45000,
+      "tuition_intl_annual": 66356,
       "tuition_currency": "CAD",
       "avg_living_cost_annual": 18000,
       "application_deadline_fall": "01-15",
@@ -2466,7 +2560,12 @@
       "data_confidence": "medium",
       "pr_pathway_notes": "Express Entry联邦技术移民；PGWP毕业工签3年。",
       "special_notes": "Arts/Science $45,000；Engineering $70,060；Rotman Commerce $72,260；PEY Co-op带薪实习可选。",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://future.utoronto.ca/pearson-scholarships"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "2026/27 international fees: Arts/Science/Commerce ~CAD 66,356; Engineering ~CAD 73,056; varies by program."
     },
     {
       "id": "ubc",
@@ -2478,11 +2577,11 @@
       "type": "public",
       "qs_rank_2025": 38,
       "usnews_global_rank_2025": 33,
-      "acceptance_rate": 0.4,
-      "tuition_intl_annual": 52260,
+      "acceptance_rate": 0.52,
+      "tuition_intl_annual": 48000,
       "tuition_currency": "CAD",
       "avg_living_cost_annual": 20000,
-      "application_deadline_fall": "12-01",
+      "application_deadline_fall": "01-15",
       "application_system": "Direct (UBC)",
       "sat_range": null,
       "act_range": null,
@@ -2518,7 +2617,12 @@
       "data_confidence": "medium",
       "pr_pathway_notes": "Express Entry联邦技术移民；PGWP毕业工签3年。",
       "special_notes": "Arts $52,260；Engineering $66,200；Sauder Commerce $66,680；截止日12月1日（rolling）。",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://students.ubc.ca/finances/tuition-fees/undergraduate-tuition-fees/"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "International tuition for 2026/27: typically CAD 39,000-53,000 depending on program. +3% annual increase for continuing."
     },
     {
       "id": "mcgill",
@@ -2530,8 +2634,8 @@
       "type": "public",
       "qs_rank_2025": 86,
       "usnews_global_rank_2025": 43,
-      "acceptance_rate": 0.31,
-      "tuition_intl_annual": 33018,
+      "acceptance_rate": 0.44,
+      "tuition_intl_annual": 42000,
       "tuition_currency": "CAD",
       "avg_living_cost_annual": 18000,
       "application_deadline_fall": "01-15",
@@ -2569,7 +2673,12 @@
       "data_confidence": "high",
       "pr_pathway_notes": "Express Entry联邦技术移民；PGWP毕业工签3年。",
       "special_notes": "Arts/Science $33,018；Engineering $63,889；Commerce $69,339；Guaranteed tuition锁定；魁北克省附加费已含。",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.mcgill.ca/student-accounts/tuition-fees/tuition-and-fees-tables-and-rates/tuition-rates-information"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "International tuition for 2025-26: CAD 31,500-51,000. 2026-27 rates expected similar with modest increase."
     },
     {
       "id": "uwaterloo",
@@ -2581,11 +2690,11 @@
       "type": "public",
       "qs_rank_2025": 112,
       "usnews_global_rank_2025": 180,
-      "acceptance_rate": 0.3,
-      "tuition_intl_annual": 38000,
+      "acceptance_rate": 0.14,
+      "tuition_intl_annual": 50000,
       "tuition_currency": "CAD",
       "avg_living_cost_annual": 18000,
-      "application_deadline_fall": "02-01",
+      "application_deadline_fall": "01-15",
       "application_system": "OUAC",
       "sat_range": null,
       "act_range": null,
@@ -2620,7 +2729,12 @@
       "data_confidence": "medium",
       "pr_pathway_notes": "Express Entry联邦技术移民；PGWP毕业工签3年。",
       "special_notes": "Math/Arts $38,000；Engineering $75,000（含co-op）；CS $73,000；co-op强制参与。",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://uwaterloo.ca/finance/fee-schedule-international-undergraduate-students-winter-3"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "International fees for 2026: typically CAD 30,000-65,000. Co-op programs higher. Engineering ~CAD 65,000/yr."
     },
     {
       "id": "queens",
@@ -2632,8 +2746,8 @@
       "type": "public",
       "qs_rank_2025": 209,
       "usnews_global_rank_2025": 227,
-      "acceptance_rate": 0.33,
-      "tuition_intl_annual": 38000,
+      "acceptance_rate": 0.2,
+      "tuition_intl_annual": 50000,
       "tuition_currency": "CAD",
       "avg_living_cost_annual": 16000,
       "application_deadline_fall": "02-01",
@@ -2670,7 +2784,12 @@
       "data_confidence": "medium",
       "pr_pathway_notes": "Express Entry联邦技术移民；PGWP毕业工签3年。",
       "special_notes": "Arts $38,000；Smith Commerce $61,581；Engineering按学分计费。",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.queensu.ca/registrar/financial-aidtuitionfees/tuition-and-fees/undergraduate-tuition-and-fees-2026-27"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "2026/27 international fees: Arts/Science ~CAD 44,810; Engineering ~CAD 55,000+; total with ancillary ~CAD 47,125+."
     },
     {
       "id": "umelbourne",
@@ -2683,10 +2802,10 @@
       "qs_rank_2025": 13,
       "usnews_global_rank_2025": 33,
       "acceptance_rate": 0.4,
-      "tuition_intl_annual": 57856,
+      "tuition_intl_annual": 52000,
       "tuition_currency": "AUD",
       "avg_living_cost_annual": 30000,
-      "application_deadline_fall": "12-31",
+      "application_deadline_fall": "05-15",
       "application_system": "Direct (UAC/VTAC) or International Office",
       "sat_range": null,
       "act_range": null,
@@ -2720,7 +2839,12 @@
       "data_confidence": "medium",
       "pr_pathway_notes": "Skilled Independent visa (189) 或 Employer Sponsored (482/186)。",
       "special_notes": "Arts/Commerce $57,856；Engineering $60,416；Melbourne Model宽度课程制。",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://study.unimelb.edu.au/how-to-apply/international-exchange-and-study-abroad-applications/tuition-fees"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "2026 fees: AUD 45,000-60,000 depending on program. Commerce/Business ~AUD 50,000; Science/Engineering ~AUD 52,000."
     },
     {
       "id": "usyd",
@@ -2732,11 +2856,11 @@
       "type": "public",
       "qs_rank_2025": 18,
       "usnews_global_rank_2025": 57,
-      "acceptance_rate": 0.5,
-      "tuition_intl_annual": 46000,
+      "acceptance_rate": 0.35,
+      "tuition_intl_annual": 56500,
       "tuition_currency": "AUD",
       "avg_living_cost_annual": 30000,
-      "application_deadline_fall": "12-31",
+      "application_deadline_fall": "05-15",
       "application_system": "UAC or Direct",
       "sat_range": null,
       "act_range": null,
@@ -2771,7 +2895,12 @@
       "data_confidence": "medium",
       "pr_pathway_notes": "Skilled Independent visa (189) 或 Employer Sponsored (482/186)。",
       "special_notes": "Arts $46,000；Commerce $52,000；Engineering $58,800；Sydney Scholars Award 20%减免。",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.sydney.edu.au/study/fees-and-loans/international-student-fees.html"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "2026 fees: AUD 56,300-60,600 per year. Business up to AUD 60,600. ~13% increase from 2025."
     },
     {
       "id": "unsw",
@@ -2783,11 +2912,11 @@
       "type": "public",
       "qs_rank_2025": 19,
       "usnews_global_rank_2025": 67,
-      "acceptance_rate": 0.35,
-      "tuition_intl_annual": 46000,
+      "acceptance_rate": 0.32,
+      "tuition_intl_annual": 52500,
       "tuition_currency": "AUD",
       "avg_living_cost_annual": 30000,
-      "application_deadline_fall": "12-31",
+      "application_deadline_fall": "05-15",
       "application_system": "UAC or Direct",
       "sat_range": null,
       "act_range": null,
@@ -2823,7 +2952,12 @@
       "data_confidence": "medium",
       "pr_pathway_notes": "Skilled Independent visa (189) 或 Employer Sponsored (482/186)。",
       "special_notes": "Arts/Business $46,000；Engineering $48,480；co-op另有费用。",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.unsw.edu.au/study/fees-and-scholarships"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "2026 fees: e.g. BA/LLB AUD 52,500; Commerce ~AUD 50,000; Engineering ~AUD 55,000. Varies by program."
     },
     {
       "id": "uq",
@@ -2836,10 +2970,10 @@
       "qs_rank_2025": 40,
       "usnews_global_rank_2025": 55,
       "acceptance_rate": 0.38,
-      "tuition_intl_annual": 44000,
+      "tuition_intl_annual": 45000,
       "tuition_currency": "AUD",
       "avg_living_cost_annual": 27000,
-      "application_deadline_fall": "12-31",
+      "application_deadline_fall": "05-15",
       "application_system": "QTAC or Direct",
       "sat_range": null,
       "act_range": null,
@@ -2874,7 +3008,12 @@
       "data_confidence": "medium",
       "pr_pathway_notes": "Skilled Independent visa (189) 或 Employer Sponsored (482/186)。",
       "special_notes": "Arts/Commerce $44,000；Engineering $48,000；Brisbane生活费低于悉尼墨尔本约20%。",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://future-students.uq.edu.au/study/fees-and-expenses"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "2026 fees: typically AUD 40,000-50,000 depending on program. Science/Engineering mid-range, Business ~AUD 45,000."
     },
     {
       "id": "anu",
@@ -2886,11 +3025,11 @@
       "type": "public",
       "qs_rank_2025": 30,
       "usnews_global_rank_2025": 80,
-      "acceptance_rate": 0.22,
-      "tuition_intl_annual": 53370,
+      "acceptance_rate": 0.35,
+      "tuition_intl_annual": 47000,
       "tuition_currency": "AUD",
       "avg_living_cost_annual": 24000,
-      "application_deadline_fall": "12-31",
+      "application_deadline_fall": "05-15",
       "application_system": "Direct",
       "sat_range": null,
       "act_range": null,
@@ -2925,7 +3064,12 @@
       "data_confidence": "medium",
       "pr_pathway_notes": "Skilled Independent visa (189) 或 Employer Sponsored (482/186)。",
       "special_notes": "Commerce/CS $53,370；堪培拉生活费低于悉尼/墨尔本；政策研究方向全澳最强。",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.anu.edu.au/study/fees-and-scholarships"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "2026 fees: typically AUD 42,000-53,000 depending on program. Average ~AUD 47,000."
     },
     {
       "id": "cornell",
@@ -3949,7 +4093,7 @@
       "qs_rank_2025": 40,
       "usnews_global_rank_2025": 80,
       "acceptance_rate": 0.13,
-      "tuition_intl_annual": 32000,
+      "tuition_intl_annual": 33850,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 17000,
       "application_deadline_fall": "01-29",
@@ -3987,7 +4131,12 @@
       "a_level_typical": "AAA",
       "special_notes": "位于伦敦市中心泰晤士河畔；医学/牙医A*AA；护理/急救医学门槛较低。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.kcl.ac.uk/international-foundation/fees-funding"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "International fee for 2026-27: ~£33,850 per year (e.g. International Relations). Varies by programme."
     },
     {
       "id": "nottingham",
@@ -3999,8 +4148,8 @@
       "type": "public",
       "qs_rank_2025": 103,
       "usnews_global_rank_2025": 197,
-      "acceptance_rate": 0.11,
-      "tuition_intl_annual": 26000,
+      "acceptance_rate": 0.2,
+      "tuition_intl_annual": 21000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 11000,
       "application_deadline_fall": "01-29",
@@ -4038,7 +4187,12 @@
       "a_level_typical": "AAA",
       "special_notes": "医学/药学/工程强；在中国宁波设有校区；无艺术设计专业。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.nottingham.ac.uk/currentstudents/news/an-update-on-tuition-fees"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "International fees for 2026/27: £19,850-£21,500 per year depending on course (from official Instagram)."
     },
     {
       "id": "leeds",
@@ -4050,7 +4204,7 @@
       "type": "public",
       "qs_rank_2025": 86,
       "usnews_global_rank_2025": 148,
-      "acceptance_rate": 0.13,
+      "acceptance_rate": 0.18,
       "tuition_intl_annual": 26000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 11000,
@@ -4089,7 +4243,12 @@
       "a_level_typical": "AAA",
       "special_notes": "英国最大院校之一；文科/媒体/商科强；医学需AAA + UKMSAT入学考试。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://students.leeds.ac.uk/fees-funding/news/article/9/tuition-fees-and-student-finance-what-s-changing"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "International fees for 2026/27: typically £22,000-£30,000 depending on programme."
     },
     {
       "id": "sheffield",
@@ -4101,8 +4260,8 @@
       "type": "public",
       "qs_rank_2025": 111,
       "usnews_global_rank_2025": 175,
-      "acceptance_rate": 0.14,
-      "tuition_intl_annual": 26000,
+      "acceptance_rate": 0.19,
+      "tuition_intl_annual": 24000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 11000,
       "application_deadline_fall": "01-29",
@@ -4140,7 +4299,12 @@
       "a_level_typical": "AAA",
       "special_notes": "工程/医学/商科强；生活费全英最低之一；Sheffield是英国最宜居城市之一。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://sheffield.ac.uk/undergraduate/tuition-fees-2026"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "International fees for 2026: typically £21,000-£30,000 depending on course. Use fee look-up tool for exact."
     },
     {
       "id": "birmingham",
@@ -4152,8 +4316,8 @@
       "type": "public",
       "qs_rank_2025": 84,
       "usnews_global_rank_2025": 144,
-      "acceptance_rate": 0.11,
-      "tuition_intl_annual": 25000,
+      "acceptance_rate": 0.17,
+      "tuition_intl_annual": 24000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 11000,
       "application_deadline_fall": "01-29",
@@ -4191,7 +4355,12 @@
       "a_level_typical": "AAA",
       "special_notes": "大型校区大学；医学/牙医需特定A-Level；体育科学和工程实力强。",
       "data_confidence": "medium",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.birmingham.ac.uk/study/international/fees"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "International fees for 2026/27: starting from £21,000 for undergraduate. Varies by programme."
     },
     {
       "id": "mcmaster",
@@ -4203,11 +4372,11 @@
       "type": "public",
       "qs_rank_2025": 189,
       "usnews_global_rank_2025": 98,
-      "acceptance_rate": 0.59,
-      "tuition_intl_annual": 32000,
+      "acceptance_rate": 0.35,
+      "tuition_intl_annual": 46000,
       "tuition_currency": "CAD",
       "avg_living_cost_annual": 16000,
-      "application_deadline_fall": "01-15",
+      "application_deadline_fall": "02-01",
       "application_system": "OUAC",
       "sat_range": null,
       "act_range": null,
@@ -4242,7 +4411,12 @@
       "data_confidence": "medium",
       "pr_pathway_notes": "Express Entry联邦技术移民；PGWP毕业工签3年。",
       "special_notes": "Arts/Science $32,000；Engineering $55,000；Health Sciences $57,540；rolling滚动录取。",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://univcan.ca/about-universities-canada/facts-and-stats/tuition-fees-by-university/"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "International fees for 2025-26: CAD 45,158-46,023. 2026-27 expected with modest increase."
     },
     {
       "id": "western",
@@ -4254,8 +4428,8 @@
       "type": "public",
       "qs_rank_2025": 114,
       "usnews_global_rank_2025": 235,
-      "acceptance_rate": 0.31,
-      "tuition_intl_annual": 39000,
+      "acceptance_rate": 0.26,
+      "tuition_intl_annual": 55000,
       "tuition_currency": "CAD",
       "avg_living_cost_annual": 16000,
       "application_deadline_fall": "01-15",
@@ -4292,7 +4466,12 @@
       "data_confidence": "medium",
       "pr_pathway_notes": "Express Entry联邦技术移民；PGWP毕业工签3年。",
       "special_notes": "Arts $39,000；Engineering $64,400；Ivey HBA为Year 3入读（2+2模式）。",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://welcome.uwo.ca/next-steps/finances/index.html"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "Estimated year 1 international tuition & fees for 2026-27: CAD 48,000-64,400. Tuition guarantee with max 4% annual increase."
     },
     {
       "id": "ualberta",
@@ -4304,8 +4483,8 @@
       "type": "public",
       "qs_rank_2025": 111,
       "usnews_global_rank_2025": 119,
-      "acceptance_rate": 0.38,
-      "tuition_intl_annual": 31500,
+      "acceptance_rate": 0.65,
+      "tuition_intl_annual": 30000,
       "tuition_currency": "CAD",
       "avg_living_cost_annual": 17000,
       "application_deadline_fall": "03-01",
@@ -4343,7 +4522,12 @@
       "data_confidence": "medium",
       "pr_pathway_notes": "Alberta PNP省提名+Express Entry双通道；PGWP毕业工签3年。",
       "special_notes": "Arts/Science $31,500；Engineering $39,792；Business $46,547；Alberta PNP省提名移民路径有优势。",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.ualberta.ca/en/admissions/tuition-and-scholarships/international-tuition-and-fees.html"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "International fees for 2026-27: typically CAD 20,000-40,000 depending on program. Tuition guarantee for program duration."
     },
     {
       "id": "monash",
@@ -4356,10 +4540,10 @@
       "qs_rank_2025": 37,
       "usnews_global_rank_2025": 75,
       "acceptance_rate": 0.4,
-      "tuition_intl_annual": 35000,
+      "tuition_intl_annual": 48000,
       "tuition_currency": "AUD",
       "avg_living_cost_annual": 28000,
-      "application_deadline_fall": "12-31",
+      "application_deadline_fall": "05-15",
       "application_system": "Direct (Monash) or VTAC",
       "sat_range": null,
       "act_range": null,
@@ -4395,7 +4579,12 @@
       "data_confidence": "medium",
       "pr_pathway_notes": "Skilled Independent visa (189) 或 Employer Sponsored (482/186)。",
       "special_notes": "Arts/Commerce $35,000；Engineering $33,634；按faculty费率差异大。",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.monash.edu/study/fees/international-fees"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "2026 fees: AUD 35,000-52,000 depending on program. Commerce/AUD ~38,000-44,000; Engineering ~AUD 46,000-52,000."
     },
     {
       "id": "uadelaide",
@@ -4407,11 +4596,11 @@
       "type": "public",
       "qs_rank_2025": 89,
       "usnews_global_rank_2025": 149,
-      "acceptance_rate": 0.3,
-      "tuition_intl_annual": 39000,
+      "acceptance_rate": 0.55,
+      "tuition_intl_annual": 42000,
       "tuition_currency": "AUD",
       "avg_living_cost_annual": 24000,
-      "application_deadline_fall": "12-31",
+      "application_deadline_fall": "05-15",
       "application_system": "Direct (SATAC) or International Office",
       "sat_range": null,
       "act_range": null,
@@ -4446,7 +4635,12 @@
       "data_confidence": "medium",
       "pr_pathway_notes": "Skilled Independent visa (189) 或 Employer Sponsored (482/186)。",
       "special_notes": "Arts/Commerce $39,000；Engineering $43,000；南澳区域优势对移民申请加分。",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "data_source_urls": [
+        "https://www.adelaide.edu.au/study/international/fees"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "2026 fees: typically AUD 37,000-50,000 depending on program. Average ~AUD 42,000."
     },
     {
       "id": "oxford",
@@ -4458,8 +4652,8 @@
       "type": "public",
       "qs_rank_2025": 3,
       "usnews_global_rank_2025": 5,
-      "acceptance_rate": 0.13,
-      "tuition_intl_annual": 43820,
+      "acceptance_rate": 0.14,
+      "tuition_intl_annual": 50000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 15120,
       "application_deadline_fall": "10-15",
@@ -4506,7 +4700,12 @@
         "business": "tsa",
         "social_sci": "tsa",
         "law": "lnat"
-      }
+      },
+      "data_source_urls": [
+        "https://www.ox.ac.uk/admissions/undergraduate/fees-and-funding/course-fees"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "£37,380-£62,820 depending on course (2026/27). Midpoint used. Clinical medicine significantly higher."
     },
     {
       "id": "cambridge",
@@ -4518,8 +4717,8 @@
       "type": "public",
       "qs_rank_2025": 2,
       "usnews_global_rank_2025": 7,
-      "acceptance_rate": 0.15,
-      "tuition_intl_annual": 41124,
+      "acceptance_rate": 0.16,
+      "tuition_intl_annual": 57459,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 15660,
       "application_deadline_fall": "10-15",
@@ -4565,7 +4764,12 @@
         "natural_sci": "esat",
         "life_sci": "esat",
         "business": "tmua"
-      }
+      },
+      "data_source_urls": [
+        "https://www.undergraduate.study.cam.ac.uk/international-students/international-fees-and-costs"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "Groups 1-5: £29,052-£70,554 + College fee ~£13,245. Total range ~£42,297-£83,799. Science/Engineering Group 4: £44,214 + College fee ~£57,459."
     },
     {
       "id": "imperial",
@@ -4577,8 +4781,8 @@
       "type": "public",
       "qs_rank_2025": 8,
       "usnews_global_rank_2025": 25,
-      "acceptance_rate": 0.14,
-      "tuition_intl_annual": 45500,
+      "acceptance_rate": 0.12,
+      "tuition_intl_annual": 43000,
       "tuition_currency": "GBP",
       "avg_living_cost_annual": 18000,
       "application_deadline_fall": "01-29",
@@ -4626,7 +4830,12 @@
         "engineering": "esat",
         "natural_sci": "esat",
         "life_sci": "esat"
-      }
+      },
+      "data_source_urls": [
+        "https://www.imperial.ac.uk/study/fees-and-funding/undergraduate/tuition-fees/"
+      ],
+      "acceptance_rate_year": "2024",
+      "tuition_range_note": "Overseas fees vary by course, typically £38,000-£48,000 for science/engineering (2026/27). Exact fees per course page."
     },
     {
       "id": "boston-college",
@@ -6611,118 +6820,6 @@
         "https://finaid.yale.edu/coa"
       ],
       "acceptance_rate_year": "2024 (Class of 2028)"
-    },
-    {
-      "id": "unimelb",
-      "name_en": "University of Melbourne",
-      "name_zh": "墨尔本大学",
-      "country": "AU",
-      "region": "Oceania",
-      "city": "Melbourne, VIC",
-      "type": "public",
-      "qs_rank_2025": 13,
-      "usnews_global_rank_2025": null,
-      "acceptance_rate": 0.7,
-      "tuition_intl_annual": 47000,
-      "tuition_currency": "AUD",
-      "avg_living_cost_annual": 24000,
-      "application_deadline_fall": "10-31",
-      "application_system": "Direct",
-      "sat_range": null,
-      "act_range": null,
-      "ielts_min": 6.5,
-      "toefl_min": 79,
-      "gpa_avg": null,
-      "popular_majors": [
-        "Commerce",
-        "Science",
-        "Arts",
-        "Engineering",
-        "Biomedicine",
-        "Architecture",
-        "Fine Arts"
-      ],
-      "coop_available": null,
-      "scholarship_intl": true,
-      "scholarship_notes": "Melbourne International Undergraduate Scholarship; merit-based; ~AUD 10,000/yr",
-      "campus_setting": "suburban",
-      "chinese_student_community": "large",
-      "visa_type": "Student Visa (500)",
-      "post_study_work": 48,
-      "tags": [
-        "澳洲",
-        "综合性强",
-        "3年制",
-        "回国认可度高"
-      ],
-      "data_source": "schools.json (legacy merge)",
-      "verified": true,
-      "data_confidence": "medium",
-      "special_notes": null,
-      "english_note": "Overall IELTS 6.5 with no band below 6.0",
-      "avg_accepted_ielts": 7,
-      "application_deadline": {
-        "early_action": null,
-        "regular": "2025-10-31"
-      },
-      "financial_aid_international": false,
-      "scholarship_typical_usd_annual": 0,
-      "batch_c": {
-        "employment_city_tags": [
-          "Melbourne",
-          "Sydney",
-          "Singapore",
-          "Shanghai"
-        ],
-        "industry_strengths": [
-          "Finance",
-          "Healthcare",
-          "Research",
-          "Government",
-          "Education"
-        ],
-        "qs_subject_ranks": {
-          "Education": 5,
-          "Agriculture": 8,
-          "Pharmacy": 12,
-          "Economics": 28
-        },
-        "notable_alumni_companies": [
-          "Macquarie",
-          "Deloitte",
-          "KPMG",
-          "WHO"
-        ],
-        "campus_vibe": [
-          "Leafy campus",
-          "Research-active",
-          "Diverse"
-        ],
-        "chinese_student_ratio_approx": 0.18
-      },
-      "finance_sandbox": {
-        "tuition_usd_annual": 31000,
-        "duration_years": 3,
-        "living_cost_usd_monthly": {
-          "low": 1400,
-          "mid": 2000,
-          "high": 2800
-        },
-        "scholarship_typical_usd_annual": 0,
-        "scholarship_coverage_rate": 0.15,
-        "scholarship_condition": "merit-based",
-        "health_insurance_usd_annual": 700,
-        "fees_usd_annual": 800
-      },
-      "archetype_fit": [
-        "HOME_ANCHOR",
-        "GLOBAL_NOMAD",
-        "CAREER_ARCHITECT"
-      ],
-      "difficulty_tier": "B",
-      "official_url": "https://www.unimelb.edu.au",
-      "batch_b_verified": true,
-      "batch_c_verified": false
     },
     {
       "id": "williams",
