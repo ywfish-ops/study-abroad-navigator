@@ -4,7 +4,7 @@
     "last_updated": "2026-05-06",
     "total_schools": 138,
     "data_cycle": "2025-2026 Academic Year",
-    "notes": "Base data for 全球留学决策导航系统. Financial figures in USD (US/CA/AU) or GBP (UK) or HKD (HK) or SGD (SG). Tuition = annual undergraduate international student tuition. Rankings: QS 2025, USNews Global 2025.",
+    "notes": "Base data for 全球留学决策导航系统. Rankings: QS 2026, USNews Global 2025-2026, USNews National 2026, USNews LAC 2026.",
     "schema_version": "v1",
     "fields": {
       "id": "Unique identifier slug",
@@ -45,7 +45,9 @@
       "tuition_subsidised_notes": "Conditions for subsidy, e.g. 3-year service obligation",
       "data_confidence": "Data confidence level: high (URL verified + human spot-check), medium (official URL source, unverified), low (third-party source or unverified)",
       "data_source_urls": "Source URLs used to populate this record",
-      "tuition_bands": "Tuition by discipline band: arts_humanities, science_lab, engineering, clinical_medicine"
+      "tuition_bands": "Tuition by discipline band: arts_humanities, science_lab, engineering, clinical_medicine",
+      "qs_rank_2026": "QS World University Rankings 2026 (null if unranked)",
+      "usnews_global_rank_2026": "US News Best Global Universities 2025-2026"
     },
     "merge_notes": "由 Claude Code 合并 schools_database.json（82所）+ 旧版 schools.json 项目字段（batch_c/finance_sandbox/meta 等）",
     "data_updated": "2026-05-06",
@@ -140,7 +142,9 @@
         "https://admission.ucla.edu/tuition-aid/tuition-fees",
         "https://admission.universityofcalifornia.edu/tuition-financial-aid/tuition-cost-of-attendance/"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 46,
+      "usnews_global_rank_2026": 13
     },
     {
       "id": "ucsd",
@@ -199,7 +203,9 @@
       "data_source_urls": [
         "https://admission.universityofcalifornia.edu/tuition-financial-aid/tuition-cost-of-attendance/"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": 66,
+      "usnews_global_rank_2026": 21
     },
     {
       "id": "ucsb",
@@ -258,7 +264,9 @@
         "https://admission.universityofcalifornia.edu/tuition-financial-aid/tuition-cost-of-attendance/",
         "https://www.finaid.ucsb.edu/docs/default-source/default-document-library/2026-2027-undergrad-coa.pdf"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": 179,
+      "usnews_global_rank_2026": 32
     },
     {
       "id": "uci",
@@ -316,7 +324,9 @@
       "data_source_urls": [
         "https://admission.universityofcalifornia.edu/tuition-financial-aid/tuition-cost-of-attendance/"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": 293,
+      "usnews_global_rank_2026": 44
     },
     {
       "id": "ucd",
@@ -375,7 +385,9 @@
         "https://admission.universityofcalifornia.edu/tuition-financial-aid/tuition-cost-of-attendance/",
         "https://financialaid.ucdavis.edu/undergraduate/cost/2627-entering"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": 114,
+      "usnews_global_rank_2026": 88
     },
     {
       "id": "ucsc",
@@ -435,7 +447,9 @@
         "https://admission.universityofcalifornia.edu/tuition-financial-aid/tuition-cost-of-attendance/",
         "https://registrar.ucsc.edu/fees-residency-veterans/undergraduate-tuition-fees/"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": 88
     },
     {
       "id": "umich",
@@ -491,7 +505,9 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "RD截止2月1日；Ross商学院/工程学院顶尖。; 2025-26 數據，待6月校董會批准2026-27",
-      "usnews_rank_2026": 21
+      "usnews_rank_2026": 21,
+      "qs_rank_2026": 45,
+      "usnews_global_rank_2026": 21
     },
     {
       "id": "uw-madison",
@@ -546,7 +562,9 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "EA截止11月1日；学费涨幅较大，建议确认最新数字。; 2025-26 數據，待暑期公佈2026-27",
-      "usnews_rank_2026": 36
+      "usnews_rank_2026": 36,
+      "qs_rank_2026": 110,
+      "usnews_global_rank_2026": 40
     },
     {
       "id": "uiuc",
@@ -606,7 +624,9 @@
         "https://registrar.illinois.edu/ug-tuition-rates-2627/",
         "https://www.osfa.illinois.edu/cost/undergraduate-cost/undergraduate-international-cost/"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 70,
+      "usnews_global_rank_2026": 52
     },
     {
       "id": "gatech",
@@ -666,7 +686,9 @@
         "https://finaid.gatech.edu/costs/undergraduate-costs",
         "https://admission.gatech.edu/tuition-fees"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": 123,
+      "usnews_global_rank_2026": 81
     },
     {
       "id": "purdue",
@@ -726,7 +748,9 @@
         "https://www.purdue.edu/treasurer/finance/bursar-office/tuition/fee-rates-2026-2027/",
         "https://www.purdue.edu/admissions/undergrad/deadlines/"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 88,
+      "usnews_global_rank_2026": 83
     },
     {
       "id": "osu",
@@ -786,7 +810,9 @@
         "https://undergrad.osu.edu/cost-and-aid/basic-costs",
         "https://sfa.osu.edu/international-student/about-aid/financial-aid-eligibility"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 190,
+      "usnews_global_rank_2026": 96
     },
     {
       "id": "uw-seattle",
@@ -845,7 +871,9 @@
         "https://www.washington.edu/financialaid/getting-started/student-budgets/",
         "https://www.washington.edu/opb/tuition-fees/estimated-annual-cost-of-attendance-for-first-year-undergraduates/"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 81,
+      "usnews_global_rank_2026": 8
     },
     {
       "id": "bu",
@@ -906,7 +934,9 @@
         "https://www.bu.edu/finaid/undergraduate-students/undergraduate/",
         "https://www.bu.edu/admissions/apply/deadlines/"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 88,
+      "usnews_global_rank_2026": 72
     },
     {
       "id": "neu",
@@ -966,7 +996,9 @@
         "https://www.collegetuitioncompare.com/edu/167358/northeastern-university/",
         "https://catalog.northeastern.edu/undergraduate/expenses/tuition-room-board-fees-per-semester/"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": 384,
+      "usnews_global_rank_2026": 155
     },
     {
       "id": "nyu",
@@ -1026,7 +1058,9 @@
         "https://www.nyu.edu/admissions/financial-aid-and-scholarships/cost-of-attendance.html",
         "https://www.nyu.edu/admissions/undergraduate-admissions/apply/deadlines.html"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 55,
+      "usnews_global_rank_2026": 31
     },
     {
       "id": "asu",
@@ -1086,7 +1120,9 @@
         "https://students.asu.edu/yourtuition",
         "https://admission.asu.edu/cost-aid/non-resident-first-year"
       ],
-      "acceptance_rate_year": "Class of 2030"
+      "acceptance_rate_year": "Class of 2030",
+      "qs_rank_2026": 173,
+      "usnews_global_rank_2026": 121
     },
     {
       "id": "uta",
@@ -1146,7 +1182,9 @@
         "https://admissions.utexas.edu/tuition-costs",
         "https://utexas.edu/student-accounts/tuition-fees"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 68,
+      "usnews_global_rank_2026": 61
     },
     {
       "id": "ucf",
@@ -1206,7 +1244,9 @@
         "https://studentaccounts.ucf.edu/tf-tuitionratescurrent/",
         "https://www.collegetuitioncompare.com/edu/132903/university-of-central-florida/tuition/"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": 388
     },
     {
       "id": "fm",
@@ -1265,7 +1305,9 @@
       "data_source_urls": [
         "https://www.usnews.com/best-colleges/franklin--marshall-college-3265/paying"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "pitt",
@@ -1324,7 +1366,9 @@
       "data_source_urls": [
         "https://www.oafa.pitt.edu/costs/"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 281,
+      "usnews_global_rank_2026": 55
     },
     {
       "id": "rutgers",
@@ -1382,7 +1426,9 @@
       "data_source_urls": [
         "https://admissions.rutgers.edu/tuition-financial-aid"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 328,
+      "usnews_global_rank_2026": 87
     },
     {
       "id": "cu-boulder",
@@ -1440,7 +1486,9 @@
       "data_source_urls": [
         "https://www.colorado.edu/financialaid/cost"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 299,
+      "usnews_global_rank_2026": 158
     },
     {
       "id": "ucl",
@@ -1504,7 +1552,9 @@
         "science_lab": 39000,
         "engineering": 41500,
         "clinical_medicine": 45000
-      }
+      },
+      "qs_rank_2026": 9,
+      "usnews_global_rank_2026": 7
     },
     {
       "id": "edinburgh",
@@ -1565,7 +1615,9 @@
         "science_lab": 32000,
         "engineering": 34000,
         "clinical_medicine": 37500
-      }
+      },
+      "qs_rank_2026": 34,
+      "usnews_global_rank_2026": 39
     },
     {
       "id": "durham",
@@ -1626,7 +1678,9 @@
         "science_lab": 28000,
         "engineering": 31000,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 94,
+      "usnews_global_rank_2026": 195
     },
     {
       "id": "manchester",
@@ -1687,7 +1741,9 @@
         "science_lab": 31500,
         "engineering": 34000,
         "clinical_medicine": 39000
-      }
+      },
+      "qs_rank_2026": 35,
+      "usnews_global_rank_2026": 53
     },
     {
       "id": "lse",
@@ -1749,7 +1805,9 @@
         "science_lab": null,
         "engineering": null,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 56,
+      "usnews_global_rank_2026": 42
     },
     {
       "id": "bristol",
@@ -1809,7 +1867,9 @@
         "science_lab": 30000,
         "engineering": 33000,
         "clinical_medicine": 35000
-      }
+      },
+      "qs_rank_2026": 51,
+      "usnews_global_rank_2026": 91
     },
     {
       "id": "warwick",
@@ -1870,7 +1930,9 @@
         "science_lab": 35530,
         "engineering": 35530,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 74,
+      "usnews_global_rank_2026": 111
     },
     {
       "id": "glasgow",
@@ -1931,7 +1993,9 @@
         "science_lab": 26500,
         "engineering": 29000,
         "clinical_medicine": 35000
-      }
+      },
+      "qs_rank_2026": 79,
+      "usnews_global_rank_2026": 142
     },
     {
       "id": "southampton",
@@ -1992,7 +2056,9 @@
         "science_lab": 26200,
         "engineering": 26500,
         "clinical_medicine": 30000
-      }
+      },
+      "qs_rank_2026": 87,
+      "usnews_global_rank_2026": 175
     },
     {
       "id": "hku",
@@ -2054,7 +2120,9 @@
         "science_lab": 198000,
         "engineering": 198000,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 11,
+      "usnews_global_rank_2026": 62
     },
     {
       "id": "hkust",
@@ -2116,7 +2184,9 @@
         "science_lab": 215000,
         "engineering": 215000,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 44,
+      "usnews_global_rank_2026": 128
     },
     {
       "id": "cuhk",
@@ -2178,7 +2248,9 @@
         "science_lab": 214000,
         "engineering": 214000,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 32,
+      "usnews_global_rank_2026": 94
     },
     {
       "id": "hkbu",
@@ -2240,7 +2312,9 @@
         "science_lab": 160000,
         "engineering": 160000,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 244,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "polyu",
@@ -2302,7 +2376,9 @@
         "science_lab": 160000,
         "engineering": 160000,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 54,
+      "usnews_global_rank_2026": 295
     },
     {
       "id": "nus",
@@ -2367,7 +2443,9 @@
         "science_lab": 34890,
         "engineering": 39168,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 8,
+      "usnews_global_rank_2026": 20
     },
     {
       "id": "ntu",
@@ -2432,7 +2510,9 @@
         "science_lab": 38000,
         "engineering": 38940,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 12,
+      "usnews_global_rank_2026": 50
     },
     {
       "id": "smu-sg",
@@ -2497,7 +2577,9 @@
         "science_lab": 30000,
         "engineering": null,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "sutd",
@@ -2561,7 +2643,9 @@
         "science_lab": 25000,
         "engineering": 30000,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "sim",
@@ -2624,7 +2708,9 @@
         "science_lab": 28000,
         "engineering": 30000,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "uoft",
@@ -2686,7 +2772,9 @@
         "science_lab": 66356,
         "engineering": 73056,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 29,
+      "usnews_global_rank_2026": 16
     },
     {
       "id": "ubc",
@@ -2749,7 +2837,9 @@
         "science_lab": 53868,
         "engineering": 63654,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 40,
+      "usnews_global_rank_2026": 33
     },
     {
       "id": "mcgill",
@@ -2811,7 +2901,9 @@
         "science_lab": 54000,
         "engineering": 54000,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 27,
+      "usnews_global_rank_2026": 43
     },
     {
       "id": "uwaterloo",
@@ -2873,7 +2965,9 @@
         "science_lab": 56000,
         "engineering": 65000,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 119,
+      "usnews_global_rank_2026": 180
     },
     {
       "id": "queens",
@@ -2934,7 +3028,9 @@
         "science_lab": 44810,
         "engineering": 55230,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 191,
+      "usnews_global_rank_2026": 227
     },
     {
       "id": "umelbourne",
@@ -2995,7 +3091,9 @@
         "science_lab": 52944,
         "engineering": 60960,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 19,
+      "usnews_global_rank_2026": 33
     },
     {
       "id": "usyd",
@@ -3057,7 +3155,9 @@
         "science_lab": 56300,
         "engineering": 57000,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 25,
+      "usnews_global_rank_2026": 57
     },
     {
       "id": "unsw",
@@ -3120,7 +3220,9 @@
         "science_lab": 50000,
         "engineering": 55000,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 20,
+      "usnews_global_rank_2026": 67
     },
     {
       "id": "uq",
@@ -3182,7 +3284,9 @@
         "science_lab": 45000,
         "engineering": 53760,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 42,
+      "usnews_global_rank_2026": 55
     },
     {
       "id": "anu",
@@ -3244,7 +3348,9 @@
         "science_lab": 50000,
         "engineering": 53000,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 32,
+      "usnews_global_rank_2026": 80
     },
     {
       "id": "cornell",
@@ -3305,7 +3411,9 @@
         "https://bursar.cornell.edu/students-parents/tuition-rates-and-fees",
         "https://irp.cornell.edu/common-data-set"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 16,
+      "usnews_global_rank_2026": 16
     },
     {
       "id": "columbia",
@@ -3366,7 +3474,9 @@
         "https://undergrad.admissions.columbia.edu/affordability/cost",
         "https://opir.columbia.edu/common-data-set"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 38,
+      "usnews_global_rank_2026": 10
     },
     {
       "id": "upenn",
@@ -3427,7 +3537,9 @@
         "https://penntoday.upenn.edu/news/penn-trustees-approve-2026-2027-undergraduate-charges-and-financial-aid-budget",
         "https://admissions.upenn.edu/apply/deadlines"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 15,
+      "usnews_global_rank_2026": 15
     },
     {
       "id": "usc",
@@ -3488,7 +3600,9 @@
         "https://arr.usc.edu/tuition-and-fees/",
         "https://www.uscannenbergmedia.com/2026/03/10/usc-tuition-hike-will-likely-push-cost-of-attendance-over-100k/"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 146,
+      "usnews_global_rank_2026": 70
     },
     {
       "id": "emory",
@@ -3549,7 +3663,9 @@
         "https://news.emory.edu/stories/2026/03/er_undergraduate_tuition_update_19-03-2026/story.html",
         "https://studentaid.emory.edu/_includes/documents/sections/undergraduate/apply/cost-of-attendance-worksheet.pdf"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 182,
+      "usnews_global_rank_2026": 54
     },
     {
       "id": "vanderbilt",
@@ -3605,7 +3721,9 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "Need-blind国际生；全美少数need-blind国际生院校之一。",
-      "usnews_rank_2026": 17
+      "usnews_rank_2026": 17,
+      "qs_rank_2026": 250,
+      "usnews_global_rank_2026": 75
     },
     {
       "id": "tufts",
@@ -3660,7 +3778,9 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "所有国际生申请时自动评估奖学金资格。",
-      "usnews_rank_2026": 36
+      "usnews_rank_2026": 36,
+      "qs_rank_2026": 334,
+      "usnews_global_rank_2026": 116
     },
     {
       "id": "cwru",
@@ -3721,7 +3841,9 @@
         "https://case.edu/financialaid/undergraduates/cost-undergraduate-attendance",
         "https://case.edu/studentaccounts/tuition-fees/undergraduate-tuition-fees"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": 294,
+      "usnews_global_rank_2026": 104
     },
     {
       "id": "unc",
@@ -3780,7 +3902,9 @@
       "data_source_urls": [
         "https://admissions.unc.edu/tuition-costs/"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 140,
+      "usnews_global_rank_2026": 68
     },
     {
       "id": "uva",
@@ -3835,7 +3959,9 @@
       "verified": true,
       "data_confidence": "medium",
       "special_notes": "EA截止11月1日；McIntire商学院/公共政策顶尖。",
-      "usnews_rank_2026": 24
+      "usnews_rank_2026": 24,
+      "qs_rank_2026": 275,
+      "usnews_global_rank_2026": 109
     },
     {
       "id": "umd",
@@ -3895,7 +4021,9 @@
       "data_source_urls": [
         "https://financialaid.umd.edu/cost-attendance"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 207,
+      "usnews_global_rank_2026": 82
     },
     {
       "id": "msu",
@@ -3955,7 +4083,9 @@
       "data_source_urls": [
         "https://admissions.msu.edu/tuition"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 161,
+      "usnews_global_rank_2026": 138
     },
     {
       "id": "umn",
@@ -4015,7 +4145,9 @@
       "data_source_urls": [
         "https://admissions.tc.umn.edu/cost-tuition"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 210,
+      "usnews_global_rank_2026": 89
     },
     {
       "id": "indiana",
@@ -4074,7 +4206,9 @@
       "data_source_urls": [
         "https://studentcentral.indiana.edu/tuition-costs/index.html"
       ],
-      "acceptance_rate_year": "2026-2027"
+      "acceptance_rate_year": "2026-2027",
+      "qs_rank_2026": 306,
+      "usnews_global_rank_2026": 161
     },
     {
       "id": "vassar",
@@ -4134,7 +4268,9 @@
         "https://www.collegetuitioncompare.com/edu/197133/vassar-college/tuition/",
         "https://offices.vassar.edu/student-financial-services/tuition/"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "drexel",
@@ -4194,7 +4330,9 @@
         "https://www.collegetuitioncompare.com/edu/212054/drexel-university/tuition/",
         "https://drexel.edu/drexelcentral/cost/tuition/undergraduate"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "scu",
@@ -4255,7 +4393,9 @@
         "https://www.scu.edu/media/offices/bursar/2026-27-Tuition-&-Student-Fees-Schedule-UG-and-Graduate-Programs--Mar-2026.pdf",
         "https://www.scu.edu/financialaid/cost-of-attendance/"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "kcl",
@@ -4317,7 +4457,9 @@
         "science_lab": 34000,
         "engineering": 35000,
         "clinical_medicine": 40000
-      }
+      },
+      "qs_rank_2026": 31,
+      "usnews_global_rank_2026": 36
     },
     {
       "id": "nottingham",
@@ -4379,7 +4521,9 @@
         "science_lab": 27000,
         "engineering": 33000,
         "clinical_medicine": 30750
-      }
+      },
+      "qs_rank_2026": 97,
+      "usnews_global_rank_2026": 197
     },
     {
       "id": "leeds",
@@ -4441,7 +4585,9 @@
         "science_lab": 26000,
         "engineering": 28000,
         "clinical_medicine": 33000
-      }
+      },
+      "qs_rank_2026": 86,
+      "usnews_global_rank_2026": 148
     },
     {
       "id": "sheffield",
@@ -4503,7 +4649,9 @@
         "science_lab": 27000,
         "engineering": 30570,
         "clinical_medicine": 34000
-      }
+      },
+      "qs_rank_2026": 92,
+      "usnews_global_rank_2026": 175
     },
     {
       "id": "birmingham",
@@ -4565,7 +4713,9 @@
         "science_lab": 25000,
         "engineering": 27000,
         "clinical_medicine": 35000
-      }
+      },
+      "qs_rank_2026": 76,
+      "usnews_global_rank_2026": 144
     },
     {
       "id": "mcmaster",
@@ -4627,7 +4777,9 @@
         "science_lab": 38000,
         "engineering": 44500,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 173,
+      "usnews_global_rank_2026": 98
     },
     {
       "id": "western",
@@ -4688,7 +4840,9 @@
         "science_lab": 52000,
         "engineering": 60000,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 151,
+      "usnews_global_rank_2026": 235
     },
     {
       "id": "ualberta",
@@ -4750,7 +4904,9 @@
         "science_lab": 32000,
         "engineering": 38000,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 94,
+      "usnews_global_rank_2026": 119
     },
     {
       "id": "monash",
@@ -4813,7 +4969,9 @@
         "science_lab": 46000,
         "engineering": 52000,
         "clinical_medicine": null
-      }
+      },
+      "qs_rank_2026": 36,
+      "usnews_global_rank_2026": 75
     },
     {
       "id": "uadelaide",
@@ -4875,7 +5033,9 @@
         "science_lab": 42000,
         "engineering": 48000,
         "clinical_medicine": null
-      }
+      },
+      "usnews_global_rank_2026": 149,
+      "qs_rank_2026": 82
     },
     {
       "id": "oxford",
@@ -4946,7 +5106,9 @@
         "science_lab": 44240,
         "engineering": 48620,
         "clinical_medicine": 62820
-      }
+      },
+      "qs_rank_2026": 4,
+      "usnews_global_rank_2026": 4
     },
     {
       "id": "cambridge",
@@ -5016,7 +5178,9 @@
         "science_lab": 57459,
         "engineering": 57459,
         "clinical_medicine": 83799
-      }
+      },
+      "qs_rank_2026": 6,
+      "usnews_global_rank_2026": 5
     },
     {
       "id": "imperial",
@@ -5088,7 +5252,9 @@
         "science_lab": 44000,
         "engineering": 48000,
         "clinical_medicine": 55000
-      }
+      },
+      "qs_rank_2026": 2,
+      "usnews_global_rank_2026": 11
     },
     {
       "id": "boston-college",
@@ -5148,7 +5314,9 @@
       "data_source_urls": [
         "https://www.bc.edu/bc-web/sites/bc-news/articles/2025/spring/trustees-set-tuition-for-2025-2026.html"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "brandeis",
@@ -5208,7 +5376,9 @@
       "data_source_urls": [
         "https://www.brandeis.edu/student-financial-services/tuition-calculator/index.html"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "brown",
@@ -5267,7 +5437,9 @@
         "https://pbn.com/brown-university-increases-tuition-for-2026-27-academic-year/",
         "https://admission.brown.edu/tuition-aid/tuition-fees"
       ],
-      "acceptance_rate_year": "2024-25"
+      "acceptance_rate_year": "2024-25",
+      "qs_rank_2026": 69,
+      "usnews_global_rank_2026": 100
     },
     {
       "id": "caltech",
@@ -5327,7 +5499,9 @@
         "https://www.finaid.caltech.edu/costs",
         "https://www.catalog.caltech.edu/current/information-for-undergraduate-students/undergraduate-expenses/"
       ],
-      "acceptance_rate_year": "2024-25"
+      "acceptance_rate_year": "2024-25",
+      "qs_rank_2026": 10,
+      "usnews_global_rank_2026": 23
     },
     {
       "id": "cmu",
@@ -5387,7 +5561,9 @@
       "data_source_urls": [
         "https://www.cmu.edu/sfs/tuition/index.html"
       ],
-      "acceptance_rate_year": "2024-25"
+      "acceptance_rate_year": "2024-25",
+      "qs_rank_2026": 52,
+      "usnews_global_rank_2026": 67
     },
     {
       "id": "dartmouth",
@@ -5447,7 +5623,9 @@
         "https://admissions.dartmouth.edu/estimate-your-cost/cost-attendance",
         "https://financialaid.dartmouth.edu/cost-attendance/cost-attendance-2025-2026"
       ],
-      "acceptance_rate_year": "2024-25"
+      "acceptance_rate_year": "2024-25",
+      "qs_rank_2026": 247,
+      "usnews_global_rank_2026": 100
     },
     {
       "id": "duke",
@@ -5506,7 +5684,9 @@
       "data_source_urls": [
         "https://financialaid.duke.edu/types-aid/cost-attendance"
       ],
-      "acceptance_rate_year": "2025 (Class of 2029)"
+      "acceptance_rate_year": "2025 (Class of 2029)",
+      "qs_rank_2026": 62,
+      "usnews_global_rank_2026": 27
     },
     {
       "id": "fordham",
@@ -5568,7 +5748,9 @@
         "https://www.fordham.edu/student-financial-services/tuition-and-payments/undergraduate-tuition/fordham-college-at-rose-hill/",
         "https://fordhamobserver.com/82633/breaking/breaking-tuition-increases-4-5-for-2026-27-academic-year/"
       ],
-      "acceptance_rate_year": "2024-25"
+      "acceptance_rate_year": "2024-25",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "georgetown",
@@ -5628,7 +5810,9 @@
       "data_source_urls": [
         "https://www.georgetown.edu/news/announcing-fall-2026-spring-2027-tuition-rates-2/"
       ],
-      "acceptance_rate_year": "2025 (Class of 2030)"
+      "acceptance_rate_year": "2025 (Class of 2030)",
+      "qs_rank_2026": 285,
+      "usnews_global_rank_2026": 100
     },
     {
       "id": "gwu",
@@ -5688,7 +5872,9 @@
       "data_source_urls": [
         "https://gwtoday.gwu.edu/2025-2026-academic-year-tuition-rates-announced"
       ],
-      "acceptance_rate_year": "2024"
+      "acceptance_rate_year": "2024",
+      "qs_rank_2026": 358,
+      "usnews_global_rank_2026": 500
     },
     {
       "id": "harvard",
@@ -5747,7 +5933,9 @@
       "data_source_urls": [
         "https://college.harvard.edu/financial-aid/how-aid-works"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": 5,
+      "usnews_global_rank_2026": 1
     },
     {
       "id": "howard",
@@ -5807,7 +5995,9 @@
       "data_source_urls": [
         "https://www.howard.edu/bursar/tuition-fees/"
       ],
-      "acceptance_rate_year": "2024-25"
+      "acceptance_rate_year": "2024-25",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "jhu",
@@ -5867,7 +6057,9 @@
         "https://www.jhu.edu/admissions/tuition/",
         "https://www.usnews.com/best-colleges/jhu-2077/paying"
       ],
-      "acceptance_rate_year": "2024-25 (Class of 2029)"
+      "acceptance_rate_year": "2024-25 (Class of 2029)",
+      "qs_rank_2026": 24,
+      "usnews_global_rank_2026": 14
     },
     {
       "id": "mit",
@@ -5926,7 +6118,9 @@
       "data_source_urls": [
         "https://registrar.mit.edu/registration-academics/tuition-fees/undergraduate"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": 1,
+      "usnews_global_rank_2026": 2
     },
     {
       "id": "ncsu",
@@ -5987,7 +6181,9 @@
       "data_source_urls": [
         "https://studentservices.ncsu.edu/finances/tuition-and-fees/tuition-and-fee-rates/undergraduate-students/"
       ],
-      "acceptance_rate_year": "2024-25 (Class of 2028)"
+      "acceptance_rate_year": "2024-25 (Class of 2028)",
+      "qs_rank_2026": 272,
+      "usnews_global_rank_2026": 150
     },
     {
       "id": "northwestern",
@@ -6046,7 +6242,9 @@
       "data_source_urls": [
         "https://news.northwestern.edu/stories/2025/05/northwestern-sets-tuition-fees-and-financial-aid-for-2025-2026-academic-year"
       ],
-      "acceptance_rate_year": "2024-25 (Class of 2029)"
+      "acceptance_rate_year": "2024-25 (Class of 2029)",
+      "qs_rank_2026": 42,
+      "usnews_global_rank_2026": 24
     },
     {
       "id": "notre-dame",
@@ -6105,7 +6303,9 @@
       "data_source_urls": [
         "https://studentaccounts.nd.edu/rates/undergraduate-programs/"
       ],
-      "acceptance_rate_year": "2025 (Class of 2030)"
+      "acceptance_rate_year": "2025 (Class of 2030)",
+      "qs_rank_2026": 294,
+      "usnews_global_rank_2026": 100
     },
     {
       "id": "penn-state",
@@ -6165,7 +6365,9 @@
       "data_source_urls": [
         "https://tuition.psu.edu/rates-effective-2025-fall-semester"
       ],
-      "acceptance_rate_year": "2024-25"
+      "acceptance_rate_year": "2024-25",
+      "qs_rank_2026": 82,
+      "usnews_global_rank_2026": 89
     },
     {
       "id": "pepperdine",
@@ -6226,7 +6428,9 @@
       "data_source_urls": [
         "https://seaver.pepperdine.edu/admission/financial-aid/undergraduate/costs/budget-costs.htm"
       ],
-      "acceptance_rate_year": "2024-25"
+      "acceptance_rate_year": "2024-25",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "princeton",
@@ -6286,7 +6490,9 @@
         "https://admission.princeton.edu/cost-aid/fees-payment-options",
         "https://finaid.princeton.edu/how-aid-works/student-budget"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": 25,
+      "usnews_global_rank_2026": 16
     },
     {
       "id": "rice",
@@ -6346,7 +6552,9 @@
       "data_source_urls": [
         "https://news.rice.edu/news/2026/rice-sets-2026-27-undergraduate-tuition-while-reaffirming-commitment-full-need-loan-free"
       ],
-      "acceptance_rate_year": "2024-25 (Class of 2029)"
+      "acceptance_rate_year": "2024-25 (Class of 2029)",
+      "qs_rank_2026": 119,
+      "usnews_global_rank_2026": 100
     },
     {
       "id": "rochester",
@@ -6407,7 +6615,9 @@
       "data_source_urls": [
         "https://www.rochester.edu/financial-aid/cost/"
       ],
-      "acceptance_rate_year": "2024 (Class of 2028)"
+      "acceptance_rate_year": "2024 (Class of 2028)",
+      "qs_rank_2026": 236,
+      "usnews_global_rank_2026": 130
     },
     {
       "id": "stanford",
@@ -6466,7 +6676,9 @@
       "data_source_urls": [
         "https://stanforddaily.com/2026/02/10/university-decides-against-increasing-undergraduate-tuition-for-upcoming-year/"
       ],
-      "acceptance_rate_year": "2024-25 (Class of 2028; Stanford did not release Class of 2029 rate)"
+      "acceptance_rate_year": "2024-25 (Class of 2028; Stanford did not release Class of 2029 rate)",
+      "qs_rank_2026": 4,
+      "usnews_global_rank_2026": 3
     },
     {
       "id": "syracuse",
@@ -6526,7 +6738,9 @@
       "data_source_urls": [
         "https://finance.syr.edu/bursar/tuition-fees-and-related-policies-bulletin/"
       ],
-      "acceptance_rate_year": "2025"
+      "acceptance_rate_year": "2025",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": 300
     },
     {
       "id": "tamu",
@@ -6587,7 +6801,9 @@
         "https://tuition.tamu.edu/",
         "https://www.usnews.com/best-colleges/texas-am-university-college-station-10366/paying"
       ],
-      "acceptance_rate_year": "2024-25"
+      "acceptance_rate_year": "2024-25",
+      "qs_rank_2026": 144,
+      "usnews_global_rank_2026": 150
     },
     {
       "id": "tulane",
@@ -6648,7 +6864,9 @@
         "https://studentaccounts.tulane.edu/sites/default/files/2026-03/2026-2027_NTC_COSTS_20260319.pdf",
         "https://financialaid.tulane.edu/cost-of-attendance"
       ],
-      "acceptance_rate_year": "2025"
+      "acceptance_rate_year": "2025",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": 300
     },
     {
       "id": "ucb",
@@ -6708,7 +6926,9 @@
       "data_source_urls": [
         "https://financialaid.berkeley.edu/cost-of-attendance/"
       ],
-      "acceptance_rate_year": "Fall 2025"
+      "acceptance_rate_year": "Fall 2025",
+      "qs_rank_2026": 17,
+      "usnews_global_rank_2026": 6
     },
     {
       "id": "uf",
@@ -6769,7 +6989,9 @@
         "https://www.sfa.ufl.edu/cost/",
         "https://admissions.ufl.edu/apply/deadlines"
       ],
-      "acceptance_rate_year": "2024-25"
+      "acceptance_rate_year": "2024-25",
+      "qs_rank_2026": 212,
+      "usnews_global_rank_2026": 150
     },
     {
       "id": "villanova",
@@ -6833,7 +7055,9 @@
         "https://www.villanova.edu/university/office-of-financial-assistance/financial-aid-process/cost-of-attendance.html",
         "https://www.villanova.edu/university/financial-affairs/bursar/tuition-and-fees.html"
       ],
-      "acceptance_rate_year": "2024-25"
+      "acceptance_rate_year": "2024-25",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "vtech",
@@ -6894,7 +7118,9 @@
       "data_source_urls": [
         "https://www.bursar.vt.edu/tuition/index.html"
       ],
-      "acceptance_rate_year": "2024-25"
+      "acceptance_rate_year": "2024-25",
+      "qs_rank_2026": 358,
+      "usnews_global_rank_2026": 300
     },
     {
       "id": "wake-forest",
@@ -6953,7 +7179,9 @@
       "data_source_urls": [
         "https://finance.wfu.edu/students-parents/sfs/tuition-fees/"
       ],
-      "acceptance_rate_year": "2024-25 (Class of 2028)"
+      "acceptance_rate_year": "2024-25 (Class of 2028)",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": 300
     },
     {
       "id": "washu",
@@ -7013,7 +7241,8 @@
       "data_source_urls": [
         "https://source.washu.edu/2025/03/2025-26-tuition-housing-meal-plans-fees-announced/"
       ],
-      "acceptance_rate_year": "2024-25"
+      "acceptance_rate_year": "2024-25",
+      "qs_rank_2026": 167
     },
     {
       "id": "yale",
@@ -7072,7 +7301,9 @@
       "data_source_urls": [
         "https://finaid.yale.edu/coa"
       ],
-      "acceptance_rate_year": "2024 (Class of 2028)"
+      "acceptance_rate_year": "2024 (Class of 2028)",
+      "qs_rank_2026": 21,
+      "usnews_global_rank_2026": 9
     },
     {
       "id": "williams",
@@ -7132,7 +7363,9 @@
         "https://www.williams.edu/sfs/files/2026/03/Tuition-letter-26-27-FINAL-2.pdf",
         "https://www.williams.edu/admission-aid/financial-aid/cost-and-aid/"
       ],
-      "acceptance_rate_year": "Class of 2030"
+      "acceptance_rate_year": "Class of 2030",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "amherst",
@@ -7190,7 +7423,9 @@
         "https://www.amherst.edu/admission/apply/firstyear/calendar_deadlines",
         "https://www.amherst.edu/offices/controller/student-accounts/tuition-and-fees/node/608551"
       ],
-      "acceptance_rate_year": "Class of 2030"
+      "acceptance_rate_year": "Class of 2030",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "swarthmore",
@@ -7249,7 +7484,9 @@
         "https://www.swarthmore.edu/financial-aid/tuition-books-housing-food-plan-activities-fee",
         "https://www.swarthmore.edu/news-events/swarthmore-admits-965-to-class-2029"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "pomona",
@@ -7307,7 +7544,9 @@
       "data_source_urls": [
         "https://www.pomona.edu/administration/finance-office/student-accounts/tuition-and-costs"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "wellesley",
@@ -7365,7 +7604,9 @@
       "data_source_urls": [
         "https://www.wellesley.edu/admission-aid/student-financial-services/tuition-cost"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "bowdoin",
@@ -7422,7 +7663,9 @@
       "data_source_urls": [
         "https://www.bowdoin.edu/bursar/tuition/index.html"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "middlebury",
@@ -7481,7 +7724,9 @@
         "https://www.middlebury.edu/student-financial-services/tuition-fees-and-payment/tuition-and-fees",
         "https://www.middlebury.edu/international-student-and-scholar-services/forms-and-resources/new-and-returning-student-forms-0"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "colby",
@@ -7540,7 +7785,9 @@
         "https://www.colby.edu/people/offices-directory/student-financial-services/student-account-information/student-charges-payment-schedule/",
         "https://afa.colby.edu/cost-and-aid/tuition-and-fees/"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "hamilton",
@@ -7599,7 +7846,9 @@
         "https://www.hamilton.edu/admission/tuition",
         "https://www.hamilton.edu/parents/tuition-information"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "colgate",
@@ -7656,7 +7905,9 @@
       "data_source_urls": [
         "https://www.colgate.edu/admission-aid/tuition-fees/cost-attendance-2026-27"
       ],
-      "acceptance_rate_year": "Class of 2027"
+      "acceptance_rate_year": "Class of 2027",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "harvey-mudd",
@@ -7710,7 +7961,9 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": null,
-      "usnews_rank_2026": 9
+      "usnews_rank_2026": 9,
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "cmc",
@@ -7769,7 +8022,9 @@
         "https://www.cmc.edu/institutional-research/fact-sheet",
         "https://www.cmc.edu/washington-program/program-costs"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "smith",
@@ -7823,7 +8078,9 @@
       "data_source_urls": [
         "https://www.smith.edu/admission-aid/tuition-aid-applicants/transfer-applicants"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "bryn-mawr",
@@ -7876,7 +8133,9 @@
       "data_source_urls": [
         "https://www.brynmawr.edu/sites/default/files/media/documents/2026-04/2025_2026%20quick%20facts.Final_.pdf"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "davidson",
@@ -7934,7 +8193,9 @@
         "https://www.davidson.edu/admission-and-financial-aid/cost-attendance",
         "https://www.davidson.edu/offices-and-services/controllers-office/students-and-families"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "macalester",
@@ -7987,7 +8248,9 @@
       "data_source_urls": [
         "https://www.macalester.edu/financial-aid/tuition/"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "grinnell",
@@ -8041,7 +8304,9 @@
         "https://www.grinnell.edu/about/leadership/offices-services/treasurer/student-accounts/comprehensive",
         "https://www.grinnell.edu/news/comprehensive-fees-2026-27-academic-year"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "oberlin",
@@ -8095,7 +8360,9 @@
         "https://www.oberlin.edu/student-accounts/tuition-and-fees",
         "https://www.oberlin.edu/admissions-and-aid/tuition-and-fees"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "lafayette",
@@ -8154,7 +8421,9 @@
         "https://president.lafayette.edu/2025/01/27/2025-26-tuition-and-fees-announcement/",
         "https://www.usnews.com/best-colleges/lafayette-college-3284/paying"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "kenyon",
@@ -8207,7 +8476,9 @@
       "data_source_urls": [
         "https://www.kenyon.edu/offices-and-services/office-of-accounting/student-accounts-3/billing-and-payment-information/explanation-of-fees-and-charges/"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "trinity-ct",
@@ -8261,7 +8532,9 @@
         "https://www.trincoll.edu/student-accounts/tuition-and-fees/",
         "https://www.trincoll.edu/admissions/tuition-fees/"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "union-college",
@@ -8310,7 +8583,9 @@
       "verified": false,
       "data_confidence": "high",
       "special_notes": "综合费用约$85,000; 2025-26 數據，官網未列2026-27",
-      "usnews_rank_2026": null
+      "usnews_rank_2026": null,
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     },
     {
       "id": "bates",
@@ -8365,7 +8640,9 @@
         "https://www.bates.edu/financial-services/",
         "https://www.bates.edu/admission/apply/application-options/"
       ],
-      "acceptance_rate_year": "Class of 2029"
+      "acceptance_rate_year": "Class of 2029",
+      "qs_rank_2026": null,
+      "usnews_global_rank_2026": null
     }
   ]
 }
