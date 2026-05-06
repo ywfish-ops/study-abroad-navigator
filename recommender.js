@@ -216,7 +216,7 @@ const RecommenderModule = (() => {
 
   /** 按 QS/USNews 排名打优先因子分 */
   function scoreByRank(school) {
-    const rank = school.usnews_rank_2026 || school.qs_rank_2025;
+    const rank = school.usnews_rank_2026 || school.qs_rank_2026;
     if (!rank) return 12;
     if (rank <= 20) return 25;
     if (rank <= 50) return 20;
@@ -1064,7 +1064,7 @@ const RecommenderModule = (() => {
     const flag = COUNTRY_FLAG[s.country] ?? '';
     const rankStr = s.usnews_rank_2026
       ? `USNews #${s.usnews_rank_2026}`
-      : (s.qs_rank_2025 ? `QS #${s.qs_rank_2025}` : '');
+      : (s.qs_rank_2026 ? `QS #${s.qs_rank_2026}` : '');
     const cityStr = s.city ? s.city.split(',')[0] : '';
     const typeStr = s.type === 'public' ? '公立' : s.type === 'private' ? '私立' : '';
     const meta = [cityStr, typeStr, rankStr].filter(Boolean).join(' · ');

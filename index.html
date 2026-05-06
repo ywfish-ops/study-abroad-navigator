@@ -1227,8 +1227,8 @@ window.ExplorerModule = (function() {
   }
 
   function getRankDisplay(school) {
-    if (school.qs_rank_2025) return { prefix: 'QS', num: '#' + school.qs_rank_2025 };
-    if (school.usnews_global_rank_2025) return { prefix: 'USN', num: '#' + school.usnews_global_rank_2025 };
+    if (school.qs_rank_2026) return { prefix: 'QS', num: '#' + school.qs_rank_2026 };
+    if (school.usnews_global_rank_2026) return { prefix: 'USN', num: '#' + school.usnews_global_rank_2026 };
     return null;
   }
 
@@ -1273,8 +1273,8 @@ window.ExplorerModule = (function() {
         return ra - rb;
       }
       // Default: rank
-      const qa = a.qs_rank_2025 || 9999, qb = b.qs_rank_2025 || 9999;
-      const ua = a.usnews_global_rank_2025 || 9999, ub = b.usnews_global_rank_2025 || 9999;
+      const qa = a.qs_rank_2026 || 9999, qb = b.qs_rank_2026 || 9999;
+      const ua = a.usnews_global_rank_2026 || 9999, ub = b.usnews_global_rank_2026 || 9999;
       return Math.min(qa, ua) - Math.min(qb, ub);
     });
   }
@@ -1462,8 +1462,8 @@ window.ExplorerModule = (function() {
 
       /* 排名 */
       const ranks = [];
-      if (s.qs_rank_2025)           ranks.push(['QS 2025', `#${s.qs_rank_2025}`]);
-      if (s.usnews_global_rank_2025) ranks.push(['USNews 全球', `#${s.usnews_global_rank_2025}`]);
+      if (s.qs_rank_2026)           ranks.push(['QS 2026', `#${s.qs_rank_2026}`]);
+      if (s.usnews_global_rank_2026) ranks.push(['USNews 全球 2026', `#${s.usnews_global_rank_2026}`]);
       if (s.usnews_rank_2026)        ranks.push(['USNews 2026', `#${s.usnews_rank_2026}`]);
       if (ranks.length) {
         html += `<div class="sheet-section"><div class="sheet-section-title">排名</div>`;

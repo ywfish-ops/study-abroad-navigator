@@ -192,7 +192,7 @@ const FinanceModule = (() => {
     list.innerHTML = filtered.map(s => {
       const sel      = selectedIds.has(s.id);
       const disabled = !sel && maxed;
-      const rankStr  = s.usnews_rank_2026 ? `USNews #${s.usnews_rank_2026}` : (s.qs_rank_2025 ? `QS #${s.qs_rank_2025}` : '');
+      const rankStr  = s.usnews_rank_2026 ? `USNews #${s.usnews_rank_2026}` : (s.qs_rank_2026 ? `QS #${s.qs_rank_2026}` : '');
       const cityStr  = s.city ? s.city.split(',')[0] : '';
       const meta     = [cityStr, rankStr].filter(Boolean).join(' · ');
 
@@ -346,7 +346,7 @@ const FinanceModule = (() => {
     const pct       = v => gross > 0 ? (v / gross * 100).toFixed(1) : '0';
     const rankStr   = school.usnews_rank_2026
       ? `USNews #${school.usnews_rank_2026}`
-      : (school.qs_rank_2025 ? `QS #${school.qs_rank_2025}` : '');
+      : (school.qs_rank_2026 ? `QS #${school.qs_rank_2026}` : '');
     const cityStr   = school.city ? school.city.split(',')[0] : '';
 
     return `

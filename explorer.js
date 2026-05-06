@@ -209,7 +209,7 @@ const ExplorerModule = (() => {
           return s.usnews_rank_2026 != null ? s.usnews_rank_2026 : 999;
         if (isLac)
           return 1000 + (s.usnews_rank_2026 ?? 999);
-        return 2000 + (s.qs_rank_2025 ?? 9999);
+        return 2000 + (s.qs_rank_2026 ?? 9999);
       };
       return sortKey(a) - sortKey(b);
     });
@@ -252,8 +252,8 @@ const ExplorerModule = (() => {
     const inCompare = compareList.includes(school.id);
     const cardIsLac = (school.tags || []).includes('liberal-arts') || (school.tags || []).includes('liberal-arts-focus');
     const rankText = school.country === 'US'
-      ? (school.usnews_rank_2026 ? `US News ${cardIsLac ? 'LAC' : ''} #${school.usnews_rank_2026}`.trim() : (school.qs_rank_2025 ? `QS #${school.qs_rank_2025}` : ''))
-      : (school.qs_rank_2025 ? `QS #${school.qs_rank_2025}` : '');
+      ? (school.usnews_rank_2026 ? `US News ${cardIsLac ? 'LAC' : ''} #${school.usnews_rank_2026}`.trim() : (school.qs_rank_2026 ? `QS #${school.qs_rank_2026}` : ''))
+      : (school.qs_rank_2026 ? `QS #${school.qs_rank_2026}` : '');
 
     return `
 <div class="explorer-card" id="explorer-card-${school.id}"
@@ -380,10 +380,10 @@ const ExplorerModule = (() => {
 
       <!-- 核心数据卡片 -->
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:20px;">
-        ${school.qs_rank_2025 ? `
+        ${school.qs_rank_2026 ? `
         <div style="background:#F8F7F4; border-radius:10px; padding:12px; text-align:center;">
-          <div style="font-size:20px; font-weight:700; color:#2B5CE6;">#${school.qs_rank_2025}</div>
-          <div style="font-size:11px; color:#6B7280; margin-top:2px;">QS 2025</div>
+          <div style="font-size:20px; font-weight:700; color:#2B5CE6;">#${school.qs_rank_2026}</div>
+          <div style="font-size:11px; color:#6B7280; margin-top:2px;">QS 2026</div>
         </div>` : ''}
         ${school.usnews_rank_2026 ? `
         <div style="background:#F8F7F4; border-radius:10px; padding:12px; text-align:center;">
