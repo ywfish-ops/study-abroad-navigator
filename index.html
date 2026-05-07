@@ -2382,15 +2382,47 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 <script>
-  // ═══ PWA TabBar 悬浮问题 — 诊断日志 ═══
-  // 捕获首帧、resize、visualViewport 变化时的关键尺寸
+  // ═══ PWA TabBar 悬浮问题 — 诊断日志（屏幕可见版）═══
   // 修复后删除本段
   (function() {
     if (!window.matchMedia('(display-mode: standalone)').matches) return;
 
+    // 创建可见调试面板
+    var panel = document.createElement('div');
+    panel.id = 'debug-panel';
+    panel.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;'
+      + 'background:rgba(0,0,0,.88);color:#0f0;font:10px/1.35 "JetBrains Mono",monospace;'
+      + 'padding:8px 10px;max-height:50vh;overflow-y:auto;'
+      + 'backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);'
+      + 'border-bottom:1px solid #0f0;pointer-events:none;';
+    panel.textContent = 'Debug panel initializing...';
+    document.body.appendChild(panel);
+
+    var entries = [];
+    var MAX = 20;
+
+    function render() {
+      var lines = [];
+      for (var i = 0; i < entries.length; i++) {
+        var e = entries[i];
+        var tb = e.tbRect;
+        var gap = e.winH && tb ? (e.winH - tb.bottom).toFixed(1) : '?';
+        var bad = tb && Math.abs(e.winH - tb.bottom) > 2;
+        var marker = bad ? ' ⚠️ MISMATCH' : '';
+        lines.push(
+          '#' + e.seq + ' ' + e.tag + ' @' + e.ts + 'ms' + marker + '\n'
+          + '  win=' + e.winH + ' vvp=' + e.vvpH + ' vvpTop=' + e.vvpTop + ' doc=' + e.docH + '\n'
+          + '  tb.bottom=' + (tb ? tb.bottom : 'null') + ' tb.top=' + (tb ? tb.top : 'null') + ' tbH=' + (tb ? tb.height : 'null') + '\n'
+          + '  tb.pos=' + e.tbStylePos + ' tb.cssBottom=' + e.tbStyleBottom + ' gap=' + gap + '\n'
+          + '  safePad=' + e.safeAreaTB + ' --tabbar-h=' + e.safeAreaVar
+        );
+      }
+      panel.textContent = lines.join('\n\n');
+    }
+
     var seq = 0;
     function log(tag, extra) {
-      var tb = document.querySelector('[data-tab-bar].active') || document.querySelector('[data-tab-bar]');
+      var tb = document.querySelector('[data-tab-bar]');
       var r = tb ? tb.getBoundingClientRect() : null;
       var s = getComputedStyle(document.documentElement);
       var entry = {
@@ -2411,42 +2443,34 @@ document.addEventListener('DOMContentLoaded', () => {
         isStandalone: true,
       };
       if (extra) Object.assign(entry, extra);
+      entries.push(entry);
+      if (entries.length > MAX) entries.shift();
+      render();
       console.log('[TabBar Debug]', entry);
     }
 
-    // 首帧：等 DOM 稳定后立即记录
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', function() {
-        requestAnimationFrame(function() {
-          log('first-paint-DCL+RAF');
-        });
+        requestAnimationFrame(function() { log('DCL+RAF'); });
       });
     } else {
-      requestAnimationFrame(function() {
-        log('first-paint-RAF');
-      });
+      requestAnimationFrame(function() { log('RAF'); });
     }
 
-    // resize（window）
-    window.addEventListener('resize', function() { log('window-resize'); });
-
-    // visualViewport resize（PWA 键盘/安全区变化关键事件）
+    window.addEventListener('resize', function() { log('win-resize'); });
     if (window.visualViewport) {
       window.visualViewport.addEventListener('resize', function() { log('vvp-resize'); });
       window.visualViewport.addEventListener('scroll', function() { log('vvp-scroll'); });
     }
-
-    // 额外：orientation change
     window.addEventListener('orientationchange', function() {
-      setTimeout(function() { log('orientationchange+100ms'); }, 100);
+      setTimeout(function() { log('orient+100'); }, 100);
     });
 
-    // 定期采样（首 3 秒内每 500ms 一次）
     [500, 1000, 1500, 2000, 2500, 3000].forEach(function(ms) {
-      setTimeout(function() { log('sample-'+ms+'ms'); }, ms);
+      setTimeout(function() { log('t+'+ms); }, ms);
     });
 
-    console.log('[TabBar Debug] Logger installed. PWA standalone detected.');
+    console.log('[TabBar Debug] Visible panel installed.');
   })();
 </script>
 </body>
