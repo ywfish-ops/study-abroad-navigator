@@ -25,6 +25,10 @@
       t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     document.documentElement.setAttribute('data-theme', t);
+    // PWA 独立窗口需预留底部 home indicator（首帧 env() 可能尚未解析）
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      document.documentElement.classList.add('pwa');
+    }
   })();
 </script>
 <style>
@@ -458,8 +462,12 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
   html { background: var(--screen-bg); }
   /* tab bar：用 max() 预留底部安全区，避免首帧 env() 返回 0 导致悬浮 */
   :root {
-    --safe-bottom: max(34px, env(safe-area-inset-bottom));
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
     --vvp-offset: 0px;
+    --tabbar-h: calc(56px + var(--safe-bottom));
+  }
+  html.pwa {
+    --safe-bottom: max(34px, env(safe-area-inset-bottom));
     --tabbar-h: calc(56px + var(--safe-bottom));
   }
   .tabbar {
