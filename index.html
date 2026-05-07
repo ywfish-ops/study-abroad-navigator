@@ -15,20 +15,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="recommender.js" defer></script>
 <script>
-  // 在 CSS 解析前同步设置：主题 + 移动/PWA class（避免 display-mode 媒体查询首帧不确定性）
+  // 在 CSS 解析前同步设置主题，消除 FOUC
   (function() {
     var t = localStorage.getItem('theme_v1');
     if (!t) {
       t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     document.documentElement.setAttribute('data-theme', t);
-
-    // PWA standalone 的 display-mode 在首帧 CSS 求值时可能还未就绪，
-    // 导致 .screen 先用桌面 height:844px 渲染，下一帧才切到 height:100dvh，产生「放大→回正」闪现。
-    // JS matchMedia 同步执行，结果在 CSS 解析前写入 class，确保首帧即正确尺寸。
-    if (window.innerWidth <= 430 || window.matchMedia('(display-mode: standalone)').matches) {
-      document.documentElement.classList.add('is-mobile');
-    }
   })();
 </script>
 <style>
@@ -488,21 +481,6 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
   }
 }
 
-/* ── .is-mobile 首帧补救 ──────────────────────────────────
-   由 <head> 中阻塞脚本在 CSS 解析前写入。
-   display-mode: standalone 在首帧 CSS 求值时可能尚未就绪，
-   导致 .screen 先用桌面 height:844px 渲染，下一帧才切到
-   height:100dvh，产生「放大→回正」闪现。
-   这里用 JS-set class 补齐关键属性，确保首帧即正确尺寸。
-─────────────────────────────────────────────────────────── */
-html.is-mobile { background: var(--screen-bg); }
-html.is-mobile body { display:block; min-height:100dvh; overflow-x:hidden; }
-html.is-mobile .screen { max-width:100vw; height:100dvh; padding-top:env(safe-area-inset-top,0px); box-sizing:border-box; }
-html.is-mobile .tabbar { position:fixed !important; }
-html.is-mobile #page-explore .screen,
-html.is-mobile #page-sandbox .screen { height:auto !important; min-height:100dvh; padding-bottom:calc(var(--tabbar-h) + 12px); }
-html.is-mobile #page-explore .schools,
-html.is-mobile #page-sandbox .sandbox-body { overflow:visible !important; height:auto !important; flex:none !important; }
 
 
 /* ════════════════════════════════════════
