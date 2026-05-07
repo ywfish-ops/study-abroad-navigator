@@ -5,7 +5,7 @@
 <title>DecideOn · 留学决策导航</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="DecideOn"/>
 <link rel="manifest" href="manifest.json"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -444,10 +444,12 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
   .screen {
     max-width:100vw;
     height:100dvh;
-    /* PWA 全屏模式下内容从屏幕最顶部开始，需要顶部安全区留白 */
+    /* black-translucent 模式下内容从屏幕最顶部开始，背景色延伸到状态栏后方 */
     padding-top: env(safe-area-inset-top, 0px);
     box-sizing: border-box;
   }
+  /* PWA 全屏下 html 背景跟随 screen，确保状态栏后方无缝 */
+  html { background: var(--screen-bg); }
   /* tab bar：底部安全区单独占空间，整体高度更紧凑 */
   :root { --tabbar-h: calc(56px + env(safe-area-inset-bottom, 0px)); }
   .tabbar {
