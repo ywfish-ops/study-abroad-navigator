@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="zh-CN" data-theme="dark">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8"/>
 <title>DecideOn · 留学决策导航</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
 <meta name="apple-mobile-web-app-title" content="DecideOn"/>
 <link rel="manifest" href="manifest.json"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -14,6 +14,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="recommender.js" defer></script>
+<script>
+  // 在 CSS 解析前同步设置主题，消除 FOUC
+  (function() {
+    var t = localStorage.getItem('theme_v1');
+    if (!t) {
+      t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
 <style>
 /* ═══════════════════════════════════
    TOKENS
@@ -434,7 +444,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
   .screen {
     max-width:100vw;
     height:100dvh;
-    /* black-translucent 模式下内容从屏幕最顶部开始，需要顶部安全区留白 */
+    /* PWA 全屏模式下内容从屏幕最顶部开始，需要顶部安全区留白 */
     padding-top: env(safe-area-inset-top, 0px);
     box-sizing: border-box;
   }
@@ -1101,16 +1111,17 @@ function toggleFilterDrawer() {
 }
 
 /* ── Theme ── */
-let currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+let currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
 
 function toggleMode() {
   currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  applyTheme(currentTheme);
+  applyTheme(currentTheme, true);
   if (window.radarInstance) { radarInstance.destroy(); radarInstance = null; initRadar(); }
 }
 
-function applyTheme(t) {
+function applyTheme(t, persist) {
   document.documentElement.setAttribute('data-theme', t);
+  if (persist) localStorage.setItem('theme_v1', t);
   const btn = document.getElementById('toggleBtn');
   const icon = document.getElementById('toggleIcon');
   const label = document.getElementById('toggleLabel');
