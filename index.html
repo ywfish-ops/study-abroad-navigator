@@ -8,6 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="DecideOn"/>
 <link rel="manifest" href="manifest.json"/>
+<link rel="icon" type="image/svg+xml" href="decideon-mark.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
@@ -132,8 +133,11 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 #page-home .screen-content{position:relative;z-index:5;height:calc(844px - var(--tabbar-h));overflow-y:auto;scrollbar-width:none;}
 #page-home .screen-content::-webkit-scrollbar{display:none;}
 .nav{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 24px 0;}
-.brand{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;letter-spacing:.4px;color:var(--brand-color);display:inline-flex;align-items:center;gap:8px;transition:var(--transition);}
-.brand .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);transition:background .35s ease;}
+.brand{font-family:'Inter',sans-serif;font-size:15px;color:var(--brand-color);display:inline-flex;align-items:center;gap:8px;transition:var(--transition);line-height:1;}
+.brand-mark{display:block;color:var(--brand-color);transition:color .35s ease;}
+.brand-text{display:inline-flex;align-items:baseline;letter-spacing:-0.2px;}
+.brand-decide{font-weight:700;}
+.brand-on{font-weight:800;}
 .pill{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;font-family:'Inter','Noto Sans SC',sans-serif;font-size:11px;font-weight:500;letter-spacing:.3px;color:var(--pill-color);border:1px solid var(--pill-border);border-radius:999px;background:var(--pill-bg);transition:var(--transition);}
 .pill .ring{width:5px;height:5px;border-radius:50%;background:var(--pill-dot);transition:background .35s ease;}
 .hero{position:relative;z-index:5;padding:8px 24px 4px;}
@@ -679,7 +683,15 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
   <div class="glow-a"></div><div class="glow-b"></div><div class="halo"></div><div class="noise"></div>
   <div class="screen-content">
   <div class="nav">
-    <div class="brand"><span class="dot"></span>DecideOn</div>
+    <div class="brand">
+      <svg class="brand-mark" width="22" height="22" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <path d="M32 56 L32 36 Q32 28 22 22 L12 16" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.28"/>
+        <path d="M32 56 L32 36 Q32 28 42 22 L52 16" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <circle cx="52" cy="16" r="5.5" fill="var(--accent)"/>
+        <circle cx="32" cy="56" r="2.5" fill="currentColor" opacity="0.4"/>
+      </svg>
+      <span class="brand-text"><span class="brand-decide">Decide</span><span class="brand-on">On</span></span>
+    </div>
     <div class="pill"><span class="ring"></span>2027届 · 内测版</div>
   </div>
   <section class="hero">
