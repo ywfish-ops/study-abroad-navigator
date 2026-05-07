@@ -1464,7 +1464,7 @@ window.ExplorerModule = (function() {
       const ranks = [];
       if (s.qs_rank_2026)           ranks.push(['QS 2026', `#${s.qs_rank_2026}`]);
       if (s.usnews_global_rank_2026) ranks.push(['USNews 全球 2026', `#${s.usnews_global_rank_2026}`]);
-      if (s.usnews_rank_2026)        ranks.push(['USNews 2026', `#${s.usnews_rank_2026}`]);
+      if (s.usnews_rank_2026 && s.country === 'US') ranks.push(['USNews 美国 2026', `#${s.usnews_rank_2026}`]);
       if (ranks.length) {
         html += `<div class="sheet-section"><div class="sheet-section-title">排名</div>`;
         ranks.forEach(([l, v]) => { html += row(l, v); });
@@ -1488,12 +1488,12 @@ window.ExplorerModule = (function() {
 
       /* 费用 */
       html += `<div class="sheet-section"><div class="sheet-section-title">费用</div>`;
-      if (s.tuition_intl_annual) {
+      if (s.tuition_intl_annual || s.avg_living_cost_annual) {
         const cur = s.tuition_currency || 'USD';
         const sym = { USD:'$', GBP:'£', HKD:'HK$', CAD:'CA$', AUD:'A$', SGD:'S$' }[cur] || cur;
-        html += row(`学费/年 (${cur})`, `${sym}${s.tuition_intl_annual.toLocaleString()}`);
+        if (s.tuition_intl_annual) html += row(`学费/年 (${cur})`, `${sym}${s.tuition_intl_annual.toLocaleString()}`);
+        if (s.avg_living_cost_annual) html += row(`生活费/年 (${cur})`, `${sym}${s.avg_living_cost_annual.toLocaleString()}`);
       }
-      if (s.avg_living_cost_annual) html += row('生活费/年 (USD)', `$${s.avg_living_cost_annual.toLocaleString()}`);
       const total = s.tuition_intl_annual ? fourYearCNY(s) : null;
       if (total) html += row('4年总计 (估算)', `约 ¥${total} 万`);
       html += `</div>`;

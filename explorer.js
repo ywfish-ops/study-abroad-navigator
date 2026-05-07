@@ -388,7 +388,7 @@ const ExplorerModule = (() => {
         ${school.usnews_rank_2026 ? `
         <div style="background:#F8F7F4; border-radius:10px; padding:12px; text-align:center;">
           <div style="font-size:20px; font-weight:700; color:#1A1A2E;">#${school.usnews_rank_2026}</div>
-          <div style="font-size:11px; color:#6B7280; margin-top:2px;">${isLac ? 'US News LAC 2026' : 'US News 2026'}</div>
+          <div style="font-size:11px; color:#6B7280; margin-top:2px;">${isLac ? 'US News LAC 2026' : 'US News 美国 2026'}</div>
         </div>` : ''}
         ${wan || engWales ? `
         <div style="background:#FEF3C7; border-radius:10px; padding:12px; text-align:center;">
