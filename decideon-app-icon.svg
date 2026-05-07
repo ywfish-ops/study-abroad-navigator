@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <style>
+      .bg { fill: #F8F4ED; }
+      .mark-primary { stroke: #1A1A1A; stroke-width: 5; stroke-linecap: round; fill: none; }
+      .mark-faded   { stroke: #1A1A1A; stroke-width: 5; stroke-linecap: round; fill: none; opacity: .22; }
+      .mark-accent  { fill: #FF6B6B; }
+      .mark-base    { fill: #1A1A1A; opacity: .35; }
+      @media (prefers-color-scheme: dark) {
+        .bg { fill: #1F1A4A; }
+        .mark-primary { stroke: #FFFFFF; }
+        .mark-faded   { stroke: #FFFFFF; }
+        .mark-base    { fill: #FFFFFF; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="1024" height="1024" rx="224" />
+  <g transform="translate(64, 64) scale(14)">
+    <path class="mark-faded" d="M32 56 L32 36 Q32 28 22 22 L12 16" />
+    <path class="mark-primary" d="M32 56 L32 36 Q32 28 42 22 L52 16" />
+    <circle class="mark-accent" cx="52" cy="16" r="5.5" />
+    <circle class="mark-base" cx="32" cy="56" r="2.5" />
+  </g>
+</svg>
