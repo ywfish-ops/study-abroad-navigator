@@ -450,12 +450,16 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
   }
   /* PWA 全屏下 html 背景跟随 screen，确保状态栏后方无缝 */
   html { background: var(--screen-bg); }
-  /* tab bar：底部安全区单独占空间，整体高度更紧凑 */
-  :root { --tabbar-h: calc(56px + env(safe-area-inset-bottom, 0px)); }
+  /* tab bar：用 max() 预留底部安全区，避免首帧 env() 返回 0 导致悬浮 */
+  :root {
+    --safe-bottom: max(34px, env(safe-area-inset-bottom));
+    --vvp-offset: 0px;
+    --tabbar-h: calc(56px + var(--safe-bottom));
+  }
   .tabbar {
     position:fixed !important;
-    bottom:0; left:0; right:0; width:100%;
-    padding:6px 12px env(safe-area-inset-bottom, 6px);
+    bottom: var(--vvp-offset, 0px); left:0; right:0; width:100%;
+    padding:6px 12px var(--safe-bottom);
   }
 
   /* 各页可滚动区：扣除顶部安全区 */
@@ -2382,95 +2386,20 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 <script>
-  // ═══ PWA TabBar 悬浮问题 — 诊断日志（屏幕可见版）═══
-  // 修复后删除本段
+  // ═══ PWA TabBar — visualViewport 同步 ═══
+  // 补偿 iOS PWA 滚动时 visualViewport 偏移，保持 tabbar 始终贴底
   (function() {
-    if (!window.matchMedia('(display-mode: standalone)').matches) return;
+    var vv = window.visualViewport;
+    if (!vv) return;
 
-    // 创建可见调试面板
-    var panel = document.createElement('div');
-    panel.id = 'debug-panel';
-    panel.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;'
-      + 'background:rgba(0,0,0,.88);color:#0f0;font:10px/1.35 "JetBrains Mono",monospace;'
-      + 'padding:8px 10px;max-height:50vh;overflow-y:auto;'
-      + 'backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);'
-      + 'border-bottom:1px solid #0f0;pointer-events:none;';
-    panel.textContent = 'Debug panel initializing...';
-    document.body.appendChild(panel);
-
-    var entries = [];
-    var MAX = 20;
-
-    function render() {
-      var lines = [];
-      for (var i = 0; i < entries.length; i++) {
-        var e = entries[i];
-        var tb = e.tbRect;
-        var gap = e.winH && tb ? (e.winH - tb.bottom).toFixed(1) : '?';
-        var bad = tb && Math.abs(e.winH - tb.bottom) > 2;
-        var marker = bad ? ' ⚠️ MISMATCH' : '';
-        lines.push(
-          '#' + e.seq + ' ' + e.tag + ' @' + e.ts + 'ms' + marker + '\n'
-          + '  win=' + e.winH + ' vvp=' + e.vvpH + ' vvpTop=' + e.vvpTop + ' doc=' + e.docH + '\n'
-          + '  tb.bottom=' + (tb ? tb.bottom : 'null') + ' tb.top=' + (tb ? tb.top : 'null') + ' tbH=' + (tb ? tb.height : 'null') + '\n'
-          + '  tb.pos=' + e.tbStylePos + ' tb.cssBottom=' + e.tbStyleBottom + ' gap=' + gap + '\n'
-          + '  safePad=' + e.safeAreaTB + ' --tabbar-h=' + e.safeAreaVar
-        );
-      }
-      panel.textContent = lines.join('\n\n');
+    function sync() {
+      var offset = window.innerHeight - vv.height - vv.offsetTop;
+      document.documentElement.style.setProperty('--vvp-offset', Math.max(0, offset) + 'px');
     }
 
-    var seq = 0;
-    function log(tag, extra) {
-      var tb = document.querySelector('[data-tab-bar]');
-      var r = tb ? tb.getBoundingClientRect() : null;
-      var s = getComputedStyle(document.documentElement);
-      var entry = {
-        seq: ++seq,
-        tag: tag,
-        ts: performance.now().toFixed(1),
-        winH: window.innerHeight,
-        vvpH: window.visualViewport ? window.visualViewport.height : 'N/A',
-        vvpTop: window.visualViewport ? window.visualViewport.offsetTop : 'N/A',
-        docH: document.documentElement.clientHeight,
-        screenH: document.querySelector('.screen') ? document.querySelector('.screen').clientHeight : 'N/A',
-        screenStyleH: document.querySelector('.screen') ? getComputedStyle(document.querySelector('.screen')).height : 'N/A',
-        tbRect: r ? { bottom: r.bottom.toFixed(1), top: r.top.toFixed(1), height: r.height.toFixed(1), width: r.width.toFixed(1) } : null,
-        tbStylePos: tb ? getComputedStyle(tb).position : 'N/A',
-        tbStyleBottom: tb ? getComputedStyle(tb).bottom : 'N/A',
-        safeAreaTB: getComputedStyle(document.querySelector('[data-tab-bar]') || document.body).paddingBottom,
-        safeAreaVar: s.getPropertyValue('--tabbar-h').trim(),
-        isStandalone: true,
-      };
-      if (extra) Object.assign(entry, extra);
-      entries.push(entry);
-      if (entries.length > MAX) entries.shift();
-      render();
-      console.log('[TabBar Debug]', entry);
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', function() {
-        requestAnimationFrame(function() { log('DCL+RAF'); });
-      });
-    } else {
-      requestAnimationFrame(function() { log('RAF'); });
-    }
-
-    window.addEventListener('resize', function() { log('win-resize'); });
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', function() { log('vvp-resize'); });
-      window.visualViewport.addEventListener('scroll', function() { log('vvp-scroll'); });
-    }
-    window.addEventListener('orientationchange', function() {
-      setTimeout(function() { log('orient+100'); }, 100);
-    });
-
-    [500, 1000, 1500, 2000, 2500, 3000].forEach(function(ms) {
-      setTimeout(function() { log('t+'+ms); }, ms);
-    });
-
-    console.log('[TabBar Debug] Visible panel installed.');
+    sync();
+    vv.addEventListener('resize', sync);
+    vv.addEventListener('scroll', sync);
   })();
 </script>
 </body>
