@@ -443,6 +443,19 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .sandbox-compare-btn.primary{background:var(--accent-bg);border:1px solid var(--accent-border);color:var(--accent);}
 .sandbox-compare-btn.secondary{background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-secondary);}
 
+/* ── PWA 首帧保障 ──────────────────────────────────────────
+   iOS PWA cold start 时 window.innerWidth 在首帧报告错误值
+   （layout viewport 约为 visual viewport 的 2 倍），导致
+   (max-width:430px) 和 (display-mode:standalone) media query
+   首帧均不命中，桌面布局短暂生效后跳变。
+   html.pwa 类由 head 内联脚本同步写入，比 CSS 媒体查询更早
+   生效，用它来保障关键布局属性首帧即正确。
+─────────────────────────────────────────────────────────── */
+html.pwa body { display:block; overflow-x:hidden; }
+html.pwa .screen { max-width:100vw !important; height:100dvh !important; padding-top:env(safe-area-inset-top,0px); box-sizing:border-box; }
+html.pwa { background:var(--screen-bg); --safe-bottom:max(34px,env(safe-area-inset-bottom)); --tabbar-h:calc(56px + var(--safe-bottom)); --vvp-offset:0px; }
+html.pwa .tabbar { position:fixed !important; bottom:var(--vvp-offset,0px); left:0; right:0; width:100%; padding:6px 12px var(--safe-bottom); }
+
 /* ── Mobile fullscreen ──────────────────────────────────────
    手机直接打开时：填满屏幕，tabbar 固定底部
    PWA standalone 同样走这套规则——避免首帧 viewport 探测延迟
@@ -2383,7 +2396,6 @@ document.addEventListener('DOMContentLoaded', () => {
   fixSchoolsHeight();
   fixSandboxHeight();
   setupSheetDrag();
-  // 学术定位起始屏：首次进入即根据是否已有结果决定是否显示"再次查看"
   window.QuizModule?.init?.();
 });
 </script>
