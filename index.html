@@ -107,10 +107,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
   font-size:15px;font-weight:600;color:var(--text-primary);letter-spacing:.2px;transition:var(--transition);}
 .tabbar{position:absolute;left:0;right:0;bottom:0;height:var(--tabbar-h);padding:6px 12px;
   background:var(--tabbar-bg);border-top:1px solid var(--tabbar-border);
-  display:grid;grid-template-columns:repeat(5,1fr);z-index:6;transition:var(--transition);
-  /* iOS PWA：进合成层 + 用 translateZ 锁底，防止首帧 safe-area 未就绪时悬空 */
-  transform:translate3d(0,0,0);-webkit-transform:translate3d(0,0,0);
-  will-change:transform;backface-visibility:hidden;}
+  display:grid;grid-template-columns:repeat(5,1fr);z-index:6;transition:var(--transition);}
 .tab{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:3px;padding-top:4px;color:var(--tab-inactive);cursor:pointer;transition:color .25s ease;}
 .tab .ic{width:22px;height:22px;display:flex;align-items:center;justify-content:center;}
@@ -448,16 +445,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
     bottom:0; left:0; right:0; width:100%;
     padding:6px 12px env(safe-area-inset-bottom, 6px);
   }
-  /* 兜底：若首帧 dvh / safe-area 尚未就绪，tabbar 与屏底之间出现缝隙时，
-     用同色伪元素延伸到屏外，遮住可能的"悬空"视觉。 */
-  .tabbar::after {
-    content:'';
-    position:absolute;
-    left:0; right:0;
-    top:100%; height:80px;
-    background:var(--tabbar-bg);
-    pointer-events:none;
-  }
+
   /* 各页可滚动区：扣除顶部安全区 */
   #page-home .screen-content { height:calc(100dvh - var(--tabbar-h) - env(safe-area-inset-top, 0px)); }
   #page-locate .quiz-body    { height:calc(100dvh - var(--tabbar-h) - 47px - env(safe-area-inset-top, 0px)); }
@@ -2351,31 +2339,15 @@ function setupSheetDrag() {
   });
 }
 
-/* ── iOS PWA：解决首帧 safe-area 未就绪导致 tabbar 悬空 ── */
-function pinTabbarToBottom() {
-  // 强制读 layout 触发 reflow，让 env(safe-area-inset-*) 完成解析
-  void document.body.offsetHeight;
-  window.scrollTo(0, 0);
-  // 再来一帧，覆盖部分 iOS PWA 冷启动后 dvh 二次校正的情况
-  requestAnimationFrame(() => {
-    void document.body.offsetHeight;
-    window.scrollTo(0, 0);
-  });
-}
-
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded', () => {
   applyTheme(currentTheme);
   fixSchoolsHeight();
   fixSandboxHeight();
   setupSheetDrag();
-  pinTabbarToBottom();
   // 学术定位起始屏：首次进入即根据是否已有结果决定是否显示"再次查看"
   window.QuizModule?.init?.();
 });
-// PWA 从后台恢复 / iOS Home 切回时也校正一次
-window.addEventListener('pageshow', pinTabbarToBottom);
-window.addEventListener('orientationchange', () => setTimeout(pinTabbarToBottom, 50));
 </script>
 <!-- 学校详情底部抽屉 -->
 <div class="sheet-overlay" id="school-sheet-overlay" onclick="ExplorerModule.closeDetail()"></div>
