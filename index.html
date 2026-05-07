@@ -691,9 +691,140 @@ html.pwa .tabbar { position:fixed !important; bottom:var(--vvp-offset,0px); left
 .sheet-add-btn:active{opacity:.8;}
 .sheet-add-btn.added{background:var(--tag-wen-bg);color:var(--tag-wen-color);}
 
+/* ═══════════════════════════════════
+   SPLASH — 开屏动效
+   Fork 绘制 → 点击圆点 → mark 缩小归位到左上角 brand → 首页从下方滑入
+═══════════════════════════════════ */
+#splash {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+#splash.is-done { display: none; }
+
+/* Background layer — fades independently from the mark */
+#splash-bg {
+  position: absolute; inset: 0;
+  background: var(--screen-bg);
+  transition: opacity 1s ease;
+}
+#splash.is-fading #splash-bg { opacity: 0; }
+
+/* Splash mark — 220px native for crisp rendering, shrinks to 22px at nav */
+#splash-mark {
+  width: 220px; height: 220px;
+  color: var(--brand-color);
+  transform: scale(1);
+  transform-origin: center center;
+  will-change: transform;
+  backface-visibility: hidden;
+  transition: transform 0.85s cubic-bezier(.65,0,.2,1) 0s,
+              color 0.35s ease;
+}
+
+/* Drawing keyframes (0 → 1.6s) */
+@keyframes sp-draw      { from { stroke-dashoffset: 72; } to { stroke-dashoffset: 0; } }
+@keyframes sp-fade-in   { from { opacity: 0; } to { opacity: 0.28; } }
+@keyframes sp-dot-pop   { 0% { transform: scale(0); opacity: 0; } 60% { transform: scale(1.3); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+@keyframes sp-origin-in { from { opacity: 0; } to { opacity: 0.4; } }
+
+#splash-mark .sp-rejected { opacity: 0; animation: sp-fade-in 0.5s 0.2s ease forwards; }
+#splash-mark .sp-chosen   { stroke-dasharray: 72; stroke-dashoffset: 72; animation: sp-draw 1.0s 0.4s cubic-bezier(.5,.05,.2,1) forwards; }
+#splash-mark .sp-dot      { transform-origin: 52px 16px; opacity: 0; animation: sp-dot-pop 0.45s 1.2s cubic-bezier(.5,1.7,.5,1) forwards,
+                                                         sp-dot-glow 1.8s 1.6s ease-in-out infinite; }
+@keyframes sp-dot-glow  { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.18); opacity: 0.85; } }
+#splash-mark .sp-origin   { opacity: 0; animation: sp-origin-in 0.4s 0s ease forwards; }
+
+/* Tagline */
+#splash-mark, #splash-tagline { position: relative; z-index: 1; }
+#splash-tagline {
+  margin-top: 130px;
+  font-family: 'Noto Sans SC','Inter',sans-serif;
+  font-size: 40px; font-weight: 800;
+  color: var(--text-primary); letter-spacing: -0.3px;
+  animation: sp-tagline-in 0.5s 1.3s both;
+  transition: opacity 1s ease;
+}
+@keyframes sp-tagline-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+#splash.is-fading #splash-tagline { animation: none; opacity: 0; }
+
+/* Enter dot — appears after drawing, user clicks to proceed */
+/* After drawing (1.6s): accent dot on the fork mark glows to invite tap */
+#splash-mark.ready { cursor: pointer; }
+#splash-mark.ready:active { transform: scale(0.95); }
+
+/* Hide page content while splash is up (tabbar covered by splash z-index) */
+body.splash-active #page-home .screen-content {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+/* Hide real brand mark while splash is overlaying — morph reads cleanly */
+body.splash-active .brand-mark,
+body.splash-active .brand-text { opacity: 0; }
+body.splash-revealed .brand-mark,
+body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
+
 </style>
 </head>
 <body>
+
+<!-- SPLASH: 开屏动效 — Fork 绘制 → 点击圆点 → 缩小归位 → 首页滑入 -->
+<div id="splash">
+  <div id="splash-bg"></div>
+  <svg id="splash-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+    <path class="sp-rejected" d="M32 56 L32 36 Q32 28 22 22 L12 16" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <path class="sp-chosen" d="M32 56 L32 36 Q32 28 42 22 L52 16" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <circle class="sp-dot" cx="52" cy="16" r="5.5" fill="#FF6B6B"/>
+    <circle class="sp-origin" cx="32" cy="56" r="2.5" fill="currentColor"/>
+  </svg>
+  <div id="splash-tagline">两条路，<br/>选定<span style="color:#FF6B6B">那一条</span>。</div>
+</div>
+<script>
+(function() {
+  // TODO: 正式上线后改为 sessionStorage 控制，仅首次访问显示
+  document.body.classList.add('splash-active');
+  var splash = document.getElementById('splash');
+  var splashMark = document.getElementById('splash-mark');
+  var done = false;
+
+  function exit() {
+    if (done) return; done = true;
+    var target = document.querySelector('#page-home .brand-mark');
+    if (!target) { dismiss(); return; }
+    var tr = target.getBoundingClientRect();
+    var mr = splashMark.getBoundingClientRect();
+    var cx = mr.left + mr.width / 2;
+    var cy = mr.top + mr.height / 2;
+    var tx = tr.left + tr.width / 2;
+    var ty = tr.top + tr.height / 2;
+    splashMark.style.transform = 'translate(' + (tx - cx) + 'px, ' + (ty - cy) + 'px) scale(0.1)';
+    splash.classList.add('is-shrinking');
+    // 背景渐隐 + 首页同步淡入（交叉淡入）
+    setTimeout(function() {
+      splash.classList.add('is-fading');
+      document.body.classList.remove('splash-active');
+      document.body.classList.add('splash-revealed');
+    }, 400);
+    setTimeout(function() { splash.classList.add('is-done'); }, 1600);
+  }
+
+  function dismiss() {
+    if (done) return; done = true;
+    document.body.classList.remove('splash-active');
+    document.body.classList.add('splash-revealed');
+    splash.classList.add('is-fading');
+    setTimeout(function() { splash.classList.add('is-done'); }, 600);
+  }
+
+  // 绘制完成后（1.6s），圆点开始呼吸发光，诱导用户点击
+  setTimeout(function() { splashMark.classList.add('ready'); }, 1600);
+  splashMark.addEventListener('click', exit);
+  // 6 秒后用户仍未点击则自动消失
+  setTimeout(function() { if (!done) exit(); }, 6000);
+})();
+</script>
 
 <button class="mode-toggle" id="toggleBtn" onclick="toggleMode()">
   <span id="toggleIcon">☀️</span><span id="toggleLabel">浅色模式</span>
@@ -709,7 +840,7 @@ html.pwa .tabbar { position:fixed !important; bottom:var(--vvp-offset,0px); left
       <svg class="brand-mark" width="22" height="22" viewBox="0 0 64 64" fill="none" aria-hidden="true">
         <path d="M32 56 L32 36 Q32 28 22 22 L12 16" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.28"/>
         <path d="M32 56 L32 36 Q32 28 42 22 L52 16" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
-        <circle cx="52" cy="16" r="5.5" fill="var(--accent)"/>
+        <circle cx="52" cy="16" r="5.5" fill="#FF6B6B"/>
         <circle cx="32" cy="56" r="2.5" fill="currentColor" opacity="0.4"/>
       </svg>
       <span class="brand-text"><span class="brand-decide">Decide</span><span class="brand-on">On</span></span>
@@ -2432,7 +2563,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sync();
     vv.addEventListener('resize', sync);
-    vv.addEventListener('scroll', sync);
+    // 不监听 scroll — 页内滚动会触发 visualViewport.scroll，导致 tabbar 误位移
   })();
 </script>
 </body>
