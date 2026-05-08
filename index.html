@@ -39,7 +39,7 @@
   --screen-bg: linear-gradient(180deg,#0F0C29 0%,#302B63 55%,#24243e 100%);
   --page-bg: #07060f; --text-primary: #fff;
   --text-secondary: rgba(255,255,255,.60); --text-tertiary: rgba(255,255,255,.42);
-  --accent: #FF6B6B; --accent-bg: rgba(255,107,107,.12); --accent-border: rgba(255,107,107,.35);
+  --accent: #FF8C69; --accent-light: #FFAB8C; --accent-bg: rgba(255,140,105,.12); --accent-border: rgba(255,140,105,.35);
   --brand-color: #fff; --pill-color: rgba(255,255,255,.78);
   --pill-border: rgba(255,255,255,.22); --pill-bg: rgba(255,255,255,.04); --pill-dot: #56C8D2;
   --sidebar-bg: rgba(255,255,255,.025); --sidebar-border: rgba(255,255,255,.06);
@@ -59,7 +59,7 @@
   --tag-wen-bg: rgba(86,200,210,.14); --tag-wen-color: #56C8D2;
   --tag-bao-bg: rgba(107,123,255,.14); --tag-bao-color: #8A98FF;
   --tabbar-bg: rgba(15,12,41,.95); --tabbar-border: rgba(255,255,255,.10);
-  --tab-inactive: rgba(255,255,255,.40); --tab-active: #FF6B6B;
+  --tab-inactive: rgba(255,255,255,.40); --tab-active: #FF8C69;
   --home-indicator: rgba(255,255,255,.50); --noise-opacity: 0.18;
   --eyebrow-font: 'JetBrains Mono',monospace; --eyebrow-size: 10.5px;
   --eyebrow-spacing: 2.4px; --eyebrow-transform: uppercase;
@@ -70,9 +70,9 @@
 [data-theme="light"] {
   --screen-bg: #FAF8F5; --page-bg: #ECE8E0; --text-primary: #1A1A1A;
   --text-secondary: #8A8A8A; --text-tertiary: #BBBBBB;
-  --accent: #FF8C69; --accent-bg: #FFF0E8; --accent-border: rgba(255,140,105,.35);
+  --accent: #FF6B6B; --accent-light: #FF8C69; --accent-bg: rgba(255,107,107,.08); --accent-border: rgba(255,107,107,.18);
   --brand-color: #1A1A1A; --pill-color: #6A6A6A; --pill-border: #E5E2DA;
-  --pill-bg: rgba(255,255,255,.60); --pill-dot: #FF8C69;
+  --pill-bg: rgba(255,255,255,.60); --pill-dot: #FF6B6B;
   --sidebar-bg: #F3F0EA; --sidebar-border: #E5E2DA;
   --card-bg: #fff; --card-border: transparent;
   --card-shadow: 0 4px 20px rgba(0,0,0,.08); --card-hover-bg: #fff;
@@ -87,7 +87,7 @@
   --tag-wen-bg: #E6F7F2; --tag-wen-color: #2EA383;
   --tag-bao-bg: #EAEEFF; --tag-bao-color: #5C70E0;
   --tabbar-bg: #fff; --tabbar-border: #EEEEEE;
-  --tab-inactive: #BBBBBB; --tab-active: #FF8C69; --home-indicator: #1A1A1A;
+  --tab-inactive: #BBBBBB; --tab-active: #FF6B6B; --home-indicator: #1A1A1A;
   --noise-opacity: 0; --eyebrow-font: 'JetBrains Mono',monospace;
   --eyebrow-size: 10.5px; --eyebrow-spacing: 2.4px; --eyebrow-transform: uppercase;
   --h1-weight: 800; --h1-size: 28px; --h1-color: #1A1A1A;
@@ -157,7 +157,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .card{position:relative;border-radius:var(--card-radius);padding:var(--card-padding);background:var(--card-bg);border:1px solid var(--card-border);box-shadow:var(--card-shadow);overflow:hidden;cursor:pointer;transition:transform .25s ease,background .35s ease,border-color .35s ease,box-shadow .35s ease;}
 .card:active{transform:scale(.985);} .card:hover{background:var(--card-hover-bg);border-color:var(--card-hover-border);}
 .card .topbar{position:absolute;top:-1px;left:-1px;right:-1px;height:3px;}
-.card.c1{border-top:none;}.card.c1 .topbar{background:linear-gradient(90deg,#FF6B6B,#FF8C69);}
+.card.c1{border-top:none;}.card.c1 .topbar{background:linear-gradient(90deg,var(--accent),var(--accent-light));}
 .card.c2{border-top:none;}.card.c2 .topbar{background:linear-gradient(90deg,#52C4A0,#70E8C5);}
 .card.c3{border-top:none;}.card.c3 .topbar{background:linear-gradient(90deg,#6B7BFF,#70B8FF);}
 .card.c4{border-top:none;}.card.c4 .topbar{background:linear-gradient(90deg,#9B5BFF,#D86BFF);}
@@ -245,16 +245,27 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 
 /* Filter drawer */
 .filter-drawer{position:relative;z-index:5;margin:8px 20px 0;background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;overflow:hidden;max-height:0;opacity:0;pointer-events:none;transition:max-height .3s ease,opacity .25s ease;}
-.filter-drawer.open{max-height:320px;opacity:1;pointer-events:auto;}
+.filter-drawer.open{max-height:520px;opacity:1;pointer-events:auto;}
 .filter-drawer-inner{padding:14px 16px 12px;}
 .filter-section{margin-bottom:12px;} .filter-section:last-child{margin-bottom:0;}
 .filter-section-label{font-family:var(--eyebrow-font);font-size:9.5px;letter-spacing:2px;color:var(--text-tertiary);text-transform:uppercase;margin-bottom:8px;}
 .filter-chips{display:flex;flex-wrap:wrap;gap:6px;}
 .filter-chip{display:inline-flex;align-items:center;padding:5px 11px;font-family:'Noto Sans SC',sans-serif;font-size:11.5px;font-weight:500;color:var(--pill-color);border:1px solid var(--pill-border);border-radius:999px;background:var(--pill-bg);cursor:pointer;transition:all .2s;white-space:nowrap;}
 .filter-chip.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.filter-reset-wrap{margin-top:2px;text-align:center;}
+.filter-reset-btn{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:var(--text-tertiary);background:none;border:1px solid var(--pill-border);border-radius:999px;padding:5px 16px;cursor:pointer;transition:all .2s;}
+.filter-reset-btn:hover{color:var(--accent);border-color:var(--accent);}
 .schools-count{position:relative;z-index:5;padding:4px 20px 0;font-family:'Noto Sans SC',sans-serif;font-size:11px;color:var(--text-tertiary);}
 .schools-loading,.schools-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;gap:12px;}
 .schools-empty-text{font-family:'Noto Sans SC',sans-serif;font-size:14px;color:var(--text-secondary);}
+/* Skeleton placeholders — pulse while data loads */
+.skel{width:100%;max-width:320px;height:72px;border-radius:16px;background:var(--card-bg);animation:skel-pulse 1.4s ease-in-out infinite;}
+.skel-short{max-width:200px;height:56px;}
+.skel:nth-child(2){animation-delay:.15s;}
+.skel:nth-child(3){animation-delay:.3s;}
+.skel:nth-child(4){animation-delay:.45s;}
+.skel:nth-child(5){animation-delay:.6s;}
+@keyframes skel-pulse{0%,100%{opacity:.35;}50%{opacity:.7;}}
 
 /* ── Quiz ── */
 #page-locate .screen{overflow:hidden;}
@@ -265,7 +276,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .quiz-dim-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;}
 .quiz-count{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-tertiary);}
 .progress-track{width:100%;height:3px;background:var(--card-border);border-radius:999px;overflow:hidden;}
-.progress-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),#FF8C69);transition:width .4s ease;}
+.progress-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-light));transition:width .4s ease;}
 .quiz-question-wrap{padding:20px 24px 8px;}
 .quiz-q-num{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--text-tertiary);margin-bottom:10px;text-transform:uppercase;}
 .quiz-q-text{font-family:'Noto Sans SC',sans-serif;font-size:20px;font-weight:700;line-height:1.35;letter-spacing:-.3px;color:var(--text-primary);}
@@ -334,7 +345,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .calc-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:40px 32px;text-align:center;}
 .calc-title{font-family:'Noto Sans SC',sans-serif;font-size:18px;font-weight:600;color:var(--text-primary);margin-bottom:32px;}
 .calc-bar-wrap{width:100%;height:6px;background:var(--card-border);border-radius:999px;overflow:hidden;margin-bottom:28px;}
-.calc-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),#FF8C69);width:0%;transition:width .3s ease;}
+.calc-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-light));width:0%;transition:width .3s ease;}
 .calc-steps{width:100%;text-align:left;display:flex;flex-direction:column;gap:12px;}
 .calc-step{display:flex;align-items:center;gap:12px;font-family:'Noto Sans SC',sans-serif;font-size:13px;color:var(--text-tertiary);transition:color .3s ease;}
 .calc-step.done{color:var(--text-primary);}
@@ -347,7 +358,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .result-header{padding:14px 24px 0;display:flex;align-items:center;justify-content:space-between;}
 .result-header-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;}
 .result-archetype-card{margin:14px 20px 0;border-radius:20px;background:var(--card-bg);border:1px solid var(--card-border);box-shadow:var(--card-shadow);padding:20px;position:relative;overflow:hidden;}
-.result-archetype-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#FF8C69,#6B7BFF);}
+.result-archetype-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light),#6B7BFF);}
 .result-archetype-emoji{font-size:32px;margin-bottom:10px;}
 .result-archetype-name{font-family:'Noto Sans SC',sans-serif;font-size:24px;font-weight:800;color:var(--text-primary);letter-spacing:-.4px;margin-bottom:3px;}
 .result-archetype-en{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:1px;margin-bottom:12px;}
@@ -355,7 +366,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .result-confidence{margin-top:14px;padding-top:14px;border-top:1px solid var(--card-border);display:flex;align-items:center;gap:8px;}
 .result-conf-label{font-family:'Noto Sans SC',sans-serif;font-size:11px;color:var(--text-tertiary);}
 .result-conf-bar{flex:1;height:4px;background:var(--card-border);border-radius:999px;overflow:hidden;}
-.result-conf-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),#FF8C69);transition:width 1s ease;}
+.result-conf-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-light));transition:width 1s ease;}
 .result-conf-val{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:var(--accent);}
 .result-radar-wrap{margin:14px 20px 0;border-radius:18px;background:var(--card-bg);border:1px solid var(--card-border);padding:16px;}
 .result-section-title{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:.5px;margin-bottom:12px;text-transform:uppercase;}
@@ -364,7 +375,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .dim-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;} .dim-row:last-child{margin-bottom:0;}
 .dim-name{font-family:'Noto Sans SC',sans-serif;font-size:12px;color:var(--text-secondary);width:52px;flex-shrink:0;}
 .dim-bar-track{flex:1;height:5px;background:var(--card-border);border-radius:999px;overflow:hidden;}
-.dim-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),#FF8C69);transition:width 1s ease;}
+.dim-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-light));transition:width 1s ease;}
 .dim-val{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:var(--text-primary);width:28px;text-align:right;}
 .result-tips{margin:14px 20px 0;border-radius:18px;background:var(--card-bg);border:1px solid var(--card-border);padding:16px;}
 .result-tip{display:flex;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--card-border);}
@@ -596,7 +607,7 @@ html.pwa .tabbar { position:fixed !important; bottom:var(--vvp-offset,0px); left
 .rec-card-meta{font-family:'Noto Sans SC',sans-serif;font-size:11.5px;color:var(--text-secondary);margin-top:4px;}
 .rec-score-row{display:flex;align-items:center;gap:10px;margin-top:10px;}
 .rec-score-bar-wrap{flex:1;height:5px;background:var(--card-border);border-radius:999px;overflow:hidden;}
-.rec-score-bar{height:100%;background:linear-gradient(90deg,var(--accent),#FF8C69);border-radius:999px;transition:width .8s ease;}
+.rec-score-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-light));border-radius:999px;transition:width .8s ease;}
 .rec-score-num{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--text-primary);min-width:28px;text-align:right;}
 .rec-card-toggle{margin-top:10px;padding-top:10px;border-top:1px solid var(--divider);font-family:'Noto Sans SC',sans-serif;font-size:11.5px;color:var(--text-tertiary);text-align:center;}
 .rec-toggle-icon{margin-left:4px;display:inline-block;transition:transform .25s;}
@@ -737,6 +748,9 @@ html.pwa .tabbar { position:fixed !important; bottom:var(--vvp-offset,0px); left
                                                          sp-dot-glow 1.8s 1.6s ease-in-out infinite; }
 @keyframes sp-dot-glow  { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.18); opacity: 0.85; } }
 #splash-mark .sp-origin   { opacity: 0; animation: sp-origin-in 0.4s 0s ease forwards; }
+#splash-mark .sp-dot      { fill: var(--accent); }
+.brand-mark .sp-dot       { fill: var(--accent); }
+.dnav-brand .sp-dot       { fill: var(--accent); }
 
 /* Tagline */
 #splash-mark, #splash-tagline { position: relative; z-index: 1; }
@@ -748,6 +762,7 @@ html.pwa .tabbar { position:fixed !important; bottom:var(--vvp-offset,0px); left
   animation: sp-tagline-in 1.5s 2.0s both;
 }
 @keyframes sp-tagline-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.splash-accent { color: var(--accent); transition: color 0.35s ease; }
 @keyframes sp-tagline-out { from { opacity: 1; } to { opacity: 0; } }
 /* Tagline fades out first — before background, so user focus stays on the icon */
 #splash.is-exiting #splash-tagline {
@@ -938,7 +953,7 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
     <svg width="30" height="30" viewBox="0 0 64 64" fill="none">
       <path d="M32 56 L32 36 Q32 28 22 22 L12 16" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.28"/>
       <path d="M32 56 L32 36 Q32 28 42 22 L52 16" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
-      <circle cx="52" cy="16" r="5.5" fill="#FF6B6B"/>
+      <circle class="sp-dot" cx="52" cy="16" r="5.5"/>
     </svg>
     <span>DecideOn</span>
   </div>
@@ -972,10 +987,10 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
   <svg id="splash-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
     <path class="sp-rejected" d="M32 56 L32 36 Q32 28 22 22 L12 16" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
     <path class="sp-chosen" d="M32 56 L32 36 Q32 28 42 22 L52 16" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
-    <circle class="sp-dot" cx="52" cy="16" r="5.5" fill="#FF6B6B"/>
+    <circle class="sp-dot" cx="52" cy="16" r="5.5"/>
     <circle class="sp-origin" cx="32" cy="56" r="2.5" fill="currentColor"/>
   </svg>
-  <div id="splash-tagline">两条路，<br/>选定<span style="color:#FF6B6B">那一条</span>。</div>
+  <div id="splash-tagline">两条路，<br/>选定<span class="splash-accent">那一条</span>。</div>
 </div>
 <script>
 (function() {
@@ -1044,7 +1059,7 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
       <svg class="brand-mark" width="22" height="22" viewBox="0 0 64 64" fill="none" aria-hidden="true">
         <path d="M32 56 L32 36 Q32 28 22 22 L12 16" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.28"/>
         <path d="M32 56 L32 36 Q32 28 42 22 L52 16" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
-        <circle cx="52" cy="16" r="5.5" fill="#FF6B6B"/>
+        <circle class="sp-dot" cx="52" cy="16" r="5.5"/>
         <circle cx="32" cy="56" r="2.5" fill="currentColor" opacity="0.4"/>
       </svg>
       <span class="brand-text"><span class="brand-decide">Decide</span><span class="brand-on">On</span></span>
@@ -1153,12 +1168,25 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
       <div class="filter-section">
         <div class="filter-section-label">专业方向</div>
         <div class="filter-chips" id="filter-major">
-          <div class="filter-chip" data-val="cs_eng">计算机/工程</div>
-          <div class="filter-chip" data-val="business">商科/经济</div>
+          <div class="filter-chip" data-val="cs">计算机</div>
+          <div class="filter-chip" data-val="engineering">工程</div>
+          <div class="filter-chip" data-val="business">商科</div>
+          <div class="filter-chip" data-val="economics">经济</div>
           <div class="filter-chip" data-val="science">理科</div>
-          <div class="filter-chip" data-val="humanities">人文社科</div>
+          <div class="filter-chip" data-val="humanities">人文</div>
+          <div class="filter-chip" data-val="social_science">社科</div>
           <div class="filter-chip" data-val="arts_media">艺术/传媒</div>
-          <div class="filter-chip" data-val="health">医健</div>
+          <div class="filter-chip" data-val="health">医学/健康</div>
+          <div class="filter-chip" data-val="education">教育</div>
+          <div class="filter-chip" data-val="agriculture">农业/环境</div>
+        </div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-label">院校类型</div>
+        <div class="filter-chips" id="filter-type">
+          <div class="filter-chip" data-val="public">公立</div>
+          <div class="filter-chip" data-val="private">私立</div>
+          <div class="filter-chip" data-val="lac">文理学院</div>
         </div>
       </div>
       <div class="filter-section">
@@ -1168,6 +1196,9 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
           <div class="filter-chip" data-val="suburban">郊区</div>
           <div class="filter-chip" data-val="rural">小镇</div>
         </div>
+      </div>
+      <div class="filter-reset-wrap">
+        <button class="filter-reset-btn" onclick="ExplorerModule.resetFilters()">重置筛选</button>
       </div>
     </div>
   </div>
@@ -1388,7 +1419,7 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
     </div>
     <div class="sandbox-breakdown">
       <div class="sandbox-section-label" style="margin-bottom:14px">费用构成（/年）</div>
-      <div class="sandbox-breakdown-row"><div class="sandbox-breakdown-dot" style="background:#FF8C69"></div><div class="sandbox-breakdown-name">学费</div><div class="sandbox-breakdown-bar-track"><div class="sandbox-breakdown-bar-fill" id="bb-tuition" style="background:#FF8C69;width:0%"></div></div><div class="sandbox-breakdown-val" id="bv-tuition">—</div></div>
+      <div class="sandbox-breakdown-row"><div class="sandbox-breakdown-dot" style="background:var(--accent)"></div><div class="sandbox-breakdown-name">学费</div><div class="sandbox-breakdown-bar-track"><div class="sandbox-breakdown-bar-fill" id="bb-tuition" style="background:var(--accent);width:0%"></div></div><div class="sandbox-breakdown-val" id="bv-tuition">—</div></div>
       <div class="sandbox-breakdown-row"><div class="sandbox-breakdown-dot" style="background:#6B7BFF"></div><div class="sandbox-breakdown-name">生活费</div><div class="sandbox-breakdown-bar-track"><div class="sandbox-breakdown-bar-fill" id="bb-living" style="background:#6B7BFF;width:0%"></div></div><div class="sandbox-breakdown-val" id="bv-living">—</div></div>
       <div class="sandbox-breakdown-row"><div class="sandbox-breakdown-dot" style="background:#2DD4A0"></div><div class="sandbox-breakdown-name">其他</div><div class="sandbox-breakdown-bar-track"><div class="sandbox-breakdown-bar-fill" id="bb-other" style="background:#2DD4A0;width:0%"></div></div><div class="sandbox-breakdown-val" id="bv-other">—</div></div>
       <div class="sandbox-breakdown-row"><div class="sandbox-breakdown-dot" style="background:#56C8D2"></div><div class="sandbox-breakdown-name">奖学金减免</div><div class="sandbox-breakdown-bar-track"><div class="sandbox-breakdown-bar-fill" id="bb-scholarship" style="background:#56C8D2;width:0%"></div></div><div class="sandbox-breakdown-val" id="bv-scholarship" style="color:#2DD4A0">-$0</div></div>
@@ -1531,19 +1562,65 @@ window.SandboxModule  = { onShow(){}, update(){}, reset(){}, exportReport(){} };
 window.ExplorerModule = (function() {
   const COMPARE_KEY = 'gs_explorer_compare_v1';
   const MAJOR_KEYWORDS = {
-    cs_eng:     ['Computer Science','Engineering','Data Science','Computing','Software','IT','Informatics','Electrical','Mechanical','Civil','Chemical'],
-    business:   ['Business','Finance','Economics','Accounting','Management','Commerce','Marketing','MBA'],
-    science:    ['Biology','Chemistry','Physics','Mathematics','Statistics','Science','Biochemistry','Math'],
-    humanities: ['Philosophy','History','Political Science','International','Government','Law','Social','Sociology','Psychology','Linguistics'],
-    arts_media: ['Arts','Film','Design','Music','Media','Communications','Journalism','Architecture','Theater'],
-    health:     ['Medicine','Health','Nursing','Pharmacy','Biomedical','Pre-Med','Public Health'],
+    cs: [
+      'Computer Science','Computing','Software Engineering','Data Science',
+      'Informatics','Information Systems','Information Technology','Game Design',
+    ],
+    engineering: [
+      'Engineering',
+    ],
+    business: [
+      'Business','Finance','Accounting','Management','Marketing','Commerce',
+      'MBA','Hospitality','Hotel','Supply Chain',
+    ],
+    economics: [
+      'Economics',
+    ],
+    science: [
+      'Biology','Chemistry','Physics','Mathematics','Statistics','Biochemistry',
+      'Neuroscience','Marine Biology','Environmental Science','Life Sciences',
+      'Natural Sciences','Cognitive Science','Oceanography',
+    ],
+    humanities: [
+      'History','Philosophy','Classics','English','Languages','Linguistics',
+      'Literature','Liberal',
+    ],
+    social_science: [
+      'Political Science','International Relations','International Affairs',
+      'International Studies','Sociology','Psychology','Government',
+      'Public Policy','Law','Criminology','Social Work','Geography',
+      'Social Sciences','Public Affairs','Industrial & Labor Relations',
+    ],
+    arts_media: [
+      'Arts','Film','Design','Music','Media','Communications','Journalism',
+      'Architecture','Architectural','Visual Arts','Studio Art','Theater','Art Design',
+    ],
+    health: [
+      'Medicine','Medical','Nursing','Pharmacy','Public Health','Biomedical',
+      'Health','Pre-Med','Chinese Medicine',
+    ],
+    education: [
+      'Education',
+    ],
+    agriculture: [
+      'Agriculture','Environmental Studies','Sustainability','Wine','Viticulture',
+      'Agriculture Science',
+    ],
   };
+
+  // 文理学院 (Liberal Arts Colleges) — 按名称人工识别
+  const LAC_IDS = new Set([
+    'fm','vassar','williams','amherst','swarthmore','pomona','wellesley',
+    'bowdoin','middlebury','colby','hamilton','harvey-mudd','cmc','smith',
+    'bryn-mawr','davidson','macalester','grinnell','oberlin','lafayette',
+    'kenyon','trinity-ct','union-college','bates',
+  ]);
   const COUNTRY_FLAGS = { US:'🇺🇸', GB:'🇬🇧', HK:'🇭🇰', SG:'🇸🇬', CA:'🇨🇦', AU:'🇦🇺' };
   const EXCHANGE_RATES = { USD:1, GBP:1.27, HKD:0.128, SGD:0.74, CAD:0.73, AUD:0.65 };
   const CNY_RATE = 7.25;
 
   let _schools = [];
-  let _filters = { search:'', country:'', difficulties:[], major:'', settings:[] };
+  let _filters = { search:'', country:'', difficulties:[], major:'', settings:[], types:[] };
   let _sort = 'rank';
   let _compare = [];
   let _loaded = false;
@@ -1577,12 +1654,13 @@ window.ExplorerModule = (function() {
     return Math.round(total4 * CNY_RATE / 10000);
   }
 
-  function getMajorGroup(school) {
-    const majors = (school.popular_majors || []).join(' ');
+  function getMajorGroups(school) {
+    const majors = (school.popular_majors || []).join(' ').toLowerCase();
+    const groups = [];
     for (const [group, kws] of Object.entries(MAJOR_KEYWORDS)) {
-      if (kws.some(kw => majors.toLowerCase().includes(kw.toLowerCase()))) return group;
+      if (kws.some(kw => majors.includes(kw.toLowerCase()))) groups.push(group);
     }
-    return null;
+    return groups;
   }
 
   function getDifficultyTag(diff) {
@@ -1625,7 +1703,16 @@ window.ExplorerModule = (function() {
       }
       // Major
       if (_filters.major) {
-        if (getMajorGroup(s) !== _filters.major) return false;
+        if (!getMajorGroups(s).includes(_filters.major)) return false;
+      }
+      // School type (public / private / lac)
+      if (_filters.types.length > 0) {
+        const isLAC = LAC_IDS.has(s.id);
+        let typeMatch = false;
+        if (_filters.types.includes('public') && s.type === 'public') typeMatch = true;
+        if (_filters.types.includes('private') && s.type === 'private' && !isLAC) typeMatch = true;
+        if (_filters.types.includes('lac') && isLAC) typeMatch = true;
+        if (!typeMatch) return false;
       }
       // Campus setting
       if (_filters.settings.length > 0) {
@@ -1721,7 +1808,7 @@ window.ExplorerModule = (function() {
     });
     // Update filter pill badge
     const badge = document.getElementById('filter-count-badge');
-    const total = _filters.difficulties.length + (_filters.major ? 1 : 0) + _filters.settings.length;
+    const total = _filters.difficulties.length + (_filters.major ? 1 : 0) + _filters.settings.length + _filters.types.length;
     if (badge) badge.textContent = total > 0 ? `· ${total}` : '';
   }
 
@@ -1735,8 +1822,8 @@ window.ExplorerModule = (function() {
         render();
       });
     });
-    // Filter drawer chips (difficulty, major, setting)
-    ['filter-difficulty', 'filter-major', 'filter-setting'].forEach(groupId => {
+    // Filter drawer chips (difficulty, major, type, setting)
+    ['filter-difficulty', 'filter-major', 'filter-type', 'filter-setting'].forEach(groupId => {
       document.getElementById(groupId)?.querySelectorAll('.filter-chip').forEach(chip => {
         chip.addEventListener('click', () => {
           const val = chip.dataset.val;
@@ -1748,7 +1835,10 @@ window.ExplorerModule = (function() {
             else _filters.major = '';
           } else {
             chip.classList.toggle('active');
-            const arr = groupId === 'filter-difficulty' ? _filters.difficulties : _filters.settings;
+            let arr;
+            if (groupId === 'filter-difficulty') arr = _filters.difficulties;
+            else if (groupId === 'filter-type') arr = _filters.types;
+            else arr = _filters.settings;
             const idx = arr.indexOf(val);
             if (idx === -1) arr.push(val); else arr.splice(idx, 1);
           }
@@ -1776,18 +1866,31 @@ window.ExplorerModule = (function() {
       _schools = data.schools || [];
       _loaded = true;
       _compare = getCompare();
-      render();
+      // 加载期间用户可能已切走 — 仅当仍在探索页时才渲染
+      if (document.getElementById('page-explore')?.classList.contains('active')) {
+        render();
+      }
     } catch (e) {
       const list = document.getElementById('schools-list');
-      if (list) list.innerHTML = '<div class="schools-empty"><div class="schools-empty-icon">⚠️</div><div class="schools-empty-text">数据加载失败，请刷新重试</div></div>';
+      if (list && document.getElementById('page-explore')?.classList.contains('active')) {
+        list.innerHTML = '<div class="schools-empty"><div class="schools-empty-icon">⚠️</div><div class="schools-empty-text">数据加载失败，请刷新重试</div></div>';
+      }
     }
   }
 
   return {
     onShow() {
       _compare = getCompare();
-      if (!_loaded) { load(); bindFilterChips(); }
-      else render();
+      if (!_loaded) {
+        // 立即显示骨架屏，避免大片空白
+        const list = document.getElementById('schools-list');
+        if (list) list.innerHTML = '<div class="schools-loading"><div class="skel"></div><div class="skel"></div><div class="skel skel-short"></div><div class="skel"></div><div class="skel skel-short"></div></div>';
+        load();
+        bindFilterChips();
+      } else {
+        // 用 rAF 延迟渲染，确保不阻塞导航响应
+        requestAnimationFrame(() => render());
+      }
       fixSchoolsHeight();
     },
     onSearch(val) {
@@ -1928,6 +2031,21 @@ window.ExplorerModule = (function() {
       const btn = document.getElementById('sheet-add-btn');
       btn.textContent = inC ? '✓ 已加入财务对比' : '+ 加入财务对比';
       btn.className = 'sheet-add-btn' + (inC ? ' added' : '');
+    },
+    resetFilters() {
+      _filters = { search:'', country:'', difficulties:[], major:'', settings:[], types:[] };
+      // Reset country chips
+      document.querySelectorAll('#country-chips .chip').forEach(c => c.classList.remove('active'));
+      document.querySelector('#country-chips .chip[data-country=""]')?.classList.add('active');
+      // Reset filter drawer chips
+      document.querySelectorAll('#filter-drawer .filter-chip').forEach(c => c.classList.remove('active'));
+      // Reset search input
+      const searchInput = document.getElementById('explore-search');
+      if (searchInput) searchInput.value = '';
+      // Close filter drawer on mobile
+      document.getElementById('filter-drawer')?.classList.remove('open');
+      updateCompareBadges();
+      render();
     },
   };
 })();
@@ -2375,7 +2493,7 @@ window.QuizModule = (function() {
       type: 'radar',
       data: {
         labels: ['学习驱动','环境适应','风险承受','职业清晰','身份认同'],
-        datasets: [{ data: ['DRIVE','ENV','RISK','CAREER','IDENTITY'].map(d=>scores[d]||0), backgroundColor:'rgba(255,107,107,0.15)', borderColor:'#FF6B6B', borderWidth:2, pointBackgroundColor:'#FF6B6B', pointRadius:4 }]
+        datasets: [{ data: ['DRIVE','ENV','RISK','CAREER','IDENTITY'].map(d=>scores[d]||0), backgroundColor:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()+'26', borderColor:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(), borderWidth:2, pointBackgroundColor:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(), pointRadius:4 }]
       },
       options: {
         responsive:true, maintainAspectRatio:false,
