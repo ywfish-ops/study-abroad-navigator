@@ -745,16 +745,17 @@ html.pwa .tabbar { position:fixed !important; bottom:var(--vvp-offset,0px); left
   font-family: 'Noto Sans SC','Inter',sans-serif;
   font-size: 40px; font-weight: 800;
   color: var(--text-primary); letter-spacing: -0.3px;
-  animation: sp-tagline-in 0.5s 1.3s both;
-  transition: opacity 1s ease;
+  animation: sp-tagline-in 1.5s 2.0s both;
 }
 @keyframes sp-tagline-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-#splash.is-fading #splash-tagline { animation: none; opacity: 0; }
+@keyframes sp-tagline-out { from { opacity: 1; } to { opacity: 0; } }
+/* Tagline fades out first — before background, so user focus stays on the icon */
+#splash.is-exiting #splash-tagline {
+  animation: sp-tagline-out 0.8s ease forwards;
+}
 
-/* Enter dot — appears after drawing, user clicks to proceed */
-/* After drawing (1.6s): accent dot on the fork mark glows to invite tap */
-#splash-mark.ready { cursor: pointer; }
-#splash-mark.ready:active { transform: scale(0.95); }
+/* After drawing (1.6s): full screen tappable, dot glow invites */
+#splash.ready { cursor: pointer; }
 
 /* Hide page content while splash is up (tabbar covered by splash z-index) */
 body.splash-active #page-home .screen-content {
@@ -996,13 +997,15 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
     var ty = tr.top + tr.height / 2;
     splashMark.style.transform = 'translate(' + (tx - cx) + 'px, ' + (ty - cy) + 'px) scale(0.1)';
     splash.classList.add('is-shrinking');
-    // 背景渐隐 + 首页同步淡入（交叉淡入）
+    // 文字先淡出，把焦点留给 icon 缩小动画
+    splash.classList.add('is-exiting');
+    // 背景延迟淡出 + 首页同步淡入
     setTimeout(function() {
       splash.classList.add('is-fading');
       document.body.classList.remove('splash-active');
       document.body.classList.add('splash-revealed');
       document.body.setAttribute('data-page', 'home');
-    }, 400);
+    }, 600);
     setTimeout(function() { splash.classList.add('is-done'); }, 1600);
   }
 
@@ -1011,13 +1014,17 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
     document.body.classList.remove('splash-active');
     document.body.classList.add('splash-revealed');
     document.body.setAttribute('data-page', 'home');
+    splash.classList.add('is-exiting');
     splash.classList.add('is-fading');
     setTimeout(function() { splash.classList.add('is-done'); }, 600);
   }
 
-  // 绘制完成后（1.6s），圆点开始呼吸发光，诱导用户点击
-  setTimeout(function() { splashMark.classList.add('ready'); }, 1600);
-  splashMark.addEventListener('click', exit);
+  // 绘制完成后（1.6s），全屏可点击
+  setTimeout(function() { splash.classList.add('ready'); }, 1600);
+  splash.addEventListener('click', function(e) {
+    if (!splash.classList.contains('ready')) return;
+    exit();
+  });
   // 6 秒后用户仍未点击则自动消失
   setTimeout(function() { if (!done) exit(); }, 6000);
 })();
