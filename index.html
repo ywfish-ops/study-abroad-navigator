@@ -197,6 +197,13 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .guide-highlight{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px;margin:12px 0;}
 .guide-highlight-label{font-family:'Noto Sans SC',sans-serif;font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.5px;margin-bottom:4px;text-transform:uppercase;}
 .guide-highlight p{font-size:12.5px;margin:0;}
+.guide-pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
+.guide-pro,.guide-con{border-radius:10px;padding:12px 14px;font-size:12px;line-height:1.6;}
+.guide-pro{background:rgba(82,196,160,.08);border:1px solid rgba(82,196,160,.2);}
+.guide-con{background:rgba(232,91,91,.06);border:1px solid rgba(232,91,91,.15);}
+.guide-pro strong{color:#52C4A0;} .guide-con strong{color:#E85B5B;}
+.guide-pro ul,.guide-con ul{margin:4px 0 0;padding-left:16px;}
+.guide-pro li,.guide-con li{margin-bottom:2px;line-height:1.55;}
 
 /* ── Explore ── */
 .topnav{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:8px 20px 0;}
@@ -1152,7 +1159,7 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
       <div class="topbar"></div>
       <div class="card-row">
         <div class="card-left">
-          <div class="card-num">🇺🇸</div>
+          <div class="card-num">05</div>
           <div class="card-title">美国大学</div>
           <div class="card-eng">U.S. Universities<span class="sep">·</span>公立 · 私立 · LAC</div>
           <div class="card-desc">公立大学、私立大学、文理学院三大体系，录取机制、费用结构与申请策略全解析。</div>
@@ -1165,7 +1172,7 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
       <div class="topbar"></div>
       <div class="card-row">
         <div class="card-left">
-          <div class="card-num">🇬🇧</div>
+          <div class="card-num">06</div>
           <div class="card-title">英国大学</div>
           <div class="card-eng">UK Universities<span class="sep">·</span>罗素集团 · 红砖大学</div>
           <div class="card-desc">UCAS 统一申请、三年制本科、 conditional offer 机制，以及牛剑特殊的学院制与面试流程。</div>
@@ -1178,7 +1185,7 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
       <div class="topbar"></div>
       <div class="card-row">
         <div class="card-left">
-          <div class="card-num">🌏</div>
+          <div class="card-num">07</div>
           <div class="card-title">港新澳加</div>
           <div class="card-eng">HK · SG · AU · CA<span class="sep">·</span>多国联申热门</div>
           <div class="card-desc">香港、新加坡、澳洲、加拿大四地教育体系与申请要点，适合多国联申策略参考。</div>
@@ -1619,104 +1626,144 @@ function renderGuideContent(region) {
     title.textContent = '美国大学';
     body.innerHTML = `
 <div class="guide-section">
-  <h3>教育体系</h3>
-  <p>美国高等教育分三大类：<strong>公立大学</strong>（州政府资助，学费较低，规模大，如UC系统、密歇根大学）、<strong>私立大学</strong>（捐赠基金支撑，资源丰富，如哈佛、斯坦福、MIT）、<strong>文理学院 LAC</strong>（专注本科通识教育，师生比极低，如Williams、Amherst）。本科通常为四年制，前两年为通识课程，后两年确定专业。</p>
-  <div class="guide-tag-row"><span class="guide-tag">公立大学</span><span class="guide-tag">私立大学</span><span class="guide-tag">文理学院 LAC</span><span class="guide-tag">四年制</span></div>
+  <h3>教育体系概览</h3>
+  <p>美国高等教育是全球最具多样性的体系之一，拥有 4,000+ 所院校，分为三大类型。本科通常为<strong>四年制</strong>，采用学分制，前两年为通识教育（General Education），后两年确定主修（Major）。学生可以灵活转专业、双主修或辅修。学期制（Semester）为主流，每年秋季（8-9月）和春季（1月）两次入学。</p>
+  <div class="guide-tag-row"><span class="guide-tag">四年制</span><span class="guide-tag">学分制</span><span class="guide-tag">通识教育</span><span class="guide-tag">灵活转专业</span></div>
+</div>
+<hr class="guide-divider">
+<div class="guide-section">
+  <h3>公立大学 Public Universities</h3>
+  <p>由州政府资助运营，以服务本州居民为使命。规模通常较大（2-5万人），学科门类齐全，学费对本州生较低，国际生学费约为州内生的 2-3 倍。代表系统为加州大学（UC）、密歇根大学、弗吉尼亚大学等，其中 UC Berkeley 和 UCLA 常年位居全球公立大学排名前两位。</p>
+  <div class="guide-pros-cons">
+    <div class="guide-pro"><strong>优势</strong><ul><li>学费相对较低（国际生四年 ¥80-180万）</li><li>专业覆盖面广，科研资源丰富</li><li>校园多元，社交和社团活动多</li><li>大型校友网络，就业资源好</li></ul></div>
+    <div class="guide-con"><strong>不足</strong><ul><li>大班教学为主，个性化关注少</li><li>热门专业（CS、工程等）竞争激烈</li><li>选课可能紧张，需提前规划</li><li>州立旗舰校对国际生录取名额有限</li></ul></div>
+  </div>
+</div>
+<hr class="guide-divider">
+<div class="guide-section">
+  <h3>私立大学 Private Universities</h3>
+  <p>依靠捐赠基金（Endowment）和学费运营，不依赖政府拨款。规模中等（5,000-15,000人），资源高度集中，师生比较好。常春藤盟校（Ivy League）、Stanford、MIT、芝加哥大学等属于此类。录取竞争极为激烈，Top 20 综合录取率通常低于 8%。</p>
+  <div class="guide-pros-cons">
+    <div class="guide-pro"><strong>优势</strong><ul><li>师生比低，小班讨论课（Seminar）多</li><li>校友网络强，华尔街/硅谷招聘目标校</li><li>捐赠基金雄厚，实验室和设备一流</li><li>部分院校对国际生 Need-Blind</li></ul></div>
+    <div class="guide-con"><strong>不足</strong><ul><li>学费昂贵（四年 ¥200-350万）</li><li>录取竞争白热化，录取率极低</li><li>校园文化可能偏精英化</li><li>奖学金以 Need-Based 为主，Merit 较少</li></ul></div>
+  </div>
+</div>
+<hr class="guide-divider">
+<div class="guide-section">
+  <h3>文理学院 Liberal Arts Colleges (LAC)</h3>
+  <p>专注本科教育的小型院校（1,500-3,000人），以通识课程为核心，培养批判性思维和跨学科能力。不设大型研究生院，教授以教学为第一使命。Williams、Amherst、Swarthmore 等顶尖 LAC 的学术声誉不亚于藤校，毕业生进入顶尖研究生院比例极高。</p>
+  <div class="guide-pros-cons">
+    <div class="guide-pro"><strong>优势</strong><ul><li>师生比极低（1:7-1:10），教授亲自授课</li><li>课堂以讨论为主，写作和思辨能力训练强</li><li>社区紧密，四年同窗关系深厚</li><li>升入顶尖研究生院（法学/医学/PhD）比例极高</li></ul></div>
+    <div class="guide-con"><strong>不足</strong><ul><li>学费与私立大学相当（¥200-350万）</li><li>专业设置偏学术，应用类（工程、商科）较少</li><li>校园小，社交圈相对有限</li><li>国内知名度较低，回国就业需解释</li></ul></div>
+  </div>
 </div>
 <hr class="guide-divider">
 <div class="guide-section">
   <h3>申请系统</h3>
-  <p>主流平台为 Common App（覆盖 1,000+ 所院校）和 Coalition App。加州大学使用独立的 UC Application。申请通常需要：高中成绩单（GPA）、标化成绩（SAT/ACT，部分学校 Test-Optional）、推荐信（2-3封）、个人陈述及补充文书、课外活动列表。</p>
+  <p>主流平台为 <strong>Common App</strong>（覆盖 1,000+ 所院校）和 <strong>Coalition App</strong>。加州大学使用独立的 <strong>UC Application</strong>（11月30日截止）。申请材料通常包括：高中成绩单（GPA）、标化成绩（SAT/ACT，越来越多学校 Test-Optional）、2-3封推荐信、个人陈述（Personal Statement）及补充文书、课外活动列表。</p>
 </div>
 <hr class="guide-divider">
 <div class="guide-section">
   <h3>录取批次</h3>
-  <p><strong>ED</strong>（Early Decision）：绑定式早申，录取必须入读，11月截止，12月出结果。<br/><strong>EA</strong>（Early Action）：非绑定早申，可多校同时申请，通常11月截止。<br/><strong>REA</strong>（Restrictive EA）：限制性早申，不能同时申请其他私立早申。<br/><strong>RD</strong>（Regular Decision）：常规轮，1月截止，3-4月出结果。</p>
-  <div class="guide-tag-row"><span class="guide-tag">ED 绑定</span><span class="guide-tag">EA 非绑定</span><span class="guide-tag">RD 常规</span></div>
+  <p><strong>ED</strong>（Early Decision）：绑定式早申，录取必须入读，通常 11月截止，12月出结果。ED 录取率通常为 RD 的 2-3 倍。<br/><strong>EA</strong>（Early Action）：非绑定早申，可多校同时申请，11月截止。<br/><strong>REA</strong>（Restrictive EA）：限制性早申（哈佛、斯坦福、普林斯顿等采用），不能同时申请其他私立早申。<br/><strong>RD</strong>（Regular Decision）：常规轮，1月截止，3-4月出结果。</p>
+  <div class="guide-tag-row"><span class="guide-tag">ED 绑定</span><span class="guide-tag">EA 非绑定</span><span class="guide-tag">REA 限制</span><span class="guide-tag">RD 常规</span></div>
 </div>
 <hr class="guide-divider">
 <div class="guide-section">
   <h3>费用参考</h3>
-  <p>公立大学四年学费约 ¥80-180 万；私立大学及 LAC 四年学费约 ¥200-350 万（均不含生活费）。部分顶尖私立大学实施 Need-Blind 录取（如哈佛、MIT、普林斯顿等），国际生可申请助学金。</p>
+  <p>公立大学四年学费约 ¥80-180 万；私立大学及 LAC 四年学费约 ¥200-350 万。生活费（住宿+餐饮+保险+杂费）另计，约 ¥10-20 万/年。部分顶尖私立大学实施 <strong>Need-Blind</strong> 录取（哈佛、MIT、普林斯顿、耶鲁、达特茅斯、Amherst 等），录取时不看经济状况，录取后按需提供助学金。</p>
 </div>
 <hr class="guide-divider">
 <div class="guide-section">
   <h3>代表院校</h3>
-  <div class="guide-highlight">
-    <div class="guide-highlight-label">公立旗舰</div>
-    <p>UC Berkeley、UCLA、密歇根大学安娜堡、弗吉尼亚大学、北卡教堂山</p>
-  </div>
-  <div class="guide-highlight">
-    <div class="guide-highlight-label">私立名校</div>
-    <p>哈佛大学、斯坦福大学、MIT、耶鲁大学、普林斯顿大学、哥伦比亚大学、芝加哥大学、宾夕法尼亚大学</p>
-  </div>
-  <div class="guide-highlight">
-    <div class="guide-highlight-label">顶尖 LAC</div>
-    <p>Williams College、Amherst College、Swarthmore College、Pomona College、Wellesley College</p>
-  </div>
+  <div class="guide-highlight"><div class="guide-highlight-label">公立旗舰</div><p>UC Berkeley、UCLA、密歇根大学安娜堡、弗吉尼亚大学、北卡教堂山、佐治亚理工</p></div>
+  <div class="guide-highlight"><div class="guide-highlight-label">私立名校</div><p>哈佛大学、斯坦福大学、MIT、耶鲁大学、普林斯顿大学、哥伦比亚大学、芝加哥大学、宾夕法尼亚大学、加州理工、杜克大学</p></div>
+  <div class="guide-highlight"><div class="guide-highlight-label">顶尖 LAC</div><p>Williams College、Amherst College、Swarthmore College、Pomona College、Wellesley College、Bowdoin College</p></div>
 </div>`;
   } else if (region === 'uk') {
     title.textContent = '英国大学';
     body.innerHTML = `
 <div class="guide-section">
-  <h3>教育体系</h3>
-  <p>英国本科通常为<strong>三年制</strong>（苏格兰地区为四年），入学即确定专业方向，课程高度专业化。学位分为 BA（文学士）、BSc（理学士）、BEng（工学士）等。硕士通常为一年制。</p>
-  <div class="guide-tag-row"><span class="guide-tag">三年制</span><span class="guide-tag">专业导向</span><span class="guide-tag">学位分类明确</span></div>
+  <h3>教育体系概览</h3>
+  <p>英国高等教育以<strong>专业化、短学制</strong>著称。本科通常为<strong>三年制</strong>（苏格兰地区四年），入学即锁定专业方向，与美国不同——没有通识教育阶段，也很少中途转专业。学位分 BA（文学士）、BSc（理学士）、BEng（工学士）、LLB（法学士）等。硕士以一年制授课型（Taught Master's）为主，是全球最短的硕士路径之一。学年通常为秋季（9-10月）开学，三学期制。</p>
+  <div class="guide-tag-row"><span class="guide-tag">三年制</span><span class="guide-tag">专业导向</span><span class="guide-tag">学位分类明确</span><span class="guide-tag">一年制硕士</span></div>
+  <div class="guide-pros-cons">
+    <div class="guide-pro"><strong>优势</strong><ul><li>学制短，三年本科 + 一年硕士高效</li><li>专业深度强，课程聚焦核心领域</li><li>学历全球认可，尤其英联邦国家</li><li>UCAS 统一申请，流程标准化</li></ul></div>
+    <div class="guide-con"><strong>不足</strong><ul><li>入学即定专业，几乎没有转专业空间</li><li>通识教育缺失，跨学科机会少</li><li>国际生奖学金极少，基本全自费</li><li>毕业后留英工作签证门槛较高</li></ul></div>
+  </div>
 </div>
 <hr class="guide-divider">
 <div class="guide-section">
   <h3>UCAS 申请系统</h3>
-  <p>所有英国本科申请统一通过 <strong>UCAS</strong>（Universities and Colleges Admissions Service）提交。每人最多填 <strong>5 个志愿</strong>（医学/牙医/兽医最多 4 个）。关键时间节点：9月初开放申请，10月15日牛剑及医学截止，1月底常规截止。需要提交个人陈述（Personal Statement）、推荐信、预估成绩。</p>
+  <p>所有英国本科申请统一通过 <strong>UCAS</strong>（Universities and Colleges Admissions Service）提交。每人最多填 <strong>5 个志愿</strong>（医学/牙医/兽医最多 4 个），无排序、无 EA/ED 批次。关键时间节点：9月初开放申请，<strong>10月15日</strong>牛剑及医学/牙医/兽医截止，<strong>1月29日</strong>常规截止。2026年起 UCAS 个人陈述改为三个结构化问题，不再是一篇自由文书。需提交推荐信和预估成绩（Predicted Grades）。</p>
 </div>
 <hr class="guide-divider">
 <div class="guide-section">
   <h3>学术要求与 Offer 类型</h3>
-  <p>英国大学主要看 <strong>A-Level</strong> 或 <strong>IB</strong> 成绩。Offer 分两种：<strong>Conditional Offer</strong>（有条件录取，达到指定成绩后转为正式录取）和 <strong>Unconditional Offer</strong>（无条件录取，较少见）。A-Level 通常要求 3 门成绩，G5 院校常见要求 AAA-A*AA。</p>
-  <div class="guide-tag-row"><span class="guide-tag">A-Level</span><span class="guide-tag">IB</span><span class="guide-tag">Conditional Offer</span></div>
+  <p>英国大学主要看 <strong>A-Level</strong> 或 <strong>IB</strong> 成绩（也接受 AP、高考等）。Offer 分两种：<strong>Conditional Offer</strong>（有条件录取，达到指定 A-Level/IB 成绩后转正，占绝大多数）和 <strong>Unconditional Offer</strong>（无条件录取，较少见，通常给已毕业学生）。A-Level 通常考 3-4 门，G5 院校常见要求 A*AA-AAA；IB 通常要求 38-42 分。部分专业要求特定科目成绩（如医学要求化学+生物）。</p>
+  <div class="guide-tag-row"><span class="guide-tag">A-Level</span><span class="guide-tag">IB</span><span class="guide-tag">Conditional Offer</span><span class="guide-tag">预估成绩</span></div>
 </div>
 <hr class="guide-divider">
 <div class="guide-section">
-  <h3>罗素集团与 G5</h3>
-  <p><strong>罗素集团</strong>（Russell Group）为英国 24 所研究型大学联盟，类似美国常春藤。其中 <strong>G5 超级精英</strong>（牛津、剑桥、帝国理工、LSE、UCL）为最顶尖的 5 所。牛剑（Oxbridge）采用独特的<strong>学院制</strong>，申请时需选择具体学院，并参加面试和入学考试（如 MAT、PAT、TSA 等）。</p>
+  <h3>院校分类：罗素集团与 G5</h3>
+  <p><strong>罗素集团</strong>（Russell Group）为英国 24 所研究密集型大学联盟，相当于美国 R1 研究型大学，占据英国 75% 以上的研究经费。其中 <strong>G5 超级精英</strong>（牛津、剑桥、帝国理工、LSE、UCL）为最顶尖的 5 所，对标美国藤校。此外，<strong>红砖大学</strong>（如曼彻斯特、伯明翰等）是 19 世纪工业革命时期建立的六所老牌工科强校。</p>
+  <p style="margin-top:10px">牛剑（Oxbridge）采用独特的<strong>学院制</strong>（Collegiate System）：大学负责教学和学位授予，学院（College）负责招生、住宿、导师制辅导（Tutorial/Supervision）。申请牛剑时需选择（或开放申请）具体学院，入围后参加面试和入学考试（如 MAT、PAT、TSA、BMAT 等）。</p>
 </div>
 <hr class="guide-divider">
 <div class="guide-section">
   <h3>费用参考</h3>
-  <p>国际生学费约 £18,000-£40,000/年（约 ¥50-115 万/三年总计）。牛剑及医学类偏高。生活费伦敦地区约 £12,000-15,000/年，非伦敦约 £9,000-12,000/年。</p>
+  <p>国际生学费约 £18,000-£45,000/年。牛剑及临床医学可达 £50,000+/年。三年本科总费用约 ¥150-350 万（含生活费）。伦敦地区生活成本显著高于其他城市（住宿差价约 40-50%）。英国大学奖学金对国际生极为有限，大部分需全自费。</p>
 </div>
 <hr class="guide-divider">
 <div class="guide-section">
   <h3>代表院校</h3>
   <div class="guide-highlight"><div class="guide-highlight-label">G5 超级精英</div><p>牛津大学、剑桥大学、帝国理工学院、伦敦政经学院 LSE、伦敦大学学院 UCL</p></div>
-  <div class="guide-highlight"><div class="guide-highlight-label">罗素集团代表</div><p>爱丁堡大学、曼彻斯特大学、KCL、布里斯托大学、华威大学、杜伦大学</p></div>
+  <div class="guide-highlight"><div class="guide-highlight-label">罗素集团代表</div><p>爱丁堡大学、曼彻斯特大学、伦敦国王学院 KCL、布里斯托大学、华威大学、杜伦大学、格拉斯哥大学</p></div>
 </div>`;
   } else {
     title.textContent = '港新澳加';
     body.innerHTML = `
 <div class="guide-section">
-  <h3>🇭🇰 香港</h3>
-  <p>香港有 <strong>8 所公立大学</strong>（港八大），通过 <strong>JUPAS</strong>（本地生）或<strong>非联招</strong>（国际生）申请。本科四年制（2012年由三年改四年）。国际生通常以 IB、A-Level、SAT/AP 成绩申请。港大、港中文、港科大为"港三"龙头，商科及金融专业认可度极高。</p>
-  <div class="guide-tag-row"><span class="guide-tag">港八大</span><span class="guide-tag">四年制</span><span class="guide-tag">IB / A-Level</span></div>
+  <h3>🇭🇰 香港 · 教育体系概览</h3>
+  <p>香港有 <strong>8 所公立大学</strong>（港八大），通过 <strong>JUPAS</strong>（本地生）或<strong>非联招</strong>（国际生）申请。本科<strong>四年制</strong>（2012年由三年改四年），国际生通常以 IB、A-Level、SAT/AP 成绩申请。港大、港中文、港科大为"港三"龙头，商科及金融专业在亚洲认可度极高。政府资助院校（UGC-funded）科研经费充足，硕士一年制授课型为主。全英语授课环境，与国际学术体系无缝衔接。</p>
+  <div class="guide-tag-row"><span class="guide-tag">港八大</span><span class="guide-tag">四年制</span><span class="guide-tag">英语授课</span><span class="guide-tag">非联招</span></div>
+  <div class="guide-pros-cons">
+    <div class="guide-pro"><strong>优势</strong><ul><li>离家近、文化相近，节假日可往返</li><li>港三商科/金融亚洲顶级，投行招聘目标校</li><li>全英文授课，学术标准国际化</li><li>毕业后 IANG 签证可在港工作、满7年可永居</li></ul></div>
+    <div class="guide-con"><strong>不足</strong><ul><li>生活成本极高（租房 ¥8,000-15,000/月）</li><li>校园面积小，住宿资源紧张（多数需校外租房）</li><li>港三录取竞争白热化，IB 通常需 36-42 分</li><li>课程选择面相对窄，跨校选课有限</li></ul></div>
+  </div>
   <div class="guide-highlight"><div class="guide-highlight-label">代表院校</div><p>香港大学 HKU、香港中文大学 CUHK、香港科技大学 HKUST、香港理工大学 PolyU、香港城市大学 CityU</p></div>
 </div>
 <hr class="guide-divider">
 <div class="guide-section">
-  <h3>🇸🇬 新加坡</h3>
-  <p>新加坡顶尖院校为 <strong>NUS</strong>（新加坡国立大学）和 <strong>NTU</strong>（南洋理工大学），QS 排名常年位居亚洲前 3。另有 SMU（新加坡管理大学）专注商科。申请竞争极为激烈，A-Level 通常要求 AAA 以上，IB 通常 38-42 分。本科三年制（荣誉学位四年），英语授课环境，毕业生就业率高。</p>
-  <div class="guide-tag-row"><span class="guide-tag">NUS</span><span class="guide-tag">NTU</span><span class="guide-tag">三年制</span><span class="guide-tag">英语授课</span></div>
+  <h3>🇸🇬 新加坡 · 教育体系概览</h3>
+  <p>新加坡高等教育以 <strong>NUS</strong>（新加坡国立大学）和 <strong>NTU</strong>（南洋理工大学）为双龙头，QS 排名常年位居亚洲前 3、全球前 20。另有 <strong>SMU</strong>（新加坡管理大学）专注商科、<strong>SUTD</strong>（新加坡科技设计大学）专注工程与设计。本科<strong>三年制</strong>（荣誉学位四年），采用英式专业导向模式，入学即定专业。A-Level 通常要求 AAA 以上，IB 通常 38-42 分，中国学生也可用高考成绩申请。政府提供 <strong>Tuition Grant</strong>（学费补助），签约毕业后在新工作 3 年可减免约 50% 学费。</p>
+  <div class="guide-tag-row"><span class="guide-tag">NUS/NTU</span><span class="guide-tag">三年制</span><span class="guide-tag">Tuition Grant</span><span class="guide-tag">亚洲 Top 3</span></div>
+  <div class="guide-pros-cons">
+    <div class="guide-pro"><strong>优势</strong><ul><li>QS 排名高，学历全球认可</li><li>英语为官方语言，无语言障碍</li><li>政府 Tuition Grant 大幅减轻学费负担</li><li>安全、整洁、国际化程度极高</li></ul></div>
+    <div class="guide-con"><strong>不足</strong><ul><li>录取竞争极为激烈，录取率低于很多美国 Top 20</li><li>文化相对单一，社交生活不如欧美多元</li><li>国土小，实习和就业市场容量有限</li><li>气候全年湿热，部分学生不适应</li></ul></div>
+  </div>
+  <div class="guide-highlight"><div class="guide-highlight-label">代表院校</div><p>新加坡国立大学 NUS、南洋理工大学 NTU、新加坡管理大学 SMU、新加坡科技设计大学 SUTD</p></div>
 </div>
 <hr class="guide-divider">
 <div class="guide-section">
-  <h3>🇦🇺 澳洲</h3>
-  <p>澳洲拥有 <strong>Go8</strong>（八大名校联盟），以墨尔本大学、悉尼大学、澳国立（ANU）为代表。本科三年制为主（荣誉学位四年）。入学采用 <strong>ATAR</strong> 排名系统（澳洲本地生）；国际生以 IB、A-Level 或高考成绩申请。多数学校采用<strong>滚动录取</strong>（Rolling Admission），一年两次入学（2月/7月）。毕业生工签（PSW）政策友好，本科毕业可获得 2-4 年工作签证。</p>
-  <div class="guide-tag-row"><span class="guide-tag">Go8 八大</span><span class="guide-tag">三年制</span><span class="guide-tag">滚动录取</span><span class="guide-tag">工签友好</span></div>
+  <h3>🇦🇺 澳洲 · 教育体系概览</h3>
+  <p>澳洲拥有 <strong>Go8</strong>（八大名校联盟），以墨尔本大学、悉尼大学、澳国立（ANU）为代表，均为研究密集型大学。本科<strong>三年制</strong>为主（荣誉学位四年），采用英联邦教育体系。国际生以 IB、A-Level 或中国高考成绩申请，多数学校采用<strong>滚动录取</strong>（Rolling Admission），一年两次入学（2月/7月），申请节奏灵活。毕业生工签（<strong>PSW</strong>，Post-Study Work）政策友好，本科毕业可获 2-4 年工作签证，部分专业（护理、工程、IT 等）可走技术移民路径。</p>
+  <div class="guide-tag-row"><span class="guide-tag">Go8 八大</span><span class="guide-tag">三年制</span><span class="guide-tag">滚动录取</span><span class="guide-tag">PSW 工签</span></div>
+  <div class="guide-pros-cons">
+    <div class="guide-pro"><strong>优势</strong><ul><li>Go8 院校研究实力强，QS 排名靠前</li><li>一年两次入学，申请节奏灵活</li><li>工签政策友好，移民路径相对清晰</li><li>气候宜人，多元文化社会包容性强</li></ul></div>
+    <div class="guide-con"><strong>不足</strong><ul><li>距离中国远，往返成本高（单程 8-12 小时）</li><li>国际生学费昂贵（¥20-30万/年），奖学金少</li><li>部分院校在国内认可度不如英美同档</li><li>悉尼/墨尔本生活成本高（租房 ¥6,000-10,000/月）</li></ul></div>
+  </div>
   <div class="guide-highlight"><div class="guide-highlight-label">Go8 代表院校</div><p>墨尔本大学、悉尼大学、澳国立 ANU、新南威尔士大学 UNSW、昆士兰大学、莫纳什大学</p></div>
 </div>
 <hr class="guide-divider">
 <div class="guide-section">
-  <h3>🇨🇦 加拿大</h3>
-  <p>加拿大大学以公立为主，本科四年制。顶尖院校集中在 <strong>U15</strong> 研究型大学联盟，以多伦多大学、UBC、麦吉尔大学为"加三"龙头。申请通常看高中成绩单和标化考试，部分名校要求补充文书或面试。滑铁卢大学的 <strong>Co-op</strong> 带薪实习项目享誉全球。毕业后可申请 <strong>PGWP</strong>（Post-Graduation Work Permit），最长 3 年，移民路径清晰。</p>
+  <h3>🇨🇦 加拿大 · 教育体系概览</h3>
+  <p>加拿大大学以<strong>公立为主</strong>，本科四年制。顶尖院校集中在 <strong>U15</strong> 研究型大学联盟（相当于美国 AAU），以多伦多大学、UBC、麦吉尔大学为"加三"龙头。申请通常看高中成绩单和标化考试，部分名校要求补充文书或面试（如 UBC 的 Personal Profile）。滑铁卢大学的 <strong>Co-op</strong> 带薪实习项目享誉全球（6 个学期轮换实习，累计约 2 年工作经验）。毕业后可申请 <strong>PGWP</strong>（Post-Graduation Work Permit），最长 3 年开放式工签，技术移民（Express Entry）路径清晰。魁北克省院校（麦吉尔、蒙特利尔等）有独立移民体系和法语环境。</p>
   <div class="guide-tag-row"><span class="guide-tag">U15 联盟</span><span class="guide-tag">四年制</span><span class="guide-tag">Co-op 实习</span><span class="guide-tag">PGWP 工签</span></div>
+  <div class="guide-pros-cons">
+    <div class="guide-pro"><strong>优势</strong><ul><li>公立大学学费相对合理（¥15-28万/年）</li><li>PGWP + Express Entry，移民路径最清晰</li><li>Co-op 带薪实习让学生毕业即有工作经验</li><li>社会安全、包容，华人社区成熟</li></ul></div>
+    <div class="guide-con"><strong>不足</strong><ul><li>冬季漫长寒冷（多伦多/蒙特利尔 -20°C 常见）</li><li>顶尖院校数量有限，"加三"之外知名度下降</li><li>本科四年制，比英澳三年制多一年</li><li>部分城市（温哥华、多伦多）生活成本高</li></ul></div>
+  </div>
   <div class="guide-highlight"><div class="guide-highlight-label">代表院校</div><p>多伦多大学 UofT、英属哥伦比亚大学 UBC、麦吉尔大学 McGill、滑铁卢大学、麦克马斯特大学</p></div>
 </div>`;
   }
