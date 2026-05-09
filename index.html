@@ -179,6 +179,24 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .stat-num .slash{color:var(--accent);font-weight:400;font-size:14px;}
 .stat-num .unit{font-family:'Noto Sans SC',sans-serif;font-size:10px;font-weight:500;color:var(--stat-unit-color);letter-spacing:.3px;}
 .stat-label{font-family:'Noto Sans SC',sans-serif;font-size:10px;font-weight:400;letter-spacing:.3px;color:var(--stat-label-color);margin-top:4px;}
+/* ── 留学地区导航卡片 ── */
+.card.c5{border-top:none;}.card.c5 .topbar{background:linear-gradient(90deg,#4B8BFF,#70A8FF);}
+.card.c6{border-top:none;}.card.c6 .topbar{background:linear-gradient(90deg,#E85B5B,#F07070);}
+.card.c7{border-top:none;}.card.c7 .topbar{background:linear-gradient(90deg,#52B868,#70D885);}
+/* ── 留学地区介绍页 ── */
+.guide-body{position:relative;z-index:5;height:calc(844px - var(--tabbar-h) - 47px);padding:0 20px 40px;overflow-y:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.guide-body::-webkit-scrollbar{display:none;}
+.guide-section{margin-bottom:20px;}
+.guide-section h3{font-family:'Noto Sans SC',sans-serif;font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 8px;}
+.guide-section p{font-family:'Noto Sans SC',sans-serif;font-size:13px;line-height:1.75;color:var(--text-secondary);margin:0;}
+.guide-section ul{margin:6px 0 0;padding-left:18px;}
+.guide-section li{font-family:'Noto Sans SC',sans-serif;font-size:13px;line-height:1.7;color:var(--text-secondary);}
+.guide-tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.guide-tag{font-family:'Noto Sans SC',sans-serif;font-size:11px;padding:4px 10px;border-radius:8px;background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-secondary);}
+.guide-divider{border:none;border-top:1px solid var(--divider);margin:20px 0;}
+.guide-highlight{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px;margin:12px 0;}
+.guide-highlight-label{font-family:'Noto Sans SC',sans-serif;font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.5px;margin-bottom:4px;text-transform:uppercase;}
+.guide-highlight p{font-size:12.5px;margin:0;}
 
 /* ── Explore ── */
 .topnav{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:8px 20px 0;}
@@ -504,6 +522,7 @@ html.pwa .tabbar { position:fixed !important; bottom:var(--vvp-offset,0px); left
   /* 各页可滚动区：扣除顶部安全区 */
   #page-home .screen-content { height:calc(100dvh - var(--tabbar-h) - env(safe-area-inset-top, 0px)); }
   #page-locate .quiz-body    { height:calc(100dvh - var(--tabbar-h) - 47px - env(safe-area-inset-top, 0px)); }
+  .guide-body                { height:calc(100dvh - var(--tabbar-h) - 47px - env(safe-area-inset-top, 0px)); }
   .quiz-start-screen          { min-height:calc(100dvh - var(--tabbar-h) - 47px - env(safe-area-inset-top, 0px)); }
   .result-body               { height:calc(100dvh - var(--tabbar-h) - 47px - env(safe-area-inset-top, 0px)); }
 
@@ -821,6 +840,9 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
   .rec-body {
     height: calc(100dvh - var(--tabbar-h) - 47px);
   }
+  .guide-body {
+    height: calc(100dvh - var(--tabbar-h) - 47px);
+  }
   .tabbar { position: absolute; }
 }
 
@@ -900,11 +922,7 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
   }
   /* Hide all tabbars */
   .tabbar { display: none; }
-  /* Hide mobile back buttons (sidebar replaces them) */
-  #page-explore .topnav .back-btn,
-  #page-locate .topnav .back-btn,
-  #page-recommender .topnav .back-btn,
-  #page-sandbox .topnav .back-btn { display: none; }
+  /* Back buttons now visible on all pages in desktop */
   /* Home back button (appears on subpages via JS) */
   .back-btn-inline { display: none; }
 
@@ -912,6 +930,7 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
   #page-home .screen,
   #page-explore .screen,
   #page-sandbox .screen { overflow: visible; min-height: auto; }
+  #page-guide .screen,
   #page-result .screen { overflow: visible; }
   /* result page padding */
   #page-result .result-body { padding-left: 32px; padding-right: 32px; }
@@ -925,6 +944,7 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
   }
   #page-home .nav,
   #page-home .hero { padding-left: 32px; padding-right: 32px; }
+  #page-guide .guide-body { height: auto !important; overflow: visible !important; padding: 0 32px 40px; }
   #page-explore .schools {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1124,6 +1144,45 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
           <div class="card-eng">Money sandbox<span class="sep">·</span>约 3 分钟</div>
           <div class="card-desc">四年总花费，实时推演</div>
           <div class="card-extra">输入家庭预算，找到真正负担得起的学校</div>
+        </div>
+        <div class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+    <div class="card c5" onclick="navigateToGuide('us')">
+      <div class="topbar"></div>
+      <div class="card-row">
+        <div class="card-left">
+          <div class="card-num">🇺🇸</div>
+          <div class="card-title">美国大学</div>
+          <div class="card-eng">U.S. Universities<span class="sep">·</span>公立 · 私立 · LAC</div>
+          <div class="card-desc">公立大学、私立大学、文理学院三大体系，录取机制、费用结构与申请策略全解析。</div>
+          <div class="card-extra">Common App · SAT/ACT · ED/EA/RD · 四年制</div>
+        </div>
+        <div class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+    <div class="card c6" onclick="navigateToGuide('uk')">
+      <div class="topbar"></div>
+      <div class="card-row">
+        <div class="card-left">
+          <div class="card-num">🇬🇧</div>
+          <div class="card-title">英国大学</div>
+          <div class="card-eng">UK Universities<span class="sep">·</span>罗素集团 · 红砖大学</div>
+          <div class="card-desc">UCAS 统一申请、三年制本科、 conditional offer 机制，以及牛剑特殊的学院制与面试流程。</div>
+          <div class="card-extra">UCAS · A-Level / IB · 三年制 · 学院制</div>
+        </div>
+        <div class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+    <div class="card c7" onclick="navigateToGuide('other')">
+      <div class="topbar"></div>
+      <div class="card-row">
+        <div class="card-left">
+          <div class="card-num">🌏</div>
+          <div class="card-title">港新澳加</div>
+          <div class="card-eng">HK · SG · AU · CA<span class="sep">·</span>多国联申热门</div>
+          <div class="card-desc">香港、新加坡、澳洲、加拿大四地教育体系与申请要点，适合多国联申策略参考。</div>
+          <div class="card-extra">JUPAS / IB · 滚动录取 · 工签友好</div>
         </div>
         <div class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
@@ -1454,6 +1513,27 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
 </div>
 </div>
 
+<!-- PAGE: GUIDE -->
+<div class="page" id="page-guide">
+<div class="screen">
+  <div class="glow-a"></div><div class="glow-b"></div><div class="halo"></div><div class="noise"></div>
+  <div class="topnav">
+    <div class="back-group">
+      <div class="back-btn" onclick="navigate('home')"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 3L5 7L9 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="page-title" id="guide-title">留学地区介绍</div>
+    </div>
+  </div>
+  <div class="guide-body" id="guide-body"></div>
+  <nav class="tabbar" data-tab-bar>
+    <div class="tab" onclick="navigate('home')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 9.5L11 3L19 9.5V19H14V14H8V19H3V9.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">首页</div></div>
+    <div class="tab" onclick="navigate('explore')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="9.5" cy="9.5" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="M14.5 14.5L19 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><div class="lbl">探索</div></div>
+    <div class="tab" onclick="navigate('locate')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M12 2L4 12.5H10.5L9.5 20L18 9.5H11.5L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div class="lbl">定位</div></div>
+    <div class="tab" onclick="navigate('recommender')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="5" width="16" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="5" y="10" width="12" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="7" y="15" width="8" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/></svg></div><div class="lbl">联申</div></div>
+    <div class="tab" onclick="navigate('sandbox')"><div class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 6.5V15.5M13.5 8.5C13.5 8.5 12.5 7.8 11 7.8C9.5 7.8 8.7 8.5 8.7 9.5C8.7 12 13.3 11 13.3 13.5C13.3 14.5 12.5 15.2 11 15.2C9.5 15.2 8.5 14.5 8.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="lbl">预算</div></div>
+  </nav>
+</div>
+</div>
+
 <script>
 /* ── 轻提示 ── */
 function showToast(msg) {
@@ -1484,6 +1564,7 @@ function navigate(page) {
   if (page === 'sandbox') setTimeout(() => { fixSandboxHeight(); SandboxModule.onShow(); }, 50);
   if (page === 'recommender') setTimeout(() => { window.RecommenderModule?.init?.(); }, 50);
   if (page === 'locate')  setTimeout(() => { window.QuizModule?.init?.(); }, 0);
+  if (page === 'guide')   renderGuideContent(_guideRegion || 'us');
 }
 
 function screenH(pageId) {
@@ -1514,6 +1595,131 @@ function fixSandboxHeight() {
   const h = screenH('#page-sandbox');
   const used = (status?.offsetHeight || 47) + (topnav?.offsetHeight || 44);
   body.style.height = Math.max(120, h - used - tabbar.offsetHeight) + 'px';
+}
+
+/* ── Guide page ── */
+let _guideRegion = 'us';
+
+function navigateToGuide(region) {
+  _guideRegion = region;
+  document.body.style.overflow = '';
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-guide').classList.add('active');
+  document.body.setAttribute('data-page', 'guide');
+  window.scrollTo(0, 0);
+  renderGuideContent(region);
+}
+
+function renderGuideContent(region) {
+  const title = document.getElementById('guide-title');
+  const body = document.getElementById('guide-body');
+  if (!title || !body) return;
+
+  if (region === 'us') {
+    title.textContent = '美国大学';
+    body.innerHTML = `
+<div class="guide-section">
+  <h3>教育体系</h3>
+  <p>美国高等教育分三大类：<strong>公立大学</strong>（州政府资助，学费较低，规模大，如UC系统、密歇根大学）、<strong>私立大学</strong>（捐赠基金支撑，资源丰富，如哈佛、斯坦福、MIT）、<strong>文理学院 LAC</strong>（专注本科通识教育，师生比极低，如Williams、Amherst）。本科通常为四年制，前两年为通识课程，后两年确定专业。</p>
+  <div class="guide-tag-row"><span class="guide-tag">公立大学</span><span class="guide-tag">私立大学</span><span class="guide-tag">文理学院 LAC</span><span class="guide-tag">四年制</span></div>
+</div>
+<hr class="guide-divider">
+<div class="guide-section">
+  <h3>申请系统</h3>
+  <p>主流平台为 Common App（覆盖 1,000+ 所院校）和 Coalition App。加州大学使用独立的 UC Application。申请通常需要：高中成绩单（GPA）、标化成绩（SAT/ACT，部分学校 Test-Optional）、推荐信（2-3封）、个人陈述及补充文书、课外活动列表。</p>
+</div>
+<hr class="guide-divider">
+<div class="guide-section">
+  <h3>录取批次</h3>
+  <p><strong>ED</strong>（Early Decision）：绑定式早申，录取必须入读，11月截止，12月出结果。<br/><strong>EA</strong>（Early Action）：非绑定早申，可多校同时申请，通常11月截止。<br/><strong>REA</strong>（Restrictive EA）：限制性早申，不能同时申请其他私立早申。<br/><strong>RD</strong>（Regular Decision）：常规轮，1月截止，3-4月出结果。</p>
+  <div class="guide-tag-row"><span class="guide-tag">ED 绑定</span><span class="guide-tag">EA 非绑定</span><span class="guide-tag">RD 常规</span></div>
+</div>
+<hr class="guide-divider">
+<div class="guide-section">
+  <h3>费用参考</h3>
+  <p>公立大学四年学费约 ¥80-180 万；私立大学及 LAC 四年学费约 ¥200-350 万（均不含生活费）。部分顶尖私立大学实施 Need-Blind 录取（如哈佛、MIT、普林斯顿等），国际生可申请助学金。</p>
+</div>
+<hr class="guide-divider">
+<div class="guide-section">
+  <h3>代表院校</h3>
+  <div class="guide-highlight">
+    <div class="guide-highlight-label">公立旗舰</div>
+    <p>UC Berkeley、UCLA、密歇根大学安娜堡、弗吉尼亚大学、北卡教堂山</p>
+  </div>
+  <div class="guide-highlight">
+    <div class="guide-highlight-label">私立名校</div>
+    <p>哈佛大学、斯坦福大学、MIT、耶鲁大学、普林斯顿大学、哥伦比亚大学、芝加哥大学、宾夕法尼亚大学</p>
+  </div>
+  <div class="guide-highlight">
+    <div class="guide-highlight-label">顶尖 LAC</div>
+    <p>Williams College、Amherst College、Swarthmore College、Pomona College、Wellesley College</p>
+  </div>
+</div>`;
+  } else if (region === 'uk') {
+    title.textContent = '英国大学';
+    body.innerHTML = `
+<div class="guide-section">
+  <h3>教育体系</h3>
+  <p>英国本科通常为<strong>三年制</strong>（苏格兰地区为四年），入学即确定专业方向，课程高度专业化。学位分为 BA（文学士）、BSc（理学士）、BEng（工学士）等。硕士通常为一年制。</p>
+  <div class="guide-tag-row"><span class="guide-tag">三年制</span><span class="guide-tag">专业导向</span><span class="guide-tag">学位分类明确</span></div>
+</div>
+<hr class="guide-divider">
+<div class="guide-section">
+  <h3>UCAS 申请系统</h3>
+  <p>所有英国本科申请统一通过 <strong>UCAS</strong>（Universities and Colleges Admissions Service）提交。每人最多填 <strong>5 个志愿</strong>（医学/牙医/兽医最多 4 个）。关键时间节点：9月初开放申请，10月15日牛剑及医学截止，1月底常规截止。需要提交个人陈述（Personal Statement）、推荐信、预估成绩。</p>
+</div>
+<hr class="guide-divider">
+<div class="guide-section">
+  <h3>学术要求与 Offer 类型</h3>
+  <p>英国大学主要看 <strong>A-Level</strong> 或 <strong>IB</strong> 成绩。Offer 分两种：<strong>Conditional Offer</strong>（有条件录取，达到指定成绩后转为正式录取）和 <strong>Unconditional Offer</strong>（无条件录取，较少见）。A-Level 通常要求 3 门成绩，G5 院校常见要求 AAA-A*AA。</p>
+  <div class="guide-tag-row"><span class="guide-tag">A-Level</span><span class="guide-tag">IB</span><span class="guide-tag">Conditional Offer</span></div>
+</div>
+<hr class="guide-divider">
+<div class="guide-section">
+  <h3>罗素集团与 G5</h3>
+  <p><strong>罗素集团</strong>（Russell Group）为英国 24 所研究型大学联盟，类似美国常春藤。其中 <strong>G5 超级精英</strong>（牛津、剑桥、帝国理工、LSE、UCL）为最顶尖的 5 所。牛剑（Oxbridge）采用独特的<strong>学院制</strong>，申请时需选择具体学院，并参加面试和入学考试（如 MAT、PAT、TSA 等）。</p>
+</div>
+<hr class="guide-divider">
+<div class="guide-section">
+  <h3>费用参考</h3>
+  <p>国际生学费约 £18,000-£40,000/年（约 ¥50-115 万/三年总计）。牛剑及医学类偏高。生活费伦敦地区约 £12,000-15,000/年，非伦敦约 £9,000-12,000/年。</p>
+</div>
+<hr class="guide-divider">
+<div class="guide-section">
+  <h3>代表院校</h3>
+  <div class="guide-highlight"><div class="guide-highlight-label">G5 超级精英</div><p>牛津大学、剑桥大学、帝国理工学院、伦敦政经学院 LSE、伦敦大学学院 UCL</p></div>
+  <div class="guide-highlight"><div class="guide-highlight-label">罗素集团代表</div><p>爱丁堡大学、曼彻斯特大学、KCL、布里斯托大学、华威大学、杜伦大学</p></div>
+</div>`;
+  } else {
+    title.textContent = '港新澳加';
+    body.innerHTML = `
+<div class="guide-section">
+  <h3>🇭🇰 香港</h3>
+  <p>香港有 <strong>8 所公立大学</strong>（港八大），通过 <strong>JUPAS</strong>（本地生）或<strong>非联招</strong>（国际生）申请。本科四年制（2012年由三年改四年）。国际生通常以 IB、A-Level、SAT/AP 成绩申请。港大、港中文、港科大为"港三"龙头，商科及金融专业认可度极高。</p>
+  <div class="guide-tag-row"><span class="guide-tag">港八大</span><span class="guide-tag">四年制</span><span class="guide-tag">IB / A-Level</span></div>
+  <div class="guide-highlight"><div class="guide-highlight-label">代表院校</div><p>香港大学 HKU、香港中文大学 CUHK、香港科技大学 HKUST、香港理工大学 PolyU、香港城市大学 CityU</p></div>
+</div>
+<hr class="guide-divider">
+<div class="guide-section">
+  <h3>🇸🇬 新加坡</h3>
+  <p>新加坡顶尖院校为 <strong>NUS</strong>（新加坡国立大学）和 <strong>NTU</strong>（南洋理工大学），QS 排名常年位居亚洲前 3。另有 SMU（新加坡管理大学）专注商科。申请竞争极为激烈，A-Level 通常要求 AAA 以上，IB 通常 38-42 分。本科三年制（荣誉学位四年），英语授课环境，毕业生就业率高。</p>
+  <div class="guide-tag-row"><span class="guide-tag">NUS</span><span class="guide-tag">NTU</span><span class="guide-tag">三年制</span><span class="guide-tag">英语授课</span></div>
+</div>
+<hr class="guide-divider">
+<div class="guide-section">
+  <h3>🇦🇺 澳洲</h3>
+  <p>澳洲拥有 <strong>Go8</strong>（八大名校联盟），以墨尔本大学、悉尼大学、澳国立（ANU）为代表。本科三年制为主（荣誉学位四年）。入学采用 <strong>ATAR</strong> 排名系统（澳洲本地生）；国际生以 IB、A-Level 或高考成绩申请。多数学校采用<strong>滚动录取</strong>（Rolling Admission），一年两次入学（2月/7月）。毕业生工签（PSW）政策友好，本科毕业可获得 2-4 年工作签证。</p>
+  <div class="guide-tag-row"><span class="guide-tag">Go8 八大</span><span class="guide-tag">三年制</span><span class="guide-tag">滚动录取</span><span class="guide-tag">工签友好</span></div>
+  <div class="guide-highlight"><div class="guide-highlight-label">Go8 代表院校</div><p>墨尔本大学、悉尼大学、澳国立 ANU、新南威尔士大学 UNSW、昆士兰大学、莫纳什大学</p></div>
+</div>
+<hr class="guide-divider">
+<div class="guide-section">
+  <h3>🇨🇦 加拿大</h3>
+  <p>加拿大大学以公立为主，本科四年制。顶尖院校集中在 <strong>U15</strong> 研究型大学联盟，以多伦多大学、UBC、麦吉尔大学为"加三"龙头。申请通常看高中成绩单和标化考试，部分名校要求补充文书或面试。滑铁卢大学的 <strong>Co-op</strong> 带薪实习项目享誉全球。毕业后可申请 <strong>PGWP</strong>（Post-Graduation Work Permit），最长 3 年，移民路径清晰。</p>
+  <div class="guide-tag-row"><span class="guide-tag">U15 联盟</span><span class="guide-tag">四年制</span><span class="guide-tag">Co-op 实习</span><span class="guide-tag">PGWP 工签</span></div>
+  <div class="guide-highlight"><div class="guide-highlight-label">代表院校</div><p>多伦多大学 UofT、英属哥伦比亚大学 UBC、麦吉尔大学 McGill、滑铁卢大学、麦克马斯特大学</p></div>
+</div>`;
+  }
 }
 
 /* ── Filter drawer ── */
