@@ -871,6 +871,7 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
   body[data-page] .dnav-item[data-page] svg { opacity: 1; }
 
   /* ── Content area ── */
+  html { background: var(--page-bg); }
   body {
     padding-left: 220px;
   }
@@ -880,12 +881,15 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
     overflow: visible;
   }
   /* All scroll areas: document-level */
-  #page-home .screen-content,
   #page-locate .quiz-body,
   .result-body,
   .rec-body {
     height: auto !important;
     min-height: calc(100dvh - 48px);
+    overflow: visible !important;
+  }
+  #page-home .screen-content {
+    height: auto !important;
     overflow: visible !important;
   }
   #page-explore .schools,
@@ -905,8 +909,9 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
   .back-btn-inline { display: none; }
 
   /* ── Override page-specific overflow ── */
+  #page-home .screen,
   #page-explore .screen,
-  #page-sandbox .screen,
+  #page-sandbox .screen { overflow: visible; min-height: auto; }
   #page-result .screen { overflow: visible; }
   /* result page padding */
   #page-result .result-body { padding-left: 32px; padding-right: 32px; }
