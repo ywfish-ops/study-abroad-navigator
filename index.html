@@ -184,26 +184,33 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .card.c6{border-top:none;}.card.c6 .topbar{background:linear-gradient(90deg,#E85B5B,#F07070);}
 .card.c7{border-top:none;}.card.c7 .topbar{background:linear-gradient(90deg,#52B868,#70D885);}
 /* ── 留学地区介绍页 ── */
-.guide-body{position:relative;z-index:5;height:calc(844px - var(--tabbar-h) - 47px);padding:0 20px 40px;overflow-y:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.guide-body{position:relative;z-index:5;height:calc(844px - var(--tabbar-h) - 47px);padding:8px 20px 40px;overflow-y:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
 .guide-body::-webkit-scrollbar{display:none;}
-.guide-section{margin-bottom:20px;}
-.guide-section h3{font-family:'Noto Sans SC',sans-serif;font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 8px;}
-.guide-section p{font-family:'Noto Sans SC',sans-serif;font-size:13px;line-height:1.75;color:var(--text-secondary);margin:0;}
-.guide-section ul{margin:6px 0 0;padding-left:18px;}
-.guide-section li{font-family:'Noto Sans SC',sans-serif;font-size:13px;line-height:1.7;color:var(--text-secondary);}
-.guide-tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
-.guide-tag{font-family:'Noto Sans SC',sans-serif;font-size:11px;padding:4px 10px;border-radius:8px;background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-secondary);}
-.guide-divider{border:none;border-top:1px solid var(--divider);margin:20px 0;}
-.guide-highlight{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px;margin:12px 0;}
-.guide-highlight-label{font-family:'Noto Sans SC',sans-serif;font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.5px;margin-bottom:4px;text-transform:uppercase;}
-.guide-highlight p{font-size:12.5px;margin:0;}
-.guide-pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
-.guide-pro,.guide-con{border-radius:10px;padding:12px 14px;font-size:12px;line-height:1.6;}
+.guide-section{margin-bottom:28px;}
+.guide-section h3{font-family:'Noto Sans SC',sans-serif;font-size:17px;font-weight:700;color:var(--text-primary);margin:0 0 10px;padding-left:12px;border-left:3px solid var(--accent);letter-spacing:.3px;}
+.guide-section p{font-family:'Noto Sans SC',sans-serif;font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0;}
+.guide-section strong{color:var(--text-primary);font-weight:600;}
+.guide-section ul{margin:6px 0 0;padding-left:20px;}
+.guide-section li{font-family:'Noto Sans SC',sans-serif;font-size:14px;line-height:1.75;color:var(--text-secondary);margin-bottom:2px;}
+.guide-tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.guide-tag{font-family:'Noto Sans SC',sans-serif;font-size:12px;padding:5px 12px;border-radius:8px;background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-secondary);}
+.guide-divider{border:none;border-top:1px solid var(--divider);margin:24px 0;}
+.guide-highlight{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:16px 18px;margin:14px 0;}
+.guide-highlight-label{font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.5px;margin-bottom:6px;text-transform:uppercase;}
+.guide-highlight p{font-size:13px;margin:0;line-height:1.7;}
+.guide-pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;}
+.guide-pro,.guide-con{border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.65;}
 .guide-pro{background:rgba(82,196,160,.08);border:1px solid rgba(82,196,160,.2);}
 .guide-con{background:rgba(232,91,91,.06);border:1px solid rgba(232,91,91,.15);}
+.guide-pro strong,.guide-con strong{display:block;margin-bottom:6px;font-size:13px;font-weight:700;}
 .guide-pro strong{color:#52C4A0;} .guide-con strong{color:#E85B5B;}
-.guide-pro ul,.guide-con ul{margin:4px 0 0;padding-left:16px;}
-.guide-pro li,.guide-con li{margin-bottom:2px;line-height:1.55;}
+.guide-pro ul,.guide-con ul{margin:0;padding-left:16px;}
+.guide-pro li,.guide-con li{margin-bottom:3px;line-height:1.55;font-size:12px;}
+
+/* 窄屏：优劣势改为上下排列 */
+@media (max-width:380px){
+  .guide-pros-cons{grid-template-columns:1fr;}
+}
 
 /* ── Explore ── */
 .topnav{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:8px 20px 0;}
@@ -951,7 +958,7 @@ body.splash-revealed .brand-text { opacity: 1; transition: opacity 0.3s ease; }
   }
   #page-home .nav,
   #page-home .hero { padding-left: 32px; padding-right: 32px; }
-  #page-guide .guide-body { height: auto !important; overflow: visible !important; padding: 0 32px 40px; }
+  #page-guide .guide-body { height: auto !important; overflow: visible !important; padding: 16px 32px 40px; }
   #page-explore .schools {
     display: grid;
     grid-template-columns: 1fr 1fr;
